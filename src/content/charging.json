@@ -2,7 +2,7 @@
   {
     "version": "Standard / RWD base",
     "chemistry": "LFP (CATL, EU)",
-    "daily": "100% (consigliato)",
+    "daily": "100%",
     "peakDc": "~175 kW"
   },
   {

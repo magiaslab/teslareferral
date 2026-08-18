@@ -5,6 +5,7 @@ import Button from '../components/Button.astro';
 import Callout from '../components/Callout.astro';
 import Card from '../components/Card.astro';
 import Disclaimer from '../components/Disclaimer.astro';
+import Faq from '../components/Faq.astro';
 import KeyPoints from '../components/KeyPoints.astro';
 import ModelTable from '../components/ModelTable.astro';
 import {
@@ -14,26 +15,24 @@ import {
   PROGRAM_IT,
   REFERRAL_URL,
   ROUTES,
-  TERMS_IN_FORCE,
-  TERMS_UPDATED,
 } from '../consts';
 import faq from '../content/faq.json';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { guideJsonLd } from '../lib/schema';
 import type { FaqItem } from '../types';
 
-const title = 'Referral Tesla come funziona (2026) | Programma Italia';
+const title = 'Come funziona il referral Tesla in Italia';
 const description =
-  'Referral Tesla come funziona nel 2026 in Italia: programma «Segnala e guadagna», modelli idonei, 1.000 km Supercharger e come applicare il codice prima dell\'ordine.';
+  'Il programma Segnala e guadagna aggiunge circa 1.000 km Supercharger su Model 3 e Model Y. Quando usarlo, quanto vale e perché non è uno sconto.';
 
 const toc = [
-  { id: 'che-cose', label: 'Che cos\'è il programma referral Tesla?' },
-  { id: 'modelli-idonei', label: 'Quali modelli sono idonei nel 2026?' },
-  { id: 'quanto-vale', label: 'Quanto vale il vantaggio?' },
-  { id: 'come-si-usa', label: 'Referral Tesla come funziona?' },
-  { id: 'dopo-ordine', label: 'Si può applicare dopo l\'ordine?' },
-  { id: 'limiti', label: 'Quali sono i limiti e le scadenze?' },
-  { id: 'incentivo', label: 'È un incentivo statale?' },
+  { id: 'che-cose', label: 'Che cos\'è' },
+  { id: 'modelli-idonei', label: 'Quali modelli' },
+  { id: 'quanto-vale', label: 'Quanto vale' },
+  { id: 'come-si-usa', label: 'Come si usa' },
+  { id: 'dopo-ordine', label: 'Dopo l\'ordine' },
+  { id: 'limiti', label: 'Limiti e scadenze' },
+  { id: 'incentivo', label: 'Ecobonus e incentivi' },
   { id: 'faq', label: 'Domande frequenti' },
 ];
 
@@ -45,18 +44,24 @@ const crumbs = [
 
 <BaseLayout title={title} description={description} jsonLd={guideJsonLd()}>
   <div class="section-pad">
-    <div class="wrap grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6">
-      <aside class="lg:col-span-3">
+    <div class="wrap">
+      <Breadcrumb items={crumbs} />
+      <div class="mt-3">
+        <ArticleMeta reading="Guida · Lettura 9 min" />
+      </div>
+
+      <div class="mt-8 grid grid-cols-1 lg:grid-cols-[220px_minmax(0,1fr)] gap-8 lg:gap-12 items-start">
+      <aside>
         <details class="lg:hidden rounded-[14px] border border-line bg-surface p-4">
-          <summary class="min-h-11 cursor-pointer font-display text-[22px] font-semibold leading-[1.35]">
+          <summary class="min-h-11 cursor-pointer font-semibold">
             Indice
           </summary>
-          <nav aria-label="Indice della guida" class="mt-4">
-            <ol class="list-none m-0 p-0 grid gap-1">
+          <nav aria-label="Indice della guida" class="mt-3">
+            <ol class="list-none m-0 p-0 grid">
               {
                 toc.map((item) => (
                   <li>
-                    <a href={`#${item.id}`} class="flex items-center min-h-11 caption-14 text-ink no-underline hover:text-brand">
+                    <a href={`#${item.id}`} class="flex items-center min-h-10 caption-14 text-ink no-underline hover:text-brand">
                       {item.label}
                     </a>
                   </li>
@@ -66,36 +71,31 @@ const crumbs = [
           </nav>
         </details>
 
-        <Card tag="nav" class="hidden lg:block sticky top-24 w-[260px]">
-          <p class="heading-22 m-0">Indice</p>
-          <ol class="list-none m-0 mt-4 p-0 grid gap-1">
+        <nav aria-label="Indice della guida" class="hidden lg:block sticky top-24 rounded-[14px] border border-line bg-surface p-5">
+          <p class="caption-14 font-semibold m-0 text-ink-soft">Indice</p>
+          <ol class="list-none m-0 mt-3 p-0 grid">
             {
               toc.map((item) => (
                 <li>
-                  <a href={`#${item.id}`} class="flex items-center min-h-11 caption-14 text-ink no-underline hover:text-brand">
+                  <a href={`#${item.id}`} class="flex items-start min-h-9 py-1.5 caption-14 text-ink no-underline hover:text-brand">
                     {item.label}
                   </a>
                 </li>
               ))
             }
           </ol>
-        </Card>
+        </nav>
       </aside>
 
-      <article class="lg:col-span-9 max-w-[76ch]">
-        <Breadcrumb items={crumbs} />
-        <div class="mt-4">
-          <ArticleMeta reading="Guida · Lettura 9 min" />
-        </div>
-        <h1 class="display-40 m-0 mt-4">Referral Tesla come funziona: guida 2026 in Italia</h1>
+      <article class="min-w-0 max-w-[68ch]">
+        <h1 class="display-40 m-0">Come funziona il referral Tesla</h1>
 
         <div class="mt-8">
-          <Callout title="In breve">
+          <Callout title="Da sapere">
             <p class="m-0">
-              Il <strong>referral Tesla</strong> (programma ufficiale <strong>«{PROGRAM_IT}» / {PROGRAM_EN}</strong>)
-              permette a chi ordina una <strong>Tesla Model 3 o Model Y nuova</strong> tramite il link di un
-              proprietario di ricevere crediti di ricarica Supercharger (attualmente ~1.000 km), senza
-              costi aggiuntivi. Chi condivide il link riceve a sua volta crediti Tesla.
+              Il referral Tesla è il programma «{PROGRAM_IT}» ({PROGRAM_EN}). Chi ordina una
+              Model 3 o Model Y nuova dal link di un proprietario riceve circa 1.000 km
+              Supercharger, senza pagare di più. Chi condivide il link riceve crediti Tesla.
             </p>
           </Callout>
         </div>
@@ -103,40 +103,38 @@ const crumbs = [
         <div class="mt-8">
           <KeyPoints
             items={[
-              'Idonei: solo Model 3 e Model Y.',
-              'Beneficio: ~1.000 km Supercharger (importo in fase d\'ordine).',
-              'Applicare il link prima dell\'ordine.',
-              'Referente: massimo 10 acquisti per anno solare.',
-              'Crediti 12 mesi, estendibili a 36.',
-              'Cumulabile con Ecobonus; non è un incentivo statale.',
+              'Solo Model 3 e Model Y nuove.',
+              'Circa 1.000 km Supercharger: conta quanto vedi sull\'ordine.',
+              'Apri il link prima di confermare.',
+              'Chi condivide il link: fino a 10 acquisti l\'anno.',
+              'I crediti durano 12 mesi, allungabili fino a 36.',
+              'Si cumula con l\'Ecobonus: non lo sostituisce.',
             ]}
           />
         </div>
 
         <section id="che-cose" class="mt-16">
-          <h2 class="heading-28 m-0">Che cos'è il programma referral Tesla?</h2>
+          <h2 class="heading-28 m-0">Che cos'è il referral Tesla?</h2>
           <p class="body-18 m-0 mt-4">
-            Il <strong>programma referral Tesla</strong> («{PROGRAM_IT}» / {PROGRAM_EN}) è
-            un'iniziativa ufficiale di marketing con cui un
-            proprietario Tesla condivide un link personale; chi acquista una Tesla nuova idonea
-            tramite quel link ottiene un vantaggio, e il referente riceve crediti Tesla. I crediti
-            del referente si usano per Supercharger, upgrade software, assistenza o Tesla Shop; non
-            per abbonamenti e non sono convertibili in denaro.
+            «{PROGRAM_IT}» ({PROGRAM_EN}) è il programma con cui un proprietario Tesla
+            condivide un link personale. Chi compra una Model 3 o Model Y nuova da quel
+            link riceve i chilometri Supercharger; chi lo condivide riceve crediti Tesla.
+            Quei crediti servono per Supercharger, software, assistenza o Tesla Shop: non
+            per gli abbonamenti e non si trasformano in contanti.
           </p>
           <p class="body-18 m-0 mt-4">
-            CodiceEV non gestisce il programma e non è affiliato a Tesla, Inc. Il link segnalato
-            apre tesla.com con il codice già applicato. Non è richiesta una registrazione su questo
-            sito. Il programma è indipendente e cumulabile con gli incentivi statali.
+            CodiceEV non gestisce il programma e non è affiliato a Tesla. Il link apre
+            tesla.com con il codice già inserito. Qui non ti registri. L'offerta è privata
+            Tesla e si può usare insieme agli incentivi pubblici.
           </p>
         </section>
 
         <section id="modelli-idonei" class="mt-16">
-          <h2 class="heading-28 m-0">Quali modelli Tesla sono idonei al referral nel 2026?</h2>
+          <h2 class="heading-28 m-0">Quali modelli Tesla entrano nel referral</h2>
           <p class="body-18 m-0 mt-4">
-            Solo <strong>Model 3</strong> e <strong>Model Y</strong> nuove. Model S e Model X non
-            sono più prodotti idonei: lo sconto di 500 € che molti siti pubblicano ancora non è più
-            valido. Restano esclusi anche l'usato certificato (Tesla Approved) e i veicoli di terze
-            parti.
+            Solo <strong>Model 3</strong> e <strong>Model Y</strong> nuove. Model S e Model X
+            sono fuori: lo sconto di 500 € che alcuni siti citano ancora non è più in vigore.
+            Stesso discorso per l'usato certificato (Tesla Approved) e per le auto di terzi.
           </p>
           <div class="mt-8">
             <ModelTable />
@@ -148,25 +146,22 @@ const crumbs = [
         </section>
 
         <section id="quanto-vale" class="mt-16">
-          <h2 class="heading-28 m-0">Quanto vale il vantaggio del referral Tesla?</h2>
+          <h2 class="heading-28 m-0">Quanto vale il referral Tesla</h2>
           <p class="body-18 m-0 mt-4">
-            Il beneficio per l'acquirente è in <strong>crediti di ricarica Supercharger</strong>,
-            attualmente circa 1.000 km. L'importo mostrato in fase d'ordine è quello che conta ed è
-            soggetto a variazioni Tesla. Indicativamente i 1.000 km valgono 60–70 € di ricariche: è
-            una stima, non un importo garantito.
+            Per chi compra, oggi sono circa <strong>1.000 km Supercharger</strong>. Quello che
+            compare sull'ordine è quello che conta: Tesla può cambiare l'offerta. In pratica
+            quei chilometri valgono 60–70 € di ricariche, a seconda di tariffa e percorso.
           </p>
           <p class="body-18 m-0 mt-4">
-            I <strong>crediti Tesla</strong> del referente (chi condivide il link) si usano per
-            Supercharger, upgrade software, assistenza o Tesla Shop. Non coprono gli abbonamenti e
-            non si convertono in denaro.
+            I crediti di chi condivide il link si usano per Supercharger, software, assistenza
+            o Tesla Shop. Non coprono gli abbonamenti e non diventano soldi.
           </p>
         </section>
 
         <section id="come-si-usa" class="mt-16">
-          <h2 class="heading-28 m-0">Referral Tesla come funziona?</h2>
+          <h2 class="heading-28 m-0">Come si usa il codice</h2>
           <p class="body-18 m-0 mt-4">
-            L'applicazione avviene nel flusso d'ordine sul sito Tesla, non su CodiceEV. I passaggi
-            sono tre.
+            Tutto succede su Tesla.com, non su questo sito. I passaggi sono tre.
           </p>
           <ol class="body-18 mt-6 pl-6 grid gap-4">
             {
@@ -179,61 +174,52 @@ const crumbs = [
             }
           </ol>
           <p class="body-16 text-ink-soft m-0 mt-6">
-            Nota sul browser: il codice è associato alla sessione aperta dal link. Se si copia
-            l'indirizzo in un altro browser, in una finestra anonima o su un altro dispositivo, il
-            referral può non risultare applicato. Completare configurazione e ordine nella stessa
-            sessione.
+            Il codice resta sulla sessione aperta dal link. Se copi l'indirizzo in un altro
+            browser, in una finestra anonima o su un altro telefono, può sparire. Configura e
+            conferma lì.
           </p>
         </section>
 
         <section id="dopo-ordine" class="mt-16">
-          <h2 class="heading-28 m-0">Il referral Tesla si può applicare dopo aver ordinato?</h2>
+          <h2 class="heading-28 m-0">Si può aggiungere dopo l'ordine?</h2>
           <p class="body-18 m-0 mt-4">
-            No. Il link non può essere applicato dopo aver effettuato l'ordine: non esiste un
-            recupero a posteriori. Un account può usarne uno una sola volta.
+            No. Dopo l'invio Tesla non lo associa più. Un account lo usa una volta sola.
           </p>
         </section>
 
         <section id="limiti" class="mt-16">
           <h2 class="heading-28 m-0">Quali sono i limiti e le scadenze?</h2>
           <ul class="body-18 mt-6 pl-6 grid gap-3">
-            <li>Referente: fino a 10 referral d'acquisto per anno solare.</li>
-            <li>Vantaggi in sospeso nell'app Tesla fino alla data di concessione, poi scadono dopo 12 mesi.</li>
-            <li>Ogni nuovo referral estende la scadenza dei crediti Supercharger di 12 mesi, fino a 36 mesi.</li>
+            <li>Chi condivide il link: fino a 10 acquisti per anno solare.</li>
+            <li>I vantaggi restano in sospeso nell'app fino alla concessione, poi durano 12 mesi.</li>
+            <li>Ogni nuovo acquisto dal tuo link può allungare i Supercharger di 12 mesi, fino a 36.</li>
             <li>
-              Termini ufficiali in vigore dal 3 ottobre 2024, aggiornati il 4 giugno 2025
-              ({TERMS_IN_FORCE} / {TERMS_UPDATED}).
+              Termini Tesla in vigore dal 3 ottobre 2024, aggiornati il 4 giugno 2025.
             </li>
           </ul>
         </section>
 
         <section id="incentivo" class="mt-16">
-          <h2 class="heading-28 m-0">Il referral Tesla è un incentivo statale?</h2>
+          <h2 class="heading-28 m-0">È un incentivo statale?</h2>
           <p class="body-18 m-0 mt-4">
-            No. È marketing privato Tesla, indipendente e cumulabile con Ecobonus e incentivi
-            regionali. Quelli pubblici seguono regole proprie: ISEE, requisiti del veicolo e, per
-            l'immatricolazione, una finestra tipica di 270 giorni. Il referral non sostituisce né
-            modifica quelle regole. Per i tempi di ritiro vedi{' '}
+            No. È un'offerta Tesla, distinta da Ecobonus e bonus regionali. Quelli pubblici
+            hanno regole proprie: ISEE, tipo di auto e, di solito, 270 giorni per
+            l'immatricolazione. Il referral non le cambia. Per i tempi di ritiro vedi{' '}
             <a href={ROUTES.delivery} class="text-brand">Tesla pronta consegna in Italia</a>.
           </p>
         </section>
 
         <section id="faq" class="mt-16">
           <h2 class="heading-28 m-0">Domande frequenti</h2>
-          {
-            (faq as FaqItem[]).map((item) => (
-              <div class="mt-8">
-                <h3 class="heading-22 m-0">{item.q}</h3>
-                <p class="body-18 m-0 mt-3">{item.a}</p>
-              </div>
-            ))
-          }
+          <div class="mt-6">
+            <Faq items={faq as FaqItem[]} />
+          </div>
         </section>
 
         <Card class="mt-16">
-          <h2 class="heading-22 m-0">Vuoi usare un link referral attivo?</h2>
+          <h2 class="heading-22 m-0">Vuoi usare il link?</h2>
           <p class="body-16 text-ink-soft m-0 mt-3">
-            Il link apre Tesla.com con il codice già applicato. Il prezzo di listino non cambia.
+            Si apre Tesla.com con il codice già inserito. Il listino non cambia.
           </p>
           <div class="mt-6 flex flex-col sm:flex-row gap-4">
             <Button href={REFERRAL_URL} external icon="arrow-right">Ottieni i 1.000 km</Button>
@@ -255,6 +241,7 @@ const crumbs = [
           </div>
         </Card>
       </article>
+      </div>
     </div>
   </div>
 </BaseLayout>

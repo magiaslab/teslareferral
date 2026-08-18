@@ -1,4 +1,5 @@
 ---
+import Breadcrumb from '../components/Breadcrumb.astro';
 import Button from '../components/Button.astro';
 import Callout from '../components/Callout.astro';
 import CtaBanner from '../components/CtaBanner.astro';
@@ -26,9 +27,9 @@ import { homeJsonLd } from '../lib/schema';
 import type { FaqItem } from '../types';
 
 const verified = formatVerifiedDateIt(VERIFIED_DATE);
-const title = 'Referral Tesla Italia: codice e 1.000 km Supercharger';
+const title = 'Referral Tesla Italia: 1.000 km Supercharger con il codice';
 const description =
-  'Referral Tesla Italia 2026: con un codice referral valido ottieni 1.000 km Supercharger gratis su Model 3 e Model Y, stesso prezzo di listino. Prima di ordinare.';
+  'In Italia il codice referral Tesla aggiunge circa 1.000 km Supercharger su Model 3 e Model Y nuove, allo stesso prezzo di listino. Va usato prima di ordinare.';
 const homeFaq = (faq as FaqItem[]).slice(0, 5);
 ---
 
@@ -41,15 +42,18 @@ const homeFaq = (faq as FaqItem[]).slice(0, 5);
   <section class="section-pad">
     <div class="wrap grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6 items-center">
       <div class="md:col-span-7">
-        <Pill variant="brand" icon="badge-check">Proprietario Model Y verificato</Pill>
-        <h1 class="display-56 m-0 mt-6">
-          Codice referral Tesla 2026: 1.000 km di Supercharger gratis
+        <Breadcrumb items={[{ name: 'Home', path: '/' }]} />
+        <div class="mt-5">
+          <Pill variant="brand" icon="badge-check">Ho una Model Y</Pill>
+        </div>
+        <h1 class="display-56 m-0 mt-5">
+          1.000 km Supercharger con il codice referral Tesla
         </h1>
         <p class="body-18 text-ink-soft m-0 mt-6 max-w-[40rem]">
-          Il <strong class="text-ink font-semibold">referral Tesla in Italia</strong> non è uno
-          sconto sul listino: paghi lo stesso prezzo e, in più, ricevi{' '}
+          In Italia il <strong class="text-ink font-semibold">referral Tesla</strong> non sconta
+          il listino: paghi lo stesso prezzo e ricevi{' '}
           <span class="num-hl">1.000 km di ricariche gratuite</span>
-          {' '}su Model 3 e Model Y, se applichi il codice prima di ordinare.
+          {' '}su Model 3 e Model Y, se usi il codice prima di ordinare.
         </p>
         <div class="mt-8 flex flex-col sm:flex-row gap-4">
           <Button href={REFERRAL_URL} external hero icon="arrow-right">Ottieni i 1.000 km</Button>
@@ -72,7 +76,7 @@ const homeFaq = (faq as FaqItem[]).slice(0, 5);
           width={800}
           height={600}
           alt="Tesla in ricarica a una stazione Supercharger"
-          caption="I 1.000 km Supercharger del referral partono da qui."
+          caption="I 1.000 km Supercharger si usano qui, in viaggio."
           priority
         />
       </div>
@@ -81,24 +85,20 @@ const homeFaq = (faq as FaqItem[]).slice(0, 5);
 
   <section class="pb-16 md:pb-24">
     <div class="wrap grid gap-8">
-      <Callout title="In breve">
+      <Callout title="Da sapere">
         <p class="m-0">
-          Con un <strong>codice referral Tesla</strong> attivo nel 2026 ricevi{' '}
-          <strong>1.000 km di ricariche Supercharger gratuite</strong> su{' '}
-          <strong>Model 3</strong> e <strong>Model Y</strong>, allo{' '}
-          <strong>stesso prezzo di listino</strong>. Va applicato <strong>prima</strong> di
-          configurare l'auto: non si aggiunge dopo l'ordine.
-        </p>
-        <p class="caption-14 text-ink-soft m-0 mt-4">
-          Verificato ad {verified} · soggetto a variazioni decise da Tesla.
+          Con un codice referral Tesla ricevi circa 1.000 km Supercharger su Model 3 e
+          Model Y, allo stesso prezzo di listino. Usalo prima di configurare l'auto:
+          dopo l'ordine non si aggiunge. Tesla può cambiare l'offerta
+          ({verified}).
         </p>
       </Callout>
       <KeyPoints
         items={[
-          '1.000 km Supercharger gratis su Model 3 e Model Y (importo mostrato all\'ordine, soggetto a variazioni Tesla).',
-          'Prezzo identico al listino: il referral non aumenta il costo.',
-          'Vantaggio solo al primo acquisto, con link valido applicato prima dell\'ordine.',
-          'Model S e Model X non sono più idonei (aggiornamento 2026).',
+          'Circa 1.000 km Supercharger su Model 3 e Model Y nuove. Conta quanto vedi sull\'ordine.',
+          'Il listino non sale: i chilometri sono un extra.',
+          'Vale al primo acquisto, se apri il link prima di confermare.',
+          'Model S e Model X restano fuori.',
         ]}
       />
     </div>
@@ -106,9 +106,9 @@ const homeFaq = (faq as FaqItem[]).slice(0, 5);
 
   <section id="come-funziona" class="section-pad bg-surface">
     <div class="wrap">
-      <h2 class="heading-28 m-0">Referral Tesla come funziona?</h2>
+      <h2 class="heading-28 m-0">Come si usa il referral Tesla</h2>
       <p class="body-18 text-ink-soft m-0 mt-4 max-w-[40rem]">
-        Dal clic all'ordine su Tesla.com servono pochi minuti. Nessuna registrazione su questo sito.
+        Dal link all'ordine su Tesla.com bastano pochi minuti. Qui non ti registri.
       </p>
       <ol class="mt-12 grid gap-8 list-none m-0 p-0">
         {
@@ -120,16 +120,16 @@ const homeFaq = (faq as FaqItem[]).slice(0, 5);
         }
       </ol>
       <p class="body-16 m-0 mt-8">
-        Dettaglio completo nella <a href={ROUTES.guide} class="text-brand">guida al programma Segnala e guadagna</a>.
+        Il passo passo è nella <a href={ROUTES.guide} class="text-brand">guida Segnala e guadagna</a>.
       </p>
     </div>
   </section>
 
   <section id="vantaggi" class="section-pad cv-auto">
     <div class="wrap">
-      <h2 class="heading-28 m-0">Quali modelli Tesla sono idonei al referral nel 2026?</h2>
+      <h2 class="heading-28 m-0">Su quali Tesla vale il referral</h2>
       <p class="body-18 text-ink-soft m-0 mt-4">
-        Solo Model 3 e Model Y nuove, acquistate direttamente da Tesla. Il prezzo di listino non cambia.
+        Solo Model 3 e Model Y nuove, comprate da Tesla. Il listino resta quello.
       </p>
       <div class="mt-12">
         <ModelTable />
@@ -142,20 +142,20 @@ const homeFaq = (faq as FaqItem[]).slice(0, 5);
       <div class="md:col-span-7">
         <h2 class="heading-28 m-0">Tesla pronta consegna in Italia: tempi reali</h2>
         <p class="body-18 text-ink-soft m-0 mt-4">
-          Una <strong class="text-ink font-semibold">Tesla in pronta consegna</strong> (stock) può
-          arrivare in <strong class="text-ink font-semibold">1–2 settimane</strong>. Una
-          configurata da zero si allinea spesso allo sprint di fine trimestre. Il referral va
-          applicato prima dell'ordine anche sullo stock.
+          Una <strong class="text-ink font-semibold">Tesla in pronta consegna</strong> può
+          arrivare in <strong class="text-ink font-semibold">1–2 settimane</strong>. Se la
+          configuri da zero, l'attesa si sposta spesso a fine trimestre. Il referral va
+          usato prima di confermare, anche sullo stock.
         </p>
         <p class="body-16 m-0 mt-6">
-          Dettaglio su <a href={ROUTES.delivery} class="text-brand">Tesla pronta consegna, Model Y e Model 3</a>.
+          Tempi e stock: <a href={ROUTES.delivery} class="text-brand">Tesla pronta consegna in Italia</a>.
         </p>
       </div>
       <div class="md:col-span-5">
         <Callout title="Stock vs configurata">
           <p class="m-0">
-            <strong>Tesla pronta consegna</strong>: 1–2 settimane, allestimento fisso.{' '}
-            <strong>Configurata</strong>: attesa spesso a fine trimestre. Stesso referral su{' '}
+            Stock: 1–2 settimane, configurazione già decisa. Auto configurata: di solito
+            fine trimestre. Stesso referral su{' '}
             <a href={ROUTES.modelY} class="text-brand">Model Y</a> e{' '}
             <a href={ROUTES.model3} class="text-brand">Model 3</a>.
           </p>
@@ -172,7 +172,7 @@ const homeFaq = (faq as FaqItem[]).slice(0, 5);
           aspect="1/1"
           width={800}
           height={800}
-          alt="Alessandro Cipriani, proprietario Tesla Model Y verificato"
+          alt="Alessandro Cipriani con la sua Tesla Model Y"
           caption="Alessandro con la sua Model Y."
         />
       </div>
@@ -185,7 +185,7 @@ const homeFaq = (faq as FaqItem[]).slice(0, 5);
           gratuitamente, senza impegno. Nessun call center: scrivi direttamente a me.
         </p>
         <div class="mt-6 flex flex-wrap gap-3">
-          <Pill variant="brand" icon="badge-check">Proprietario verificato</Pill>
+          <Pill variant="brand" icon="badge-check">Proprietario Tesla</Pill>
           <Pill variant="outline">{OWNER_NAME}</Pill>
         </div>
         <div class="mt-8 flex flex-col sm:flex-row gap-4">
@@ -206,7 +206,7 @@ const homeFaq = (faq as FaqItem[]).slice(0, 5);
 
   <section id="faq" class="section-pad cv-auto">
     <div class="wrap max-w-[840px] mx-auto">
-      <h2 class="heading-28 m-0">Referral Tesla: domande frequenti</h2>
+      <h2 class="heading-28 m-0">Domande sul referral Tesla</h2>
       <div class="mt-8">
         <Faq items={homeFaq} />
       </div>

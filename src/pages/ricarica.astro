@@ -2,6 +2,7 @@
 import ArticleMeta from '../components/ArticleMeta.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import Callout from '../components/Callout.astro';
+import Faq from '../components/Faq.astro';
 import KeyPoints from '../components/KeyPoints.astro';
 import PhotoSlot from '../components/PhotoSlot.astro';
 import charging from '../content/charging.json';
@@ -10,10 +11,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { articlePageJsonLd } from '../lib/schema';
 import type { FaqItem } from '../types';
 
-const title = 'Ricarica Tesla: quando caricare all\'80% o al 100% (LFP vs NMC)';
+const title = 'Ricarica Tesla: 80% o 100% secondo la batteria';
 const description =
-  'Guida alla ricarica Tesla Model 3 e Model Y 2026: come riconoscere batteria LFP o NMC e la strategia quotidiana corretta (80% o 100%), Supercharger e ricarica di casa.';
-const h1 = 'Ricarica Tesla: strategia quotidiana per tipo di batteria';
+  'Su Model 3 e Model Y la ricarica quotidiana dipende da LFP o NMC: 100% oppure 80%. Come riconoscerla, Supercharger e ricarica di casa.';
+const h1 = 'Ricarica Tesla: 80% o 100% secondo la batteria';
 
 const pageFaq: FaqItem[] = [
   {
@@ -50,12 +51,11 @@ const jsonLd = articlePageJsonLd({
       <h1 class="display-40 m-0 mt-4">{h1}</h1>
 
       <div class="mt-8">
-        <Callout title="In breve">
+        <Callout title="Da sapere">
           <p class="m-0">
-            La strategia di ricarica Tesla dipende dalla <strong>chimica della batteria</strong>: le
-            versioni <strong>LFP</strong> (Standard/RWD base) si caricano <strong>al 100% ogni giorno</strong>;
-            le versioni <strong>NMC/NCA</strong> (Long Range RWD/AWD, Performance) vanno tenute all'
-            <strong>80%</strong> per l'uso quotidiano e al 100% solo prima dei viaggi.
+            Dipende dalla batteria. Le LFP (Standard/RWD) stanno bene al 100% tutti i giorni.
+            Le NMC/NCA (Long Range e Performance) meglio all'80% in settimana e al 100%
+            solo prima di un viaggio.
           </p>
         </Callout>
       </div>
@@ -63,11 +63,11 @@ const jsonLd = articlePageJsonLd({
       <div class="mt-8">
         <KeyPoints
           items={[
-            'LFP: 100% (calibrazione settimanale).',
-            'NMC/NCA: 80% daily, 100% pre-viaggio.',
-            'Model Y Long Range RWD = NMC.',
-            '10–80% è la finestra DC più rapida.',
-            'Precondiziona in inverno prima di Supercharger e partenza.',
+            'LFP: 100% tutti i giorni, almeno una piena a settimana.',
+            'NMC/NCA: 80% in settimana, 100% prima dei viaggi.',
+            'La Model Y Long Range RWD è NMC.',
+            'In Supercharger la fascia più veloce è 10–80%.',
+            'In inverno precondiziona prima di partire e di caricare.',
           ]}
         />
       </div>
@@ -155,14 +155,9 @@ const jsonLd = articlePageJsonLd({
 
       <section class="mt-16">
         <h2 class="heading-28 m-0">Domande frequenti sulla ricarica</h2>
-        {
-          pageFaq.map((item) => (
-            <div class="mt-8">
-              <h3 class="heading-22 m-0">{item.q}</h3>
-              <p class="body-18 m-0 mt-3">{item.a}</p>
-            </div>
-          ))
-        }
+        <div class="mt-6">
+          <Faq items={pageFaq} />
+        </div>
       </section>
     </div>
   </article>

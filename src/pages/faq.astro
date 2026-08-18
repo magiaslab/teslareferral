@@ -3,15 +3,16 @@ import ArticleMeta from '../components/ArticleMeta.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import Callout from '../components/Callout.astro';
 import CtaBanner from '../components/CtaBanner.astro';
+import Faq from '../components/Faq.astro';
 import faq from '../content/faq.json';
 import { ROUTES } from '../consts';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { faqPageJsonLd } from '../lib/schema';
 import type { FaqItem } from '../types';
 
-const title = 'FAQ referral Tesla Italia: codice, pronta consegna, costi';
+const title = 'FAQ referral Tesla: codice, costi e pronta consegna';
 const description =
-  'FAQ referral Tesla Italia 2026: come funziona, quanto costa, pronta consegna, Model 3 e Model Y, scadenze crediti e cumulabilità con Ecobonus.';
+  'Quanto costa il referral Tesla, su quali modelli vale, come si usa in pronta consegna e quando scadono i crediti Supercharger.';
 ---
 
 <BaseLayout title={title} description={description} jsonLd={faqPageJsonLd()}>
@@ -21,27 +22,22 @@ const description =
       <div class="mt-4">
         <ArticleMeta reading="FAQ" />
       </div>
-      <h1 class="display-40 m-0 mt-4">FAQ referral Tesla Italia 2026</h1>
+      <h1 class="display-40 m-0 mt-4">Domande sul referral Tesla</h1>
 
       <div class="mt-8">
-        <Callout title="In breve">
+        <Callout title="Da sapere">
           <p class="m-0">
-            Il referral Tesla è il programma ufficiale «Segnala e guadagna»: su Model 3 e Model Y
-            nuove aggiunge circa 1.000 km Supercharger, allo stesso prezzo di listino, se il link
-            è applicato prima dell'ordine. Questo sito è indipendente.
+            Il referral Tesla è il programma Segnala e guadagna. Su Model 3 e Model Y
+            nuove aggiunge circa 1.000 km Supercharger, allo stesso listino, se usi il
+            link prima dell'ordine. Questo sito è indipendente.
           </p>
         </Callout>
       </div>
 
-      <h2 class="heading-28 m-0 mt-12">Risposte aggiornate</h2>
-      {
-        (faq as FaqItem[]).map((item) => (
-          <section class="mt-10">
-            <h3 class="heading-22 m-0">{item.q}</h3>
-            <p class="body-18 m-0 mt-3">{item.a}</p>
-          </section>
-        ))
-      }
+      <h2 class="heading-28 m-0 mt-12">Le domande che arrivano più spesso</h2>
+      <div class="mt-6">
+        <Faq items={faq as FaqItem[]} />
+      </div>
 
       <p class="body-16 m-0 mt-12">
         Approfondimenti:{' '}

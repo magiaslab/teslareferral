@@ -39,19 +39,53 @@ export const ROUTES = {
   cookie: '/cookie',
 } as const;
 
-export const NAV_LINKS = [
+export interface SiteLink {
+  href: string;
+  label: string;
+  match?: 'exact' | 'prefix';
+}
+
+export const NAV_LINKS: SiteLink[] = [
   { href: ROUTES.guide, label: 'Come funziona' },
-  { href: ROUTES.delivery, label: 'Consegna' },
   { href: ROUTES.modelY, label: 'Model Y' },
   { href: ROUTES.model3, label: 'Model 3' },
-] as const;
-
-export const SILO_LINKS = [
-  { href: ROUTES.charging, label: 'Ricarica' },
-  { href: ROUTES.homeCharging, label: 'Ricarica casa' },
-  { href: ROUTES.software, label: 'Software' },
+  { href: ROUTES.charging, label: 'Ricarica', match: 'prefix' },
+  { href: ROUTES.delivery, label: 'Consegna' },
   { href: ROUTES.faq, label: 'FAQ' },
-] as const;
+];
+
+export const MORE_LINKS: SiteLink[] = [
+  { href: ROUTES.homeCharging, label: 'Ricarica casa' },
+  { href: ROUTES.software, label: 'Software e Grok' },
+];
+
+export const FOOTER_GROUPS: { title: string; links: SiteLink[] }[] = [
+  {
+    title: 'Referral',
+    links: [
+      { href: ROUTES.guide, label: 'Come funziona' },
+      { href: ROUTES.modelY, label: 'Model Y' },
+      { href: ROUTES.model3, label: 'Model 3' },
+      { href: ROUTES.faq, label: 'FAQ' },
+    ],
+  },
+  {
+    title: 'Guide',
+    links: [
+      { href: ROUTES.charging, label: 'Ricarica LFP/NMC' },
+      { href: ROUTES.homeCharging, label: 'Ricarica casa' },
+      { href: ROUTES.delivery, label: 'Pronta consegna' },
+      { href: ROUTES.software, label: 'Software e Grok' },
+    ],
+  },
+];
+
+export function isActivePath(path: string, link: SiteLink): boolean {
+  if (link.match === 'prefix') {
+    return path === link.href || path.startsWith(`${link.href}-`) || path.startsWith(`${link.href}/`);
+  }
+  return path === link.href;
+}
 
 const MONTHS_IT = [
   'gennaio',
@@ -78,16 +112,16 @@ export function formatVerifiedDateIt(iso: string = VERIFIED_DATE): string {
 
 export const HOW_TO_STEPS = [
   {
-    title: 'Apri il link referral',
-    text: 'Apri il link referral prima di iniziare l\'ordine: si apre Tesla.com con il codice già applicato.',
+    title: 'Apri il link',
+    text: 'Si apre Tesla.com con il codice già inserito. Parti da qui, non da un\'altra scheda o da una finestra anonima.',
   },
   {
-    title: 'Configura Model 3 o Model Y',
-    text: 'Scegli versione, colore e allestimento su Tesla.com come faresti normalmente.',
+    title: 'Scegli Model 3 o Model Y',
+    text: 'Configura versione, colore e optional come faresti di solito.',
   },
   {
-    title: 'Completa l\'ordine',
-    text: 'Il vantaggio in crediti Supercharger risulta associato al tuo account Tesla.',
+    title: 'Conferma l\'ordine',
+    text: 'I chilometri Supercharger restano sul tuo account Tesla. Dopo l\'invio non si possono più aggiungere.',
   },
 ] as const;
 

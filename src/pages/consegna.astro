@@ -3,16 +3,17 @@ import ArticleMeta from '../components/ArticleMeta.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import Callout from '../components/Callout.astro';
 import CtaBanner from '../components/CtaBanner.astro';
+import Faq from '../components/Faq.astro';
 import KeyPoints from '../components/KeyPoints.astro';
 import { ROUTES } from '../consts';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { articlePageJsonLd } from '../lib/schema';
 import type { FaqItem } from '../types';
 
-const title = 'Tesla pronta consegna Italia 2026: tempi e stock';
+const title = 'Tesla pronta consegna in Italia: tempi e stock';
 const description =
-  'Tesla pronta consegna in Italia: stock in 1–2 settimane, Model Y e Model 3, sprint di fine trimestre e cosa fare prima dell\'ordine (referral incluso).';
-const h1 = 'Tesla pronta consegna in Italia: tempi e fine trimestre';
+  'Una Tesla in pronta consegna può arrivare in 1–2 settimane. Tempi di Model Y e Model 3, fine trimestre e cosa fare prima dell\'ordine, referral compreso.';
+const h1 = 'Tesla pronta consegna in Italia';
 
 const pageFaq: FaqItem[] = [
   {
@@ -57,12 +58,11 @@ const jsonLd = articlePageJsonLd({
       <h1 class="display-40 m-0 mt-4">{h1}</h1>
 
       <div class="mt-8">
-        <Callout title="In breve">
+        <Callout title="Da sapere">
           <p class="m-0">
-            Una <strong>Tesla pronta consegna</strong> (stock) in Italia può arrivare in{' '}
-            <strong>1–2 settimane</strong>. Una Tesla configurata da zero si consegna spesso in
-            prossimità della <strong>fine del trimestre</strong> (marzo, giugno, settembre, dicembre).
-            L'acconto va versato almeno <strong>7 giorni prima</strong> della consegna.
+            Una Tesla già in stock può arrivare in 1–2 settimane. Se la configuri da zero,
+            il ritiro cade spesso a fine trimestre (marzo, giugno, settembre, dicembre).
+            L'acconto va versato almeno 7 giorni prima.
           </p>
         </Callout>
       </div>
@@ -70,10 +70,10 @@ const jsonLd = articlePageJsonLd({
       <div class="mt-8">
         <KeyPoints
           items={[
-            'Tesla pronta consegna (stock): tipicamente 1–2 settimane, allestimento fisso.',
-            'Configurata: attesa spesso allineata allo sprint di fine trimestre fiscale.',
-            'Model Y e Model 3 sono i modelli più presenti in stock in Italia.',
-            'Acconto: almeno 7 giorni prima del delivery day. Referral: prima dell\'ordine.',
+            'Stock: di solito 1–2 settimane, configurazione già decisa.',
+            'Auto configurata: l\'attesa si sposta spesso a fine trimestre.',
+            'In Italia si vedono soprattutto Model Y e Model 3.',
+            'Acconto almeno 7 giorni prima del ritiro. Referral prima dell\'ordine.',
           ]}
         />
       </div>
@@ -92,9 +92,9 @@ const jsonLd = articlePageJsonLd({
       <section class="mt-16">
         <h2 class="heading-28 m-0">Tesla Model Y pronta consegna</h2>
         <p class="body-18 m-0 mt-4">
-          La <strong>Tesla Model Y pronta consegna</strong> è la combinazione più cercata in Italia:
-          SUV familiare già prodotto, ritiro rapido se accetti la configurazione in stock. Controllare
-          versione (RWD vs Long Range) e chimica della batteria nella{' '}
+          In Italia la <strong>Model Y pronta consegna</strong> è quella che si vede più spesso:
+          SUV già prodotto, ritiro rapido se accetti la configurazione in stock. Controlla
+          versione (RWD o Long Range) e chimica della batteria nella{' '}
           <a href={ROUTES.charging} class="text-brand">guida alla ricarica</a>. Il vantaggio referral
           resta 1.000 km Supercharger se il link era applicato prima dell'ordine. Dettaglio sul{' '}
           <a href={ROUTES.modelY} class="text-brand">referral Model Y</a>.
@@ -104,10 +104,10 @@ const jsonLd = articlePageJsonLd({
       <section class="mt-16">
         <h2 class="heading-28 m-0">Tesla Model 3 pronta consegna</h2>
         <p class="body-18 m-0 mt-4">
-          Una <strong>Tesla Model 3 pronta consegna</strong> segue la stessa logica: stock fisso,
-          ritiro in 1–2 settimane se c'è disponibilità. Vale per Highland in tutte le versioni nuove
-          pubblicate come inventario. Il referral non è uno sconto Tesla Model 3 sul listino: è un
-          extra di ricarica. Dettaglio sul <a href={ROUTES.model3} class="text-brand">referral Model 3</a>.
+          Una <strong>Model 3 pronta consegna</strong> è la stessa cosa: stock fisso, ritiro in
+          1–2 settimane se c'è disponibilità. Vale sulla Highland, in tutte le versioni che
+          Tesla pubblica come inventario. Il referral non sconta il listino: è un extra di
+          ricarica. Dettaglio sul <a href={ROUTES.model3} class="text-brand">referral Model 3</a>.
         </p>
       </section>
 
@@ -165,20 +165,15 @@ const jsonLd = articlePageJsonLd({
 
       <section class="mt-16">
         <h2 class="heading-28 m-0">Domande frequenti sulla consegna</h2>
-        {
-          pageFaq.map((item) => (
-            <div class="mt-8">
-              <h3 class="heading-22 m-0">{item.q}</h3>
-              <p class="body-18 m-0 mt-3">{item.a}</p>
-            </div>
-          ))
-        }
+        <div class="mt-6">
+          <Faq items={pageFaq} />
+        </div>
       </section>
 
       <div class="mt-16">
         <CtaBanner
           title="Referral prima dell'ordine, anche in pronta consegna"
-          summary="Sullo stock i tempi si accorciano, ma il codice va applicato prima di confermare. Il prezzo di listino non cambia."
+          summary="Sullo stock i tempi si accorciano, ma il codice va usato prima di confermare. Il listino non cambia."
         />
       </div>
     </div>

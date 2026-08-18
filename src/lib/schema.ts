@@ -82,9 +82,9 @@ export function howToNode(id: string) {
   return {
     '@type': 'HowTo',
     '@id': id,
-    name: 'Referral Tesla come funziona',
+    name: 'Come usare il referral Tesla',
     description:
-      'Tre passi: apri il link prima dell\'ordine, configura Model 3 o Model Y, completa l\'acquisto su Tesla.com.',
+      'Apri il link, configura Model 3 o Model Y su Tesla.com e conferma l\'ordine nella stessa sessione.',
     inLanguage: 'it-IT',
     step: HOW_TO_STEPS.map((step, index) => ({
       '@type': 'HowToStep',
@@ -140,7 +140,7 @@ export function homeJsonLd() {
     {
       '@type': 'ItemList',
       '@id': `${SITE_URL}/#modelli`,
-      name: 'Modelli Tesla idonei al referral 2026',
+      name: 'Modelli Tesla con referral',
       numberOfItems: models.length,
       itemListElement: (models as Model[]).map((model, index) => ({
         '@type': 'ListItem',
@@ -163,10 +163,10 @@ export function guideJsonLd() {
     breadcrumbList(crumbs),
     articleNode({
       url,
-      headline: 'Referral Tesla come funziona: guida 2026 in Italia',
+      headline: 'Come funziona il referral Tesla',
       description:
-        'Referral Tesla come funziona nel 2026 in Italia: programma «Segnala e guadagna», modelli idonei, 1.000 km Supercharger e come applicare il codice prima dell\'ordine.',
-      about: 'Programma referral Tesla Segnala e guadagna',
+        'Il programma Segnala e guadagna aggiunge circa 1.000 km Supercharger su Model 3 e Model Y. Va usato prima di ordinare.',
+      about: 'Referral Tesla Segnala e guadagna',
     }),
     {
       '@type': 'FAQPage',
@@ -181,7 +181,6 @@ export function modelJsonLd(model: Model) {
   const url = `${SITE_URL}/${model.slug}`;
   const crumbs: Crumb[] = [
     { name: 'Home', path: '/' },
-    { name: 'Come funziona', path: '/come-funziona' },
     { name: model.name, path: `/${model.slug}` },
   ];
   return pageGraph([
@@ -195,7 +194,7 @@ export function modelJsonLd(model: Model) {
     {
       '@type': 'ItemList',
       '@id': `${url}#versioni`,
-      name: `Versioni ${model.name} idonee al referral`,
+      name: `Versioni ${model.name} con i 1.000 km Supercharger`,
       numberOfItems: model.versions.length,
       itemListElement: model.versions.map((version, index) => ({
         '@type': 'ListItem',
@@ -254,9 +253,9 @@ export function faqPageJsonLd() {
   return articlePageJsonLd({
     path: '/faq',
     crumbName: 'FAQ',
-    headline: 'Domande frequenti sul referral Tesla 2026 (Italia)',
+    headline: 'Domande sul referral Tesla',
     description:
-      'FAQ sul codice referral Tesla 2026: è ufficiale? costa? si applica dopo l\'ordine? quali modelli? quando scadono i crediti?',
+      'Quanto costa, quali modelli, pronta consegna, scadenze dei crediti e cumulo con l\'Ecobonus.',
     about: 'Referral Tesla domande frequenti',
     faqItems: faq as FaqItem[],
   });

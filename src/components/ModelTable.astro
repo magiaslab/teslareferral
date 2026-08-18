@@ -8,14 +8,14 @@ interface Props {
   footnote?: string;
 }
 
-const defaultFootnote = `Dati verificati ad ${formatVerifiedDateIt(VERIFIED_DATE)}, soggetti a variazioni decise da Tesla. Solo veicoli nuovi acquistati direttamente da Tesla. Model S e Model X non sono più idonei nel 2026.`;
+const defaultFootnote = `Controllato a ${formatVerifiedDateIt(VERIFIED_DATE)}. Vale sulle auto nuove comprate da Tesla; Model S e Model X restano fuori. Tesla può cambiare l'offerta.`;
 const { models = modelsData as Model[], footnote = defaultFootnote } = Astro.props;
 ---
 
 <div>
   <div class="hidden sm:block overflow-hidden rounded-[14px] border border-line">
     <table class="w-full border-collapse text-left">
-      <caption class="sr-only">Vantaggio referral Tesla per modello idoneo nel 2026</caption>
+      <caption class="sr-only">Vantaggio referral Tesla su Model 3 e Model Y</caption>
       <thead class="bg-[#F3F3F0] dark:bg-[#252830]">
         <tr>
           <th scope="col" class="body-16 font-semibold px-6 py-4 border-b border-line">Modello</th>

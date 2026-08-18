@@ -1,5 +1,14 @@
 ---
-import { BRAND, CONTACT_EMAIL, CONTACT_MAILTO, DOMAIN, MAGIASLAB_URL, NAV_LINKS, OWNER_ORG, ROUTES, SILO_LINKS } from '../consts';
+import {
+  BRAND,
+  CONTACT_EMAIL,
+  CONTACT_MAILTO,
+  DOMAIN,
+  FOOTER_GROUPS,
+  MAGIASLAB_URL,
+  OWNER_ORG,
+  ROUTES,
+} from '../consts';
 import Disclaimer from './Disclaimer.astro';
 import FreshnessBadge from './FreshnessBadge.astro';
 import Icon from './Icon.astro';
@@ -7,7 +16,7 @@ import Icon from './Icon.astro';
 
 <footer class="border-t border-line bg-paper">
   <div class="wrap py-12 md:py-16">
-    <div class="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
+    <div class="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4 lg:gap-8">
       <div>
         <a href="/" class="flex items-center gap-3 no-underline text-ink min-h-11">
           <span
@@ -29,84 +38,74 @@ import Icon from './Icon.astro';
         </div>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
-        <div>
-          <p class="caption-14 font-semibold m-0 mb-2">Referral</p>
-          <ul class="flex flex-col list-none m-0 p-0">
-            {
-              NAV_LINKS.map((link) => (
+      {
+        FOOTER_GROUPS.map((group) => (
+          <div>
+            <p class="caption-14 font-semibold m-0 mb-2">{group.title}</p>
+            <ul class="flex flex-col list-none m-0 p-0">
+              {group.links.map((link) => (
                 <li>
-                  <a href={link.href} class="inline-flex items-center min-h-11 caption-14 text-ink no-underline hover:text-brand">
+                  <a
+                    href={link.href}
+                    class="inline-flex items-center min-h-10 caption-14 text-ink no-underline hover:text-brand"
+                  >
                     {link.label}
                   </a>
                 </li>
-              ))
-            }
-          </ul>
-        </div>
-        <div>
-          <p class="caption-14 font-semibold m-0 mb-2">Guide</p>
-          <ul class="flex flex-col list-none m-0 p-0">
-            {
-              SILO_LINKS.map((link) => (
-                <li>
-                  <a href={link.href} class="inline-flex items-center min-h-11 caption-14 text-ink no-underline hover:text-brand">
-                    {link.label}
-                  </a>
-                </li>
-              ))
-            }
-          </ul>
-        </div>
-        <div>
-          <p class="caption-14 font-semibold m-0 mb-2">Note legali</p>
-          <ul class="flex flex-col list-none m-0 p-0">
-            <li>
-              <a href={ROUTES.privacy} class="inline-flex items-center min-h-11 caption-14 text-ink no-underline hover:text-brand">
-                Privacy policy
-              </a>
-            </li>
-            <li>
-              <a href={ROUTES.cookie} class="inline-flex items-center min-h-11 caption-14 text-ink no-underline hover:text-brand">
-                Cookie policy
-              </a>
-            </li>
-            <li>
-              <button
-                type="button"
-                data-cookie-prefs
-                class="inline-flex items-center gap-2 min-h-11 caption-14 text-ink bg-transparent border-0 p-0 cursor-pointer hover:text-brand"
-              >
-                <Icon name="settings" size={16} />
-                Preferenze cookie
-              </button>
-            </li>
-            <li>
-              <a
-                href={CONTACT_MAILTO}
-                class="inline-flex items-center gap-2 min-h-11 caption-14 text-ink no-underline hover:text-brand"
-              >
-                <Icon name="mail" size={16} />
-                {CONTACT_EMAIL}
-              </a>
-            </li>
-            <li>
-              <a
-                href={MAGIASLAB_URL}
-                target="_blank"
-                rel="noopener"
-                class="inline-flex items-center gap-2 min-h-11 caption-14 text-ink no-underline hover:text-brand"
-              >
-                <Icon name="globe" size={16} />
-                www.magiaslab.com
-              </a>
-            </li>
-          </ul>
-        </div>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+
+      <div>
+        <p class="caption-14 font-semibold m-0 mb-2">Contatti e note</p>
+        <ul class="flex flex-col list-none m-0 p-0">
+          <li>
+            <a
+              href={CONTACT_MAILTO}
+              class="inline-flex items-center gap-2 min-h-10 caption-14 text-ink no-underline hover:text-brand"
+            >
+              <Icon name="mail" size={16} />
+              {CONTACT_EMAIL}
+            </a>
+          </li>
+          <li>
+            <a
+              href={MAGIASLAB_URL}
+              target="_blank"
+              rel="noopener"
+              class="inline-flex items-center gap-2 min-h-10 caption-14 text-ink no-underline hover:text-brand"
+            >
+              <Icon name="globe" size={16} />
+              www.magiaslab.com
+            </a>
+          </li>
+          <li>
+            <a href={ROUTES.privacy} class="inline-flex items-center min-h-10 caption-14 text-ink no-underline hover:text-brand">
+              Privacy policy
+            </a>
+          </li>
+          <li>
+            <a href={ROUTES.cookie} class="inline-flex items-center min-h-10 caption-14 text-ink no-underline hover:text-brand">
+              Cookie policy
+            </a>
+          </li>
+          <li>
+            <button
+              type="button"
+              data-cookie-prefs
+              class="inline-flex items-center gap-2 min-h-10 caption-14 text-ink bg-transparent border-0 p-0 cursor-pointer hover:text-brand"
+            >
+              <Icon name="settings" size={16} />
+              Preferenze cookie
+            </button>
+          </li>
+        </ul>
       </div>
     </div>
 
-    <div class="mt-8 pt-8 border-t border-line">
+    <div class="mt-10 pt-8 border-t border-line">
       <Disclaimer />
     </div>
   </div>

@@ -5,6 +5,7 @@ import Button from '../components/Button.astro';
 import Callout from '../components/Callout.astro';
 import Card from '../components/Card.astro';
 import CtaBanner from '../components/CtaBanner.astro';
+import Faq from '../components/Faq.astro';
 import Icon from '../components/Icon.astro';
 import KeyPoints from '../components/KeyPoints.astro';
 import stats from '../content/home-charging.json';
@@ -69,7 +70,7 @@ const jsonLd = articlePageJsonLd({
       <h1 class="display-40 m-0 mt-4">{h1}</h1>
 
       <div class="mt-8">
-        <Callout title="In breve">
+        <Callout title="Da sapere">
           <p class="m-0">
             Ho una Tesla Model Y, una wallbox <strong>V2C Trydan</strong> fornita e montata da
             Octopus, e la tariffa <strong>Intelligent Octopus</strong>. Dall'app Tesla, da quando
@@ -95,8 +96,8 @@ const jsonLd = articlePageJsonLd({
       <section class="mt-16">
         <h2 class="heading-28 m-0">I numeri dall'app Tesla</h2>
         <p class="body-18 m-0 mt-4">
-          Schermata «Statistiche di ricarica» da quando ho l'auto. Solo consumi, costi e confronti:
-          niente utenza, né dati di fornitura.
+          Schermata «Statistiche di ricarica» da quando ho l'auto: consumi, costi e confronti.
+          Non sono dati di contratto.
         </p>
         <div class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
           <Card>
@@ -303,7 +304,7 @@ const jsonLd = articlePageJsonLd({
           , dopo l'attivazione della fornitura di un <strong>nuovo</strong> cliente entrambi
           ricevete <strong>30 € IVA inclusa</strong> di credito sulla prima bolletta utile. L'amico
           può aderire una sola volta; la richiesta deve arrivare dal link e la fornitura deve
-          attivarsi. Niente spam, niente auto-invito su altre utenze intestate a sé.
+          attivarsi. Vale per un nuovo cliente, non per utenze già tue.
         </p>
         <div class="mt-8 flex flex-col sm:flex-row gap-4">
           <Button href={OCTOPUS_REFERRAL_URL} external icon="plug-zap">Passa a Octopus con il mio link</Button>
@@ -319,20 +320,14 @@ const jsonLd = articlePageJsonLd({
 
       <section class="mt-16">
         <h2 class="heading-28 m-0">Domande frequenti</h2>
-        {
-          pageFaq.map((item) => (
-            <div class="mt-8">
-              <h3 class="heading-22 m-0">{item.q}</h3>
-              <p class="body-18 m-0 mt-3">{item.a}</p>
-            </div>
-          ))
-        }
+        <div class="mt-6">
+          <Faq items={pageFaq} />
+        </div>
       </section>
 
       <p class="caption-14 text-ink-soft m-0 mt-12">
-        Stime personali, non una fattura. Fonti: app Tesla; registro wallbox V2C luglio–agosto 2026;
-        confronto diesel su consumi reali della Rio e prezzo self medio. Niente dati di contratto o
-        fornitura. Elaborazione 11 agosto 2026.
+        Stime mie, non una fattura. Fonti: app Tesla, registro wallbox V2C di luglio–agosto 2026,
+        consumi della Rio e prezzo self medio. Aggiornato l'11 agosto 2026.
       </p>
 
       <div class="mt-16">

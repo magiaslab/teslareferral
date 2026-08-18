@@ -1,14 +1,15 @@
 ---
-import { BRAND, NAV_LINKS, REFERRAL_URL, SILO_LINKS } from '../consts';
+import { BRAND, isActivePath, MORE_LINKS, NAV_LINKS, REFERRAL_URL } from '../consts';
 import Button from './Button.astro';
 import Icon from './Icon.astro';
 
 const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const menuLinks = [...NAV_LINKS, ...MORE_LINKS];
 ---
 
-<header class="sticky top-0 z-50 h-16 border-b border-line bg-paper">
-  <nav class="wrap flex h-16 items-center gap-4" aria-label="Principale">
-    <a href="/" class="flex items-center gap-3 no-underline text-ink shrink-0 min-h-11">
+<header class="sticky top-0 z-50 border-b border-line bg-paper">
+  <nav class="wrap flex h-16 items-center gap-3" aria-label="Principale">
+    <a href="/" class="flex items-center gap-2.5 no-underline text-ink shrink-0 min-h-11">
       <span
         class="flex h-[30px] w-[30px] items-center justify-center rounded-[6px] bg-[#0E7C66] font-display text-[18px] font-bold leading-none text-white"
         aria-hidden="true"
@@ -18,14 +19,17 @@ const path = Astro.url.pathname.replace(/\/$/, '') || '/';
       <span class="font-display text-lg font-bold tracking-tight max-[420px]:hidden">{BRAND}</span>
     </a>
 
-    <ul class="hidden lg:flex items-center gap-5 list-none m-0 p-0 mx-auto">
+    <ul class="hidden lg:flex items-center justify-center gap-0.5 xl:gap-1 list-none m-0 p-0 flex-1 min-w-0">
       {
         NAV_LINKS.map((link) => (
           <li>
             <a
               href={link.href}
-              class="inline-flex items-center min-h-11 body-16 text-ink no-underline hover:text-brand"
-              aria-current={path === link.href ? 'page' : undefined}
+              class:list={[
+                'inline-flex items-center min-h-11 px-2 xl:px-2.5 text-[13px] xl:text-sm font-medium no-underline whitespace-nowrap hover:text-brand',
+                isActivePath(path, link) ? 'text-brand' : 'text-ink',
+              ]}
+              aria-current={isActivePath(path, link) ? 'page' : undefined}
             >
               {link.label}
             </a>
@@ -34,7 +38,7 @@ const path = Astro.url.pathname.replace(/\/$/, '') || '/';
       }
     </ul>
 
-    <div class="ml-auto flex items-center gap-2 lg:ml-0">
+    <div class="ml-auto flex items-center gap-1.5 lg:ml-0 shrink-0">
       <button
         type="button"
         id="theme-toggle"
@@ -51,14 +55,17 @@ const path = Astro.url.pathname.replace(/\/$/, '') || '/';
           <Icon name="menu" size={20} />
           <span class="sr-only">Menu</span>
         </summary>
-        <ul class="absolute right-0 mt-2 w-56 list-none m-0 p-4 rounded-[14px] border border-line bg-surface shadow-md">
+        <ul class="absolute right-0 mt-2 w-60 list-none m-0 p-3 rounded-[14px] border border-line bg-surface shadow-md">
           {
-            [...NAV_LINKS, ...SILO_LINKS].map((link) => (
+            menuLinks.map((link) => (
               <li>
                 <a
                   href={link.href}
-                  class="flex items-center min-h-11 body-16 text-ink no-underline"
-                  aria-current={path === link.href ? 'page' : undefined}
+                  class:list={[
+                    'flex items-center min-h-11 px-2 rounded-[8px] text-sm no-underline hover:bg-brand-tint',
+                    isActivePath(path, link) ? 'text-brand font-semibold' : 'text-ink',
+                  ]}
+                  aria-current={isActivePath(path, link) ? 'page' : undefined}
                 >
                   {link.label}
                 </a>
@@ -68,7 +75,7 @@ const path = Astro.url.pathname.replace(/\/$/, '') || '/';
         </ul>
       </details>
 
-      <Button href={REFERRAL_URL} external icon="arrow-right" class="!px-3 !text-sm sm:!px-6 sm:!text-base whitespace-nowrap">
+      <Button href={REFERRAL_URL} external icon="arrow-right" class="!px-3 !text-sm xl:!px-5 whitespace-nowrap">
         Ottieni i 1.000 km
       </Button>
     </div>

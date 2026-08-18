@@ -1,5 +1,6 @@
 ---
-import { BRAND, DOMAIN } from '../consts';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import { BRAND, DOMAIN, ROUTES } from '../consts';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const title = `Cookie policy — ${BRAND}`;
@@ -9,7 +10,8 @@ const description = `${BRAND} (${DOMAIN}): cookie necessari e, solo con il tuo c
 <BaseLayout title={title} description={description}>
   <article class="section-pad">
     <div class="wrap max-w-[76ch]">
-      <h1 class="display-40 m-0">Cookie policy</h1>
+      <Breadcrumb items={[{ name: 'Home', path: '/' }, { name: 'Cookie', path: ROUTES.cookie }]} />
+      <h1 class="display-40 m-0 mt-4">Cookie policy</h1>
       <p class="caption-14 text-ink-soft m-0 mt-4">
         Informativa sui cookie e sull'archiviazione locale usati su {DOMAIN}.
       </p>

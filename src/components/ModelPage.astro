@@ -5,6 +5,7 @@ import Button from './Button.astro';
 import Callout from './Callout.astro';
 import Card from './Card.astro';
 import CtaBanner from './CtaBanner.astro';
+import Faq from './Faq.astro';
 import KeyPoints from './KeyPoints.astro';
 import PhotoSlot from './PhotoSlot.astro';
 import {
@@ -29,7 +30,6 @@ const hasEstimate =
   model.estimateEur !== null && model.kwhPer100km !== null && model.energyPriceEur !== null;
 const crumbs = [
   { name: 'Home', path: '/' },
-  { name: 'Come funziona', path: ROUTES.guide },
   { name: model.name, path: `/${model.slug}` },
 ];
 
@@ -52,17 +52,17 @@ function formatEur(value: number): string {
         )
       }
       <div class="mt-4">
-        <ArticleMeta reading={`Referral ${model.name}`} />
+        <ArticleMeta reading={model.name} />
       </div>
 
       <div class="mt-6 grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-6 items-start">
         <div class="md:col-span-7">
           <h1 class="display-40 m-0">{model.h1}</h1>
           <div class="mt-8">
-            <Callout title="In breve">
+            <Callout title="Da sapere">
               <p class="m-0">{model.intro}</p>
               <p class="caption-14 text-ink-soft m-0 mt-4">
-                Verificato ad {verified} · soggetto a variazioni decise da Tesla.
+                Controllato a {verified}. Tesla può cambiare l'offerta.
               </p>
             </Callout>
           </div>
@@ -177,20 +177,15 @@ function formatEur(value: number): string {
 
       <section id="faq-modello" class="mt-16 max-w-[76ch]">
         <h2 class="heading-28 m-0">Domande sulla {model.name}</h2>
-        {
-          model.faq.map((item) => (
-            <div class="mt-8">
-              <h3 class="heading-22 m-0">{item.q}</h3>
-              <p class="body-18 m-0 mt-3">{item.a}</p>
-            </div>
-          ))
-        }
+        <div class="mt-6">
+          <Faq items={model.faq} />
+        </div>
       </section>
 
       <div class="mt-16">
         <CtaBanner
-          title={`Referral ${model.name}: applica il codice prima dell'ordine`}
-          summary="Dopo l'invio dell'ordine il referral non è più associabile. Il prezzo di listino resta invariato."
+          title={`Referral ${model.name}: usa il codice prima dell'ordine`}
+          summary="Dopo l'invio Tesla non lo associa più. Il listino resta quello."
         />
       </div>
     </div>

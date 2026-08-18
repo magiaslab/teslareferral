@@ -1,4 +1,5 @@
 ---
+import Breadcrumb from '../components/Breadcrumb.astro';
 import { BRAND, CONTACT_EMAIL, CONTACT_MAILTO, DOMAIN, MAGIASLAB_URL, OWNER, OWNER_ORG, ROUTES } from '../consts';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
@@ -9,7 +10,8 @@ const description = `Informativa privacy di ${BRAND} (${DOMAIN}). Titolare: ${OW
 <BaseLayout title={title} description={description}>
   <article class="section-pad">
     <div class="wrap max-w-[76ch]">
-      <h1 class="display-40 m-0">Privacy policy</h1>
+      <Breadcrumb items={[{ name: 'Home', path: '/' }, { name: 'Privacy', path: ROUTES.privacy }]} />
+      <h1 class="display-40 m-0 mt-4">Privacy policy</h1>
       <p class="caption-14 text-ink-soft m-0 mt-4">
         Informativa sul trattamento dei dati personali per il sito {DOMAIN}.
       </p>

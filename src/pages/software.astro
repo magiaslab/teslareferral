@@ -2,6 +2,7 @@
 import ArticleMeta from '../components/ArticleMeta.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import Callout from '../components/Callout.astro';
+import Faq from '../components/Faq.astro';
 import KeyPoints from '../components/KeyPoints.astro';
 import software from '../content/software.json';
 import { ROUTES } from '../consts';
@@ -9,10 +10,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { articlePageJsonLd } from '../lib/schema';
 import type { FaqItem } from '../types';
 
-const title = 'Grok Tesla e aggiornamento software 2026';
+const title = 'Grok Tesla e aggiornamenti software';
 const description =
-  'Grok Tesla e aggiornamento Tesla 2026: Summer Update 2026.26 (Hey Grok, Preferred Routes, Supercharger Search) e novità dello Spring Update.';
-const h1 = 'Grok Tesla e aggiornamenti software 2026';
+  'Cos\'è Grok Tesla, cosa c\'è nel Summer Update 2026.26 (Hey Grok, Preferred Routes, Supercharger Search) e cosa restava dallo Spring Update.';
+const h1 = 'Grok Tesla e gli aggiornamenti in auto';
 
 const pageFaq: FaqItem[] = [
   {
@@ -20,12 +21,12 @@ const pageFaq: FaqItem[] = [
     a: 'Grok Tesla è l\'assistente vocale in auto: nelle release 2026 può gestire chiamate, musica e clima, oltre alle domande in linguaggio naturale. La disponibilità dipende da paese, hardware e Premium Connectivity.',
   },
   {
-    q: 'Qual è l\'aggiornamento Tesla 2026 più recente?',
-    a: `L'ultimo grande aggiornamento Tesla 2026 è il ${software.latestName} (versione ${software.latestVersion}). Tesla distribuisce due grandi update OTA all'anno.`,
+    q: 'Qual è l\'aggiornamento Tesla più recente?',
+    a: `L'ultimo grande update è il ${software.latestName} (versione ${software.latestVersion}). Tesla ne manda due all'anno, più patch in mezzo.`,
   },
   {
     q: 'FSD v14 è in Italia?',
-    a: 'FSD v14 è citato nelle note di rilascio globali; in Italia restano le funzioni di assistenza alla guida omologate. Verificare nell\'auto e nelle release notes regionali prima di dare per disponibile una funzione.',
+    a: 'FSD v14 compare nelle note globali. In Italia restano le funzioni omologate: guarda cosa mostra l\'auto, non il nome della release americana.',
   },
 ];
 
@@ -49,13 +50,12 @@ const jsonLd = articlePageJsonLd({
       <h1 class="display-40 m-0 mt-4">{h1}</h1>
 
       <div class="mt-8">
-        <Callout title="In breve">
+        <Callout title="Da sapere">
           <p class="m-0">
-            <strong>Grok Tesla</strong> è l'assistente vocale in auto. L'aggiornamento Tesla 2026
-            più recente è il <strong>{software.latestName} (versione {software.latestVersion})</strong>,
-            con Hey Grok (chiamate, musica, clima), Preferred Routes, Automatic Navigation,
-            Traction Control Modes, Set Arrival Energy, Apple Music e Supercharger Search. Tesla
-            distribuisce due grandi update OTA all'anno.
+            Grok è l'assistente vocale in auto. L'aggiornamento più recente è il{' '}
+            <strong>{software.latestName}</strong> (versione {software.latestVersion}):
+            chiamate, musica, clima, itinerari preferiti e ricerca Supercharger. Tesla
+            manda due grandi update OTA all'anno.
           </p>
         </Callout>
       </div>
@@ -63,10 +63,10 @@ const jsonLd = articlePageJsonLd({
       <div class="mt-8">
         <KeyPoints
           items={[
-            'Grok Tesla: voce, clima, musica e chiamate, dove disponibile.',
-            `${software.latestName} = versione ${software.latestVersion}.`,
+            'Grok risponde a voce e, dove c\'è, gestisce clima, musica e chiamate.',
+            `Ultimo grande update: ${software.latestName} (${software.latestVersion}).`,
             software.cadence,
-            'Preferred Routes e Supercharger Search servono i viaggi; il referral copre i km Supercharger.',
+            'Itinerari e Supercharger Search aiutano i viaggi; i km del referral restano crediti.',
           ]}
         />
       </div>
@@ -74,10 +74,10 @@ const jsonLd = articlePageJsonLd({
       <section class="mt-16">
         <h2 class="heading-28 m-0">Che cos'è Grok Tesla?</h2>
         <p class="body-18 m-0 mt-4">
-          <strong>Grok Tesla</strong> è l'assistente vocale portato in vettura. Nelle release 2026
-          può rispondere in linguaggio naturale e, dove disponibile, gestire chiamate, musica e
-          clima («Hey Grok»). La presenza dipende da paese, hardware e, in alcuni casi, Premium
-          Connectivity: non è un extra del referral e non modifica i 1.000 km Supercharger.
+          <strong>Grok Tesla</strong> è l'assistente vocale in auto. Nelle release recenti
+          risponde in linguaggio naturale e, dove c'è, gestisce chiamate, musica e clima
+          («Hey Grok»). Dipende da paese, hardware e a volte da Premium Connectivity. Non
+          è un extra del referral e non tocca i 1.000 km Supercharger.
         </p>
       </section>
 
@@ -118,23 +118,17 @@ const jsonLd = articlePageJsonLd({
       <section class="mt-16">
         <h2 class="heading-28 m-0">Ogni quanto Tesla aggiorna il software?</h2>
         <p class="body-18 m-0 mt-4">
-          {software.cadence} In mezzo arrivano patch minori. Per la freshness di questa pagina:
-          aggiornare <code>dateModified</code> a ogni nuova release. I crediti referral e gli
-          <a href={ROUTES.delivery} class="text-brand">sprint di consegna</a> non dipendono dalla
-          versione software.
+          {software.cadence} In mezzo arrivano patch minori. I chilometri del referral e gli
+          <a href={ROUTES.delivery} class="text-brand">tempi di consegna</a> non dipendono
+          dalla versione software.
         </p>
       </section>
 
       <section class="mt-16">
         <h2 class="heading-28 m-0">Domande frequenti sul software Tesla</h2>
-        {
-          pageFaq.map((item) => (
-            <div class="mt-8">
-              <h3 class="heading-22 m-0">{item.q}</h3>
-              <p class="body-18 m-0 mt-3">{item.a}</p>
-            </div>
-          ))
-        }
+        <div class="mt-6">
+          <Faq items={pageFaq} />
+        </div>
       </section>
     </div>
   </article>

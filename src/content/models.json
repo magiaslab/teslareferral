@@ -6,12 +6,12 @@
     "codename": "Juniper",
     "benefit": "1.000 km di ricariche Supercharger gratuite",
     "benefitShort": "1.000 km Supercharger",
-    "intro": "Con un referral Tesla Model Y ricevi 1.000 km di ricariche Supercharger gratis su tutte le versioni (RWD, Long Range RWD/AWD, Performance), allo stesso prezzo di listino, applicando il codice prima dell'ordine.",
-    "why": "La Model Y Juniper è il SUV familiare della gamma: si usa in città e per i viaggi. I 1.000 km Supercharger coprono i primi spostamenti extraurbani, mentre la ricarica di casa resta la fonte quotidiana. Il listino Tesla non aumenta. Chi cerca uno «sconto Tesla Model Y» trova in realtà un extra di ricarica, non una riduzione del prezzo.",
+    "intro": "Sulla Model Y nuova il referral Tesla aggiunge circa 1.000 km Supercharger, su tutte le versioni, senza alzare il listino. Il codice va usato prima di confermare l'ordine.",
+    "why": "La Model Y Juniper è il SUV che uso ogni giorno: casa, città e qualche viaggio. I 1.000 km Supercharger coprono i primi extraurbani; in settimana carico a casa. Chi cerca uno sconto Tesla Model Y trova un extra di ricarica, non un taglio al prezzo.",
     "bullets": [
-      "Il vantaggio vale su RWD, Long Range RWD, Long Range AWD e Performance.",
-      "Stesso prezzo di listino: il referral non è uno sconto sul configuratore.",
-      "Il codice va applicato prima dell'ordine, nella stessa sessione di navigazione."
+      "Vale su RWD, Long Range RWD, Long Range AWD e Performance.",
+      "Il listino non cambia: non è uno sconto nel configuratore.",
+      "Il codice va usato prima dell'ordine, nella stessa sessione."
     ],
     "versions": [
       { "name": "RWD", "chemistry": "LFP", "note": "1.000 km Supercharger" },
@@ -24,37 +24,37 @@
     "kwhPer100km": 17,
     "energyPriceEur": 0.4,
     "estimateEur": 68,
-    "tableNote": "Valido su tutte le versioni e i colori",
-    "seoTitle": "Referral Tesla Model Y 2026 | Pronta consegna e 1.000 km",
-    "seoDescription": "Referral Tesla Model Y 2026: 1.000 km Supercharger gratis su tutte le versioni. Vale anche in pronta consegna, se applichi il codice prima di ordinare.",
-    "h1": "Referral Tesla Model Y: 1.000 km di Supercharger gratis",
+    "tableNote": "Tutte le versioni e i colori",
+    "seoTitle": "Referral Tesla Model Y: 1.000 km e pronta consegna",
+    "seoDescription": "Sulla Model Y nuova il referral Tesla vale circa 1.000 km Supercharger, anche in pronta consegna. Stesso listino, codice prima dell'ordine.",
+    "h1": "Referral Tesla Model Y: 1.000 km Supercharger",
     "keyPoints": [
-      "1.000 km Supercharger su tutte le versioni della Model Y nuova.",
-      "Prezzo identico al listino: non è uno sconto Tesla Model Y.",
-      "Applicare il codice prima di configurare l'ordine, anche in pronta consegna.",
-      "La chimica della batteria (LFP o NMC) cambia la strategia di ricarica, non il referral."
+      "1.000 km Supercharger su ogni Model Y nuova.",
+      "Stesso prezzo di listino: non è uno sconto Tesla Model Y.",
+      "Usa il codice prima di confermare, anche sullo stock.",
+      "LFP o NMC cambiano come carichi, non il referral."
     ],
-    "deliveryLead": "Una Tesla Model Y pronta consegna (stock) può arrivare in 1–2 settimane, contro un'attesa spesso allineata allo sprint di fine trimestre se la configuri da zero. Colore e allestimento sono fissi. Il referral va applicato prima dell'ordine anche sullo stock.",
+    "deliveryLead": "Una Model Y in pronta consegna può arrivare in 1–2 settimane, con colore e allestimento già decisi. Se la configuri da zero, l'attesa si allunga spesso verso fine trimestre. Il referral va usato prima dell'ordine anche sullo stock.",
     "faq": [
       {
         "q": "Qual è il vantaggio referral sulla Model Y?",
-        "a": "Su una Model Y nuova acquistata direttamente da Tesla, un codice referral attivo aggiunge circa 1.000 km di ricariche Supercharger gratuite. Il prezzo di listino resta invariato. L'importo puntuale è quello mostrato in fase d'ordine."
+        "a": "Su una Model Y nuova comprata da Tesla arrivano circa 1.000 km Supercharger. Il listino resta quello. Conta quanto vedi sull'ordine."
       },
       {
         "q": "Il referral aumenta il prezzo della Model Y?",
-        "a": "No. Si paga il prezzo di listino. Il referral non è uno sconto Tesla Model Y sul configuratore: è un extra associato all'account."
+        "a": "No. Paghi il listino. Non è uno sconto Tesla Model Y: è un extra sull'account."
       },
       {
-        "q": "Vale su tutte le versioni della Model Y, inclusa la Juniper?",
-        "a": "Sì. RWD, Long Range RWD, Long Range AWD e Performance sono idonee se nuove e acquistate da Tesla. L'usato e Tesla Approved sono esclusi."
+        "q": "Vale su tutte le versioni, inclusa la Juniper?",
+        "a": "Sì, su RWD, Long Range e Performance nuove. Usato e Tesla Approved no."
       },
       {
-        "q": "I 1.000 km valgono quanto in euro sulla Model Y?",
-        "a": "Indicativamente 60–70 €. Una stima di lavoro, con 17 kWh/100 km e 0,40 €/kWh, è di circa 68 €. Non è un importo garantito: consumo e tariffe Supercharger variano."
+        "q": "I 1.000 km quanto valgono sulla Model Y?",
+        "a": "Di solito 60–70 €. Con 17 kWh/100 km e 0,40 €/kWh arrivo a circa 68 €. Consumo e tariffe Supercharger cambiano."
       },
       {
         "q": "C'è Tesla Model Y pronta consegna in Italia?",
-        "a": "Sì. Tesla pubblica veicoli in stock: una Model Y in pronta consegna può arrivare in 1–2 settimane. Colore e allestimento sono fissi. Il codice referral va applicato prima di confermare l'ordine."
+        "a": "Sì, quando Tesla pubblica stock. Il ritiro può arrivare in 1–2 settimane, con configurazione fissa. Il codice va usato prima di confermare."
       }
     ]
   },
@@ -65,12 +65,12 @@
     "codename": "Highland",
     "benefit": "1.000 km di ricariche Supercharger gratuite",
     "benefitShort": "1.000 km Supercharger",
-    "intro": "Con un referral Tesla Model 3 ricevi 1.000 km di ricariche Supercharger gratis su tutte le versioni (Standard, Long Range RWD/AWD, Performance), allo stesso prezzo di listino, applicando il codice prima dell'ordine.",
-    "why": "La Model 3 Highland è l'auto quotidiana della gamma: ricarica di casa in settimana e Supercharger nei viaggi. I 1.000 km coprono i primi extraurbani. Chi cerca uno «sconto Tesla Model 3» trova un extra di ricarica, non un taglio al listino.",
+    "intro": "Sulla Model 3 nuova il referral Tesla aggiunge circa 1.000 km Supercharger, su tutte le versioni, senza alzare il listino. Il codice va usato prima di confermare l'ordine.",
+    "why": "La Model 3 Highland è l'auto da tutti i giorni: wallbox in settimana, Supercharger nei viaggi. I 1.000 km coprono i primi extraurbani. Chi cerca uno sconto Tesla Model 3 trova un extra di ricarica, non un taglio al listino.",
     "bullets": [
-      "Il vantaggio vale su Standard, Long Range RWD, Long Range AWD e Performance.",
-      "Stesso prezzo di listino: il referral non è uno sconto sul configuratore.",
-      "Va associato all'ordine prima dell'invio: dopo non è recuperabile."
+      "Vale su Standard, Long Range RWD, Long Range AWD e Performance.",
+      "Il listino non cambia: non è uno sconto nel configuratore.",
+      "Va associato prima dell'invio: dopo non si recupera."
     ],
     "versions": [
       { "name": "Standard / RWD", "chemistry": "LFP", "note": "1.000 km Supercharger" },
@@ -83,41 +83,41 @@
     "kwhPer100km": 15,
     "energyPriceEur": 0.4,
     "estimateEur": 60,
-    "tableNote": "Valido su tutte le versioni e i colori",
-    "seoTitle": "Referral Tesla Model 3 2026 | Pronta consegna e 1.000 km",
-    "seoDescription": "Referral Tesla Model 3 2026: 1.000 km Supercharger gratis su tutte le versioni. Non è uno sconto sul listino; vale anche in pronta consegna se applichi il codice prima.",
-    "h1": "Referral Tesla Model 3: 1.000 km di Supercharger gratis",
+    "tableNote": "Tutte le versioni e i colori",
+    "seoTitle": "Referral Tesla Model 3: 1.000 km e pronta consegna",
+    "seoDescription": "Sulla Model 3 nuova il referral Tesla vale circa 1.000 km Supercharger, anche in pronta consegna. Non è uno sconto sul listino.",
+    "h1": "Referral Tesla Model 3: 1.000 km Supercharger",
     "keyPoints": [
-      "1.000 km Supercharger su tutte le versioni della Model 3 nuova.",
-      "Prezzo identico al listino: non è uno sconto Tesla Model 3.",
-      "Applicare il codice prima di configurare l'ordine, anche in pronta consegna.",
-      "Highland: stessa regola referral della Model Y, chimica batteria diversa per versione."
+      "1.000 km Supercharger su ogni Model 3 nuova.",
+      "Stesso prezzo di listino: non è uno sconto Tesla Model 3.",
+      "Usa il codice prima di confermare, anche sullo stock.",
+      "Stessa regola della Model Y; la chimica della batteria cambia per versione."
     ],
-    "deliveryLead": "Una Tesla Model 3 pronta consegna (stock) può arrivare in 1–2 settimane se accetti la configurazione già prodotta. Il referral non è uno sconto Tesla Model 3 sul listino: è un extra di ricarica, da applicare prima dell'ordine.",
+    "deliveryLead": "Una Model 3 in pronta consegna può arrivare in 1–2 settimane se accetti la configurazione già prodotta. Il referral non sconta il listino: è un extra di ricarica, da usare prima dell'ordine.",
     "faq": [
       {
         "q": "Qual è il vantaggio referral sulla Model 3?",
-        "a": "Su una Model 3 nuova acquistata direttamente da Tesla, un codice referral attivo aggiunge circa 1.000 km di ricariche Supercharger gratuite. Il prezzo di listino non cambia."
+        "a": "Su una Model 3 nuova comprata da Tesla arrivano circa 1.000 km Supercharger. Il listino non cambia."
       },
       {
         "q": "Vale sulla Model 3 Highland?",
-        "a": "Sì. Il programma 2026 riguarda i veicoli nuovi idonei, inclusa la Highland, in tutte le versioni e i colori."
+        "a": "Sì, su tutte le versioni e i colori della Highland nuova."
       },
       {
         "q": "Posso aggiungere il codice dopo aver ordinato la Model 3?",
-        "a": "No. Il referral va applicato prima di piazzare l'ordine. Una volta inviato, Tesla non consente di associarlo in un secondo momento."
+        "a": "No. Va usato prima di inviare l'ordine. Tesla non lo associa dopo."
       },
       {
-        "q": "I 1.000 km valgono quanto in euro sulla Model 3?",
-        "a": "Indicativamente 60–70 €. Una stima di lavoro, con 15 kWh/100 km e 0,40 €/kWh, è di circa 60 €. Non è un importo garantito."
+        "q": "I 1.000 km quanto valgono sulla Model 3?",
+        "a": "Di solito 60–70 €. Con 15 kWh/100 km e 0,40 €/kWh arrivo a circa 60 €. Non è un importo fisso."
       },
       {
         "q": "Esiste uno sconto Tesla Model 3 con il referral?",
-        "a": "No: il referral non è uno sconto Tesla Model 3 sul listino. Paghi lo stesso prezzo e ricevi 1.000 km Supercharger gratis."
+        "a": "No. Paghi lo stesso listino e ricevi 1.000 km Supercharger."
       },
       {
         "q": "C'è Tesla Model 3 pronta consegna in Italia?",
-        "a": "Sì. Una Model 3 in pronta consegna può arrivare in 1–2 settimane, con allestimento fisso. Il codice referral va applicato prima di confermare l'ordine."
+        "a": "Sì, quando c'è stock. Il ritiro può arrivare in 1–2 settimane, con allestimento fisso. Il codice va usato prima di confermare."
       }
     ]
   }
