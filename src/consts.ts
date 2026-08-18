@@ -10,7 +10,7 @@ export const CONTACT_EMAIL = 'social@magiaslab.com';
 export const CONTACT_MAILTO = `mailto:${CONTACT_EMAIL}`;
 export const MAGIASLAB_URL = 'https://www.magiaslab.com';
 /** Fonte unica per badge visibile e JSON-LD (`dateModified`). */
-export const VERIFIED_DATE = '2026-08-01';
+export const VERIFIED_DATE = '2026-08-18';
 export const OWNER = 'Alessandro Cipriani — Magias Lab';
 export const OWNER_NAME = 'Alessandro Cipriani';
 export const OWNER_ORG = 'Magias Lab';
@@ -21,9 +21,11 @@ export const PROGRAM_IT = 'Segnala e guadagna';
 export const PROGRAM_EN = 'Refer and Earn';
 export const TERMS_IN_FORCE = '2024-10-03';
 export const TERMS_UPDATED = '2025-06-04';
-export const GA_MEASUREMENT_ID = import.meta.env.PUBLIC_GA_MEASUREMENT_ID ?? '';
+export const GA_MEASUREMENT_ID =
+  import.meta.env.PUBLIC_GA_ID || import.meta.env.PUBLIC_GA_MEASUREMENT_ID || '';
 export const GSC_VERIFICATION = import.meta.env.PUBLIC_GSC_VERIFICATION ?? '';
 export const COOKIE_CONSENT_KEY = 'cookie-consent';
+export const COOKIE_CONSENT_MAX_DAYS = 180;
 
 export const ROUTES = {
   home: '/',
@@ -33,6 +35,7 @@ export const ROUTES = {
   charging: '/ricarica',
   homeCharging: '/ricarica-domestica',
   delivery: '/consegna',
+  prices: '/prezzo-incentivi',
   software: '/software',
   faq: '/faq',
   privacy: '/privacy',
@@ -47,14 +50,15 @@ export interface SiteLink {
 
 export const NAV_LINKS: SiteLink[] = [
   { href: ROUTES.guide, label: 'Come funziona' },
+  { href: ROUTES.prices, label: 'Prezzi' },
+  { href: ROUTES.delivery, label: 'Consegna' },
   { href: ROUTES.modelY, label: 'Model Y' },
   { href: ROUTES.model3, label: 'Model 3' },
-  { href: ROUTES.charging, label: 'Ricarica', match: 'prefix' },
-  { href: ROUTES.delivery, label: 'Consegna' },
   { href: ROUTES.faq, label: 'FAQ' },
 ];
 
 export const MORE_LINKS: SiteLink[] = [
+  { href: ROUTES.charging, label: 'Ricarica', match: 'prefix' },
   { href: ROUTES.homeCharging, label: 'Ricarica casa' },
   { href: ROUTES.software, label: 'Software e Grok' },
 ];
@@ -72,9 +76,10 @@ export const FOOTER_GROUPS: { title: string; links: SiteLink[] }[] = [
   {
     title: 'Guide',
     links: [
+      { href: ROUTES.prices, label: 'Prezzi e incentivi' },
+      { href: ROUTES.delivery, label: 'Pronta consegna' },
       { href: ROUTES.charging, label: 'Ricarica LFP/NMC' },
       { href: ROUTES.homeCharging, label: 'Ricarica casa' },
-      { href: ROUTES.delivery, label: 'Pronta consegna' },
       { href: ROUTES.software, label: 'Software e Grok' },
     ],
   },

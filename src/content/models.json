@@ -7,6 +7,7 @@
     "benefit": "1.000 km di ricariche Supercharger gratuite",
     "benefitShort": "1.000 km Supercharger",
     "intro": "Sulla Model Y nuova il referral Tesla aggiunge circa 1.000 km Supercharger, su tutte le versioni, senza alzare il listino. Il codice va usato prima di confermare l'ordine.",
+    "quickAnswer": "La Tesla Model Y in Italia è il SUV elettrico più richiesto: autonomia WLTP indicativa da circa 350 a oltre 500 km secondo la versione, di solito 5 posti, listino da verificare su Tesla.com. Il referral aggiunge 1.000 km Supercharger allo stesso prezzo, se lo usi prima di ordinare.",
     "why": "La Model Y Juniper è il SUV che uso ogni giorno: casa, città e qualche viaggio. I 1.000 km Supercharger coprono i primi extraurbani; in settimana carico a casa. Chi cerca uno sconto Tesla Model Y trova un extra di ricarica, non un taglio al prezzo.",
     "bullets": [
       "Vale su RWD, Long Range RWD, Long Range AWD e Performance.",
@@ -25,17 +26,66 @@
     "energyPriceEur": 0.4,
     "estimateEur": 68,
     "tableNote": "Tutte le versioni e i colori",
-    "seoTitle": "Referral Tesla Model Y: 1.000 km e pronta consegna",
-    "seoDescription": "Sulla Model Y nuova il referral Tesla vale circa 1.000 km Supercharger, anche in pronta consegna. Stesso listino, codice prima dell'ordine.",
-    "h1": "Referral Tesla Model Y: 1.000 km Supercharger",
+    "seoTitle": "Tesla Model Y: autonomia, Standard, 7 posti, prezzo e 1.000 km",
+    "seoDescription": "Tesla Model Y in Italia: autonomia WLTP, versione Standard, 7 posti e prezzo. Il referral aggiunge 1.000 km Supercharger allo stesso listino.",
+    "h1": "Tesla Model Y: autonomia, Standard e prezzo in Italia",
     "keyPoints": [
-      "1.000 km Supercharger su ogni Model Y nuova.",
-      "Stesso prezzo di listino: non è uno sconto Tesla Model Y.",
-      "Usa il codice prima di confermare, anche sullo stock.",
-      "LFP o NMC cambiano come carichi, non il referral."
+      "Autonomia WLTP indicativa: da circa 350 km (RWD) a oltre 500 km (Long Range).",
+      "La Standard è la RWD d'ingresso; i 7 posti non sono la norma in Italia.",
+      "Listino su Tesla.com; incentivi pubblici indipendenti dal referral.",
+      "1.000 km Supercharger, stesso prezzo, codice prima dell'ordine."
     ],
     "deliveryLead": "Una Model Y in pronta consegna può arrivare in 1–2 settimane, con colore e allestimento già decisi. Se la configuri da zero, l'attesa si allunga spesso verso fine trimestre. Il referral va usato prima dell'ordine anche sullo stock.",
+    "intentSections": [
+      {
+        "id": "autonomia",
+        "h2": "Qual è l'autonomia della Tesla Model Y?",
+        "answer": "L'autonomia Tesla Model Y dipende dalla versione: la RWD resta nella fascia indicativa 350–400 km WLTP, le Long Range salgono spesso sopra i 500 km. In inverno e in autostrada i numeri reali scendono. Conta il dato del configuratore Tesla, non un valore unico di brochure.",
+        "body": "Per i viaggi uso i Supercharger; in settimana carico a casa. La chimica (LFP sulla RWD, NMC sulle Long Range) cambia come tieni la percentuale quotidiana, non i 1.000 km del referral.",
+        "tableCaption": "Autonomia Tesla Model Y (WLTP indicativa)",
+        "tableHeaders": ["Versione", "Autonomia WLTP (indicativa)"],
+        "tableRows": [
+          { "label": "RWD / Standard", "value": "circa 350–400 km" },
+          { "label": "Long Range RWD", "value": "circa 500–600 km" },
+          { "label": "Long Range AWD", "value": "circa 500–560 km" },
+          { "label": "Performance", "value": "circa 480–530 km" }
+        ],
+        "relatedHref": "/ricarica",
+        "relatedLabel": "Come ricaricare LFP e NMC"
+      },
+      {
+        "id": "standard",
+        "h2": "Cos'è la Tesla Model Y Standard?",
+        "answer": "In Italia «Tesla Model Y Standard» è di solito la RWD d'ingresso: listino più basso, autonomia inferiore alle Long Range, batteria LFP. Non è un allestimento a parte con un altro nome sul cruscotto: è la versione base del configuratore.",
+        "body": "Va bene per città e tragitti medi se carichi a casa. Per i viaggi lunghi ripetuti conviene confrontare la Long Range. Il referral vale uguale: 1.000 km Supercharger, stesso prezzo di quella versione."
+      },
+      {
+        "id": "7-posti",
+        "h2": "La Tesla Model Y ha 7 posti?",
+        "answer": "In Italia la Model Y Juniper è di solito a 5 posti. I 7 posti, se Tesla li offre, sono un optional su alcune versioni e non su tutte: vanno verificati sul configuratore. Non dare per scontato il terzo fila sullo stock in pronta consegna.",
+        "body": "Se ti serve il terzo fila, controlla la scheda del veicolo prima di confermare. Il referral non cambia i posti: cambia solo i chilometri Supercharger sull'account."
+      },
+      {
+        "id": "prezzo",
+        "h2": "Quanto costa la Tesla Model Y?",
+        "answer": "Il Tesla Model Y prezzo è il listino del configuratore, a scaglioni (RWD, Long Range, Performance). Gli incentivi pubblici, se ne hai diritto, sono indipendenti. Il referral non sconta l'auto: aggiunge 1.000 km Supercharger.",
+        "relatedHref": "/prezzo-incentivi",
+        "relatedLabel": "Listino, incentivi e come sommarli al referral"
+      }
+    ],
     "faq": [
+      {
+        "q": "Qual è l'autonomia della Model Y?",
+        "a": "Dipende dalla versione: RWD in fascia indicativa 350–400 km WLTP, Long Range spesso sopra i 500 km. Verifica il configuratore. In inverno e in autostrada i km reali scendono."
+      },
+      {
+        "q": "Cos'è la Model Y Standard?",
+        "a": "Di solito la RWD d'ingresso: listino più basso, LFP, autonomia inferiore alle Long Range. Il referral vale uguale su tutte le versioni nuove."
+      },
+      {
+        "q": "La Model Y è a 7 posti?",
+        "a": "In Italia è di solito a 5 posti. I 7 posti, se previsti, sono un optional su alcune versioni: controlla tesla.com e lo stock."
+      },
       {
         "q": "Qual è il vantaggio referral sulla Model Y?",
         "a": "Su una Model Y nuova comprata da Tesla arrivano circa 1.000 km Supercharger. Il listino resta quello. Conta quanto vedi sull'ordine."
@@ -43,14 +93,6 @@
       {
         "q": "Il referral aumenta il prezzo della Model Y?",
         "a": "No. Paghi il listino. Non è uno sconto Tesla Model Y: è un extra sull'account."
-      },
-      {
-        "q": "Vale su tutte le versioni, inclusa la Juniper?",
-        "a": "Sì, su RWD, Long Range e Performance nuove. Usato e Tesla Approved no."
-      },
-      {
-        "q": "I 1.000 km quanto valgono sulla Model Y?",
-        "a": "Di solito 60–70 €. Con 17 kWh/100 km e 0,40 €/kWh arrivo a circa 68 €. Consumo e tariffe Supercharger cambiano."
       },
       {
         "q": "C'è Tesla Model Y pronta consegna in Italia?",
@@ -66,6 +108,7 @@
     "benefit": "1.000 km di ricariche Supercharger gratuite",
     "benefitShort": "1.000 km Supercharger",
     "intro": "Sulla Model 3 nuova il referral Tesla aggiunge circa 1.000 km Supercharger, su tutte le versioni, senza alzare il listino. Il codice va usato prima di confermare l'ordine.",
+    "quickAnswer": "La Tesla Model 3 2026 è la Highland: berline elettrica con autonomia WLTP indicativa da circa 500 a oltre 600 km secondo la versione e listino da verificare su Tesla.com. Il referral non sconta il prezzo: aggiunge 1.000 km Supercharger se applichi il codice prima dell'ordine.",
     "why": "La Model 3 Highland è l'auto da tutti i giorni: wallbox in settimana, Supercharger nei viaggi. I 1.000 km coprono i primi extraurbani. Chi cerca uno sconto Tesla Model 3 trova un extra di ricarica, non un taglio al listino.",
     "bullets": [
       "Vale su Standard, Long Range RWD, Long Range AWD e Performance.",
@@ -84,17 +127,62 @@
     "energyPriceEur": 0.4,
     "estimateEur": 60,
     "tableNote": "Tutte le versioni e i colori",
-    "seoTitle": "Referral Tesla Model 3: 1.000 km e pronta consegna",
-    "seoDescription": "Sulla Model 3 nuova il referral Tesla vale circa 1.000 km Supercharger, anche in pronta consegna. Non è uno sconto sul listino.",
-    "h1": "Referral Tesla Model 3: 1.000 km Supercharger",
+    "seoTitle": "Tesla Model 3 2026 Highland: autonomia, prezzo e 1.000 km",
+    "seoDescription": "Tesla Model 3 2026 (Highland): autonomia WLTP, prezzo e versioni. Il referral aggiunge 1.000 km Supercharger allo stesso listino, codice prima dell'ordine.",
+    "h1": "Tesla Model 3 2026 Highland: autonomia e prezzo",
     "keyPoints": [
-      "1.000 km Supercharger su ogni Model 3 nuova.",
-      "Stesso prezzo di listino: non è uno sconto Tesla Model 3.",
-      "Usa il codice prima di confermare, anche sullo stock.",
-      "Stessa regola della Model Y; la chimica della batteria cambia per versione."
+      "La Model 3 2026 in Italia è la generazione Highland.",
+      "Autonomia WLTP indicativa: da circa 500 km (Standard) a oltre 600 km (Long Range).",
+      "Listino su Tesla.com; incentivi pubblici indipendenti dal referral.",
+      "1.000 km Supercharger, stesso prezzo, codice prima dell'ordine."
     ],
     "deliveryLead": "Una Model 3 in pronta consegna può arrivare in 1–2 settimane se accetti la configurazione già prodotta. Il referral non sconta il listino: è un extra di ricarica, da usare prima dell'ordine.",
+    "intentSections": [
+      {
+        "id": "autonomia",
+        "h2": "Qual è l'autonomia della Tesla Model 3?",
+        "answer": "L'autonomia Tesla Model 3 dipende dalla versione: la Standard/RWD sta in una fascia indicativa intorno ai 500 km WLTP, le Long Range salgono spesso sopra i 600 km. Freddo, velocità e clima riducono i km reali. Il numero che conta è quello del configuratore.",
+        "body": "In settimana la ricarica di casa copre il quotidiano; i Supercharger servono ai viaggi. LFP (Standard) e NMC (Long Range) cambiano la percentuale quotidiana consigliata, non il referral.",
+        "tableCaption": "Autonomia Tesla Model 3 (WLTP indicativa)",
+        "tableHeaders": ["Versione", "Autonomia WLTP (indicativa)"],
+        "tableRows": [
+          { "label": "Standard / RWD", "value": "circa 500–520 km" },
+          { "label": "Long Range RWD", "value": "circa 600–700 km" },
+          { "label": "Long Range AWD", "value": "circa 600–630 km" },
+          { "label": "Performance", "value": "circa 530–560 km" }
+        ],
+        "relatedHref": "/ricarica",
+        "relatedLabel": "Come ricaricare LFP e NMC"
+      },
+      {
+        "id": "2026",
+        "h2": "Cos'è la Tesla Model 3 2026?",
+        "answer": "La Tesla Model 3 2026 in Italia è la Highland: restyling già in listino da qualche anno, aggiornata da software e allestimenti. Non è un modello nuovo con un altro nome. Versioni, prezzi e stock si vedono sul configuratore Tesla.",
+        "body": "Grok e gli aggiornamenti OTA arrivano sull'auto, non cambiano il referral. Per i tempi di ritiro conta lo stock, non l'anno di brochure."
+      },
+      {
+        "id": "highland",
+        "h2": "Cos'è la Tesla Model 3 Highland?",
+        "answer": "Highland è il nome non ufficiale del restyling della Model 3: interni, silenziosità e sospensioni diverse dalla generazione precedente. In Italia, nel 2026, è la Model 3 che trovi in configuratore e in pronta consegna.",
+        "body": "Il referral vale su tutte le Highland nuove comprate da Tesla. Usato e Tesla Approved restano fuori."
+      },
+      {
+        "id": "prezzo",
+        "h2": "Quanto costa la Tesla Model 3?",
+        "answer": "Il Tesla Model 3 prezzo è il listino del configuratore. Con incentivi, se ne hai diritto, il conto pubblico è un canale a parte. Il referral non taglia il prezzo: aggiunge 1.000 km Supercharger.",
+        "relatedHref": "/prezzo-incentivi",
+        "relatedLabel": "Listino, incentivi e come sommarli al referral"
+      }
+    ],
     "faq": [
+      {
+        "q": "Qual è l'autonomia della Model 3?",
+        "a": "Standard/RWD intorno ai 500 km WLTP indicativi; Long Range spesso sopra i 600 km. Verifica tesla.com. Freddo e autostrada riducono i km reali."
+      },
+      {
+        "q": "La Model 3 2026 è diversa dalla Highland?",
+        "a": "No: in Italia la Model 3 2026 è la Highland. Cambiano software e listino, non il nome di generazione sul cruscotto."
+      },
       {
         "q": "Qual è il vantaggio referral sulla Model 3?",
         "a": "Su una Model 3 nuova comprata da Tesla arrivano circa 1.000 km Supercharger. Il listino non cambia."
@@ -106,14 +194,6 @@
       {
         "q": "Posso aggiungere il codice dopo aver ordinato la Model 3?",
         "a": "No. Va usato prima di inviare l'ordine. Tesla non lo associa dopo."
-      },
-      {
-        "q": "I 1.000 km quanto valgono sulla Model 3?",
-        "a": "Di solito 60–70 €. Con 15 kWh/100 km e 0,40 €/kWh arrivo a circa 60 €. Non è un importo fisso."
-      },
-      {
-        "q": "Esiste uno sconto Tesla Model 3 con il referral?",
-        "a": "No. Paghi lo stesso listino e ricevi 1.000 km Supercharger."
       },
       {
         "q": "C'è Tesla Model 3 pronta consegna in Italia?",

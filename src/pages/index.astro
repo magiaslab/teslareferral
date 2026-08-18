@@ -37,7 +37,7 @@ const homeFaq = (faq as FaqItem[]).slice(0, 5);
   title={title}
   description={description}
   jsonLd={homeJsonLd()}
-  prefetch={[ROUTES.guide, ROUTES.delivery]}
+  prefetch={[ROUTES.guide, ROUTES.delivery, ROUTES.prices]}
 >
   <section class="section-pad">
     <div class="wrap grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6 items-center">
@@ -64,7 +64,7 @@ const homeFaq = (faq as FaqItem[]).slice(0, 5);
           {' · '}
           <a href={ROUTES.delivery} class="text-brand">Tesla pronta consegna</a>
           {' · '}
-          <a href={ROUTES.homeCharging} class="text-brand">Ricarica casa</a>
+          <a href={ROUTES.prices} class="text-brand">Prezzi e incentivi</a>
           {' · '}
           <a href={ROUTES.modelY} class="text-brand">Model Y</a>
         </p>
@@ -104,7 +104,39 @@ const homeFaq = (faq as FaqItem[]).slice(0, 5);
     </div>
   </section>
 
-  <section id="come-funziona" class="section-pad bg-surface">
+  <section id="stai-per-comprare" class="section-pad bg-surface">
+    <div class="wrap">
+      <h2 class="heading-28 m-0">Stai per comprare? Parti da qui</h2>
+      <p class="body-18 text-ink-soft m-0 mt-4 max-w-[40rem]">
+        Se stai scegliendo l'auto, inizia da tempi di ritiro e listino. Il referral si applica
+        dopo, sullo stesso prezzo, prima di confermare l'ordine.
+      </p>
+      <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+        <a
+          href={ROUTES.delivery}
+          class="block rounded-[14px] border border-line bg-paper p-7 no-underline text-ink hover:border-brand"
+        >
+          <p class="caption-14 text-ink-soft m-0">Tempi</p>
+          <p class="heading-22 m-0 mt-2">Tesla pronta consegna</p>
+          <p class="body-16 text-ink-soft m-0 mt-3">
+            Stock in 1–2 settimane, sprint di fine trimestre, Model 3 e Model Y.
+          </p>
+        </a>
+        <a
+          href={ROUTES.prices}
+          class="block rounded-[14px] border border-line bg-paper p-7 no-underline text-ink hover:border-brand"
+        >
+          <p class="caption-14 text-ink-soft m-0">Listino</p>
+          <p class="heading-22 m-0 mt-2">Prezzi e incentivi</p>
+          <p class="body-16 text-ink-soft m-0 mt-3">
+            Model 3 e Model Y, Ecobonus cumulabile, 1.000 km Supercharger.
+          </p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="come-funziona" class="section-pad">
     <div class="wrap">
       <h2 class="heading-28 m-0">Come si usa il referral Tesla</h2>
       <p class="body-18 text-ink-soft m-0 mt-4 max-w-[40rem]">

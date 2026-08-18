@@ -13,14 +13,14 @@ const description = `${BRAND} (${DOMAIN}): cookie necessari e, solo con il tuo c
       <Breadcrumb items={[{ name: 'Home', path: '/' }, { name: 'Cookie', path: ROUTES.cookie }]} />
       <h1 class="display-40 m-0 mt-4">Cookie policy</h1>
       <p class="caption-14 text-ink-soft m-0 mt-4">
-        Informativa sui cookie e sull'archiviazione locale usati su {DOMAIN}.
+        Informativa sui cookie usati su {DOMAIN}.
       </p>
 
       <h2 class="heading-28 m-0 mt-12">Come scegli</h2>
       <p class="body-18 m-0 mt-4">
         Al primo accesso compare un banner. Puoi accettare o rifiutare i cookie statistici.
-        La scelta resta su questo dispositivo. Puoi cambiarla in qualsiasi momento dalle
-        preferenze cookie in fondo alle pagine.
+        La scelta resta su questo dispositivo, in un cookie di prima parte. Puoi cambiarla
+        in qualsiasi momento dalle preferenze cookie in fondo alle pagine.
       </p>
       <p class="mt-6">
         <button type="button" class="btn btn-secondary" data-cookie-prefs>Apri le preferenze cookie</button>
@@ -28,20 +28,18 @@ const description = `${BRAND} (${DOMAIN}): cookie necessari e, solo con il tuo c
 
       <h2 class="heading-28 m-0 mt-12">Cookie necessari</h2>
       <p class="body-18 m-0 mt-4">
-        Non usiamo cookie tecnici di sessione. Salviamo in <code>localStorage</code> due
-        preferenze del dispositivo, senza le quali il sito non ricorda le tue scelte:
+        Usiamo un cookie tecnico di prima parte per ricordare il consenso:
       </p>
       <ul class="body-18 mt-4">
         <li>
-          <code>theme</code>: tema chiaro o scuro
-        </li>
-        <li>
-          <code>cookie-consent</code>: accettazione o rifiuto di Google Analytics
+          <code>cookie-consent</code>: valore <code>accepted</code> o <code>rejected</code>,
+          durata 180 giorni, <code>Path=/</code>, <code>SameSite=Lax</code>. Non è un cookie
+          di profilazione e non viene inviato a un server di {BRAND} oltre al tuo browser.
         </li>
       </ul>
       <p class="body-18 m-0 mt-4">
-        Non sono cookie di profilazione e non vengono inviati a un server di {BRAND}.
-        Si possono cancellare dai dati di navigazione del browser.
+        La scelta del tema chiaro o scuro resta in <code>localStorage</code> (<code>theme</code>)
+        sul dispositivo: non è analytics e non viene inviata a Google.
       </p>
 
       <h2 class="heading-28 m-0 mt-12">Cookie statistici (Google Analytics 4)</h2>
@@ -52,8 +50,10 @@ const description = `${BRAND} (${DOMAIN}): cookie necessari e, solo con il tuo c
         conversione. Non attiviamo segnali pubblicitari né personalizzazione ads.
       </p>
       <p class="body-18 m-0 mt-4">
-        Google può impostare cookie come <code>_ga</code> e <code>_ga_*</code>. I dati
-        sono trattati da Google secondo la sua
+        Prima del consenso impostiamo Google Consent Mode v2 con
+        <code>analytics_storage</code> e <code>ad_storage</code> su <code>denied</code>.
+        Lo script gtag.js e i cookie <code>_ga</code> / <code>_ga_*</code> partono solo
+        dopo l'accettazione. I dati sono trattati da Google secondo la sua
         {' '}<a href="https://policies.google.com/privacy" class="text-brand" target="_blank" rel="noopener">informativa</a>.
         Base giuridica: consenso (art. 6, par. 1, lett. a GDPR). Se rifiuti, lo script
         non viene caricato.
@@ -61,8 +61,10 @@ const description = `${BRAND} (${DOMAIN}): cookie necessari e, solo con il tuo c
 
       <h2 class="heading-28 m-0 mt-12">Google Search Console</h2>
       <p class="body-18 m-0 mt-4">
-        La verifica del sito in Search Console usa un meta tag nel codice. Non imposta
-        cookie sul tuo browser e non misura il comportamento di navigazione.
+        Il sito è verificato in Search Console come proprietà di tipo Dominio, tramite
+        un record DNS TXT. Non usiamo un meta tag di verifica sul sito, salvo una
+        eventuale proprietà URL-prefix futura. La verifica DNS non imposta cookie sul
+        tuo browser e non misura la navigazione.
       </p>
 
       <h2 class="heading-28 m-0 mt-12">Terze parti sui click in uscita</h2>

@@ -58,6 +58,7 @@ function formatEur(value: number): string {
       <div class="mt-6 grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-6 items-start">
         <div class="md:col-span-7">
           <h1 class="display-40 m-0">{model.h1}</h1>
+          <p class="body-18 m-0 mt-6">{model.quickAnswer}</p>
           <div class="mt-8">
             <Callout title="Da sapere">
               <p class="m-0">{model.intro}</p>
@@ -150,12 +151,59 @@ function formatEur(value: number): string {
         }
       </section>
 
+      {
+        model.intentSections.map((section) => (
+          <section id={section.id} class="mt-16 max-w-[76ch]">
+            <h2 class="heading-28 m-0">{section.h2}</h2>
+            <p class="body-18 m-0 mt-4">{section.answer}</p>
+            {section.body && <p class="body-18 m-0 mt-4">{section.body}</p>}
+            {section.tableRows && section.tableRows.length > 0 && section.tableHeaders && section.tableHeaders.length >= 2 && (
+              <div class="mt-8 overflow-hidden rounded-[14px] border border-line">
+                <table class="w-full border-collapse text-left">
+                  <caption class="sr-only">{section.tableCaption ?? section.h2}</caption>
+                  <thead class="bg-[#F3F3F0] dark:bg-[#252830]">
+                    <tr>
+                      <th scope="col" class="body-16 font-semibold px-6 py-4 border-b border-line">
+                        {section.tableHeaders[0]}
+                      </th>
+                      <th scope="col" class="body-16 font-semibold px-6 py-4 border-b border-line">
+                        {section.tableHeaders[1]}
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {section.tableRows.map((row, index) => (
+                      <tr class={index % 2 === 0 ? 'bg-[#FAFAF8] dark:bg-paper' : 'bg-surface'}>
+                        <th scope="row" class="body-16 font-semibold px-6 py-4 border-b border-line">
+                          {row.label}
+                        </th>
+                        <td class="body-16 px-6 py-4 border-b border-line">{row.value}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+            {section.relatedHref && section.relatedLabel && (
+              <p class="body-16 m-0 mt-6">
+                <a href={section.relatedHref} class="text-brand">
+                  {section.relatedLabel}
+                </a>
+              </p>
+            )}
+          </section>
+        ))
+      }
+
       <section class="mt-16 max-w-[76ch]">
-        <h2 class="heading-28 m-0">Tesla {model.name} pronta consegna</h2>
+        <h2 class="heading-28 m-0">C'è Tesla {model.name} pronta consegna?</h2>
         <p class="body-18 m-0 mt-4">{model.deliveryLead}</p>
         <p class="body-16 m-0 mt-6">
           Tempi, stock e sprint di fine trimestre:{' '}
-          <a href={ROUTES.delivery} class="text-brand">Tesla pronta consegna in Italia</a>.
+          <a href={ROUTES.delivery} class="text-brand">Tesla pronta consegna in Italia</a>
+          {' · '}
+          listino e incentivi:{' '}
+          <a href={ROUTES.prices} class="text-brand">prezzi Tesla 2026</a>.
         </p>
       </section>
 

@@ -1,5 +1,5 @@
 ---
-import { CONTACT_MAILTO, REFERRAL_URL } from '../consts';
+import { CONTACT_MAILTO, REFERRAL_URL, ROUTES } from '../consts';
 import Button from './Button.astro';
 
 interface Props {
@@ -28,4 +28,9 @@ const {
       {secondaryLabel}
     </Button>
   </div>
+  <p class="caption-14 m-0 mt-6">
+    <a href={ROUTES.guide} class="text-[#9BA0AB] underline-offset-2 hover:text-[#F2F2F0] hover:underline">
+      Come funziona il referral
+    </a>
+  </p>
 </section>

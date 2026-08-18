@@ -1,0 +1,53 @@
+{
+  "note": "Valori di listino indicativi Tesla Italia. Segnaposto da riallineare sul configuratore tesla.com a ogni verifica. Non sono un'offerta.",
+  "rows": [
+    {
+      "model": "Model 3",
+      "version": "RWD / Standard",
+      "listinoEur": 40990,
+      "note": "Versione d'ingresso, batteria LFP"
+    },
+    {
+      "model": "Model 3",
+      "version": "Long Range RWD",
+      "listinoEur": 45990,
+      "note": "Autonomia più alta, NMC"
+    },
+    {
+      "model": "Model 3",
+      "version": "Long Range AWD",
+      "listinoEur": 49990,
+      "note": "Trazione integrale"
+    },
+    {
+      "model": "Model 3",
+      "version": "Performance",
+      "listinoEur": 54990,
+      "note": "Allestimento sportivo"
+    },
+    {
+      "model": "Model Y",
+      "version": "RWD / Standard",
+      "listinoEur": 44990,
+      "note": "SUV d'ingresso, LFP"
+    },
+    {
+      "model": "Model Y",
+      "version": "Long Range RWD",
+      "listinoEur": 49990,
+      "note": "Autonomia più alta, NMC"
+    },
+    {
+      "model": "Model Y",
+      "version": "Long Range AWD",
+      "listinoEur": 52990,
+      "note": "Trazione integrale"
+    },
+    {
+      "model": "Model Y",
+      "version": "Performance",
+      "listinoEur": 59990,
+      "note": "Allestimento sportivo"
+    }
+  ]
+}

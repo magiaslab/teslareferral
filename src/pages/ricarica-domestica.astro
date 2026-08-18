@@ -243,7 +243,11 @@ const jsonLd = articlePageJsonLd({
         <p class="body-18 m-0 mt-4">
           Per batteria e costo la ricarica AC di casa resta la base; il Supercharger è per i
           viaggi. La chimica (LFP vs NMC) decide se tenere l'80% o il 100%:{' '}
-          <a href={ROUTES.charging} class="text-brand">strategia di ricarica</a>. I 1.000 km del{' '}
+          <a href={ROUTES.charging} class="text-brand">strategia di ricarica</a>. Autonomia reale:
+          {' '}<a href={`${ROUTES.modelY}#autonomia`} class="text-brand">Model Y</a>
+          {' e '}
+          <a href={`${ROUTES.model3}#autonomia`} class="text-brand">Model 3</a>.
+          I 1.000 km del{' '}
           <a href={ROUTES.guide} class="text-brand">referral Tesla</a> coprono proprio i Supercharger.
         </p>
       </section>

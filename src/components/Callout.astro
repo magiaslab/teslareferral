@@ -10,10 +10,10 @@ const { title, class: className = '' } = Astro.props;
 ---
 
 <aside class:list={['rounded-[14px] bg-brand-tint p-6 md:p-7', className]}>
-  <h2 class="heading-22 text-brand-strong m-0 inline-flex items-center gap-2">
+  <p class="heading-22 text-brand-strong m-0 inline-flex items-center gap-2">
     <Icon name="info" size={20} />
     {title}
-  </h2>
+  </p>
   <div class="body-16 text-ink mt-3">
     <slot />
   </div>

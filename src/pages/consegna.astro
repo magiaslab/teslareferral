@@ -10,23 +10,27 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { articlePageJsonLd } from '../lib/schema';
 import type { FaqItem } from '../types';
 
-const title = 'Tesla pronta consegna in Italia: tempi e stock';
+const title = 'Tesla in pronta consegna in Italia (2026): tempi e come averla subito';
 const description =
-  'Una Tesla in pronta consegna può arrivare in 1–2 settimane. Tempi di Model Y e Model 3, fine trimestre e cosa fare prima dell\'ordine, referral compreso.';
-const h1 = 'Tesla pronta consegna in Italia';
+  'Tesla pronta consegna in Italia: stock in 1–2 settimane, tempi di consegna Model 3 e Model Y, sprint di fine trimestre e codice referral da usare prima dell\'ordine.';
+const h1 = 'Tesla pronta consegna in Italia: tempi e come averla subito';
 
 const pageFaq: FaqItem[] = [
   {
-    q: 'Cos\'è una Tesla in pronta consegna?',
-    a: 'È un veicolo già prodotto, con configurazione fissa, disponibile in stock. In Italia può arrivare in 1–2 settimane, soprattutto vicino agli sprint di fine trimestre.',
+    q: 'Cosa significa Tesla pronta consegna?',
+    a: 'È un veicolo già prodotto, con configurazione fissa, visibile come stock sul sito Tesla. In Italia può arrivare in 1–2 settimane. Non è un listino diverso: paghi il veicolo scelto. Il codice referral va applicato prima di confermare, anche sullo stock.',
   },
   {
     q: 'Quanto si aspetta una Tesla in Italia?',
-    a: 'Una Tesla configurata arriva spesso in prossimità della fine del trimestre (marzo, giugno, settembre, dicembre). Una Tesla in pronta consegna (stock) può arrivare in 1–2 settimane.',
+    a: 'Una Tesla in pronta consegna (stock) può arrivare in 1–2 settimane. Se la configuri da zero, i tempi di consegna Tesla in Italia cadono spesso a fine trimestre: marzo, giugno, settembre e dicembre.',
   },
   {
-    q: 'C\'è Tesla Model Y o Model 3 pronta consegna?',
-    a: 'Sì, Tesla pubblica stock di Model Y e Model 3. Colore e allestimento sono fissi. Il codice referral va applicato prima di confermare l\'ordine, anche sullo stock.',
+    q: 'C\'è Tesla Model 3 o Model Y pronta consegna?',
+    a: 'Sì, quando Tesla pubblica inventario. In Italia si vedono soprattutto Model Y e Model 3. Colore e allestimento sono già decisi. Il referral resta 1.000 km Supercharger se il link era applicato prima dell\'ordine.',
+  },
+  {
+    q: 'Perché a fine trimestre ci sono più Tesla in pronta consegna?',
+    a: 'Tesla rendiconta le consegne per trimestre fiscale. A marzo, giugno, settembre e dicembre i volumi salgono: più stock, più slot di delivery. Chi è flessibile su colore e allestimento accorcia l\'attesa.',
   },
   {
     q: 'Quando va versato l\'acconto?',
@@ -53,16 +57,22 @@ const jsonLd = articlePageJsonLd({
     <div class="wrap max-w-[76ch]">
       <Breadcrumb items={[{ name: 'Home', path: '/' }, { name: 'Consegna', path: ROUTES.delivery }]} />
       <div class="mt-4">
-        <ArticleMeta reading="Guida · Lettura 7 min" />
+        <ArticleMeta reading="Guida · Lettura 8 min" />
       </div>
       <h1 class="display-40 m-0 mt-4">{h1}</h1>
+      <p class="body-18 m-0 mt-6">
+        Una Tesla pronta consegna è già in stock: in Italia può arrivare in 1–2 settimane,
+        con colore e allestimento fissi. Se la configuri da zero, i tempi di consegna Tesla
+        in Italia cadono spesso a fine trimestre. Il listino non cambia; i 1.000 km Supercharger
+        arrivano se applichi il codice referral prima di ordinare.
+      </p>
 
       <div class="mt-8">
         <Callout title="Da sapere">
           <p class="m-0">
-            Una Tesla già in stock può arrivare in 1–2 settimane. Se la configuri da zero,
-            il ritiro cade spesso a fine trimestre (marzo, giugno, settembre, dicembre).
-            L'acconto va versato almeno 7 giorni prima.
+            Stesso prezzo dello stock che scegli, in più 1.000 km Supercharger se usi il
+            codice prima di confermare — anche in pronta consegna. Dopo l'ordine Tesla non
+            lo associa più.
           </p>
         </Callout>
       </div>
@@ -79,7 +89,7 @@ const jsonLd = articlePageJsonLd({
       </div>
 
       <section class="mt-16">
-        <h2 class="heading-28 m-0">Cos'è una Tesla pronta consegna?</h2>
+        <h2 class="heading-28 m-0">Cosa significa Tesla pronta consegna?</h2>
         <p class="body-18 m-0 mt-4">
           Una <strong>Tesla pronta consegna</strong> è un veicolo già prodotto, visibile come stock
           sul sito Tesla, con colore, ruote e allestimento fissi. Si guadagna tempo (spesso 1–2
@@ -90,24 +100,65 @@ const jsonLd = articlePageJsonLd({
       </section>
 
       <section class="mt-16">
-        <h2 class="heading-28 m-0">Tesla Model Y pronta consegna</h2>
+        <h2 class="heading-28 m-0">Quali sono i tempi di consegna Tesla in Italia?</h2>
         <p class="body-18 m-0 mt-4">
-          In Italia la <strong>Model Y pronta consegna</strong> è quella che si vede più spesso:
-          SUV già prodotto, ritiro rapido se accetti la configurazione in stock. Controlla
-          versione (RWD o Long Range) e chimica della batteria nella{' '}
-          <a href={ROUTES.charging} class="text-brand">guida alla ricarica</a>. Il vantaggio referral
-          resta 1.000 km Supercharger se il link era applicato prima dell'ordine. Dettaglio sul{' '}
-          <a href={ROUTES.modelY} class="text-brand">referral Model Y</a>.
+          I <strong>tempi di consegna Tesla in Italia</strong> dipendono da due strade. Stock:
+          ritiro in 1–2 settimane se accetti la configurazione già prodotta. Auto configurata da
+          zero: l'attesa si allunga e cade spesso vicino a marzo, giugno, settembre o dicembre.
+          Le date nel post-ordine possono slittare: VIN, transito e slot di delivery non sono una
+          coda pubblica.
         </p>
       </section>
 
       <section class="mt-16">
-        <h2 class="heading-28 m-0">Tesla Model 3 pronta consegna</h2>
+        <h2 class="heading-28 m-0">C'è Tesla Model Y pronta consegna?</h2>
         <p class="body-18 m-0 mt-4">
-          Una <strong>Model 3 pronta consegna</strong> è la stessa cosa: stock fisso, ritiro in
-          1–2 settimane se c'è disponibilità. Vale sulla Highland, in tutte le versioni che
-          Tesla pubblica come inventario. Il referral non sconta il listino: è un extra di
-          ricarica. Dettaglio sul <a href={ROUTES.model3} class="text-brand">referral Model 3</a>.
+          In Italia la <strong>Tesla Model Y pronta consegna</strong> è quella che si vede più
+          spesso: SUV già prodotto, ritiro rapido se accetti versione e colore in inventario.
+          Controlla RWD o Long Range e la chimica della batteria nella{' '}
+          <a href={ROUTES.charging} class="text-brand">guida alla ricarica</a>. Autonomia e
+          Standard: <a href={`${ROUTES.modelY}#autonomia`} class="text-brand">Model Y</a>.
+          Il vantaggio referral resta 1.000 km Supercharger se il link era applicato prima
+          dell'ordine.
+        </p>
+      </section>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">C'è Tesla Model 3 pronta consegna?</h2>
+        <p class="body-18 m-0 mt-4">
+          Una <strong>Tesla Model 3 pronta consegna</strong> è la stessa logica: stock fisso,
+          ritiro in 1–2 settimane se c'è disponibilità. Vale sulla Highland, in tutte le versioni
+          che Tesla pubblica come inventario. Il referral non sconta il listino: è un extra di
+          ricarica. Dettaglio su autonomia e prezzo:{' '}
+          <a href={ROUTES.model3} class="text-brand">Model 3</a> e{' '}
+          <a href={ROUTES.prices} class="text-brand">prezzi e incentivi</a>.
+        </p>
+      </section>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">Perché a fine trimestre trovi più auto in pronta consegna?</h2>
+        <p class="body-18 m-0 mt-4">
+          Tesla rendiconta le <strong>consegne Tesla di fine trimestre</strong> per il trimestre
+          fiscale. A marzo, giugno, settembre e dicembre i volumi salgono: più veicoli in stock,
+          più slot di delivery, a volte più <strong>pronta consegna</strong>. Chi ha flessibilità
+          su colore e allestimento può accettare uno stock e accorciare l'attesa a 1–2 settimane.
+        </p>
+        <p class="body-18 m-0 mt-4">
+          Il rischio opposto è lo slittamento a inizio trimestre successivo se la configurazione è
+          rara o se manca un documento. Chi usa l'Ecobonus deve tenere d'occhio i 270 giorni per
+          l'immatricolazione, non la data «marketing» del trimestre. Stesso prezzo, in più 1.000 km:
+          applica il <a href={ROUTES.guide} class="text-brand">codice referral</a> prima di ordinare.
+        </p>
+      </section>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">Tesla pronta consegna a Milano, Bologna e Padova?</h2>
+        <p class="body-18 m-0 mt-4">
+          Lo stock è nazionale: una <strong>Tesla pronta consegna a Milano</strong>,{' '}
+          <strong>Bologna</strong> o <strong>Padova</strong> si sceglie sullo stesso inventario
+          Tesla, poi il Delivery team assegna il centro di ritiro più adatto (o un altro se lo
+          slot è pieno). Non esiste un listino «città»: cambiano disponibilità e data, non il
+          prezzo di listino. Il codice va usato prima di confermare, ovunque ritiri.
         </p>
       </section>
 
@@ -126,21 +177,6 @@ const jsonLd = articlePageJsonLd({
       </section>
 
       <section class="mt-16">
-        <h2 class="heading-28 m-0">Perché esistono gli sprint di fine trimestre?</h2>
-        <p class="body-18 m-0 mt-4">
-          Tesla rendiconta le consegne per trimestre fiscale. A marzo, giugno, settembre e dicembre
-          i volumi salgono: più veicoli in stock, più slot di delivery, a volte più disponibilità
-          di <strong>pronta consegna</strong>. Chi ha flessibilità su colore e allestimento può
-          accettare uno stock e accorciare l'attesa a 1–2 settimane.
-        </p>
-        <p class="body-18 m-0 mt-4">
-          Il rischio opposto è lo slittamento a inizio trimestre successivo se la configurazione è
-          rara o se manca un documento. Chi usa l'Ecobonus deve tenere d'occhio i 270 giorni per
-          l'immatricolazione, non la data «marketing» del trimestre.
-        </p>
-      </section>
-
-      <section class="mt-16">
         <h2 class="heading-28 m-0">Come si paga e cosa portare al delivery day?</h2>
         <p class="body-18 m-0 mt-4">
           L'acconto va versato almeno 7 giorni prima della consegna, con le istruzioni del Delivery
@@ -153,11 +189,11 @@ const jsonLd = articlePageJsonLd({
       <section class="mt-16">
         <h2 class="heading-28 m-0">Come scegliere una Tesla pronta consegna senza errori?</h2>
         <p class="body-18 m-0 mt-4">
-          La pronta consegna è un veicolo già prodotto, spesso con una configurazione fissa. Si
-          guadagna tempo, si perde la libertà di ogni opzione. Controllare autonomia della versione
+          Si guadagna tempo, si perde la libertà di ogni opzione. Controlla autonomia della versione
           (RWD vs Long Range) e, per la ricarica quotidiana, la chimica:{' '}
-          <a href={ROUTES.charging} class="text-brand">LFP o NMC</a>. Il vantaggio referral resta
-          lo stesso su <a href={ROUTES.modelY} class="text-brand">Model Y</a> e{' '}
+          <a href={ROUTES.charging} class="text-brand">LFP o NMC</a>. Confronta il listino su{' '}
+          <a href={ROUTES.prices} class="text-brand">prezzi Tesla e incentivi</a>. Il vantaggio
+          referral resta lo stesso su <a href={ROUTES.modelY} class="text-brand">Model Y</a> e{' '}
           <a href={ROUTES.model3} class="text-brand">Model 3</a> nuove, se il link era applicato
           prima dell'ordine.
         </p>
@@ -173,7 +209,7 @@ const jsonLd = articlePageJsonLd({
       <div class="mt-16">
         <CtaBanner
           title="Referral prima dell'ordine, anche in pronta consegna"
-          summary="Sullo stock i tempi si accorciano, ma il codice va usato prima di confermare. Il listino non cambia."
+          summary="Sullo stock i tempi si accorciano, ma il codice va usato prima di confermare. Stesso prezzo, in più 1.000 km Supercharger."
         />
       </div>
     </div>

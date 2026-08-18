@@ -1,12 +1,12 @@
 ---
-import { COOKIE_CONSENT_KEY, GA_MEASUREMENT_ID, ROUTES } from '../consts';
+import { COOKIE_CONSENT_KEY, COOKIE_CONSENT_MAX_DAYS, GA_MEASUREMENT_ID, ROUTES } from '../consts';
 import Icon from './Icon.astro';
 ---
 
 <div
   id="cookie-banner"
   hidden
-  role="dialog"
+  role="region"
   aria-labelledby="cookie-title"
   aria-describedby="cookie-desc"
   class="fixed inset-x-0 bottom-0 z-[60] border-t border-line bg-surface shadow-lg"
@@ -32,17 +32,48 @@ import Icon from './Icon.astro';
   </div>
 </div>
 
-<script is:inline define:vars={{ measurementId: GA_MEASUREMENT_ID, consentKey: COOKIE_CONSENT_KEY }}>
+<script
+  is:inline
+  define:vars={{
+    measurementId: GA_MEASUREMENT_ID,
+    consentKey: COOKIE_CONSENT_KEY,
+    maxDays: COOKIE_CONSENT_MAX_DAYS,
+  }}
+>
   (function () {
     var banner = document.getElementById('cookie-banner');
     var loaded = false;
 
+    function getCookie(name) {
+      var parts = ('; ' + document.cookie).split('; ' + name + '=');
+      if (parts.length < 2) return null;
+      return decodeURIComponent(parts.pop().split(';').shift() || '');
+    }
+
+    function setCookie(name, value, days) {
+      var cookie =
+        name +
+        '=' +
+        encodeURIComponent(value) +
+        '; Path=/; Max-Age=' +
+        days * 24 * 60 * 60 +
+        '; SameSite=Lax';
+      if (location.protocol === 'https:') cookie += '; Secure';
+      document.cookie = cookie;
+    }
+
     function choice() {
+      var fromCookie = getCookie(consentKey);
+      if (fromCookie === 'accepted' || fromCookie === 'rejected') return fromCookie;
       try {
-        return localStorage.getItem(consentKey);
-      } catch (e) {
-        return null;
-      }
+        var legacy = localStorage.getItem(consentKey);
+        if (legacy === 'accepted' || legacy === 'rejected') {
+          setCookie(consentKey, legacy, maxDays);
+          localStorage.removeItem(consentKey);
+          return legacy;
+        }
+      } catch (e) {}
+      return null;
     }
 
     function hideBanner() {
@@ -52,44 +83,53 @@ import Icon from './Icon.astro';
     function showBanner() {
       if (!banner) return;
       banner.hidden = false;
+      var focusTarget = banner.querySelector('[data-cookie-accept]');
+      if (focusTarget instanceof HTMLElement && document.activeElement && document.activeElement.closest('[data-cookie-prefs]')) {
+        focusTarget.focus();
+      }
     }
 
     function loadGtag() {
       if (loaded || !measurementId) return;
       loaded = true;
       window.dataLayer = window.dataLayer || [];
-      window.gtag = function () {
-        window.dataLayer.push(arguments);
-      };
-      window.gtag('consent', 'default', {
+      window.gtag =
+        window.gtag ||
+        function () {
+          window.dataLayer.push(arguments);
+        };
+      window.gtag('consent', 'update', {
+        analytics_storage: 'granted',
         ad_storage: 'denied',
         ad_user_data: 'denied',
         ad_personalization: 'denied',
-        analytics_storage: 'granted',
-      });
-      window.gtag('js', new Date());
-      window.gtag('config', measurementId, {
-        anonymize_ip: true,
-        allow_google_signals: false,
-        allow_ad_personalization_signals: false,
       });
       var script = document.createElement('script');
       script.async = true;
       script.src = 'https://www.googletagmanager.com/gtag/js?id=' + measurementId;
+      script.onload = function () {
+        window.gtag('js', new Date());
+        window.gtag('config', measurementId, {
+          anonymize_ip: true,
+          allow_google_signals: false,
+          allow_ad_personalization_signals: false,
+        });
+      };
       document.head.appendChild(script);
     }
 
     function setConsent(value) {
-      try {
-        localStorage.setItem(consentKey, value);
-      } catch (e) {}
+      setCookie(consentKey, value, maxDays);
       hideBanner();
       if (value === 'accepted') {
         loadGtag();
         return;
       }
       if (typeof window.gtag === 'function') {
-        window.gtag('consent', 'update', { analytics_storage: 'denied' });
+        window.gtag('consent', 'update', {
+          analytics_storage: 'denied',
+          ad_storage: 'denied',
+        });
       }
     }
 
@@ -123,6 +163,12 @@ import Icon from './Icon.astro';
       }
       var cta = target.closest('[data-track-event]');
       if (cta) trackCta(cta);
+    });
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key !== 'Escape' || !banner || banner.hidden) return;
+      var stored = choice();
+      if (stored) hideBanner();
     });
 
     var stored = choice();

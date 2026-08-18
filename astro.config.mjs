@@ -17,6 +17,8 @@ export default defineConfig({
     '/referral-tesla-model-3': '/model-3',
     '/referral-tesla-model-s': '/come-funziona',
     '/referral-tesla-model-x': '/come-funziona',
+    '/prezzi': '/prezzo-incentivi',
+    '/incentivi': '/prezzo-incentivi',
   },
   integrations: [sitemap()],
   vite: {
