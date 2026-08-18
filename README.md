@@ -25,6 +25,7 @@ In sviluppo: `astro dev --background`, poi `astro dev status` / `astro dev logs`
 | `/come-funziona` | Pillar: come funziona il referral |
 | `/model-y` · `/model-3` | Pagine modello |
 | `/ricarica` | LFP vs NMC |
+| `/ricarica-domestica` | Consumi casa, V2C, Intelligent Octopus |
 | `/consegna` | Tesla pronta consegna e fine trimestre |
 | `/software` | Grok e OTA 2026 |
 | `/faq` | FAQ |

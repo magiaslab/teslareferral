@@ -1,0 +1,346 @@
+---
+import ArticleMeta from '../components/ArticleMeta.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import Button from '../components/Button.astro';
+import Callout from '../components/Callout.astro';
+import Card from '../components/Card.astro';
+import CtaBanner from '../components/CtaBanner.astro';
+import Icon from '../components/Icon.astro';
+import KeyPoints from '../components/KeyPoints.astro';
+import stats from '../content/home-charging.json';
+import {
+  OCTOPUS_FRIENDS_TERMS,
+  OCTOPUS_IO_TERMS,
+  OCTOPUS_IO_URL,
+  OCTOPUS_REFERRAL_URL,
+  ROUTES,
+} from '../consts';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { articlePageJsonLd } from '../lib/schema';
+import type { FaqItem } from '../types';
+
+const title = 'Ricarica domestica Tesla: costi reali e Intelligent Octopus';
+const description =
+  'Ricarica domestica Tesla Model Y: 1.172 kWh, 188 €, 83% a casa. Wallbox V2C Trydan Octopus, tariffa Intelligent Octopus e confronto con il diesel.';
+const h1 = 'Ricarica domestica Tesla: consumi, costi e Intelligent Octopus';
+
+const pageFaq: FaqItem[] = [
+  {
+    q: 'Quanto costa ricaricare una Tesla a casa?',
+    a: `Sulla mia Model Y, dall'app Tesla: ${stats.teslaApp.kwh.toLocaleString('it-IT')} kWh per ${stats.teslaApp.costEur} € (${stats.teslaApp.kmAdded.toLocaleString('it-IT')} km aggiunti). A luglio 2026 la wallbox ha erogato ${stats.july.autoKwh} kWh a circa ${stats.july.effectiveEurPerKwh.toString().replace('.', ',')} €/kWh, dopo lo sconto Intelligent Octopus sui kWh ottimizzati.`,
+  },
+  {
+    q: 'Che cos\'è Intelligent Octopus?',
+    a: 'È l\'iniziativa di Octopus Energy Italia per la ricarica intelligente: imposti nell\'app quando l\'auto deve essere pronta e a che percentuale. Octopus sposta la ricarica nelle ore più convenienti e, sui kWh ottimizzati, applica uno sconto del 30% sulla sola componente materia prima della tariffa domestica. «Ricarica adesso» e le sessioni non programmate restano a prezzo pieno. Dettagli nel regolamento ufficiale.',
+  },
+  {
+    q: 'Lo sconto Intelligent Octopus vale su tutti i kWh?',
+    a: 'No. Il regolamento lo limita ai kWh di ricarica programmata e gestita dall\'app. Le ricariche manuali e quelle non ottimizzate si fatturano alla tariffa domestica piena. La percentuale può cambiare con un aggiornamento del regolamento.',
+  },
+  {
+    q: 'Come funziona Octofriends?',
+    a: 'Condividi un link personale: se un nuovo cliente attiva la fornitura tramite quel link, regolamento del 30 aprile 2026 prevede 30 € IVA inclusa di credito per te e 30 € per l\'amico, sulla prima bolletta utile. Vale una sola volta per l\'amico; la fornitura deve attivarsi davvero. Importi e condizioni possono cambiare.',
+  },
+];
+
+const jsonLd = articlePageJsonLd({
+  path: ROUTES.homeCharging,
+  crumbName: 'Ricarica casa',
+  headline: h1,
+  description,
+  about: 'Ricarica domestica Tesla e Intelligent Octopus',
+  faqItems: pageFaq,
+});
+---
+
+<BaseLayout title={title} description={description} jsonLd={jsonLd}>
+  <article class="section-pad">
+    <div class="wrap max-w-[76ch]">
+      <Breadcrumb
+        items={[
+          { name: 'Home', path: '/' },
+          { name: 'Ricarica', path: ROUTES.charging },
+          { name: 'Ricarica casa', path: ROUTES.homeCharging },
+        ]}
+      />
+      <div class="mt-4">
+        <ArticleMeta reading="Diario di ricarica · Lettura 7 min" />
+      </div>
+      <h1 class="display-40 m-0 mt-4">{h1}</h1>
+
+      <div class="mt-8">
+        <Callout title="In breve">
+          <p class="m-0">
+            Ho una Tesla Model Y, una wallbox <strong>V2C Trydan</strong> fornita e montata da
+            Octopus, e la tariffa <strong>Intelligent Octopus</strong>. Dall'app Tesla, da quando
+            ho l'auto: <strong>{stats.teslaApp.kwh.toLocaleString('it-IT')} kWh</strong> per{' '}
+            <strong>{stats.teslaApp.costEur} €</strong>, di cui l'<strong>{stats.teslaApp.homePct}%</strong> a
+            casa. Confrontata con il diesel della mia auto precedente, sugli stessi chilometri ho
+            speso circa <strong>3,6 volte meno</strong>.
+          </p>
+        </Callout>
+      </div>
+
+      <div class="mt-8">
+        <KeyPoints
+          items={[
+            `${stats.teslaApp.homePct}% dell'energia a casa, ${stats.teslaApp.superchargerPct}% Supercharger, ${stats.teslaApp.otherPct}% altro.`,
+            `Luglio: ${stats.july.autoKwh} kWh in wallbox, circa ${stats.july.effectiveEurPerKwh.toString().replace('.', ',')} €/kWh dopo Intelligent Octopus.`,
+            `Sugli stessi km, diesel precedente ≈ ${stats.vsDiesel.dieselEur} €; elettrico ≈ ${stats.vsDiesel.evEur} €.`,
+            'Colonnina V2C Trydan: installata e fornita da Octopus, gestita dall\'app Intelligent Octopus.',
+          ]}
+        />
+      </div>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">I numeri dall'app Tesla</h2>
+        <p class="body-18 m-0 mt-4">
+          Schermata «Statistiche di ricarica» da quando ho l'auto. Solo consumi, costi e confronti:
+          niente utenza, né dati di fornitura.
+        </p>
+        <div class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
+          <Card>
+            <p class="caption-14 text-ink-soft m-0 inline-flex items-center gap-2">
+              <Icon name="battery-charging" size={16} class="text-brand" /> Energia
+            </p>
+            <p class="heading-22 m-0 mt-2 num-hl">{stats.teslaApp.kwh.toLocaleString('it-IT')} kWh</p>
+          </Card>
+          <Card>
+            <p class="caption-14 text-ink-soft m-0 inline-flex items-center gap-2">
+              <Icon name="wallet" size={16} class="text-brand" /> Spesa
+            </p>
+            <p class="heading-22 m-0 mt-2">{stats.teslaApp.costEur} €</p>
+          </Card>
+          <Card>
+            <p class="caption-14 text-ink-soft m-0 inline-flex items-center gap-2">
+              <Icon name="route" size={16} class="text-brand" /> Km aggiunti
+            </p>
+            <p class="heading-22 m-0 mt-2">{stats.teslaApp.kmAdded.toLocaleString('it-IT')}</p>
+          </Card>
+          <Card>
+            <p class="caption-14 text-ink-soft m-0 inline-flex items-center gap-2">
+              <Icon name="trending-down" size={16} class="text-brand" /> Vs benzina (stima Tesla)
+            </p>
+            <p class="heading-22 m-0 mt-2">−{stats.teslaApp.savedVsPetrolEur} €</p>
+          </Card>
+        </div>
+        <div class="mt-8 overflow-hidden rounded-[14px] border border-line">
+          <table class="w-full border-collapse text-left">
+            <caption class="sr-only">Ripartizione energia per fonte di ricarica</caption>
+            <thead class="bg-[#F3F3F0] dark:bg-[#252830]">
+              <tr>
+                <th scope="col" class="body-16 font-semibold px-6 py-4 border-b border-line">Fonte</th>
+                <th scope="col" class="body-16 font-semibold px-6 py-4 border-b border-line">kWh</th>
+                <th scope="col" class="body-16 font-semibold px-6 py-4 border-b border-line">Quota</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="bg-[#FAFAF8] dark:bg-paper">
+                <th scope="row" class="body-16 font-semibold px-6 py-4 border-b border-line">Casa</th>
+                <td class="body-16 px-6 py-4 border-b border-line">{stats.teslaApp.homeKwh}</td>
+                <td class="body-16 px-6 py-4 border-b border-line">{stats.teslaApp.homePct}%</td>
+              </tr>
+              <tr class="bg-surface">
+                <th scope="row" class="body-16 font-semibold px-6 py-4 border-b border-line">Supercharger</th>
+                <td class="body-16 px-6 py-4 border-b border-line">{stats.teslaApp.superchargerKwh}</td>
+                <td class="body-16 px-6 py-4 border-b border-line">{stats.teslaApp.superchargerPct}%</td>
+              </tr>
+              <tr class="bg-[#FAFAF8] dark:bg-paper">
+                <th scope="row" class="body-16 font-semibold px-6 py-4 border-b border-line">Altro</th>
+                <td class="body-16 px-6 py-4 border-b border-line">{stats.teslaApp.otherKwh}</td>
+                <td class="body-16 px-6 py-4 border-b border-line">{stats.teslaApp.otherPct}%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="caption-14 text-ink-soft m-0 mt-4">
+          Tesla stima un equivalente benzina di {stats.teslaApp.petrolEquivalentEur} €: differenza
+          {stats.teslaApp.savedVsPetrolEur} €. È il confronto dell'app, non un importo rimborsato.
+          {stats.teslaApp.superchargerSessions} sessioni Supercharger su {stats.teslaApp.superchargerSites} siti.
+        </p>
+        <figure class="m-0 mt-8 max-w-[22rem]">
+          <picture>
+            <source srcset="/img/charge-stats.webp" type="image/webp" />
+            <img
+              src="/img/charge-stats.jpg"
+              alt="Schermata Statistiche di ricarica dell'app Tesla: 1.172 kWh, 188 €, 83% a casa"
+              width="660"
+              height="2048"
+              decoding="async"
+              loading="lazy"
+              class="w-full rounded-[14px] border border-line"
+            />
+          </picture>
+          <figcaption class="caption-14 text-ink-soft mt-3 m-0">
+            Statistiche di ricarica dall'app Tesla, Model Y.
+          </figcaption>
+        </figure>
+      </section>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">Un mese in wallbox: luglio 2026</h2>
+        <p class="body-18 m-0 mt-4">
+          Dalla wallbox V2C: <strong>{stats.july.autoKwh} kWh</strong> in {stats.july.sessions} sessioni.
+          Costo energia auto circa <strong>{stats.july.autoCostEur} €</strong>, pari a{' '}
+          <strong>{stats.july.effectiveEurPerKwh.toString().replace('.', ',')} €/kWh</strong> dopo lo
+          sconto Intelligent Octopus (stima circa {stats.july.ioDiscountEur} € sui kWh notturni
+          ottimizzati, circa il {stats.july.optimizedNightPct}%).
+        </p>
+        <p class="body-18 m-0 mt-4">
+          Tra il 1° luglio e il 10 agosto la stessa wallbox ha erogato{' '}
+          <strong>{stats.wallboxWindow.kwh} kWh</strong> in {stats.wallboxWindow.sessions} sessioni.
+          I kWh «a casa» dell'app Tesla ({stats.teslaApp.homeKwh}) coprono un periodo più lungo,
+          incluso giugno.
+        </p>
+      </section>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">Elettrico vs diesel, stessi chilometri</h2>
+        <p class="body-18 m-0 mt-4">
+          Dal 22 giugno 2026 ho percorso {stats.vsDiesel.km.toLocaleString('it-IT')} km. Confronto
+          solo energia/carburante, con la Kia Rio 1.4 CRDi che guidavo prima (~{stats.vsDiesel.dieselLPer100}{' '}
+          L/100 km).
+        </p>
+        <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <Card>
+            <p class="caption-14 text-ink-soft m-0 inline-flex items-center gap-2">
+              <Icon name="zap" size={16} class="text-brand" /> Model Y, energia
+            </p>
+            <p class="heading-28 m-0 mt-2">{stats.vsDiesel.evEur} €</p>
+            <p class="body-16 text-ink-soft m-0 mt-2">
+              {stats.vsDiesel.evCentsPerKm.toString().replace('.', ',')} c€/km · casa ~{stats.vsDiesel.homeKwh}{' '}
+              kWh a {stats.vsDiesel.homeEurPerKwh.toString().replace('.', ',')} €/kWh ·{' '}
+              {stats.vsDiesel.superchargerKwhFree} kWh Supercharger a 0 €
+            </p>
+          </Card>
+          <Card>
+            <p class="caption-14 text-ink-soft m-0 inline-flex items-center gap-2">
+              <Icon name="fuel" size={16} class="text-ink-soft" /> Diesel, stesso km
+            </p>
+            <p class="heading-28 m-0 mt-2">{stats.vsDiesel.dieselEur} €</p>
+            <p class="body-16 text-ink-soft m-0 mt-2">
+              {stats.vsDiesel.dieselCentsPerKm.toString().replace('.', ',')} c€/km · circa{' '}
+              {stats.vsDiesel.dieselMultiplier.toString().replace('.', ',')}× l'elettrico
+            </p>
+          </Card>
+        </div>
+        <p class="body-18 m-0 mt-6">
+          Differenza sul periodo: <strong>−{stats.vsDiesel.savedEur} €</strong>. A questo ritmo, solo
+          di carburante, la forbice annua è circa <strong>{stats.vsDiesel.annualGapEur} €</strong>,
+          prima di bollo e tagliandi. È una stima, non un risparmio garantito.
+        </p>
+      </section>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">Wallbox V2C Trydan, fornita e montata da Octopus</h2>
+        <p class="body-18 m-0 mt-4">
+          A casa carico con una <strong>V2C Trydan</strong> (Trydent): colonnina AC fornita e
+          installata da Octopus Energy, collegata alla Tesla e all'app Octopus. È uno dei
+          caricabatterie compatibili con Intelligent Octopus, insieme a Wallbox Pulsar, Go-e e
+          all'auto Tesla stessa.
+        </p>
+        <p class="body-18 m-0 mt-4">
+          Per batteria e costo la ricarica AC di casa resta la base; il Supercharger è per i
+          viaggi. La chimica (LFP vs NMC) decide se tenere l'80% o il 100%:{' '}
+          <a href={ROUTES.charging} class="text-brand">strategia di ricarica</a>. I 1.000 km del{' '}
+          <a href={ROUTES.guide} class="text-brand">referral Tesla</a> coprono proprio i Supercharger.
+        </p>
+      </section>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">Come funziona Intelligent Octopus</h2>
+        <p class="body-18 m-0 mt-4">
+          Uso la tariffa{' '}
+          <a href={OCTOPUS_IO_URL} class="text-brand" rel="noopener" target="_blank">Intelligent Octopus</a>.
+          Nel regolamento vigente (versione 30 luglio 2026) Octopus Energy Italia scrive questo.
+        </p>
+        <ul class="body-18 mt-6 pl-6 grid gap-3">
+          <li>
+            Imposti nell'app l'orario in cui l'auto deve essere pronta e la percentuale di carica.
+            Octopus sposta la ricarica nelle fasce più convenienti.
+          </li>
+          <li>
+            Sui <strong>kWh ottimizzati</strong> arriva uno sconto del <strong>30%</strong> sulla
+            sola <strong>componente materia prima</strong> della tariffa domestica, in credito sulla
+            prima fattura utile. Trasporto, oneri e accise restano quelli della tariffa.
+          </li>
+          <li>
+            «Ricarica adesso» e le sessioni non programmate dall'app si pagano a prezzo pieno.
+          </li>
+          <li>
+            Non è compatibile con la tariffa Octopus Go. Si può disattivare dall'app in qualsiasi
+            momento.
+          </li>
+          <li>
+            Il servizio è indicato come tecnologia in fase beta: le prime ricariche possono non
+            raggiungere subito il livello impostato.
+          </li>
+          <li>
+            La percentuale di sconto può cambiare con un aggiornamento del regolamento, anche senza
+            preavviso.
+          </li>
+        </ul>
+        <p class="body-16 m-0 mt-6">
+          Testo ufficiale:{' '}
+          <a href={OCTOPUS_IO_TERMS} class="text-brand" rel="noopener" target="_blank">
+            Termini e condizioni Intelligent Octopus (PDF)
+          </a>
+          {' · '}
+          <a href={OCTOPUS_IO_URL} class="text-brand" rel="noopener" target="_blank">
+            pagina Intelligent Octopus
+          </a>.
+        </p>
+      </section>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">Octofriends: il mio link Octopus</h2>
+        <p class="body-18 m-0 mt-4">
+          Se stai passando a Octopus (anche solo per la luce, con o senza wallbox), puoi usare il
+          mio link Octofriends. Secondo i{' '}
+          <a href={OCTOPUS_FRIENDS_TERMS} class="text-brand" rel="noopener" target="_blank">
+            termini del 30 aprile 2026
+          </a>
+          , dopo l'attivazione della fornitura di un <strong>nuovo</strong> cliente entrambi
+          ricevete <strong>30 € IVA inclusa</strong> di credito sulla prima bolletta utile. L'amico
+          può aderire una sola volta; la richiesta deve arrivare dal link e la fornitura deve
+          attivarsi. Niente spam, niente auto-invito su altre utenze intestate a sé.
+        </p>
+        <div class="mt-8 flex flex-col sm:flex-row gap-4">
+          <Button href={OCTOPUS_REFERRAL_URL} external icon="plug-zap">Passa a Octopus con il mio link</Button>
+          <Button variant="secondary" href={OCTOPUS_IO_URL} external icon="external-link">
+            Intelligent Octopus
+          </Button>
+        </div>
+        <p class="caption-14 text-ink-soft m-0 mt-4">
+          Importi e condizioni li decide Octopus e possono variare. Questo sito non è affiliato a
+          Octopus Energy Italia.
+        </p>
+      </section>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">Domande frequenti</h2>
+        {
+          pageFaq.map((item) => (
+            <div class="mt-8">
+              <h3 class="heading-22 m-0">{item.q}</h3>
+              <p class="body-18 m-0 mt-3">{item.a}</p>
+            </div>
+          ))
+        }
+      </section>
+
+      <p class="caption-14 text-ink-soft m-0 mt-12">
+        Stime personali, non una fattura. Fonti: app Tesla; registro wallbox V2C luglio–agosto 2026;
+        confronto diesel su consumi reali della Rio e prezzo self medio. Niente dati di contratto o
+        fornitura. Elaborazione 11 agosto 2026.
+      </p>
+
+      <div class="mt-16">
+        <CtaBanner
+          title="Referral Tesla e ricarica di casa"
+          summary="I 1.000 km Supercharger coprono i viaggi; a casa carico con Intelligent Octopus. Due link, due titolari, stesso prezzo di listino sull'auto."
+        />
+      </div>
+    </div>
+  </article>
+</BaseLayout>

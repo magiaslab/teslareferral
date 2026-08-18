@@ -1,5 +1,6 @@
 ---
 import type { FaqItem } from '../types';
+import Icon from './Icon.astro';
 
 interface Props {
   items: FaqItem[];
@@ -15,6 +16,7 @@ const { items, openFirst = true } = Astro.props;
       <details class="faq-item border-b border-line" open={openFirst && index === 0}>
         <summary>
           <h3 class="heading-22 m-0 pr-4">{item.q}</h3>
+          <Icon name="chevron-down" size={20} class="faq-chevron text-brand" />
         </summary>
         <p class="body-16 text-ink-soft m-0 pb-5 pr-8">{item.a}</p>
       </details>

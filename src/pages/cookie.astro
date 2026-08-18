@@ -3,7 +3,7 @@ import { BRAND, DOMAIN } from '../consts';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const title = `Cookie policy — ${BRAND}`;
-const description = `${BRAND} (${DOMAIN}) non usa cookie di tracciamento. La preferenza del tema è in localStorage.`;
+const description = `${BRAND} (${DOMAIN}): cookie necessari e, solo con il tuo consenso, Google Analytics 4 per misurare i click sui pulsanti.`;
 ---
 
 <BaseLayout title={title} description={description}>
@@ -11,29 +11,62 @@ const description = `${BRAND} (${DOMAIN}) non usa cookie di tracciamento. La pre
     <div class="wrap max-w-[76ch]">
       <h1 class="display-40 m-0">Cookie policy</h1>
       <p class="caption-14 text-ink-soft m-0 mt-4">
-        Testo di lavoro, da far revisionare. Stato attuale: nessun cookie di tracciamento.
+        Informativa sui cookie e sull'archiviazione locale usati su {DOMAIN}.
       </p>
 
-      <h2 class="heading-28 m-0 mt-12">Cookie in uso</h2>
+      <h2 class="heading-28 m-0 mt-12">Come scegli</h2>
       <p class="body-18 m-0 mt-4">
-        {DOMAIN} non imposta cookie di profilazione, marketing o analytics. Non è
-        mostrato un banner cookie perché non vengono letti o scritti cookie non
-        necessari.
+        Al primo accesso compare un banner. Puoi accettare o rifiutare i cookie statistici.
+        La scelta resta su questo dispositivo. Puoi cambiarla in qualsiasi momento dalle
+        preferenze cookie in fondo alle pagine.
+      </p>
+      <p class="mt-6">
+        <button type="button" class="btn btn-secondary" data-cookie-prefs>Apri le preferenze cookie</button>
       </p>
 
-      <h2 class="heading-28 m-0 mt-12">Archiviazione locale</h2>
+      <h2 class="heading-28 m-0 mt-12">Cookie necessari</h2>
       <p class="body-18 m-0 mt-4">
-        Se si cambia il tema (chiaro/scuro), la scelta è salvata in
-        <code>localStorage</code> con la chiave <code>theme</code>. Serve solo a
-        ricordare la preferenza al visitatore successivo. Si può cancellare dai dati
-        di navigazione del browser.
+        Non usiamo cookie tecnici di sessione. Salviamo in <code>localStorage</code> due
+        preferenze del dispositivo, senza le quali il sito non ricorda le tue scelte:
+      </p>
+      <ul class="body-18 mt-4">
+        <li>
+          <code>theme</code>: tema chiaro o scuro
+        </li>
+        <li>
+          <code>cookie-consent</code>: accettazione o rifiuto di Google Analytics
+        </li>
+      </ul>
+      <p class="body-18 m-0 mt-4">
+        Non sono cookie di profilazione e non vengono inviati a un server di {BRAND}.
+        Si possono cancellare dai dati di navigazione del browser.
       </p>
 
-      <h2 class="heading-28 m-0 mt-12">Terze parti</h2>
+      <h2 class="heading-28 m-0 mt-12">Cookie statistici (Google Analytics 4)</h2>
       <p class="body-18 m-0 mt-4">
-        Cliccando il link referral si lascia questo sito e si apre tesla.com. Cliccando
-        su WhatsApp si apre wa.me. Quei servizi possono impostare propri cookie, secondo
-        le loro policy.
+        Solo se accetti, carichiamo Google Analytics 4 (servizio di Google LLC) per
+        misurare le visite e i click sui pulsanti: link referral Tesla, mail di contatto,
+        link Octopus e altre call to action. Serve a capire quali azioni portano a una
+        conversione. Non attiviamo segnali pubblicitari né personalizzazione ads.
+      </p>
+      <p class="body-18 m-0 mt-4">
+        Google può impostare cookie come <code>_ga</code> e <code>_ga_*</code>. I dati
+        sono trattati da Google secondo la sua
+        {' '}<a href="https://policies.google.com/privacy" class="text-brand" target="_blank" rel="noopener">informativa</a>.
+        Base giuridica: consenso (art. 6, par. 1, lett. a GDPR). Se rifiuti, lo script
+        non viene caricato.
+      </p>
+
+      <h2 class="heading-28 m-0 mt-12">Google Search Console</h2>
+      <p class="body-18 m-0 mt-4">
+        La verifica del sito in Search Console usa un meta tag nel codice. Non imposta
+        cookie sul tuo browser e non misura il comportamento di navigazione.
+      </p>
+
+      <h2 class="heading-28 m-0 mt-12">Terze parti sui click in uscita</h2>
+      <p class="body-18 m-0 mt-4">
+        Cliccando il link referral si apre tesla.com. Cliccando la mail di contatto si
+        apre il client di posta. tesla.com può impostare propri cookie, secondo la sua policy.
       </p>
     </div>
   </article>

@@ -1,3 +1,29 @@
+export type IconName =
+  | 'arrow-right'
+  | 'badge-check'
+  | 'battery-charging'
+  | 'book-open'
+  | 'calendar-clock'
+  | 'check'
+  | 'cookie'
+  | 'chevron-down'
+  | 'circle-help'
+  | 'external-link'
+  | 'fuel'
+  | 'globe'
+  | 'home'
+  | 'info'
+  | 'mail'
+  | 'menu'
+  | 'moon'
+  | 'plug-zap'
+  | 'route'
+  | 'settings'
+  | 'sun'
+  | 'trending-down'
+  | 'wallet'
+  | 'zap';
+
 export interface FaqItem {
   q: string;
   a: string;

@@ -1,20 +1,25 @@
 ---
+import type { IconName } from '../types';
+import Icon from './Icon.astro';
+
 interface Props {
   variant?: 'brand' | 'outline' | 'ink';
+  icon?: IconName;
   class?: string;
 }
 
-const { variant = 'brand', class: className = '' } = Astro.props;
+const { variant = 'brand', icon, class: className = '' } = Astro.props;
 ---
 
 <span
   class:list={[
-    'inline-flex items-center rounded-full px-3.5 py-2 text-sm leading-none',
+    'inline-flex items-center gap-2 rounded-full px-3.5 py-2 text-sm leading-none',
     variant === 'brand' && 'bg-brand-tint text-brand-strong font-semibold',
     variant === 'outline' && 'bg-surface text-ink-soft border border-line',
     variant === 'ink' && 'bg-ink text-paper font-semibold',
     className,
   ]}
 >
+  {icon && <Icon name={icon} size={16} />}
   <slot />
 </span>

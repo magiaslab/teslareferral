@@ -1,5 +1,6 @@
 ---
 import { formatVerifiedDateIt, VERIFIED_DATE } from '../consts';
+import Icon from './Icon.astro';
 
 interface Props {
   prefix?: string;
@@ -9,6 +10,7 @@ const { prefix = 'Ultimo aggiornamento:' } = Astro.props;
 const label = formatVerifiedDateIt(VERIFIED_DATE);
 ---
 
-<p class="caption-14 text-ink-soft m-0">
+<p class="caption-14 text-ink-soft m-0 inline-flex items-center gap-2">
+  <Icon name="calendar-clock" size={16} />
   <time datetime={VERIFIED_DATE}>{prefix} {label}</time>
 </p>

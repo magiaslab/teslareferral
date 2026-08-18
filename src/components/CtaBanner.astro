@@ -1,5 +1,5 @@
 ---
-import { REFERRAL_URL, WHATSAPP_URL } from '../consts';
+import { CONTACT_MAILTO, REFERRAL_URL } from '../consts';
 import Button from './Button.astro';
 
 interface Props {
@@ -12,7 +12,7 @@ interface Props {
 const {
   title = 'Pronto a risparmiare 1.000 km di ricariche?',
   summary = "Applica il codice prima di configurare l'auto: dopo l'ordine non è più possibile.",
-  primaryLabel = 'Ottieni i 1.000 km →',
+  primaryLabel = 'Ottieni i 1.000 km',
   secondaryLabel = 'Hai dubbi? Scrivimi',
 } = Astro.props;
 ---
@@ -21,10 +21,10 @@ const {
   <h2 class="heading-28 m-0 text-[#F2F2F0]">{title}</h2>
   <p class="body-18 m-0 mt-4 max-w-[40rem] text-[#9BA0AB]">{summary}</p>
   <div class="mt-8 flex flex-col sm:flex-row gap-4">
-    <Button variant="primary" href={REFERRAL_URL} external onDark>
+    <Button variant="primary" href={REFERRAL_URL} external onDark icon="arrow-right">
       {primaryLabel}
     </Button>
-    <Button variant="on-dark" href={WHATSAPP_URL} external>
+    <Button variant="on-dark" href={CONTACT_MAILTO} icon="mail">
       {secondaryLabel}
     </Button>
   </div>

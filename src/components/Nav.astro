@@ -1,6 +1,7 @@
 ---
 import { BRAND, NAV_LINKS, REFERRAL_URL, SILO_LINKS } from '../consts';
 import Button from './Button.astro';
+import Icon from './Icon.astro';
 
 const path = Astro.url.pathname.replace(/\/$/, '') || '/';
 ---
@@ -41,17 +42,15 @@ const path = Astro.url.pathname.replace(/\/$/, '') || '/';
         aria-label="Attiva il tema scuro"
         aria-pressed="false"
       >
-        <svg class="h-5 w-5 dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-        </svg>
-        <svg class="hidden h-5 w-5 dark:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-          <circle cx="12" cy="12" r="4"></circle>
-          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
-        </svg>
+        <span class="dark:hidden"><Icon name="moon" size={20} /></span>
+        <span class="hidden dark:block"><Icon name="sun" size={20} /></span>
       </button>
 
       <details class="nav-menu relative lg:hidden">
-        <summary aria-label="Apri il menu">Menu</summary>
+        <summary aria-label="Apri il menu">
+          <Icon name="menu" size={20} />
+          <span class="sr-only">Menu</span>
+        </summary>
         <ul class="absolute right-0 mt-2 w-56 list-none m-0 p-4 rounded-[14px] border border-line bg-surface shadow-md">
           {
             [...NAV_LINKS, ...SILO_LINKS].map((link) => (
@@ -69,7 +68,7 @@ const path = Astro.url.pathname.replace(/\/$/, '') || '/';
         </ul>
       </details>
 
-      <Button href={REFERRAL_URL} external class="!px-3 !text-sm sm:!px-6 sm:!text-base whitespace-nowrap">
+      <Button href={REFERRAL_URL} external icon="arrow-right" class="!px-3 !text-sm sm:!px-6 sm:!text-base whitespace-nowrap">
         Ottieni i 1.000 km
       </Button>
     </div>

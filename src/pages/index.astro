@@ -12,11 +12,14 @@ import faq from '../content/faq.json';
 import {
   formatVerifiedDateIt,
   HOW_TO_STEPS,
-  OWNER,
+  CONTACT_EMAIL,
+  CONTACT_MAILTO,
+  MAGIASLAB_URL,
+  OWNER_NAME,
+  OWNER_ORG,
   REFERRAL_URL,
   ROUTES,
   VERIFIED_DATE,
-  WHATSAPP_URL,
 } from '../consts';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { homeJsonLd } from '../lib/schema';
@@ -38,7 +41,7 @@ const homeFaq = (faq as FaqItem[]).slice(0, 5);
   <section class="section-pad">
     <div class="wrap grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6 items-center">
       <div class="md:col-span-7">
-        <Pill variant="brand">⚡ Proprietario Model Y verificato</Pill>
+        <Pill variant="brand" icon="badge-check">Proprietario Model Y verificato</Pill>
         <h1 class="display-56 m-0 mt-6">
           Codice referral Tesla 2026: 1.000 km di Supercharger gratis
         </h1>
@@ -49,17 +52,17 @@ const homeFaq = (faq as FaqItem[]).slice(0, 5);
           {' '}su Model 3 e Model Y, se applichi il codice prima di ordinare.
         </p>
         <div class="mt-8 flex flex-col sm:flex-row gap-4">
-          <Button href={REFERRAL_URL} external hero>Ottieni i 1.000 km →</Button>
-          <Button variant="secondary" href={ROUTES.guide}>Come funziona</Button>
+          <Button href={REFERRAL_URL} external hero icon="arrow-right">Ottieni i 1.000 km</Button>
+          <Button variant="secondary" href={ROUTES.guide} icon="book-open">Come funziona</Button>
         </div>
         <p class="caption-14 text-ink-soft m-0 mt-4">
           <a href={ROUTES.guide} class="text-brand">Come funziona</a>
           {' · '}
           <a href={ROUTES.delivery} class="text-brand">Tesla pronta consegna</a>
           {' · '}
-          <a href={ROUTES.modelY} class="text-brand">Model Y</a>
+          <a href={ROUTES.homeCharging} class="text-brand">Ricarica casa</a>
           {' · '}
-          <a href={ROUTES.model3} class="text-brand">Model 3</a>
+          <a href={ROUTES.modelY} class="text-brand">Model Y</a>
         </p>
       </div>
       <div class="md:col-span-5">
@@ -179,15 +182,18 @@ const homeFaq = (faq as FaqItem[]).slice(0, 5);
           Guido una Tesla Model Y ogni giorno e conosco la ricarica domestica, i
           Supercharger e la configurazione. Se hai dubbi prima dell'ordine — modello
           giusto, autonomia reale, wallbox, tariffe di ricarica — ti aiuto
-          gratuitamente, senza impegno. Nessun call center: parli direttamente con me.
+          gratuitamente, senza impegno. Nessun call center: scrivi direttamente a me.
         </p>
         <div class="mt-6 flex flex-wrap gap-3">
-          <Pill variant="brand">⚡ Proprietario verificato</Pill>
-          <Pill variant="outline">{OWNER}</Pill>
+          <Pill variant="brand" icon="badge-check">Proprietario verificato</Pill>
+          <Pill variant="outline">{OWNER_NAME}</Pill>
         </div>
-        <div class="mt-8">
-          <Button variant="secondary" href={WHATSAPP_URL} external>
-            Scrivimi su WhatsApp
+        <div class="mt-8 flex flex-col sm:flex-row gap-4">
+          <Button variant="secondary" href={CONTACT_MAILTO} icon="mail">
+            {CONTACT_EMAIL}
+          </Button>
+          <Button variant="ghost" href={MAGIASLAB_URL} external icon="globe">
+            {OWNER_ORG}
           </Button>
         </div>
         <p class="caption-14 text-ink-soft m-0 mt-8 pt-6 border-t border-line">

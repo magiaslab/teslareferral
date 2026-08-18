@@ -1,4 +1,6 @@
 ---
+import Analytics from '../components/Analytics.astro';
+import CookieBanner from '../components/CookieBanner.astro';
 import Footer from '../components/Footer.astro';
 import Nav from '../components/Nav.astro';
 import { BRAND, OG_IMAGE_PATH, SITE_URL } from '../consts';
@@ -66,6 +68,7 @@ const ogAbsolute = new URL(ogImage, SITE_URL).href;
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogAbsolute} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <Analytics />
     <link
       rel="preload"
       href="/fonts/space-grotesk-700.woff2"
@@ -88,5 +91,6 @@ const ogAbsolute = new URL(ogImage, SITE_URL).href;
       <slot />
     </main>
     <Footer />
+    <CookieBanner />
   </body>
 </html>

@@ -1,18 +1,29 @@
 export const SITE_URL = 'https://teslareferral.it';
 export const REFERRAL_URL = 'https://ts.la/alessandro519156';
-export const WHATSAPP_URL = 'https://wa.me/393311072100';
+export const OCTOPUS_REFERRAL_URL = 'https://octopusenergy.it/octo-friends/crisp-eland-323';
+export const OCTOPUS_IO_URL = 'https://octopusenergy.it/intelligent-octopus';
+export const OCTOPUS_IO_TERMS =
+  'https://a.storyblok.com/f/146593/x/d7165cf193/oe-italia-regolamento-intelligent-octopus-260730.pdf';
+export const OCTOPUS_FRIENDS_TERMS =
+  'https://a.storyblok.com/f/146593/x/8bd0782df3/octofriends-termini-e-condizioni_30042026.pdf';
+export const CONTACT_EMAIL = 'social@magiaslab.com';
+export const CONTACT_MAILTO = `mailto:${CONTACT_EMAIL}`;
+export const MAGIASLAB_URL = 'https://www.magiaslab.com';
 /** Fonte unica per badge visibile e JSON-LD (`dateModified`). */
 export const VERIFIED_DATE = '2026-08-01';
 export const OWNER = 'Alessandro Cipriani — Magias Lab';
 export const OWNER_NAME = 'Alessandro Cipriani';
+export const OWNER_ORG = 'Magias Lab';
 export const BRAND = 'CodiceEV';
 export const DOMAIN = 'teslareferral.it';
 export const OG_IMAGE_PATH = '/img/og.jpg';
-export const PHONE_E164 = '+393311072100';
 export const PROGRAM_IT = 'Segnala e guadagna';
 export const PROGRAM_EN = 'Refer and Earn';
 export const TERMS_IN_FORCE = '2024-10-03';
 export const TERMS_UPDATED = '2025-06-04';
+export const GA_MEASUREMENT_ID = import.meta.env.PUBLIC_GA_MEASUREMENT_ID ?? '';
+export const GSC_VERIFICATION = import.meta.env.PUBLIC_GSC_VERIFICATION ?? '';
+export const COOKIE_CONSENT_KEY = 'cookie-consent';
 
 export const ROUTES = {
   home: '/',
@@ -20,6 +31,7 @@ export const ROUTES = {
   modelY: '/model-y',
   model3: '/model-3',
   charging: '/ricarica',
+  homeCharging: '/ricarica-domestica',
   delivery: '/consegna',
   software: '/software',
   faq: '/faq',
@@ -36,6 +48,7 @@ export const NAV_LINKS = [
 
 export const SILO_LINKS = [
   { href: ROUTES.charging, label: 'Ricarica' },
+  { href: ROUTES.homeCharging, label: 'Ricarica casa' },
   { href: ROUTES.software, label: 'Software' },
   { href: ROUTES.faq, label: 'FAQ' },
 ] as const;
@@ -78,4 +91,4 @@ export const HOW_TO_STEPS = [
   },
 ] as const;
 
-export const DISCLAIMER = `${BRAND} è un sito indipendente, non ufficiale e non affiliato, sponsorizzato o approvato da Tesla, Inc. "Tesla", "Model 3", "Model Y", "Model S", "Model X" e "Supercharger" sono marchi di Tesla, Inc., citati a scopo puramente descrittivo. Il programma referral è gestito da Tesla; questo sito si limita a segnalarlo. Il referral non è un incentivo statale.`;
+export const DISCLAIMER = `${BRAND} è un sito indipendente, non ufficiale e non affiliato, sponsorizzato o approvato da Tesla, Inc. né da Octopus Energy Italia S.r.l. "Tesla", "Model 3", "Model Y", "Model S", "Model X" e "Supercharger" sono marchi di Tesla, Inc.; "Octopus Energy", "Intelligent Octopus" e "Octofriends" sono marchi di Octopus Energy, citati a scopo descrittivo. I programmi referral sono gestiti dai rispettivi titolari; questo sito si limita a segnalarli. Il referral Tesla non è un incentivo statale.`;

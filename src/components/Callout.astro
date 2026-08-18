@@ -1,4 +1,6 @@
 ---
+import Icon from './Icon.astro';
+
 interface Props {
   title: string;
   class?: string;
@@ -14,7 +16,10 @@ const { title, class: className = '' } = Astro.props;
   ]}
   style="border-left: 3px solid var(--color-brand);"
 >
-  <h2 class="heading-22 text-brand-strong m-0">{title}</h2>
+  <h2 class="heading-22 text-brand-strong m-0 inline-flex items-center gap-2">
+    <Icon name="info" size={20} />
+    {title}
+  </h2>
   <div class="body-16 text-ink mt-3">
     <slot />
   </div>

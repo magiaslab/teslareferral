@@ -1,0 +1,67 @@
+---
+import type { IconName } from '../types';
+import {
+  ArrowRight,
+  BadgeCheck,
+  BatteryCharging,
+  BookOpen,
+  CalendarClock,
+  Check,
+  ChevronDown,
+  Cookie,
+  CircleQuestionMark,
+  ExternalLink,
+  Fuel,
+  Globe,
+  House,
+  Info,
+  Mail,
+  Menu,
+  Moon,
+  PlugZap,
+  Route,
+  Settings2,
+  Sun,
+  TrendingDown,
+  Wallet,
+  Zap,
+} from '@lucide/astro';
+
+const icons = {
+  'arrow-right': ArrowRight,
+  'badge-check': BadgeCheck,
+  'battery-charging': BatteryCharging,
+  'book-open': BookOpen,
+  'calendar-clock': CalendarClock,
+  check: Check,
+  cookie: Cookie,
+  'chevron-down': ChevronDown,
+  'circle-help': CircleQuestionMark,
+  'external-link': ExternalLink,
+  fuel: Fuel,
+  globe: Globe,
+  home: House,
+  info: Info,
+  mail: Mail,
+  menu: Menu,
+  moon: Moon,
+  'plug-zap': PlugZap,
+  route: Route,
+  settings: Settings2,
+  sun: Sun,
+  'trending-down': TrendingDown,
+  wallet: Wallet,
+  zap: Zap,
+} as const;
+
+interface Props {
+  name: IconName;
+  size?: number;
+  class?: string;
+}
+
+const { name, size = 20, class: className = '' } = Astro.props;
+const Glyph = icons[name];
+---
+
+<Glyph size={size} class:list={['shrink-0', className]} aria-hidden="true" />

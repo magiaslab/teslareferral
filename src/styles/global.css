@@ -317,18 +317,12 @@
     display: none;
   }
 
-  .faq-item > summary::after {
-    content: "+";
-    color: var(--color-brand);
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 24px;
-    line-height: 1;
-    flex-shrink: 0;
+  .faq-item .faq-chevron {
+    transition: transform 160ms ease;
   }
 
-  .faq-item[open] > summary::after {
-    content: "−";
+  .faq-item[open] .faq-chevron {
+    transform: rotate(180deg);
   }
 
   .nav-menu > summary {

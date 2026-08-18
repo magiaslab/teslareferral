@@ -8,6 +8,7 @@ import Disclaimer from '../components/Disclaimer.astro';
 import KeyPoints from '../components/KeyPoints.astro';
 import ModelTable from '../components/ModelTable.astro';
 import {
+  CONTACT_MAILTO,
   HOW_TO_STEPS,
   PROGRAM_EN,
   PROGRAM_IT,
@@ -15,7 +16,6 @@ import {
   ROUTES,
   TERMS_IN_FORCE,
   TERMS_UPDATED,
-  WHATSAPP_URL,
 } from '../consts';
 import faq from '../content/faq.json';
 import BaseLayout from '../layouts/BaseLayout.astro';
@@ -236,8 +236,8 @@ const crumbs = [
             Il link apre Tesla.com con il codice già applicato. Il prezzo di listino non cambia.
           </p>
           <div class="mt-6 flex flex-col sm:flex-row gap-4">
-            <Button href={REFERRAL_URL} external>Ottieni i 1.000 km →</Button>
-            <Button variant="secondary" href={WHATSAPP_URL} external>
+            <Button href={REFERRAL_URL} external icon="arrow-right">Ottieni i 1.000 km</Button>
+            <Button variant="secondary" href={CONTACT_MAILTO} icon="mail">
               Hai dubbi? Scrivimi
             </Button>
           </div>

@@ -3,11 +3,11 @@ import {
   DOMAIN,
   HOW_TO_STEPS,
   OG_IMAGE_PATH,
+  CONTACT_EMAIL,
+  MAGIASLAB_URL,
   OWNER_NAME,
-  PHONE_E164,
   SITE_URL,
   VERIFIED_DATE,
-  WHATSAPP_URL,
 } from '../consts';
 import faq from '../content/faq.json';
 import models from '../content/models.json';
@@ -37,8 +37,9 @@ export function personNode() {
     name: OWNER_NAME,
     jobTitle: 'Proprietario di veicolo elettrico e curatore di CodiceEV',
     worksFor: { '@id': ORG_ID },
-    telephone: PHONE_E164,
-    sameAs: [WHATSAPP_URL],
+    email: CONTACT_EMAIL,
+    url: MAGIASLAB_URL,
+    sameAs: [MAGIASLAB_URL],
   };
 }
 
@@ -220,10 +221,16 @@ export function articlePageJsonLd(opts: {
   faqItems?: FaqItem[];
 }) {
   const url = `${SITE_URL}${opts.path}`;
-  const crumbs: Crumb[] = [
-    { name: 'Home', path: '/' },
-    { name: opts.crumbName, path: opts.path },
-  ];
+  const crumbs: Crumb[] = opts.path === '/ricarica-domestica'
+    ? [
+        { name: 'Home', path: '/' },
+        { name: 'Ricarica', path: '/ricarica' },
+        { name: opts.crumbName, path: opts.path },
+      ]
+    : [
+        { name: 'Home', path: '/' },
+        { name: opts.crumbName, path: opts.path },
+      ];
   const nodes: object[] = [
     breadcrumbList(crumbs),
     articleNode({

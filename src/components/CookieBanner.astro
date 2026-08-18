@@ -1,0 +1,138 @@
+---
+import { COOKIE_CONSENT_KEY, GA_MEASUREMENT_ID, ROUTES } from '../consts';
+import Icon from './Icon.astro';
+---
+
+<div
+  id="cookie-banner"
+  hidden
+  role="dialog"
+  aria-labelledby="cookie-title"
+  aria-describedby="cookie-desc"
+  class="fixed inset-x-0 bottom-0 z-[60] border-t border-line bg-surface shadow-lg"
+>
+  <div class="wrap py-5 md:py-6">
+    <div class="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
+      <div class="flex gap-3 min-w-0">
+        <Icon name="cookie" size={22} class="mt-0.5 text-brand" />
+        <div>
+          <p id="cookie-title" class="m-0 text-base font-semibold">Cookie e misurazione</p>
+          <p id="cookie-desc" class="caption-14 text-ink-soft m-0 mt-2 max-w-[48rem]">
+            Usiamo Google Analytics 4 solo se accetti, per capire quali pulsanti portano a un
+            ordine Tesla o a un contatto. Nessuna pubblicità. Dettagli nella{' '}
+            <a href={ROUTES.cookie} class="text-brand">cookie policy</a>.
+          </p>
+        </div>
+      </div>
+      <div class="flex flex-col sm:flex-row gap-3 shrink-0">
+        <button type="button" class="btn btn-secondary" data-cookie-reject>Rifiuta</button>
+        <button type="button" class="btn btn-primary" data-cookie-accept>Accetta</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script is:inline define:vars={{ measurementId: GA_MEASUREMENT_ID, consentKey: COOKIE_CONSENT_KEY }}>
+  (function () {
+    var banner = document.getElementById('cookie-banner');
+    var loaded = false;
+
+    function choice() {
+      try {
+        return localStorage.getItem(consentKey);
+      } catch (e) {
+        return null;
+      }
+    }
+
+    function hideBanner() {
+      if (banner) banner.hidden = true;
+    }
+
+    function showBanner() {
+      if (!banner) return;
+      banner.hidden = false;
+    }
+
+    function loadGtag() {
+      if (loaded || !measurementId) return;
+      loaded = true;
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function () {
+        window.dataLayer.push(arguments);
+      };
+      window.gtag('consent', 'default', {
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        analytics_storage: 'granted',
+      });
+      window.gtag('js', new Date());
+      window.gtag('config', measurementId, {
+        anonymize_ip: true,
+        allow_google_signals: false,
+        allow_ad_personalization_signals: false,
+      });
+      var script = document.createElement('script');
+      script.async = true;
+      script.src = 'https://www.googletagmanager.com/gtag/js?id=' + measurementId;
+      document.head.appendChild(script);
+    }
+
+    function setConsent(value) {
+      try {
+        localStorage.setItem(consentKey, value);
+      } catch (e) {}
+      hideBanner();
+      if (value === 'accepted') {
+        loadGtag();
+        return;
+      }
+      if (typeof window.gtag === 'function') {
+        window.gtag('consent', 'update', { analytics_storage: 'denied' });
+      }
+    }
+
+    function trackCta(el) {
+      if (choice() !== 'accepted' || typeof window.gtag !== 'function') return;
+      var eventName = el.getAttribute('data-track-event') || 'cta_click';
+      var label = (el.textContent || '').replace(/\s+/g, ' ').trim();
+      window.gtag('event', eventName, {
+        event_category: 'conversion',
+        event_label: label,
+        link_url: el.getAttribute('href') || '',
+        transport_type: 'beacon',
+      });
+    }
+
+    document.addEventListener('click', function (event) {
+      var target = event.target;
+      if (!(target instanceof Element)) return;
+      if (target.closest('[data-cookie-accept]')) {
+        setConsent('accepted');
+        return;
+      }
+      if (target.closest('[data-cookie-reject]')) {
+        setConsent('rejected');
+        return;
+      }
+      if (target.closest('[data-cookie-prefs]')) {
+        event.preventDefault();
+        showBanner();
+        return;
+      }
+      var cta = target.closest('[data-track-event]');
+      if (cta) trackCta(cta);
+    });
+
+    var stored = choice();
+    if (stored === 'accepted') {
+      hideBanner();
+      loadGtag();
+    } else if (stored === 'rejected') {
+      hideBanner();
+    } else {
+      showBanner();
+    }
+  })();
+</script>

@@ -1,5 +1,8 @@
 ---
-import { REFERRAL_URL } from '../consts';
+import { OCTOPUS_REFERRAL_URL, REFERRAL_URL } from '../consts';
+import { trackEventForHref } from '../lib/analytics';
+import type { IconName } from '../types';
+import Icon from './Icon.astro';
 
 interface Props {
   variant?: 'primary' | 'secondary' | 'ghost' | 'on-dark';
@@ -9,6 +12,8 @@ interface Props {
   hero?: boolean;
   onDark?: boolean;
   class?: string;
+  icon?: IconName;
+  iconPosition?: 'start' | 'end';
 }
 
 const {
@@ -19,9 +24,15 @@ const {
   hero = false,
   onDark = false,
   class: className = '',
+  icon,
+  iconPosition = icon === 'arrow-right' || icon === 'external-link' ? 'end' : 'start',
 } = Astro.props;
 
-const isReferral = href === REFERRAL_URL || href.startsWith('https://ts.la/');
+const isReferral =
+  href === REFERRAL_URL ||
+  href === OCTOPUS_REFERRAL_URL ||
+  href.startsWith('https://ts.la/') ||
+  href.includes('/octo-friends/');
 const rel = external ? (isReferral ? 'nofollow noopener' : 'noopener') : undefined;
 const target = external ? '_blank' : undefined;
 
@@ -36,21 +47,23 @@ const variantClass = disabled
         : onDark
           ? 'btn-primary-on-dark'
           : 'btn-primary';
+
+const classes = ['btn', variantClass, hero && 'btn-hero', className];
+const trackEvent = trackEventForHref(href);
 ---
 
 {
   disabled ? (
-    <span class:list={['btn', variantClass, hero && 'btn-hero', className]} aria-disabled="true">
+    <span class:list={classes} aria-disabled="true">
+      {icon && iconPosition === 'start' && <Icon name={icon} size={18} />}
       <slot />
+      {icon && iconPosition === 'end' && <Icon name={icon} size={18} />}
     </span>
   ) : (
-    <a
-      class:list={['btn', variantClass, hero && 'btn-hero', className]}
-      href={href}
-      target={target}
-      rel={rel}
-    >
+    <a class:list={classes} href={href} target={target} rel={rel} data-track-event={trackEvent}>
+      {icon && iconPosition === 'start' && <Icon name={icon} size={18} />}
       <slot />
+      {icon && iconPosition === 'end' && <Icon name={icon} size={18} />}
     </a>
   )
 }

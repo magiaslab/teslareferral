@@ -1,0 +1,49 @@
+{
+  "periodLabel": "Da quando ho l'auto (app Tesla)",
+  "verified": "2026-08-11",
+  "teslaApp": {
+    "kwh": 1172,
+    "costEur": 188,
+    "kmAdded": 5362,
+    "savedVsPetrolEur": 780,
+    "petrolEquivalentEur": 968,
+    "homeKwh": 975,
+    "homePct": 83,
+    "superchargerKwh": 130,
+    "superchargerPct": 11,
+    "otherKwh": 66,
+    "otherPct": 6,
+    "workKwh": 0,
+    "superchargerSites": 2,
+    "superchargerSessions": 4
+  },
+  "july": {
+    "label": "Luglio 2026 · wallbox",
+    "autoKwh": 629,
+    "sessions": 42,
+    "autoCostEur": 114,
+    "effectiveEurPerKwh": 0.18,
+    "ioDiscountEur": 22,
+    "optimizedNightPct": 83
+  },
+  "wallboxWindow": {
+    "label": "1 luglio – 10 agosto 2026 · wallbox",
+    "kwh": 794,
+    "sessions": 55
+  },
+  "vsDiesel": {
+    "km": 5297,
+    "from": "2026-06-22",
+    "evEur": 153,
+    "evCentsPerKm": 2.9,
+    "dieselEur": 545,
+    "dieselCentsPerKm": 10.3,
+    "savedEur": 392,
+    "dieselMultiplier": 3.6,
+    "homeKwh": 844,
+    "homeEurPerKwh": 0.18,
+    "superchargerKwhFree": 115,
+    "dieselLPer100": 5,
+    "annualGapEur": "2.800–3.000"
+  }
+}

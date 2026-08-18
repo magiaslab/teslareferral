@@ -1,5 +1,6 @@
 ---
 import type { Crumb } from '../types';
+import Icon from './Icon.astro';
 
 interface Props {
   items: Crumb[];
@@ -17,12 +18,16 @@ const { items } = Astro.props;
           {index < items.length - 1 ? (
             <a
               href={item.path}
-              class="text-brand no-underline hover:underline min-h-11 inline-flex items-center"
+              class="text-brand no-underline hover:underline min-h-11 inline-flex items-center gap-1.5"
             >
+              {index === 0 && item.path === '/' && <Icon name="home" size={14} />}
               {item.name}
             </a>
           ) : (
-            <span class="min-h-11 inline-flex items-center">{item.name}</span>
+            <span class="min-h-11 inline-flex items-center gap-1.5">
+              {index === 0 && item.path === '/' && <Icon name="home" size={14} />}
+              {item.name}
+            </span>
           )}
         </li>
       ))
