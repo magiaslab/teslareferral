@@ -218,6 +218,10 @@ export function articlePageJsonLd(opts: {
   description: string;
   about: string;
   faqItems?: FaqItem[];
+  itemList?: {
+    name: string;
+    items: { name: string; description: string; url?: string }[];
+  };
 }) {
   const url = `${SITE_URL}${opts.path}`;
   const crumbs: Crumb[] = opts.path === '/ricarica-domestica'
@@ -239,6 +243,21 @@ export function articlePageJsonLd(opts: {
       about: opts.about,
     }),
   ];
+  if (opts.itemList?.items.length) {
+    nodes.push({
+      '@type': 'ItemList',
+      '@id': `${url}#elenco`,
+      name: opts.itemList.name,
+      numberOfItems: opts.itemList.items.length,
+      itemListElement: opts.itemList.items.map((item, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        name: item.name,
+        description: item.description,
+        ...(item.url ? { url: item.url } : {}),
+      })),
+    });
+  }
   if (opts.faqItems?.length) {
     nodes.push({
       '@type': 'FAQPage',

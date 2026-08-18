@@ -1,0 +1,205 @@
+---
+import ArticleMeta from '../components/ArticleMeta.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import Callout from '../components/Callout.astro';
+import CtaBanner from '../components/CtaBanner.astro';
+import Faq from '../components/Faq.astro';
+import KeyPoints from '../components/KeyPoints.astro';
+import prices from '../content/prices.json';
+import { formatVerifiedDateIt, ROUTES, SITE_URL, VERIFIED_DATE } from '../consts';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { articlePageJsonLd } from '../lib/schema';
+import type { FaqItem, PriceRow } from '../types';
+
+const verified = formatVerifiedDateIt(VERIFIED_DATE);
+const title = 'Prezzi Tesla 2026 con incentivi (Model 3 e Model Y) + 1.000 km referral';
+const description =
+  'Prezzi Tesla 2026 in Italia: listino Model 3 e Model Y, incentivi/Ecobonus cumulabili col referral (1.000 km Supercharger, stesso prezzo). Verifica su Tesla.com.';
+const h1 = 'Prezzi Tesla 2026 con incentivi: Model 3, Model Y e 1.000 km referral';
+const rows = prices.rows as PriceRow[];
+
+function formatEur(value: number): string {
+  return new Intl.NumberFormat('it-IT', {
+    style: 'currency',
+    currency: 'EUR',
+    maximumFractionDigits: 0,
+  }).format(value);
+}
+
+const pageFaq: FaqItem[] = [
+  {
+    q: 'Quanto costa una Tesla Model 3 con incentivi?',
+    a: `Il Tesla Model 3 prezzo di listino parte dalle versioni d'ingresso e sale su Long Range e Performance. Gli incentivi pubblici (Ecobonus o analoghi) sono indipendenti dal referral: si sommano secondo ISEE e regole vigenti. Il referral non sconta il listino: aggiunge 1.000 km Supercharger. Listino indicativo verificato a ${verified}; controlla tesla.com.`,
+  },
+  {
+    q: 'Quanto costa la Tesla Model Y?',
+    a: `Il Tesla Model Y prezzo segue lo stesso schema: RWD/Standard più accessibile, Long Range e Performance più in alto. Incentivi statali e referral Tesla sono due canali distinti e cumulabili. Verifica il configuratore: i listini Tesla cambiano.`,
+  },
+  {
+    q: 'Il referral Tesla è uno sconto sul prezzo?',
+    a: 'No. Paghi lo stesso Tesla prezzo di listino. Il codice aggiunge circa 1.000 km Supercharger sull\'account, se lo usi prima di ordinare. Non è un incentivo statale.',
+  },
+  {
+    q: 'Ecobonus e referral si possono sommare?',
+    a: 'Sì, perché sono indipendenti. L\'incentivo pubblico riduce (se ne hai diritto) quanto versi allo Stato/concessionario secondo le regole del bando. Il referral Tesla non tocca quel calcolo: è un extra di ricarica sul tuo account.',
+  },
+  {
+    q: 'I prezzi in tabella sono ufficiali?',
+    a: `No: sono segnaposto di listino Tesla Italia, verificati a ${verified} e soggetti a variazioni. L'importo che conta è quello del configuratore tesla.com al momento dell'ordine.`,
+  },
+];
+
+const jsonLd = articlePageJsonLd({
+  path: ROUTES.prices,
+  crumbName: 'Prezzi e incentivi',
+  headline: h1,
+  description,
+  about: 'Prezzi Tesla Italia incentivi Model 3 Model Y',
+  faqItems: pageFaq,
+  itemList: {
+    name: 'Listino Tesla Italia (indicativo)',
+    items: rows.map((row) => ({
+      name: `Tesla ${row.model} ${row.version}`,
+      description: `${formatEur(row.listinoEur)}. ${row.note}.`,
+      url: row.model === 'Model Y' ? `${SITE_URL}${ROUTES.modelY}` : `${SITE_URL}${ROUTES.model3}`,
+    })),
+  },
+});
+---
+
+<BaseLayout title={title} description={description} jsonLd={jsonLd}>
+  <article class="section-pad">
+    <div class="wrap max-w-[76ch]">
+      <Breadcrumb
+        items={[{ name: 'Home', path: '/' }, { name: 'Prezzi e incentivi', path: ROUTES.prices }]}
+      />
+      <div class="mt-4">
+        <ArticleMeta reading="Guida · Lettura 7 min" />
+      </div>
+      <h1 class="display-40 m-0 mt-4">{h1}</h1>
+      <p class="body-18 m-0 mt-6">
+        Il Tesla prezzo in Italia è il listino del configuratore: Model 3 e Model Y hanno
+        versioni diverse, gli incentivi pubblici (Ecobonus o analoghi) sono indipendenti e,
+        se ne hai diritto, si sommano al referral. Il codice non sconta l'auto: paghi lo
+        stesso listino e ricevi 1.000 km Supercharger, se lo applichi prima di ordinare.
+      </p>
+
+      <div class="mt-8">
+        <Callout title="Come sommare incentivi e referral">
+          <p class="m-0">
+            Prima verifica su Tesla.com il listino della versione. Poi, se rientri nel bando,
+            calcola l'incentivo pubblico (ISEE, tetti, immatricolazione). Infine apri il link
+            referral <em>prima</em> di confermare: stesso prezzo, in più 1.000 km. I due canali
+            non si escludono.
+          </p>
+        </Callout>
+      </div>
+
+      <div class="mt-8">
+        <KeyPoints
+          items={[
+            'Il listino Tesla e gli incentivi statali sono due conti distinti.',
+            'Il referral non è uno sconto: è 1.000 km Supercharger, stesso prezzo.',
+            'Usa il codice prima dell\'ordine, anche in pronta consegna.',
+            `Tabella listino: verifica a ${verified}, soggetta a variazioni Tesla.`,
+          ]}
+        />
+      </div>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">Qual è il Tesla Model 3 prezzo (e con incentivi)?</h2>
+        <p class="body-18 m-0 mt-4">
+          Il <strong>Tesla Model 3 prezzo</strong> parte dalla RWD/Standard e sale su Long Range e
+          Performance. Il <strong>Tesla Model 3 prezzo con incentivi</strong> dipende dal bando
+          pubblico in vigore (Ecobonus o misura equivalente): ISEE, tipo di veicolo e tetti li
+          decide lo Stato, non Tesla. Il referral non entra in quel calcolo. Autonomia e Highland:{' '}
+          <a href={ROUTES.model3} class="text-brand">pagina Model 3</a>.
+        </p>
+      </section>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">Qual è il Tesla Model Y prezzo?</h2>
+        <p class="body-18 m-0 mt-4">
+          Il <strong>Tesla Model Y prezzo</strong> segue lo stesso schema a scaglioni: SUV
+          d'ingresso (RWD/Standard), poi Long Range e Performance. Gli incentivi, se spettano,
+          si applicano secondo le regole del bando. Autonomia, Standard e 7 posti:{' '}
+          <a href={ROUTES.modelY} class="text-brand">pagina Model Y</a>.
+        </p>
+      </section>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">Quanto costano Model 3 e Model Y a listino?</h2>
+        <p class="body-16 text-ink-soft m-0 mt-4">
+          {prices.note} Verificato a {verified} ({VERIFIED_DATE}), soggetto a variazioni Tesla.
+        </p>
+        <div class="mt-8 overflow-hidden rounded-[14px] border border-line">
+          <table class="w-full border-collapse text-left">
+            <caption class="sr-only">Listino indicativo Tesla Italia per modello e versione</caption>
+            <thead class="bg-[#F3F3F0] dark:bg-[#252830]">
+              <tr>
+                <th scope="col" class="body-16 font-semibold px-6 py-4 border-b border-line">Modello</th>
+                <th scope="col" class="body-16 font-semibold px-6 py-4 border-b border-line">Versione</th>
+                <th scope="col" class="body-16 font-semibold px-6 py-4 border-b border-line">Listino</th>
+              </tr>
+            </thead>
+            <tbody>
+              {
+                rows.map((row, index) => (
+                  <tr class={index % 2 === 0 ? 'bg-[#FAFAF8] dark:bg-paper' : 'bg-surface'}>
+                    <th scope="row" class="body-16 font-semibold px-6 py-4 border-b border-line">
+                      {row.model}
+                    </th>
+                    <td class="body-16 px-6 py-4 border-b border-line">{row.version}</td>
+                    <td class="body-16 px-6 py-4 border-b border-line">{formatEur(row.listinoEur)}</td>
+                  </tr>
+                ))
+              }
+            </tbody>
+          </table>
+        </div>
+        <p class="caption-14 text-ink-soft m-0 mt-4">
+          Importo che conta: configuratore tesla.com al momento dell'ordine. Se c'è stock, i tempi
+          sono sulla pagina <a href={ROUTES.delivery} class="text-brand">Tesla pronta consegna</a>.
+        </p>
+      </section>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">Gli incentivi pubblici sono cumulabili col referral?</h2>
+        <p class="body-18 m-0 mt-4">
+          Sì: Ecobonus (o la misura vigente) e referral Tesla non si escludono. L'incentivo
+          pubblico, se ne hai diritto, segue ISEE, tetti e scadenze di immatricolazione (spesso
+          270 giorni). Il referral è un'offerta Tesla: stesso listino, 1.000 km Supercharger,
+          codice prima dell'ordine. Non sostituisce lo sconto statale e non lo modifica.
+        </p>
+        <p class="body-18 m-0 mt-4">
+          Per i dettagli del bando consulta le fonti ufficiali (MIMIT / portale incentivi). Qui
+          non pubblichiamo importi di incentivo: cambiano spesso e dipendono dalla tua situazione.
+        </p>
+      </section>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">Come si usa il codice senza alzare il prezzo?</h2>
+        <p class="body-18 m-0 mt-4">
+          Apri il <a href={ROUTES.guide} class="text-brand">link referral</a>, configura Model 3 o
+          Model Y, conferma nella stessa sessione. Dopo l'invio Tesla non associa più il codice.
+          Vale anche sullo stock. Procedura passo passo:{' '}
+          <a href={ROUTES.guide} class="text-brand">come funziona il referral Tesla</a>.
+        </p>
+      </section>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">Domande su prezzi e incentivi</h2>
+        <div class="mt-6">
+          <Faq items={pageFaq} />
+        </div>
+      </section>
+
+      <div class="mt-16">
+        <CtaBanner
+          title="Stesso prezzo, in più 1.000 km Supercharger"
+          summary="Il listino resta quello di Tesla.com. Applica il codice prima di ordinare, anche se usi gli incentivi."
+        />
+      </div>
+    </div>
+  </article>
+</BaseLayout>

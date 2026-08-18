@@ -35,6 +35,23 @@ export interface ModelVersion {
   note: string;
 }
 
+export interface SpecRow {
+  label: string;
+  value: string;
+}
+
+export interface IntentSection {
+  id: string;
+  h2: string;
+  answer: string;
+  body?: string;
+  tableCaption?: string;
+  tableHeaders?: string[];
+  tableRows?: SpecRow[];
+  relatedHref?: string;
+  relatedLabel?: string;
+}
+
 export interface Model {
   slug: string;
   variant: string;
@@ -43,6 +60,7 @@ export interface Model {
   benefit: string;
   benefitShort: string;
   intro: string;
+  quickAnswer: string;
   why: string;
   bullets: string[];
   versions: ModelVersion[];
@@ -57,7 +75,15 @@ export interface Model {
   h1: string;
   keyPoints: string[];
   deliveryLead: string;
+  intentSections: IntentSection[];
   faq: FaqItem[];
+}
+
+export interface PriceRow {
+  model: string;
+  version: string;
+  listinoEur: number;
+  note: string;
 }
 
 export interface Crumb {
