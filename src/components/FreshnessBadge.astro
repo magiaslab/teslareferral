@@ -1,0 +1,14 @@
+---
+import { formatVerifiedDateIt, VERIFIED_DATE } from '../consts';
+
+interface Props {
+  prefix?: string;
+}
+
+const { prefix = 'Ultimo aggiornamento:' } = Astro.props;
+const label = formatVerifiedDateIt(VERIFIED_DATE);
+---
+
+<p class="caption-14 text-ink-soft m-0">
+  <time datetime={VERIFIED_DATE}>{prefix} {label}</time>
+</p>

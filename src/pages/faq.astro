@@ -1,0 +1,64 @@
+---
+import ArticleMeta from '../components/ArticleMeta.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import Callout from '../components/Callout.astro';
+import CtaBanner from '../components/CtaBanner.astro';
+import faq from '../content/faq.json';
+import { ROUTES } from '../consts';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { faqPageJsonLd } from '../lib/schema';
+import type { FaqItem } from '../types';
+
+const title = 'FAQ referral Tesla Italia: codice, pronta consegna, costi';
+const description =
+  'FAQ referral Tesla Italia 2026: come funziona, quanto costa, pronta consegna, Model 3 e Model Y, scadenze crediti e cumulabilità con Ecobonus.';
+---
+
+<BaseLayout title={title} description={description} jsonLd={faqPageJsonLd()}>
+  <article class="section-pad">
+    <div class="wrap max-w-[76ch]">
+      <Breadcrumb items={[{ name: 'Home', path: '/' }, { name: 'FAQ', path: ROUTES.faq }]} />
+      <div class="mt-4">
+        <ArticleMeta reading="FAQ" />
+      </div>
+      <h1 class="display-40 m-0 mt-4">FAQ referral Tesla Italia 2026</h1>
+
+      <div class="mt-8">
+        <Callout title="In breve">
+          <p class="m-0">
+            Il referral Tesla è il programma ufficiale «Segnala e guadagna»: su Model 3 e Model Y
+            nuove aggiunge circa 1.000 km Supercharger, allo stesso prezzo di listino, se il link
+            è applicato prima dell'ordine. Questo sito è indipendente.
+          </p>
+        </Callout>
+      </div>
+
+      <h2 class="heading-28 m-0 mt-12">Risposte aggiornate</h2>
+      {
+        (faq as FaqItem[]).map((item) => (
+          <section class="mt-10">
+            <h3 class="heading-22 m-0">{item.q}</h3>
+            <p class="body-18 m-0 mt-3">{item.a}</p>
+          </section>
+        ))
+      }
+
+      <p class="body-16 m-0 mt-12">
+        Approfondimenti:{' '}
+        <a href={ROUTES.guide} class="text-brand">come funziona</a>
+        {' · '}
+        <a href={ROUTES.modelY} class="text-brand">Model Y</a>
+        {' · '}
+        <a href={ROUTES.model3} class="text-brand">Model 3</a>
+        {' · '}
+        <a href={ROUTES.charging} class="text-brand">ricarica LFP/NMC</a>
+        {' · '}
+        <a href={ROUTES.delivery} class="text-brand">Tesla pronta consegna</a>.
+      </p>
+
+      <div class="mt-16">
+        <CtaBanner />
+      </div>
+    </div>
+  </article>
+</BaseLayout>

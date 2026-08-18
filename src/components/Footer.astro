@@ -1,0 +1,89 @@
+---
+import { BRAND, DOMAIN, NAV_LINKS, ROUTES, SILO_LINKS, WHATSAPP_URL } from '../consts';
+import Disclaimer from './Disclaimer.astro';
+import FreshnessBadge from './FreshnessBadge.astro';
+---
+
+<footer class="border-t border-line bg-paper">
+  <div class="wrap py-12 md:py-16">
+    <div class="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
+      <div>
+        <a href="/" class="flex items-center gap-3 no-underline text-ink min-h-11">
+          <span
+            class="flex h-[30px] w-[30px] items-center justify-center rounded-[6px] bg-[#0E7C66] font-display text-[18px] font-bold leading-none text-white"
+            aria-hidden="true"
+          >
+            C
+          </span>
+          <span class="font-display text-lg font-bold tracking-tight">{BRAND}</span>
+        </a>
+        <p class="body-16 text-ink-soft m-0 mt-4">
+          {DOMAIN} — a cura di Alessandro Cipriani, Magias Lab
+        </p>
+        <div class="mt-3">
+          <FreshnessBadge />
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
+        <div>
+          <p class="caption-14 font-semibold m-0 mb-2">Referral</p>
+          <ul class="flex flex-col list-none m-0 p-0">
+            {
+              NAV_LINKS.map((link) => (
+                <li>
+                  <a href={link.href} class="inline-flex items-center min-h-11 caption-14 text-ink no-underline hover:text-brand">
+                    {link.label}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+        <div>
+          <p class="caption-14 font-semibold m-0 mb-2">Guide</p>
+          <ul class="flex flex-col list-none m-0 p-0">
+            {
+              SILO_LINKS.map((link) => (
+                <li>
+                  <a href={link.href} class="inline-flex items-center min-h-11 caption-14 text-ink no-underline hover:text-brand">
+                    {link.label}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+        <div>
+          <p class="caption-14 font-semibold m-0 mb-2">Note legali</p>
+          <ul class="flex flex-col list-none m-0 p-0">
+            <li>
+              <a href={ROUTES.privacy} class="inline-flex items-center min-h-11 caption-14 text-ink no-underline hover:text-brand">
+                Privacy policy
+              </a>
+            </li>
+            <li>
+              <a href={ROUTES.cookie} class="inline-flex items-center min-h-11 caption-14 text-ink no-underline hover:text-brand">
+                Cookie policy
+              </a>
+            </li>
+            <li>
+              <a
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noopener"
+                class="inline-flex items-center min-h-11 caption-14 text-ink no-underline hover:text-brand"
+              >
+                Contatti
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-8 pt-8 border-t border-line">
+      <Disclaimer />
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,218 @@
+---
+import Button from '../components/Button.astro';
+import Callout from '../components/Callout.astro';
+import CtaBanner from '../components/CtaBanner.astro';
+import Faq from '../components/Faq.astro';
+import KeyPoints from '../components/KeyPoints.astro';
+import ModelTable from '../components/ModelTable.astro';
+import PhotoSlot from '../components/PhotoSlot.astro';
+import Pill from '../components/Pill.astro';
+import Step from '../components/Step.astro';
+import faq from '../content/faq.json';
+import {
+  formatVerifiedDateIt,
+  HOW_TO_STEPS,
+  OWNER,
+  REFERRAL_URL,
+  ROUTES,
+  VERIFIED_DATE,
+  WHATSAPP_URL,
+} from '../consts';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { homeJsonLd } from '../lib/schema';
+import type { FaqItem } from '../types';
+
+const verified = formatVerifiedDateIt(VERIFIED_DATE);
+const title = 'Referral Tesla Italia: codice e 1.000 km Supercharger';
+const description =
+  'Referral Tesla Italia 2026: con un codice referral valido ottieni 1.000 km Supercharger gratis su Model 3 e Model Y, stesso prezzo di listino. Prima di ordinare.';
+const homeFaq = (faq as FaqItem[]).slice(0, 5);
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  jsonLd={homeJsonLd()}
+  prefetch={[ROUTES.guide, ROUTES.delivery]}
+>
+  <section class="section-pad">
+    <div class="wrap grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6 items-center">
+      <div class="md:col-span-7">
+        <Pill variant="brand">⚡ Proprietario Model Y verificato</Pill>
+        <h1 class="display-56 m-0 mt-6">
+          Codice referral Tesla 2026: 1.000 km di Supercharger gratis
+        </h1>
+        <p class="body-18 text-ink-soft m-0 mt-6 max-w-[40rem]">
+          Il <strong class="text-ink font-semibold">referral Tesla in Italia</strong> non è uno
+          sconto sul listino: paghi lo stesso prezzo e, in più, ricevi{' '}
+          <span class="num-hl">1.000 km di ricariche gratuite</span>
+          {' '}su Model 3 e Model Y, se applichi il codice prima di ordinare.
+        </p>
+        <div class="mt-8 flex flex-col sm:flex-row gap-4">
+          <Button href={REFERRAL_URL} external hero>Ottieni i 1.000 km →</Button>
+          <Button variant="secondary" href={ROUTES.guide}>Come funziona</Button>
+        </div>
+        <p class="caption-14 text-ink-soft m-0 mt-4">
+          <a href={ROUTES.guide} class="text-brand">Come funziona</a>
+          {' · '}
+          <a href={ROUTES.delivery} class="text-brand">Tesla pronta consegna</a>
+          {' · '}
+          <a href={ROUTES.modelY} class="text-brand">Model Y</a>
+          {' · '}
+          <a href={ROUTES.model3} class="text-brand">Model 3</a>
+        </p>
+      </div>
+      <div class="md:col-span-5">
+        <PhotoSlot
+          src="/img/home-hero"
+          aspect="4/3"
+          width={800}
+          height={600}
+          alt="Tesla in ricarica a una stazione Supercharger"
+          caption="I 1.000 km Supercharger del referral partono da qui."
+          priority
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="pb-16 md:pb-24">
+    <div class="wrap grid gap-8">
+      <Callout title="In breve">
+        <p class="m-0">
+          Con un <strong>codice referral Tesla</strong> attivo nel 2026 ricevi{' '}
+          <strong>1.000 km di ricariche Supercharger gratuite</strong> su{' '}
+          <strong>Model 3</strong> e <strong>Model Y</strong>, allo{' '}
+          <strong>stesso prezzo di listino</strong>. Va applicato <strong>prima</strong> di
+          configurare l'auto: non si aggiunge dopo l'ordine.
+        </p>
+        <p class="caption-14 text-ink-soft m-0 mt-4">
+          Verificato ad {verified} · soggetto a variazioni decise da Tesla.
+        </p>
+      </Callout>
+      <KeyPoints
+        items={[
+          '1.000 km Supercharger gratis su Model 3 e Model Y (importo mostrato all\'ordine, soggetto a variazioni Tesla).',
+          'Prezzo identico al listino: il referral non aumenta il costo.',
+          'Vantaggio solo al primo acquisto, con link valido applicato prima dell\'ordine.',
+          'Model S e Model X non sono più idonei (aggiornamento 2026).',
+        ]}
+      />
+    </div>
+  </section>
+
+  <section id="come-funziona" class="section-pad bg-surface">
+    <div class="wrap">
+      <h2 class="heading-28 m-0">Referral Tesla come funziona?</h2>
+      <p class="body-18 text-ink-soft m-0 mt-4 max-w-[40rem]">
+        Dal clic all'ordine su Tesla.com servono pochi minuti. Nessuna registrazione su questo sito.
+      </p>
+      <ol class="mt-12 grid gap-8 list-none m-0 p-0">
+        {
+          HOW_TO_STEPS.map((step, index) => (
+            <Step n={index + 1} title={step.title}>
+              {step.text}
+            </Step>
+          ))
+        }
+      </ol>
+      <p class="body-16 m-0 mt-8">
+        Dettaglio completo nella <a href={ROUTES.guide} class="text-brand">guida al programma Segnala e guadagna</a>.
+      </p>
+    </div>
+  </section>
+
+  <section id="vantaggi" class="section-pad cv-auto">
+    <div class="wrap">
+      <h2 class="heading-28 m-0">Quali modelli Tesla sono idonei al referral nel 2026?</h2>
+      <p class="body-18 text-ink-soft m-0 mt-4">
+        Solo Model 3 e Model Y nuove, acquistate direttamente da Tesla. Il prezzo di listino non cambia.
+      </p>
+      <div class="mt-12">
+        <ModelTable />
+      </div>
+    </div>
+  </section>
+
+  <section id="pronta-consegna" class="section-pad bg-surface cv-auto">
+    <div class="wrap grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-6 items-start">
+      <div class="md:col-span-7">
+        <h2 class="heading-28 m-0">Tesla pronta consegna in Italia: tempi reali</h2>
+        <p class="body-18 text-ink-soft m-0 mt-4">
+          Una <strong class="text-ink font-semibold">Tesla in pronta consegna</strong> (stock) può
+          arrivare in <strong class="text-ink font-semibold">1–2 settimane</strong>. Una
+          configurata da zero si allinea spesso allo sprint di fine trimestre. Il referral va
+          applicato prima dell'ordine anche sullo stock.
+        </p>
+        <p class="body-16 m-0 mt-6">
+          Dettaglio su <a href={ROUTES.delivery} class="text-brand">Tesla pronta consegna, Model Y e Model 3</a>.
+        </p>
+      </div>
+      <div class="md:col-span-5">
+        <Callout title="Stock vs configurata">
+          <p class="m-0">
+            <strong>Tesla pronta consegna</strong>: 1–2 settimane, allestimento fisso.{' '}
+            <strong>Configurata</strong>: attesa spesso a fine trimestre. Stesso referral su{' '}
+            <a href={ROUTES.modelY} class="text-brand">Model Y</a> e{' '}
+            <a href={ROUTES.model3} class="text-brand">Model 3</a>.
+          </p>
+        </Callout>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-pad cv-auto">
+    <div class="wrap grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-6 items-center">
+      <div class="md:col-span-5">
+        <PhotoSlot
+          src="/img/home-trust"
+          aspect="1/1"
+          width={800}
+          height={800}
+          alt="Alessandro Cipriani, proprietario Tesla Model Y verificato"
+          caption="Alessandro con la sua Model Y."
+        />
+      </div>
+      <div class="md:col-span-7">
+        <h2 class="heading-28 m-0">Chi c'è dietro il link referral?</h2>
+        <p class="body-18 text-ink-soft m-0 mt-4">
+          Guido una Tesla Model Y ogni giorno e conosco la ricarica domestica, i
+          Supercharger e la configurazione. Se hai dubbi prima dell'ordine — modello
+          giusto, autonomia reale, wallbox, tariffe di ricarica — ti aiuto
+          gratuitamente, senza impegno. Nessun call center: parli direttamente con me.
+        </p>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <Pill variant="brand">⚡ Proprietario verificato</Pill>
+          <Pill variant="outline">{OWNER}</Pill>
+        </div>
+        <div class="mt-8">
+          <Button variant="secondary" href={WHATSAPP_URL} external>
+            Scrivimi su WhatsApp
+          </Button>
+        </div>
+        <p class="caption-14 text-ink-soft m-0 mt-8 pt-6 border-t border-line">
+          Trasparenza: usando il mio link, tu ricevi il vantaggio e io un piccolo credito
+          Tesla. Nessun costo aggiuntivo per te.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="section-pad cv-auto">
+    <div class="wrap max-w-[840px] mx-auto">
+      <h2 class="heading-28 m-0">Referral Tesla: domande frequenti</h2>
+      <div class="mt-8">
+        <Faq items={homeFaq} />
+      </div>
+      <p class="body-16 m-0 mt-8">
+        Altre risposte (scadenze, Ecobonus, Model S/X) nella <a href={ROUTES.faq} class="text-brand">FAQ completa</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="pb-16 md:pb-24">
+    <div class="wrap">
+      <CtaBanner />
+    </div>
+  </section>
+</BaseLayout>

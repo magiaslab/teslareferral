@@ -1,0 +1,98 @@
+---
+import { BRAND, NAV_LINKS, REFERRAL_URL, SILO_LINKS } from '../consts';
+import Button from './Button.astro';
+
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+---
+
+<header class="sticky top-0 z-50 h-16 border-b border-line bg-paper">
+  <nav class="wrap flex h-16 items-center gap-4" aria-label="Principale">
+    <a href="/" class="flex items-center gap-3 no-underline text-ink shrink-0 min-h-11">
+      <span
+        class="flex h-[30px] w-[30px] items-center justify-center rounded-[6px] bg-[#0E7C66] font-display text-[18px] font-bold leading-none text-white"
+        aria-hidden="true"
+      >
+        C
+      </span>
+      <span class="font-display text-lg font-bold tracking-tight max-[420px]:hidden">{BRAND}</span>
+    </a>
+
+    <ul class="hidden lg:flex items-center gap-5 list-none m-0 p-0 mx-auto">
+      {
+        NAV_LINKS.map((link) => (
+          <li>
+            <a
+              href={link.href}
+              class="inline-flex items-center min-h-11 body-16 text-ink no-underline hover:text-brand"
+              aria-current={path === link.href ? 'page' : undefined}
+            >
+              {link.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="ml-auto flex items-center gap-2 lg:ml-0">
+      <button
+        type="button"
+        id="theme-toggle"
+        class="inline-flex h-11 w-11 items-center justify-center rounded-[10px] text-ink hover:bg-brand-tint"
+        aria-label="Attiva il tema scuro"
+        aria-pressed="false"
+      >
+        <svg class="h-5 w-5 dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+        <svg class="hidden h-5 w-5 dark:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
+        </svg>
+      </button>
+
+      <details class="nav-menu relative lg:hidden">
+        <summary aria-label="Apri il menu">Menu</summary>
+        <ul class="absolute right-0 mt-2 w-56 list-none m-0 p-4 rounded-[14px] border border-line bg-surface shadow-md">
+          {
+            [...NAV_LINKS, ...SILO_LINKS].map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  class="flex items-center min-h-11 body-16 text-ink no-underline"
+                  aria-current={path === link.href ? 'page' : undefined}
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </details>
+
+      <Button href={REFERRAL_URL} external class="!px-3 !text-sm sm:!px-6 sm:!text-base whitespace-nowrap">
+        Ottieni i 1.000 km
+      </Button>
+    </div>
+  </nav>
+</header>
+
+<script is:inline>
+  (function () {
+    var btn = document.getElementById('theme-toggle');
+    if (!btn) return;
+    function sync() {
+      var dark = document.documentElement.classList.contains('dark');
+      btn.setAttribute('aria-label', dark ? 'Attiva il tema chiaro' : 'Attiva il tema scuro');
+      btn.setAttribute('aria-pressed', dark ? 'true' : 'false');
+    }
+    sync();
+    btn.addEventListener('click', function () {
+      var dark = !document.documentElement.classList.contains('dark');
+      document.documentElement.classList.toggle('dark', dark);
+      try {
+        localStorage.setItem('theme', dark ? 'dark' : 'light');
+      } catch (e) {}
+      sync();
+    });
+  })();
+</script>

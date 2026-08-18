@@ -1,0 +1,23 @@
+---
+import type { FaqItem } from '../types';
+
+interface Props {
+  items: FaqItem[];
+  openFirst?: boolean;
+}
+
+const { items, openFirst = true } = Astro.props;
+---
+
+<div class="border-t border-line">
+  {
+    items.map((item, index) => (
+      <details class="faq-item border-b border-line" open={openFirst && index === 0}>
+        <summary>
+          <h3 class="heading-22 m-0 pr-4">{item.q}</h3>
+        </summary>
+        <p class="body-16 text-ink-soft m-0 pb-5 pr-8">{item.a}</p>
+      </details>
+    ))
+  }
+</div>

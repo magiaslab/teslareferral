@@ -1,0 +1,59 @@
+{
+  "trailingSlash": false,
+  "headers": [
+    {
+      "source": "/fonts/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/img/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/favicon.svg",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/guida/come-funziona-il-referral-tesla",
+      "destination": "/come-funziona",
+      "permanent": true
+    },
+    {
+      "source": "/referral-tesla-model-y",
+      "destination": "/model-y",
+      "permanent": true
+    },
+    {
+      "source": "/referral-tesla-model-3",
+      "destination": "/model-3",
+      "permanent": true
+    },
+    {
+      "source": "/referral-tesla-model-s",
+      "destination": "/come-funziona",
+      "permanent": true
+    },
+    {
+      "source": "/referral-tesla-model-x",
+      "destination": "/come-funziona",
+      "permanent": true
+    }
+  ]
+}

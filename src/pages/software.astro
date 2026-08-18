@@ -1,0 +1,141 @@
+---
+import ArticleMeta from '../components/ArticleMeta.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import Callout from '../components/Callout.astro';
+import KeyPoints from '../components/KeyPoints.astro';
+import software from '../content/software.json';
+import { ROUTES } from '../consts';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { articlePageJsonLd } from '../lib/schema';
+import type { FaqItem } from '../types';
+
+const title = 'Grok Tesla e aggiornamento software 2026';
+const description =
+  'Grok Tesla e aggiornamento Tesla 2026: Summer Update 2026.26 (Hey Grok, Preferred Routes, Supercharger Search) e novità dello Spring Update.';
+const h1 = 'Grok Tesla e aggiornamenti software 2026';
+
+const pageFaq: FaqItem[] = [
+  {
+    q: 'Che cos\'è Grok Tesla?',
+    a: 'Grok Tesla è l\'assistente vocale in auto: nelle release 2026 può gestire chiamate, musica e clima, oltre alle domande in linguaggio naturale. La disponibilità dipende da paese, hardware e Premium Connectivity.',
+  },
+  {
+    q: 'Qual è l\'aggiornamento Tesla 2026 più recente?',
+    a: `L'ultimo grande aggiornamento Tesla 2026 è il ${software.latestName} (versione ${software.latestVersion}). Tesla distribuisce due grandi update OTA all'anno.`,
+  },
+  {
+    q: 'FSD v14 è in Italia?',
+    a: 'FSD v14 è citato nelle note di rilascio globali; in Italia restano le funzioni di assistenza alla guida omologate. Verificare nell\'auto e nelle release notes regionali prima di dare per disponibile una funzione.',
+  },
+];
+
+const jsonLd = articlePageJsonLd({
+  path: ROUTES.software,
+  crumbName: 'Software',
+  headline: h1,
+  description,
+  about: 'Grok Tesla e aggiornamento software 2026',
+  faqItems: pageFaq,
+});
+---
+
+<BaseLayout title={title} description={description} jsonLd={jsonLd}>
+  <article class="section-pad">
+    <div class="wrap max-w-[76ch]">
+      <Breadcrumb items={[{ name: 'Home', path: '/' }, { name: 'Software', path: ROUTES.software }]} />
+      <div class="mt-4">
+        <ArticleMeta reading="Note di rilascio · Lettura 6 min" />
+      </div>
+      <h1 class="display-40 m-0 mt-4">{h1}</h1>
+
+      <div class="mt-8">
+        <Callout title="In breve">
+          <p class="m-0">
+            <strong>Grok Tesla</strong> è l'assistente vocale in auto. L'aggiornamento Tesla 2026
+            più recente è il <strong>{software.latestName} (versione {software.latestVersion})</strong>,
+            con Hey Grok (chiamate, musica, clima), Preferred Routes, Automatic Navigation,
+            Traction Control Modes, Set Arrival Energy, Apple Music e Supercharger Search. Tesla
+            distribuisce due grandi update OTA all'anno.
+          </p>
+        </Callout>
+      </div>
+
+      <div class="mt-8">
+        <KeyPoints
+          items={[
+            'Grok Tesla: voce, clima, musica e chiamate, dove disponibile.',
+            `${software.latestName} = versione ${software.latestVersion}.`,
+            software.cadence,
+            'Preferred Routes e Supercharger Search servono i viaggi; il referral copre i km Supercharger.',
+          ]}
+        />
+      </div>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">Che cos'è Grok Tesla?</h2>
+        <p class="body-18 m-0 mt-4">
+          <strong>Grok Tesla</strong> è l'assistente vocale portato in vettura. Nelle release 2026
+          può rispondere in linguaggio naturale e, dove disponibile, gestire chiamate, musica e
+          clima («Hey Grok»). La presenza dipende da paese, hardware e, in alcuni casi, Premium
+          Connectivity: non è un extra del referral e non modifica i 1.000 km Supercharger.
+        </p>
+      </section>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">Aggiornamento Tesla 2026: Summer Update (2026.26)</h2>
+        <p class="body-18 m-0 mt-4">
+          Il Summer Update 2026 è il secondo grande OTA dell'anno. Le novità principali, secondo le
+          release notes Tesla, sono:
+        </p>
+        <ul class="body-18 mt-6 pl-6 grid gap-3">
+          {software.summer.map((item) => <li>{item}</li>)}
+        </ul>
+        <p class="body-18 m-0 mt-4">
+          Preferred Routes e Automatic Navigation riducono i ritocchi al viaggio. Set Arrival Energy
+          e Supercharger Search si legano alla{' '}
+          <a href={ROUTES.charging} class="text-brand">strategia di ricarica</a>: arrivare con il
+          SoC giusto e precondizionare. I km del{' '}
+          <a href={ROUTES.guide} class="text-brand">referral Tesla</a> restano crediti Supercharger,
+          indipendenti dal software.
+        </p>
+      </section>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">Cosa c'era già nello Spring Update 2026?</h2>
+        <p class="body-18 m-0 mt-4">
+          Lo Spring Update ha aperto il ciclo annuale. Tra le voci più citate:
+        </p>
+        <ul class="body-18 mt-6 pl-6 grid gap-3">
+          {software.spring.map((item) => <li>{item}</li>)}
+        </ul>
+        <p class="body-18 m-0 mt-4">
+          Grok, Pet Mode e dashcam 24h dipendono da hardware, paese e (in alcuni casi) Premium
+          Connectivity. FSD v14 è una linea delle note globali: in Italia vale ciò che l'auto
+          mostra come omologato, non il nome della release americana.
+        </p>
+      </section>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">Ogni quanto Tesla aggiorna il software?</h2>
+        <p class="body-18 m-0 mt-4">
+          {software.cadence} In mezzo arrivano patch minori. Per la freshness di questa pagina:
+          aggiornare <code>dateModified</code> a ogni nuova release. I crediti referral e gli
+          <a href={ROUTES.delivery} class="text-brand">sprint di consegna</a> non dipendono dalla
+          versione software.
+        </p>
+      </section>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">Domande frequenti sul software Tesla</h2>
+        {
+          pageFaq.map((item) => (
+            <div class="mt-8">
+              <h3 class="heading-22 m-0">{item.q}</h3>
+              <p class="body-18 m-0 mt-3">{item.a}</p>
+            </div>
+          ))
+        }
+      </section>
+    </div>
+  </article>
+</BaseLayout>

@@ -1,0 +1,21 @@
+---
+interface Props {
+  title: string;
+  class?: string;
+}
+
+const { title, class: className = '' } = Astro.props;
+---
+
+<aside
+  class:list={[
+    'rounded-[14px] bg-brand-tint p-7',
+    className,
+  ]}
+  style="border-left: 3px solid var(--color-brand);"
+>
+  <h2 class="heading-22 text-brand-strong m-0">{title}</h2>
+  <div class="body-16 text-ink mt-3">
+    <slot />
+  </div>
+</aside>

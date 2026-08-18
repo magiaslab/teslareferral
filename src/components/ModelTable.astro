@@ -1,0 +1,61 @@
+---
+import { formatVerifiedDateIt, VERIFIED_DATE } from '../consts';
+import type { Model } from '../types';
+import modelsData from '../content/models.json';
+
+interface Props {
+  models?: Model[];
+  footnote?: string;
+}
+
+const defaultFootnote = `Dati verificati ad ${formatVerifiedDateIt(VERIFIED_DATE)}, soggetti a variazioni decise da Tesla. Solo veicoli nuovi acquistati direttamente da Tesla. Model S e Model X non sono più idonei nel 2026.`;
+const { models = modelsData as Model[], footnote = defaultFootnote } = Astro.props;
+---
+
+<div>
+  <div class="hidden sm:block overflow-hidden rounded-[14px] border border-line">
+    <table class="w-full border-collapse text-left">
+      <caption class="sr-only">Vantaggio referral Tesla per modello idoneo nel 2026</caption>
+      <thead class="bg-[#F3F3F0] dark:bg-[#252830]">
+        <tr>
+          <th scope="col" class="body-16 font-semibold px-6 py-4 border-b border-line">Modello</th>
+          <th scope="col" class="body-16 font-semibold px-6 py-4 border-b border-line">Vantaggio</th>
+          <th scope="col" class="body-16 font-semibold px-6 py-4 border-b border-line">Note</th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          models.map((model, index) => (
+            <tr class={index % 2 === 0 ? 'bg-[#FAFAF8] dark:bg-paper' : 'bg-surface'}>
+              <th scope="row" class="body-16 font-semibold px-6 py-4 border-b border-line">
+                <a href={`/${model.slug}`} class="text-brand hover:underline">
+                  {model.name}
+                </a>
+              </th>
+              <td class="body-16 px-6 py-4 border-b border-line">{model.benefit}</td>
+              <td class="body-16 text-ink-soft px-6 py-4 border-b border-line">{model.tableNote}</td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <ul class="sm:hidden grid gap-4 list-none m-0 p-0">
+    {
+      models.map((model) => (
+        <li class="bg-surface border border-line rounded-[14px] p-7 shadow-sm">
+          <a href={`/${model.slug}`} class="heading-22 text-brand no-underline">
+            {model.name}
+          </a>
+          <p class="body-16 m-0 mt-3">
+            <span class="font-semibold">Vantaggio:</span> {model.benefit}
+          </p>
+          <p class="caption-14 text-ink-soft m-0 mt-2">{model.tableNote}</p>
+        </li>
+      ))
+    }
+  </ul>
+
+  <p class="caption-14 text-ink-soft m-0 mt-4">{footnote}</p>
+</div>

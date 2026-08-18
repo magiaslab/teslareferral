@@ -1,0 +1,40 @@
+---
+import { BRAND, DOMAIN } from '../consts';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const title = `Cookie policy — ${BRAND}`;
+const description = `${BRAND} (${DOMAIN}) non usa cookie di tracciamento. La preferenza del tema è in localStorage.`;
+---
+
+<BaseLayout title={title} description={description}>
+  <article class="section-pad">
+    <div class="wrap max-w-[76ch]">
+      <h1 class="display-40 m-0">Cookie policy</h1>
+      <p class="caption-14 text-ink-soft m-0 mt-4">
+        Testo di lavoro, da far revisionare. Stato attuale: nessun cookie di tracciamento.
+      </p>
+
+      <h2 class="heading-28 m-0 mt-12">Cookie in uso</h2>
+      <p class="body-18 m-0 mt-4">
+        {DOMAIN} non imposta cookie di profilazione, marketing o analytics. Non è
+        mostrato un banner cookie perché non vengono letti o scritti cookie non
+        necessari.
+      </p>
+
+      <h2 class="heading-28 m-0 mt-12">Archiviazione locale</h2>
+      <p class="body-18 m-0 mt-4">
+        Se si cambia il tema (chiaro/scuro), la scelta è salvata in
+        <code>localStorage</code> con la chiave <code>theme</code>. Serve solo a
+        ricordare la preferenza al visitatore successivo. Si può cancellare dai dati
+        di navigazione del browser.
+      </p>
+
+      <h2 class="heading-28 m-0 mt-12">Terze parti</h2>
+      <p class="body-18 m-0 mt-4">
+        Cliccando il link referral si lascia questo sito e si apre tesla.com. Cliccando
+        su WhatsApp si apre wa.me. Quei servizi possono impostare propri cookie, secondo
+        le loro policy.
+      </p>
+    </div>
+  </article>
+</BaseLayout>

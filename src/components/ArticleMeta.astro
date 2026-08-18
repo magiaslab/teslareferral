@@ -1,0 +1,15 @@
+---
+import { OWNER, VERIFIED_DATE, formatVerifiedDateIt } from '../consts';
+
+interface Props {
+  reading?: string;
+}
+
+const { reading } = Astro.props;
+const verified = formatVerifiedDateIt(VERIFIED_DATE);
+---
+
+<p class="caption-14 text-ink-soft m-0">
+  {reading && <>{reading} · </>}
+  Aggiornata ad {verified} · Autore: {OWNER} (proprietario Model Y verificato)
+</p>

@@ -1,0 +1,38 @@
+---
+interface Props {
+  src: string;
+  aspect: '4/3' | '1/1';
+  caption?: string;
+  width: number;
+  height: number;
+  alt: string;
+  priority?: boolean;
+}
+
+const { src, aspect, caption, width, height, alt, priority = false } = Astro.props;
+const ratio = aspect === '1/1' ? '1 / 1' : '4 / 3';
+const webp = `${src}.webp`;
+const jpg = `${src}.jpg`;
+---
+
+<figure class="m-0">
+  <picture>
+    <source srcset={webp} type="image/webp" />
+    <img
+      src={jpg}
+      alt={alt}
+      width={width}
+      height={height}
+      decoding="async"
+      fetchpriority={priority ? 'high' : 'low'}
+      loading={priority ? 'eager' : 'lazy'}
+      class="w-full rounded-[14px] object-cover"
+      style={`aspect-ratio: ${ratio};`}
+    />
+  </picture>
+  {
+    caption && (
+      <figcaption class="caption-14 text-ink-soft mt-3 m-0">{caption}</figcaption>
+    )
+  }
+</figure>

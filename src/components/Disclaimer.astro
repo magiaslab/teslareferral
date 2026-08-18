@@ -1,0 +1,13 @@
+---
+import { DISCLAIMER } from '../consts';
+
+interface Props {
+  class?: string;
+}
+
+const { class: className = '' } = Astro.props;
+---
+
+<p class:list={['caption-14 text-ink-soft m-0', className]}>
+  {DISCLAIMER}
+</p>

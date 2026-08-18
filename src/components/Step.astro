@@ -1,0 +1,23 @@
+---
+interface Props {
+  n: number;
+  title: string;
+}
+
+const { n, title } = Astro.props;
+---
+
+<li class="flex gap-4 md:gap-6">
+  <span
+    class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-brand-tint font-display text-lg font-bold text-brand-strong"
+    aria-hidden="true"
+  >
+    {n}
+  </span>
+  <div>
+    <h3 class="heading-22 m-0">{title}</h3>
+    <p class="body-16 text-ink-soft m-0 mt-2">
+      <slot />
+    </p>
+  </div>
+</li>

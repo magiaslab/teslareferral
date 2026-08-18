@@ -1,0 +1,92 @@
+---
+import Footer from '../components/Footer.astro';
+import Nav from '../components/Nav.astro';
+import { BRAND, OG_IMAGE_PATH, SITE_URL } from '../consts';
+import { absoluteUrl } from '../lib/schema';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  jsonLd?: unknown;
+  ogImage?: string;
+  prefetch?: readonly string[];
+}
+
+const {
+  title,
+  description,
+  jsonLd,
+  ogImage = OG_IMAGE_PATH,
+  prefetch = [],
+} = Astro.props;
+
+const canonical = absoluteUrl(Astro.url.pathname);
+const fullTitle = title.includes(BRAND) ? title : `${title}`;
+const ogAbsolute = new URL(ogImage, SITE_URL).href;
+---
+
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script is:inline>
+      (function () {
+        try {
+          var stored = localStorage.getItem('theme');
+          var theme =
+            stored === 'dark' || stored === 'light'
+              ? stored
+              : window.matchMedia('(prefers-color-scheme: dark)').matches
+                ? 'dark'
+                : 'light';
+          document.documentElement.classList.toggle('dark', theme === 'dark');
+        } catch (e) {}
+      })();
+    </script>
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="it-IT" href={canonical} />
+    <link rel="alternate" hreflang="x-default" href={canonical} />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#FAFAF8" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="it_IT" />
+    <meta property="og:site_name" content={BRAND} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogAbsolute} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogAbsolute} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link
+      rel="preload"
+      href="/fonts/space-grotesk-700.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="preload" href="/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin />
+    {prefetch.map((href) => <link rel="prefetch" href={href} />)}
+    {
+      jsonLd && (
+        <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+      )
+    }
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <a class="skip-link" href="#contenuto">Salta al contenuto</a>
+    <Nav />
+    <main id="contenuto" class="flex-1">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

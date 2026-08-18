@@ -1,0 +1,387 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-ink: #14151a;
+  --color-ink-soft: #3a3d46;
+  --color-paper: #fafaf8;
+  --color-surface: #ffffff;
+  --color-line: #e6e5e0;
+  --color-brand: #0e7c66;
+  --color-brand-strong: #0a5f4e;
+  --color-brand-tint: #e6f4ef;
+  --color-highlight: #f2c230;
+  --color-error: #c0392b;
+
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  --radius-btn: 10px;
+  --radius-card: 14px;
+
+  --shadow-sm: 0 1px 2px rgba(20, 21, 26, 0.06);
+  --shadow-md: 0 4px 16px rgba(20, 21, 26, 0.07);
+  --shadow-lg: 0 12px 32px rgba(20, 21, 26, 0.1);
+}
+
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("/fonts/space-grotesk-600.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("/fonts/space-grotesk-700.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/inter-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/inter-600.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@layer base {
+  html {
+    color-scheme: light;
+    scroll-behavior: smooth;
+    font-synthesis: none;
+  }
+
+  html.dark {
+    color-scheme: dark;
+    --color-paper: #14151a;
+    --color-surface: #1c1e24;
+    --color-line: #2c2f37;
+    --color-ink: #f2f2f0;
+    --color-ink-soft: #9ba0ab;
+    --color-brand: #2fa98d;
+    --color-brand-strong: #2fa98d;
+    --color-brand-tint: #16362f;
+  }
+
+  body {
+    margin: 0;
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.6;
+    font-weight: 400;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brand);
+    outline-offset: 3px;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
+  }
+}
+
+@layer components {
+  .display-56 {
+    font-family: var(--font-display);
+    font-size: 38px;
+    line-height: 1.05;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+  }
+
+  .display-40 {
+    font-family: var(--font-display);
+    font-size: 30px;
+    line-height: 1.15;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+  }
+
+  .heading-28 {
+    font-family: var(--font-display);
+    font-size: 28px;
+    line-height: 1.25;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+
+  .heading-22 {
+    font-family: var(--font-display);
+    font-size: 22px;
+    line-height: 1.35;
+    font-weight: 600;
+    text-wrap: balance;
+  }
+
+  .body-18 {
+    font-family: var(--font-sans);
+    font-size: 18px;
+    line-height: 1.6;
+    font-weight: 400;
+  }
+
+  .body-16 {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.6;
+    font-weight: 400;
+  }
+
+  .caption-14 {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    line-height: 1.5;
+    font-weight: 400;
+  }
+
+  .num-hl {
+    background: linear-gradient(transparent 62%, var(--color-highlight) 62%);
+    font-weight: 600;
+  }
+
+  .skip-link {
+    position: absolute;
+    left: 16px;
+    top: -100px;
+    z-index: 100;
+    background: var(--color-brand);
+    color: #fff;
+    font-weight: 600;
+    min-height: 44px;
+    padding: 8px 16px;
+    border-radius: 10px;
+  }
+
+  .skip-link:focus {
+    top: 16px;
+    color: #fff;
+  }
+
+  html.dark .skip-link {
+    background: #2fa98d;
+    color: #14151a;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 48px;
+    min-width: 44px;
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-family: var(--font-sans);
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.25;
+    text-decoration: none;
+    border: 1px solid transparent;
+    transition: background-color 150ms ease;
+    cursor: pointer;
+  }
+
+  .btn-hero {
+    min-height: 52px;
+  }
+
+  .btn-primary {
+    background: var(--color-brand);
+    color: #fff;
+  }
+
+  .btn-primary:hover {
+    background: var(--color-brand-strong);
+  }
+
+  html.dark .btn-primary {
+    background: #2fa98d;
+    color: #14151a;
+  }
+
+  html.dark .btn-primary:hover {
+    background: #27987f;
+  }
+
+  .btn-primary-on-dark {
+    background: #2fa98d;
+    color: #14151a;
+  }
+
+  .btn-primary-on-dark:hover {
+    background: #27987f;
+  }
+
+  .btn-secondary {
+    background: var(--color-surface);
+    color: var(--color-ink);
+    border-color: var(--color-ink);
+  }
+
+  .btn-secondary:hover {
+    background: #f1f1ed;
+  }
+
+  html.dark .btn-secondary:hover {
+    background: #252830;
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--color-brand);
+    padding-inline: 16px;
+  }
+
+  .btn-ghost:hover {
+    background: var(--color-brand-tint);
+  }
+
+  .btn-on-dark {
+    background: transparent;
+    color: #f2f2f0;
+    border-color: #4a4d55;
+  }
+
+  .btn-on-dark:hover {
+    background: #1c1e24;
+  }
+
+  .btn-disabled {
+    background: #ededed;
+    color: #8c8f97;
+    border-color: transparent;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  .section-pad {
+    padding-block: 64px;
+  }
+
+  .wrap {
+    max-width: 1120px;
+    margin-inline: auto;
+    padding-inline: 20px;
+  }
+
+  .faq-item > summary {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    min-height: 56px;
+    cursor: pointer;
+    padding-block: 12px;
+  }
+
+  .faq-item > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-item > summary::after {
+    content: "+";
+    color: var(--color-brand);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  .faq-item[open] > summary::after {
+    content: "−";
+  }
+
+  .nav-menu > summary {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    min-width: 44px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+  }
+
+  .nav-menu > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .cv-auto {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 480px;
+  }
+}
+
+@media (min-width: 768px) {
+  .display-56 {
+    font-size: 56px;
+  }
+
+  .display-40 {
+    font-size: 40px;
+  }
+
+  .section-pad {
+    padding-block: 96px;
+  }
+
+  .wrap {
+    padding-inline: 32px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

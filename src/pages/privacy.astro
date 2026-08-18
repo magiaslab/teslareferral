@@ -1,0 +1,56 @@
+---
+import { BRAND, DOMAIN, OWNER, WHATSAPP_URL } from '../consts';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const title = `Privacy policy — ${BRAND}`;
+const description = `Informativa privacy di ${BRAND} (${DOMAIN}). Titolare: ${OWNER}. Nessun cookie di tracciamento.`;
+---
+
+<BaseLayout title={title} description={description}>
+  <article class="section-pad">
+    <div class="wrap max-w-[76ch]">
+      <h1 class="display-40 m-0">Privacy policy</h1>
+      <p class="caption-14 text-ink-soft m-0 mt-4">
+        Testo di lavoro, da far revisionare. Nessun cookie di tracciamento è in uso.
+      </p>
+
+      <h2 class="heading-28 m-0 mt-12">Titolare del trattamento</h2>
+      <p class="body-18 m-0 mt-4">
+        Il titolare è Alessandro Cipriani, Magias Lab, per il sito {DOMAIN} ({BRAND}).
+        Per richieste: <a href={WHATSAPP_URL} class="text-brand" target="_blank" rel="noopener">WhatsApp</a>.
+      </p>
+
+      <h2 class="heading-28 m-0 mt-12">Dati trattati</h2>
+      <p class="body-18 m-0 mt-4">
+        Questo sito è statico. Non richiede un account e non raccoglie anagrafiche
+        tramite form. Se si scrive in privato (WhatsApp), i dati dello scambio sono
+        trattati solo per rispondere alla richiesta.
+      </p>
+
+      <h2 class="heading-28 m-0 mt-12">Preferenza sul tema</h2>
+      <p class="body-18 m-0 mt-4">
+        L'eventuale scelta del tema chiaro o scuro è salvata in <code>localStorage</code> sul
+        dispositivo. Non è un cookie e non viene inviata a un server di {BRAND}.
+      </p>
+
+      <h2 class="heading-28 m-0 mt-12">Analytics</h2>
+      <p class="body-18 m-0 mt-4">
+        Non è attivo alcun strumento di analytics. Se in futuro venisse aggiunto, sarà
+        una soluzione cookieless (Plausible o Umami) e questa pagina verrà aggiornata.
+      </p>
+
+      <h2 class="heading-28 m-0 mt-12">Link esterni</h2>
+      <p class="body-18 m-0 mt-4">
+        Il link referral apre tesla.com, gestito da Tesla, Inc. WhatsApp è gestito da
+        Meta. I trattamenti su quei siti seguono le rispettive informative.
+      </p>
+
+      <h2 class="heading-28 m-0 mt-12">Diritti</h2>
+      <p class="body-18 m-0 mt-4">
+        Per accesso, rettifica o cancellazione dei dati eventualmente scambiati in
+        privato si può scrivere al contatto sopra. Il Garante per la protezione dei
+        dati personali è l'autorità di controllo in Italia.
+      </p>
+    </div>
+  </article>
+</BaseLayout>

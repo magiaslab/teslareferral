@@ -1,0 +1,198 @@
+---
+import ArticleMeta from './ArticleMeta.astro';
+import Breadcrumb from './Breadcrumb.astro';
+import Button from './Button.astro';
+import Callout from './Callout.astro';
+import Card from './Card.astro';
+import CtaBanner from './CtaBanner.astro';
+import KeyPoints from './KeyPoints.astro';
+import PhotoSlot from './PhotoSlot.astro';
+import {
+  formatVerifiedDateIt,
+  HOW_TO_STEPS,
+  REFERRAL_URL,
+  ROUTES,
+  VERIFIED_DATE,
+} from '../consts';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { modelJsonLd } from '../lib/schema';
+import type { Model } from '../types';
+
+interface Props {
+  model: Model;
+}
+
+const { model } = Astro.props;
+const isDev = import.meta.env.DEV;
+const verified = formatVerifiedDateIt(VERIFIED_DATE);
+const hasEstimate =
+  model.estimateEur !== null && model.kwhPer100km !== null && model.energyPriceEur !== null;
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Come funziona', path: ROUTES.guide },
+  { name: model.name, path: `/${model.slug}` },
+];
+
+function formatEur(value: number): string {
+  return new Intl.NumberFormat('it-IT', {
+    style: 'currency',
+    currency: 'EUR',
+    maximumFractionDigits: 0,
+  }).format(value);
+}
+---
+
+<BaseLayout title={model.seoTitle} description={model.seoDescription} jsonLd={modelJsonLd(model)}>
+  <article class="section-pad">
+    <div class="wrap">
+      <Breadcrumb items={crumbs} />
+      {
+        isDev && (
+          <p class="caption-14 text-ink-soft mt-4 m-0">Template pagina-modello (solo in sviluppo)</p>
+        )
+      }
+      <div class="mt-4">
+        <ArticleMeta reading={`Referral ${model.name}`} />
+      </div>
+
+      <div class="mt-6 grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-6 items-start">
+        <div class="md:col-span-7">
+          <h1 class="display-40 m-0">{model.h1}</h1>
+          <div class="mt-8">
+            <Callout title="In breve">
+              <p class="m-0">{model.intro}</p>
+              <p class="caption-14 text-ink-soft m-0 mt-4">
+                Verificato ad {verified} · soggetto a variazioni decise da Tesla.
+              </p>
+            </Callout>
+          </div>
+          <div class="mt-8 flex flex-col sm:flex-row gap-4">
+            <Button href={REFERRAL_URL} external hero>Ottieni i 1.000 km →</Button>
+            <Button variant="ghost" href="#faq-modello">FAQ del modello</Button>
+          </div>
+        </div>
+        <div class="md:col-span-5">
+          <PhotoSlot
+            src={model.photoSrc}
+            aspect="4/3"
+            width={800}
+            height={600}
+            alt={model.photoAlt}
+          />
+        </div>
+      </div>
+
+      <div class="mt-12">
+        <KeyPoints items={model.keyPoints} />
+      </div>
+
+      <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+        <Card>
+          <p class="caption-14 text-ink-soft m-0">Vantaggio</p>
+          <p class="heading-22 m-0 mt-2">{model.benefit}</p>
+        </Card>
+        <Card>
+          <p class="caption-14 text-ink-soft m-0">Costo aggiuntivo</p>
+          <p class="heading-22 m-0 mt-2">Nessuno</p>
+        </Card>
+        <Card>
+          <p class="caption-14 text-ink-soft m-0">Quando applicarlo</p>
+          <p class="heading-22 m-0 mt-2">Prima dell'ordine</p>
+        </Card>
+      </div>
+
+      <section class="mt-16 max-w-[76ch]">
+        <h2 class="heading-28 m-0">Che cos'è la {model.name} {model.codename}?</h2>
+        <p class="body-18 m-0 mt-4">{model.why}</p>
+        <ul class="body-18 mt-6 pl-6 grid gap-3">
+          {model.bullets.map((bullet) => <li>{bullet}</li>)}
+        </ul>
+      </section>
+
+      <section class="mt-16 max-w-[76ch]">
+        <h2 class="heading-28 m-0">Quali versioni della {model.name} ricevono i 1.000 km?</h2>
+        <p class="body-18 m-0 mt-4">
+          Tutte le versioni nuove acquistate da Tesla. La chimica della batteria cambia la strategia
+          di ricarica quotidiana, non il referral: dettagli nella{' '}
+          <a href={ROUTES.charging} class="text-brand">guida LFP vs NMC</a>.
+        </p>
+        <div class="mt-8 overflow-hidden rounded-[14px] border border-line">
+          <table class="w-full border-collapse text-left">
+            <caption class="sr-only">Versioni {model.name} e vantaggio referral</caption>
+            <thead class="bg-[#F3F3F0] dark:bg-[#252830]">
+              <tr>
+                <th scope="col" class="body-16 font-semibold px-6 py-4 border-b border-line">Versione</th>
+                <th scope="col" class="body-16 font-semibold px-6 py-4 border-b border-line">Chimica</th>
+                <th scope="col" class="body-16 font-semibold px-6 py-4 border-b border-line">Referral</th>
+              </tr>
+            </thead>
+            <tbody>
+              {
+                model.versions.map((version, index) => (
+                  <tr class={index % 2 === 0 ? 'bg-[#FAFAF8] dark:bg-paper' : 'bg-surface'}>
+                    <th scope="row" class="body-16 font-semibold px-6 py-4 border-b border-line">{version.name}</th>
+                    <td class="body-16 px-6 py-4 border-b border-line">{version.chemistry}</td>
+                    <td class="body-16 px-6 py-4 border-b border-line">{version.note}</td>
+                  </tr>
+                ))
+              }
+            </tbody>
+          </table>
+        </div>
+        {
+          hasEstimate && (
+            <p class="body-16 text-ink-soft m-0 mt-6">
+              Una stima indicativa del valore dei 1.000 km, calcolata su {model.kwhPer100km} kWh/100 km
+              e {model.energyPriceEur?.toString().replace('.', ',')} €/kWh, è di circa{' '}
+              {formatEur(model.estimateEur ?? 0)}. Non è un importo garantito.
+            </p>
+          )
+        }
+      </section>
+
+      <section class="mt-16 max-w-[76ch]">
+        <h2 class="heading-28 m-0">Tesla {model.name} pronta consegna</h2>
+        <p class="body-18 m-0 mt-4">{model.deliveryLead}</p>
+        <p class="body-16 m-0 mt-6">
+          Tempi, stock e sprint di fine trimestre:{' '}
+          <a href={ROUTES.delivery} class="text-brand">Tesla pronta consegna in Italia</a>.
+        </p>
+      </section>
+
+      <section class="mt-16 max-w-[76ch]">
+        <h2 class="heading-28 m-0">Come ottenere il vantaggio sulla {model.name}?</h2>
+        <ol class="body-18 mt-6 pl-6 grid gap-4">
+          {
+            HOW_TO_STEPS.map((step, index) => (
+              <li>
+                <span class="font-semibold">{index + 1}. {step.title}.</span> {step.text}
+              </li>
+            ))
+          }
+        </ol>
+        <p class="body-16 m-0 mt-6">
+          Procedura completa: <a href={ROUTES.guide} class="text-brand">come funziona il referral Tesla</a>.
+        </p>
+      </section>
+
+      <section id="faq-modello" class="mt-16 max-w-[76ch]">
+        <h2 class="heading-28 m-0">Domande sulla {model.name}</h2>
+        {
+          model.faq.map((item) => (
+            <div class="mt-8">
+              <h3 class="heading-22 m-0">{item.q}</h3>
+              <p class="body-18 m-0 mt-3">{item.a}</p>
+            </div>
+          ))
+        }
+      </section>
+
+      <div class="mt-16">
+        <CtaBanner
+          title={`Referral ${model.name}: applica il codice prima dell'ordine`}
+          summary="Dopo l'invio dell'ordine il referral non è più associabile. Il prezzo di listino resta invariato."
+        />
+      </div>
+    </div>
+  </article>
+</BaseLayout>

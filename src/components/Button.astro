@@ -1,0 +1,56 @@
+---
+import { REFERRAL_URL } from '../consts';
+
+interface Props {
+  variant?: 'primary' | 'secondary' | 'ghost' | 'on-dark';
+  href: string;
+  external?: boolean;
+  disabled?: boolean;
+  hero?: boolean;
+  onDark?: boolean;
+  class?: string;
+}
+
+const {
+  variant = 'primary',
+  href,
+  external = false,
+  disabled = false,
+  hero = false,
+  onDark = false,
+  class: className = '',
+} = Astro.props;
+
+const isReferral = href === REFERRAL_URL || href.startsWith('https://ts.la/');
+const rel = external ? (isReferral ? 'nofollow noopener' : 'noopener') : undefined;
+const target = external ? '_blank' : undefined;
+
+const variantClass = disabled
+  ? 'btn-disabled'
+  : variant === 'secondary'
+    ? 'btn-secondary'
+    : variant === 'ghost'
+      ? 'btn-ghost'
+      : variant === 'on-dark'
+        ? 'btn-on-dark'
+        : onDark
+          ? 'btn-primary-on-dark'
+          : 'btn-primary';
+---
+
+{
+  disabled ? (
+    <span class:list={['btn', variantClass, hero && 'btn-hero', className]} aria-disabled="true">
+      <slot />
+    </span>
+  ) : (
+    <a
+      class:list={['btn', variantClass, hero && 'btn-hero', className]}
+      href={href}
+      target={target}
+      rel={rel}
+    >
+      <slot />
+    </a>
+  )
+}

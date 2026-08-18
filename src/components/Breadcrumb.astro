@@ -1,0 +1,31 @@
+---
+import type { Crumb } from '../types';
+
+interface Props {
+  items: Crumb[];
+}
+
+const { items } = Astro.props;
+---
+
+<nav aria-label="Percorso" class="caption-14 text-ink-soft">
+  <ol class="flex flex-wrap items-center gap-2 list-none m-0 p-0">
+    {
+      items.map((item, index) => (
+        <li class="inline-flex items-center gap-2">
+          {index > 0 && <span aria-hidden="true">/</span>}
+          {index < items.length - 1 ? (
+            <a
+              href={item.path}
+              class="text-brand no-underline hover:underline min-h-11 inline-flex items-center"
+            >
+              {item.name}
+            </a>
+          ) : (
+            <span class="min-h-11 inline-flex items-center">{item.name}</span>
+          )}
+        </li>
+      ))
+    }
+  </ol>
+</nav>

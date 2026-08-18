@@ -1,0 +1,167 @@
+---
+import ArticleMeta from '../components/ArticleMeta.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import Callout from '../components/Callout.astro';
+import KeyPoints from '../components/KeyPoints.astro';
+import PhotoSlot from '../components/PhotoSlot.astro';
+import charging from '../content/charging.json';
+import { ROUTES } from '../consts';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { articlePageJsonLd } from '../lib/schema';
+import type { FaqItem } from '../types';
+
+const title = 'Ricarica Tesla: quando caricare all\'80% o al 100% (LFP vs NMC)';
+const description =
+  'Guida alla ricarica Tesla Model 3 e Model Y 2026: come riconoscere batteria LFP o NMC e la strategia quotidiana corretta (80% o 100%), Supercharger e ricarica di casa.';
+const h1 = 'Ricarica Tesla: strategia quotidiana per tipo di batteria';
+
+const pageFaq: FaqItem[] = [
+  {
+    q: 'Quando caricare la Tesla all\'80% o al 100%?',
+    a: 'Dipende dalla chimica: LFP (Standard/RWD base) al 100% ogni giorno; NMC/NCA (Long Range e Performance) all\'80% in quotidiano e al 100% solo prima dei viaggi.',
+  },
+  {
+    q: 'Come capisco se ho batteria LFP o NMC?',
+    a: 'Se lo slider del limite mostra l\'etichetta «Trip» sopra l\'80%, hai una cella nickel (NMC/NCA). In tabella: Standard/RWD base = LFP; Long Range e Performance = NMC/NCA.',
+  },
+  {
+    q: 'Meglio ricarica di casa o Supercharger?',
+    a: 'Per batteria e costo, la ricarica AC di casa (wallbox, notturna) è la base. Il Supercharger (DC) è per i viaggi: precondiziona impostandolo come destinazione.',
+  },
+];
+
+const jsonLd = articlePageJsonLd({
+  path: ROUTES.charging,
+  crumbName: 'Ricarica',
+  headline: h1,
+  description,
+  about: 'Strategia di ricarica Tesla LFP vs NMC',
+  faqItems: pageFaq,
+});
+---
+
+<BaseLayout title={title} description={description} jsonLd={jsonLd}>
+  <article class="section-pad">
+    <div class="wrap max-w-[76ch]">
+      <Breadcrumb items={[{ name: 'Home', path: '/' }, { name: 'Ricarica', path: ROUTES.charging }]} />
+      <div class="mt-4">
+        <ArticleMeta reading="Guida · Lettura 8 min" />
+      </div>
+      <h1 class="display-40 m-0 mt-4">{h1}</h1>
+
+      <div class="mt-8">
+        <Callout title="In breve">
+          <p class="m-0">
+            La strategia di ricarica Tesla dipende dalla <strong>chimica della batteria</strong>: le
+            versioni <strong>LFP</strong> (Standard/RWD base) si caricano <strong>al 100% ogni giorno</strong>;
+            le versioni <strong>NMC/NCA</strong> (Long Range RWD/AWD, Performance) vanno tenute all'
+            <strong>80%</strong> per l'uso quotidiano e al 100% solo prima dei viaggi.
+          </p>
+        </Callout>
+      </div>
+
+      <div class="mt-8">
+        <KeyPoints
+          items={[
+            'LFP → 100% (calibrazione settimanale).',
+            'NMC/NCA → 80% daily, 100% pre-viaggio.',
+            'Model Y Long Range RWD = NMC.',
+            '10–80% è la finestra DC più rapida.',
+            'Precondiziona in inverno prima di Supercharger e partenza.',
+          ]}
+        />
+      </div>
+
+      <div class="mt-12">
+        <PhotoSlot
+          src="/img/ricarica"
+          aspect="4/3"
+          width={800}
+          height={600}
+          alt="Auto elettrica bianca collegata a una colonnina di ricarica"
+        />
+      </div>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">Che batteria ha la mia Tesla: LFP o NMC?</h2>
+        <p class="body-18 m-0 mt-4">
+          Su Model 3 e Model Y (Juniper 2025–2026 in UE) la chimica segue di solito la versione.
+          Verifica rapida: se lo slider del limite mostra l'etichetta <strong>«Trip» sopra l'80%</strong>,
+          hai una cella nickel (NMC/NCA).
+        </p>
+        <div class="mt-8 overflow-x-auto overflow-hidden rounded-[14px] border border-line">
+          <table class="w-full border-collapse text-left min-w-[36rem]">
+            <caption class="sr-only">Chimica batteria e ricarica quotidiana per versione Tesla</caption>
+            <thead class="bg-[#F3F3F0] dark:bg-[#252830]">
+              <tr>
+                <th scope="col" class="body-16 font-semibold px-6 py-4 border-b border-line">Versione</th>
+                <th scope="col" class="body-16 font-semibold px-6 py-4 border-b border-line">Chimica</th>
+                <th scope="col" class="body-16 font-semibold px-6 py-4 border-b border-line">Ricarica quotidiana</th>
+                <th scope="col" class="body-16 font-semibold px-6 py-4 border-b border-line">Picco DC</th>
+              </tr>
+            </thead>
+            <tbody>
+              {
+                charging.map((row, index) => (
+                  <tr class={index % 2 === 0 ? 'bg-[#FAFAF8] dark:bg-paper' : 'bg-surface'}>
+                    <th scope="row" class="body-16 font-semibold px-6 py-4 border-b border-line">{row.version}</th>
+                    <td class="body-16 px-6 py-4 border-b border-line">{row.chemistry}</td>
+                    <td class="body-16 px-6 py-4 border-b border-line">{row.daily}</td>
+                    <td class="body-16 px-6 py-4 border-b border-line">{row.peakDc}</td>
+                  </tr>
+                ))
+              }
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">Perché caricare al 100% solo con batteria LFP?</h2>
+        <p class="body-18 m-0 mt-4">
+          Le <strong>LFP</strong> tollerano il 100% e Tesla ne consiglia una carica piena almeno una
+          volta a settimana per calibrare il BMS e la stima di autonomia. Le <strong>NMC/NCA</strong>
+          degradano più in fretta se lasciate piene: meglio 80% quotidiano, 100% solo pre-viaggio con
+          <strong>Departure Time</strong> così l'auto precondiziona e arriva al picco al momento giusto.
+        </p>
+        <p class="body-18 m-0 mt-4">
+          Lo stato di carica (SoC) alto a lungo è lo stress principale sulle celle nickel. Un limite
+          all'80% nell'app riduce quel tempo senza togliere autonomia utile in città.
+        </p>
+      </section>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">Come ricaricare al Supercharger nel modo più efficiente?</h2>
+        <p class="body-18 m-0 mt-4">
+          Imposta il Supercharger come destinazione nel navigatore per <strong>precondizionare</strong>
+          la batteria. La finestra <strong>10–80%</strong> è la più veloce in DC; oltre l'80% la curva
+          cala. In inverno precondiziona prima di partire e di caricare: una batteria fredda accetta
+          meno kW.
+        </p>
+      </section>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">Meglio ricarica di casa (AC) o Supercharger (DC)?</h2>
+        <p class="body-18 m-0 mt-4">
+          Per batteria e portafoglio, la <strong>ricarica AC di casa</strong> (wallbox, notturna, con
+          programmi smart) è la base quotidiana. Il Supercharger è comodo in viaggio. Il referral da
+          ~1.000 km copre proprio quella parte extraurbana: vedi{' '}
+          <a href={ROUTES.modelY} class="text-brand">Model Y</a> e{' '}
+          <a href={ROUTES.guide} class="text-brand">come funziona il referral</a>.
+        </p>
+      </section>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">Domande frequenti sulla ricarica</h2>
+        {
+          pageFaq.map((item) => (
+            <div class="mt-8">
+              <h3 class="heading-22 m-0">{item.q}</h3>
+              <p class="body-18 m-0 mt-3">{item.a}</p>
+            </div>
+          ))
+        }
+      </section>
+    </div>
+  </article>
+</BaseLayout>
