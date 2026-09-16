@@ -1,10 +1,10 @@
 ---
-import { BRAND, isActivePath, MORE_LINKS, NAV_LINKS, REFERRAL_URL } from '../consts';
+import { BRAND, isNavItemActive, MORE_LINKS, NAV_LINKS, REFERRAL_URL } from '../consts';
 import Button from './Button.astro';
 import Icon from './Icon.astro';
 
 const path = Astro.url.pathname.replace(/\/$/, '') || '/';
-const menuLinks = [...NAV_LINKS, ...MORE_LINKS];
+const menuItems = [...NAV_LINKS, ...MORE_LINKS.map((link) => ({ ...link, children: undefined }))];
 ---
 
 <header class="sticky top-0 z-50 border-b border-line bg-paper">
@@ -19,20 +19,53 @@ const menuLinks = [...NAV_LINKS, ...MORE_LINKS];
       <span class="font-display text-lg font-bold tracking-tight max-[420px]:hidden">{BRAND}</span>
     </a>
 
-    <ul class="hidden lg:flex items-center justify-center gap-0.5 xl:gap-1 list-none m-0 p-0 flex-1 min-w-0">
+    <ul class="hidden lg:flex items-center justify-center gap-0 list-none m-0 p-0 flex-1 min-w-0">
       {
         NAV_LINKS.map((link) => (
-          <li>
-            <a
-              href={link.href}
-              class:list={[
-                'inline-flex items-center min-h-11 px-2 xl:px-2.5 text-[13px] xl:text-sm font-medium no-underline whitespace-nowrap hover:text-brand',
-                isActivePath(path, link) ? 'text-brand' : 'text-ink',
-              ]}
-              aria-current={isActivePath(path, link) ? 'page' : undefined}
-            >
-              {link.label}
-            </a>
+          <li class="relative group">
+            {link.children ? (
+              <>
+                <a
+                  href={link.href}
+                  class:list={[
+                    'inline-flex items-center gap-1 min-h-11 px-2 xl:px-2.5 text-[13px] xl:text-sm font-medium no-underline whitespace-nowrap hover:text-brand',
+                    isNavItemActive(path, link) ? 'text-brand' : 'text-ink',
+                  ]}
+                  aria-current={isNavItemActive(path, link) ? 'page' : undefined}
+                  aria-haspopup="true"
+                >
+                  {link.label}
+                  <Icon name="chevron-down" size={14} class="opacity-70" />
+                </a>
+                <ul class="nav-drop-panel absolute left-0 top-full z-50 min-w-[14rem] list-none m-0 p-2 rounded-[12px] border border-line bg-surface shadow-md">
+                  {link.children.map((child) => (
+                    <li>
+                      <a
+                        href={child.href}
+                        class:list={[
+                          'flex items-center min-h-10 px-3 rounded-[8px] text-sm no-underline hover:bg-brand-tint',
+                          path === child.href ? 'text-brand font-semibold' : 'text-ink',
+                        ]}
+                        aria-current={path === child.href ? 'page' : undefined}
+                      >
+                        {child.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            ) : (
+              <a
+                href={link.href}
+                class:list={[
+                  'inline-flex items-center min-h-11 px-2 xl:px-2.5 text-[13px] xl:text-sm font-medium no-underline whitespace-nowrap hover:text-brand',
+                  isNavItemActive(path, link) ? 'text-brand' : 'text-ink',
+                ]}
+                aria-current={isNavItemActive(path, link) ? 'page' : undefined}
+              >
+                {link.label}
+              </a>
+            )}
           </li>
         ))
       }
@@ -55,27 +88,50 @@ const menuLinks = [...NAV_LINKS, ...MORE_LINKS];
           <Icon name="menu" size={20} />
           <span class="sr-only">Menu</span>
         </summary>
-        <ul class="absolute right-0 mt-2 w-60 list-none m-0 p-3 rounded-[14px] border border-line bg-surface shadow-md">
+        <ul class="absolute right-0 mt-2 w-64 list-none m-0 p-3 rounded-[14px] border border-line bg-surface shadow-md max-h-[70vh] overflow-y-auto">
           {
-            menuLinks.map((link) => (
+            menuItems.map((item) => (
               <li>
                 <a
-                  href={link.href}
+                  href={item.href}
                   class:list={[
                     'flex items-center min-h-11 px-2 rounded-[8px] text-sm no-underline hover:bg-brand-tint',
-                    isActivePath(path, link) ? 'text-brand font-semibold' : 'text-ink',
+                    isNavItemActive(path, item) ? 'text-brand font-semibold' : 'text-ink',
                   ]}
-                  aria-current={isActivePath(path, link) ? 'page' : undefined}
+                  aria-current={isNavItemActive(path, item) ? 'page' : undefined}
                 >
-                  {link.label}
+                  {item.label}
                 </a>
+                {item.children && (
+                  <ul class="list-none m-0 mb-2 pl-3">
+                    {item.children.map((child) => (
+                      <li>
+                        <a
+                          href={child.href}
+                          class:list={[
+                            'flex items-center min-h-10 px-2 rounded-[8px] text-sm no-underline hover:bg-brand-tint',
+                            path === child.href ? 'text-brand font-semibold' : 'text-ink',
+                          ]}
+                        >
+                          {child.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </li>
             ))
           }
         </ul>
       </details>
 
-      <Button href={REFERRAL_URL} external icon="arrow-right" class="!px-3 !text-sm xl:!px-5 whitespace-nowrap">
+      <Button
+        href={REFERRAL_URL}
+        external
+        icon="arrow-right"
+        class="!px-3 !text-sm xl:!px-5 whitespace-nowrap"
+        ctaPosition="nav"
+      >
         Ottieni i 1.000 km
       </Button>
     </div>

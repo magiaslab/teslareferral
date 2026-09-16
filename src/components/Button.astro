@@ -1,6 +1,6 @@
 ---
 import { OCTOPUS_REFERRAL_URL, REFERRAL_URL } from '../consts';
-import { trackEventForHref } from '../lib/analytics';
+import { isReferralHref, trackEventForHref } from '../lib/analytics';
 import type { IconName } from '../types';
 import Icon from './Icon.astro';
 
@@ -14,6 +14,8 @@ interface Props {
   class?: string;
   icon?: IconName;
   iconPosition?: 'start' | 'end';
+  ctaPosition?: string;
+  model?: string;
 }
 
 const {
@@ -26,14 +28,17 @@ const {
   class: className = '',
   icon,
   iconPosition = icon === 'arrow-right' || icon === 'external-link' ? 'end' : 'start',
+  ctaPosition = 'body',
+  model = '',
 } = Astro.props;
 
-const isReferral =
+const isPartnerReferral =
   href === REFERRAL_URL ||
   href === OCTOPUS_REFERRAL_URL ||
   href.startsWith('https://ts.la/') ||
   href.includes('/octo-friends/');
-const rel = external ? (isReferral ? 'nofollow noopener' : 'noopener') : undefined;
+const teslaReferral = isReferralHref(href);
+const rel = external ? (isPartnerReferral ? 'nofollow noopener' : 'noopener') : undefined;
 const target = external ? '_blank' : undefined;
 
 const variantClass = disabled
@@ -60,7 +65,16 @@ const trackEvent = trackEventForHref(href);
       {icon && iconPosition === 'end' && <Icon name={icon} size={18} />}
     </span>
   ) : (
-    <a class:list={classes} href={href} target={target} rel={rel} data-track-event={trackEvent}>
+    <a
+      class:list={classes}
+      href={href}
+      target={target}
+      rel={rel}
+      data-track-event={trackEvent}
+      data-cta-position={ctaPosition}
+      data-model={model || undefined}
+      data-referral-cta={teslaReferral ? '' : undefined}
+    >
       {icon && iconPosition === 'start' && <Icon name={icon} size={18} />}
       <slot />
       {icon && iconPosition === 'end' && <Icon name={icon} size={18} />}

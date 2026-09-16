@@ -26,9 +26,9 @@
     "energyPriceEur": 0.4,
     "estimateEur": 68,
     "tableNote": "Tutte le versioni e i colori",
-    "seoTitle": "Tesla Model Y: autonomia, Standard, 7 posti, prezzo e 1.000 km",
-    "seoDescription": "Tesla Model Y in Italia: autonomia WLTP, versione Standard, 7 posti e prezzo. Il referral aggiunge 1.000 km Supercharger allo stesso listino.",
-    "h1": "Tesla Model Y: autonomia, Standard e prezzo in Italia",
+    "seoTitle": "Tesla Model Y 2026: versioni, autonomia, prezzi e come averla con 1.000 km gratis",
+    "seoDescription": "Tesla Model Y 2026: versioni Standard, Premium, Long Range e Performance, autonomia, 7 posti, prezzo e pronta consegna. Referral: stesso listino + 1.000 km Supercharger.",
+    "h1": "Tesla Model Y 2026: guida completa",
     "keyPoints": [
       "Autonomia WLTP indicativa: da circa 350 km (RWD) a oltre 500 km (Long Range).",
       "La Standard è la RWD d'ingresso; i 7 posti non sono la norma in Italia.",
@@ -39,7 +39,7 @@
     "intentSections": [
       {
         "id": "autonomia",
-        "h2": "Qual è l'autonomia della Tesla Model Y?",
+        "h2": "Tesla Model Y: autonomia reale per versione",
         "answer": "L'autonomia Tesla Model Y dipende dalla versione: la RWD resta nella fascia indicativa 350–400 km WLTP, le Long Range salgono spesso sopra i 500 km. In inverno e in autostrada i numeri reali scendono. Conta il dato del configuratore Tesla, non un valore unico di brochure.",
         "body": "Per i viaggi uso i Supercharger; in settimana carico a casa. La chimica (LFP sulla RWD, NMC sulle Long Range) cambia come tieni la percentuale quotidiana, non i 1.000 km del referral.",
         "tableCaption": "Autonomia Tesla Model Y (WLTP indicativa)",
@@ -55,22 +55,39 @@
       },
       {
         "id": "standard",
-        "h2": "Cos'è la Tesla Model Y Standard?",
-        "answer": "In Italia «Tesla Model Y Standard» è di solito la RWD d'ingresso: listino più basso, autonomia inferiore alle Long Range, batteria LFP. Non è un allestimento a parte con un altro nome sul cruscotto: è la versione base del configuratore.",
-        "body": "Va bene per città e tragitti medi se carichi a casa. Per i viaggi lunghi ripetuti conviene confrontare la Long Range. Il referral vale uguale: 1.000 km Supercharger, stesso prezzo di quella versione."
+        "h2": "Model Y Standard",
+        "answer": "La Tesla Model Y Standard è la versione d'ingresso (di solito RWD, LFP). Listino più basso, autonomia inferiore alle Long Range. Va bene per casa–lavoro se carichi a muro.",
+        "body": "Per i viaggi lunghi ripetuti confronta Long Range / Premium. Il referral vale uguale: 1.000 km Supercharger sul nuovo.",
+        "relatedHref": "/model-y-standard",
+        "relatedLabel": "Model Y Standard: prezzo, autonomia e differenze con la Premium"
+      },
+      {
+        "id": "premium",
+        "h2": "Model Y Premium: cosa cambia",
+        "answer": "In Italia «Tesla Model Y Premium» indica di solito le versioni sopra la Standard: listino Long Range RWD da circa 49.990 € e autonomia WLTP indicativa intorno ai 600 km, contro circa 39.990 € e 534 km della Standard. Verifica tesla.com. Il referral vale uguale, 1.000 km Supercharger sul nuovo.",
+        "body": "Se confronti Standard e Premium, parti dalla scheda Tesla, non da un listino di terzi.",
+        "relatedHref": "/model-y-standard",
+        "relatedLabel": "Tabella Standard vs Premium"
       },
       {
         "id": "7-posti",
-        "h2": "La Tesla Model Y ha 7 posti?",
-        "answer": "In Italia la Model Y Juniper è di solito a 5 posti. I 7 posti, se Tesla li offre, sono un optional su alcune versioni e non su tutte: vanno verificati sul configuratore. Non dare per scontato il terzo fila sullo stock in pronta consegna.",
-        "body": "Se ti serve il terzo fila, controlla la scheda del veicolo prima di confermare. Il referral non cambia i posti: cambia solo i chilometri Supercharger sull'account."
+        "h2": "Model Y 7 posti: c'è e quanto costa?",
+        "answer": "In Italia la Model Y Juniper è di solito a 5 posti. I 7 posti sono un optional sulla Premium Long Range AWD: circa 2.500 € in più, listino intorno a 55.490 €. Non dare per scontato il terzo fila sullo stock in pronta consegna.",
+        "body": "Se ti serve il terzo fila, controlla la scheda del veicolo prima di confermare. Il referral non cambia i posti."
       },
       {
         "id": "prezzo",
-        "h2": "Quanto costa la Tesla Model Y?",
-        "answer": "Il Tesla Model Y prezzo è il listino del configuratore, a scaglioni (RWD, Long Range, Performance). Gli incentivi pubblici, se ne hai diritto, sono indipendenti. Il referral non sconta l'auto: aggiunge 1.000 km Supercharger.",
+        "h2": "Prezzo Model Y 2026",
+        "answer": "Il Tesla Model Y prezzo 2026 è il listino del configuratore, a scaglioni (Standard/RWD, Long Range, Performance). Gli incentivi pubblici, se ne hai diritto, sono indipendenti. Il referral non sconta l'auto: aggiunge 1.000 km Supercharger.",
         "relatedHref": "/prezzo-incentivi",
         "relatedLabel": "Listino, incentivi e come sommarli al referral"
+      },
+      {
+        "id": "usata",
+        "h2": "Model Y usata o nuova?",
+        "answer": "La Model Y usata in Italia si trova di solito tra circa 28.000 € e 45.000 € secondo anno e km, ma perde il referral. I 1.000 km Supercharger valgono solo sul nuovo da Tesla. Confronta garanzia e incentivi prima di chiudere sull'usato.",
+        "relatedHref": "/tesla-usata-o-nuova",
+        "relatedLabel": "Tesla usata o nuova: quando conviene il nuovo"
       }
     ],
     "faq": [
@@ -80,19 +97,19 @@
       },
       {
         "q": "Cos'è la Model Y Standard?",
-        "a": "Di solito la RWD d'ingresso: listino più basso, LFP, autonomia inferiore alle Long Range. Il referral vale uguale su tutte le versioni nuove."
+        "a": "Di solito la RWD d'ingresso: listino più basso, LFP, autonomia inferiore alle Long Range. Approfondimento su /model-y-standard. Il referral vale uguale su tutte le versioni nuove."
+      },
+      {
+        "q": "Model Y Premium: cosa cambia?",
+        "a": "Di solito allestimento e autonomia sopra la Standard: circa 49.990 € e ~600 km WLTP vs 39.990 € e 534 km della Standard. Verifica tesla.com. Il referral non cambia."
       },
       {
         "q": "La Model Y è a 7 posti?",
-        "a": "In Italia è di solito a 5 posti. I 7 posti, se previsti, sono un optional su alcune versioni: controlla tesla.com e lo stock."
+        "a": "In Italia è di solito a 5 posti. I 7 posti, sulla Premium Long Range AWD, sono un optional da circa 2.500 €: controlla tesla.com e lo stock."
       },
       {
-        "q": "Qual è il vantaggio referral sulla Model Y?",
-        "a": "Su una Model Y nuova comprata da Tesla arrivano circa 1.000 km Supercharger. Il listino resta quello. Conta quanto vedi sull'ordine."
-      },
-      {
-        "q": "Il referral aumenta il prezzo della Model Y?",
-        "a": "No. Paghi il listino. Non è uno sconto Tesla Model Y: è un extra sull'account."
+        "q": "Quanto costa la Model Y nel 2026?",
+        "a": "Listino a scaglioni sul configuratore. Tabella e incentivi sulla pagina prezzi. Il referral aggiunge 1.000 km, non sconta."
       },
       {
         "q": "C'è Tesla Model Y pronta consegna in Italia?",
@@ -127,9 +144,9 @@
     "energyPriceEur": 0.4,
     "estimateEur": 60,
     "tableNote": "Tutte le versioni e i colori",
-    "seoTitle": "Tesla Model 3 2026 Highland: autonomia, prezzo e 1.000 km",
-    "seoDescription": "Tesla Model 3 2026 (Highland): autonomia WLTP, prezzo e versioni. Il referral aggiunge 1.000 km Supercharger allo stesso listino, codice prima dell'ordine.",
-    "h1": "Tesla Model 3 2026 Highland: autonomia e prezzo",
+    "seoTitle": "Tesla Model 3 2026: versioni, autonomia, prezzi e 1.000 km Supercharger con il referral",
+    "seoDescription": "Tesla Model 3 2026: versioni, autonomia reale, Highland, prezzo con incentivi, pronta consegna e usato vs nuovo. Stesso listino + 1.000 km Supercharger con il referral.",
+    "h1": "Tesla Model 3 2026: guida completa",
     "keyPoints": [
       "La Model 3 2026 in Italia è la generazione Highland.",
       "Autonomia WLTP indicativa: da circa 500 km (Standard) a oltre 600 km (Long Range).",
@@ -140,7 +157,7 @@
     "intentSections": [
       {
         "id": "autonomia",
-        "h2": "Qual è l'autonomia della Tesla Model 3?",
+        "h2": "Tesla Model 3: autonomia reale per versione",
         "answer": "L'autonomia Tesla Model 3 dipende dalla versione: la Standard/RWD sta in una fascia indicativa intorno ai 500 km WLTP, le Long Range salgono spesso sopra i 600 km. Freddo, velocità e clima riducono i km reali. Il numero che conta è quello del configuratore.",
         "body": "In settimana la ricarica di casa copre il quotidiano; i Supercharger servono ai viaggi. LFP (Standard) e NMC (Long Range) cambiano la percentuale quotidiana consigliata, non il referral.",
         "tableCaption": "Autonomia Tesla Model 3 (WLTP indicativa)",
@@ -158,20 +175,35 @@
         "id": "2026",
         "h2": "Cos'è la Tesla Model 3 2026?",
         "answer": "La Tesla Model 3 2026 in Italia è la Highland: restyling già in listino da qualche anno, aggiornata da software e allestimenti. Non è un modello nuovo con un altro nome. Versioni, prezzi e stock si vedono sul configuratore Tesla.",
-        "body": "Grok e gli aggiornamenti OTA arrivano sull'auto, non cambiano il referral. Per i tempi di ritiro conta lo stock, non l'anno di brochure."
+        "relatedHref": "/model-3-2026",
+        "relatedLabel": "Tesla Model 3 2026: novità e differenze con la Highland"
       },
       {
         "id": "highland",
-        "h2": "Cos'è la Tesla Model 3 Highland?",
-        "answer": "Highland è il nome non ufficiale del restyling della Model 3: interni, silenziosità e sospensioni diverse dalla generazione precedente. In Italia, nel 2026, è la Model 3 che trovi in configuratore e in pronta consegna.",
+        "h2": "Model 3 Highland: cosa è cambiato",
+        "answer": "Highland è il nome non ufficiale del restyling: interni, silenziosità e sospensioni diverse dalla generazione precedente. In Italia, nel 2026, è la Model 3 in configuratore e in pronta consegna.",
         "body": "Il referral vale su tutte le Highland nuove comprate da Tesla. Usato e Tesla Approved restano fuori."
       },
       {
         "id": "prezzo",
-        "h2": "Quanto costa la Tesla Model 3?",
-        "answer": "Il Tesla Model 3 prezzo è il listino del configuratore. Con incentivi, se ne hai diritto, il conto pubblico è un canale a parte. Il referral non taglia il prezzo: aggiunge 1.000 km Supercharger.",
+        "h2": "Prezzo Model 3 2026 e incentivi",
+        "answer": "Il Tesla Model 3 prezzo 2026 è il listino del configuratore. Con incentivi, se ne hai diritto, il conto pubblico è un canale a parte. Il referral non taglia il prezzo: aggiunge 1.000 km Supercharger.",
         "relatedHref": "/prezzo-incentivi",
         "relatedLabel": "Listino, incentivi e come sommarli al referral"
+      },
+      {
+        "id": "usata",
+        "h2": "Model 3 usata o nuova?",
+        "answer": "La Model 3 usata in Italia sta di solito tra circa 22.000 € e 42.000 € (pre-Highland più bassa, Highland più alta). Il referral non vale sull'usato. Garanzia e incentivi spesso fanno vincere la nuova.",
+        "relatedHref": "/tesla-usata-o-nuova",
+        "relatedLabel": "Tesla usata o nuova: confronto completo"
+      },
+      {
+        "id": "novita-2026",
+        "h2": "Le novità 2026",
+        "answer": "Software, listino e allestimenti si aggiornano sul configuratore. Non attribuiamo restyling non confermati.",
+        "relatedHref": "/model-3-2026",
+        "relatedLabel": "Tesla Model 3 2026: tutte le novità"
       }
     ],
     "faq": [

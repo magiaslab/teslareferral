@@ -10,7 +10,9 @@ export const CONTACT_EMAIL = 'social@magiaslab.com';
 export const CONTACT_MAILTO = `mailto:${CONTACT_EMAIL}`;
 export const MAGIASLAB_URL = 'https://www.magiaslab.com';
 /** Fonte unica per badge visibile e JSON-LD (`dateModified`). */
-export const VERIFIED_DATE = '2026-08-18';
+export const VERIFIED_DATE = '2026-09-16';
+export const REFERRAL_CTA =
+  'Stesso prezzo di listino. In più 1.000 km Supercharger: applica il codice prima di ordinare';
 export const OWNER = 'Alessandro Cipriani — Magias Lab';
 export const OWNER_NAME = 'Alessandro Cipriani';
 export const OWNER_ORG = 'Magias Lab';
@@ -24,6 +26,8 @@ export const TERMS_UPDATED = '2025-06-04';
 export const GA_MEASUREMENT_ID =
   import.meta.env.PUBLIC_GA_ID || import.meta.env.PUBLIC_GA_MEASUREMENT_ID || '';
 export const GSC_VERIFICATION = import.meta.env.PUBLIC_GSC_VERIFICATION ?? '';
+export const UMAMI_ID = import.meta.env.PUBLIC_UMAMI_ID ?? '';
+export const PLAUSIBLE_DOMAIN = import.meta.env.PUBLIC_PLAUSIBLE_DOMAIN ?? '';
 export const COOKIE_CONSENT_KEY = 'cookie-consent';
 export const COOKIE_CONSENT_MAX_DAYS = 180;
 
@@ -31,11 +35,16 @@ export const ROUTES = {
   home: '/',
   guide: '/come-funziona',
   modelY: '/model-y',
+  modelYStandard: '/model-y-standard',
   model3: '/model-3',
+  model3_2026: '/model-3-2026',
   charging: '/ricarica',
   homeCharging: '/ricarica-domestica',
   delivery: '/consegna',
+  deliveryTimes: '/tempi-di-consegna',
+  stores: '/store-tesla-italia',
   prices: '/prezzo-incentivi',
+  usedVsNew: '/tesla-usata-o-nuova',
   software: '/software',
   faq: '/faq',
   privacy: '/privacy',
@@ -48,19 +57,48 @@ export interface SiteLink {
   match?: 'exact' | 'prefix';
 }
 
-export const NAV_LINKS: SiteLink[] = [
-  { href: ROUTES.guide, label: 'Come funziona' },
+export interface NavItem extends SiteLink {
+  children?: SiteLink[];
+}
+
+export const NAV_LINKS: NavItem[] = [
+  {
+    href: ROUTES.modelY,
+    label: 'Model Y',
+    match: 'prefix',
+    children: [
+      { href: ROUTES.modelY, label: 'Model Y' },
+      { href: ROUTES.modelYStandard, label: 'Model Y Standard' },
+    ],
+  },
+  {
+    href: ROUTES.model3,
+    label: 'Model 3',
+    match: 'prefix',
+    children: [
+      { href: ROUTES.model3, label: 'Model 3' },
+      { href: ROUTES.model3_2026, label: 'Model 3 2026' },
+    ],
+  },
+  {
+    href: ROUTES.delivery,
+    label: 'Consegna',
+    children: [
+      { href: ROUTES.delivery, label: 'Pronta consegna' },
+      { href: ROUTES.deliveryTimes, label: 'Tempi di consegna' },
+      { href: ROUTES.stores, label: 'Store in Italia' },
+    ],
+  },
   { href: ROUTES.prices, label: 'Prezzi' },
-  { href: ROUTES.delivery, label: 'Consegna' },
-  { href: ROUTES.modelY, label: 'Model Y' },
-  { href: ROUTES.model3, label: 'Model 3' },
-  { href: ROUTES.faq, label: 'FAQ' },
+  { href: ROUTES.usedVsNew, label: 'Usata o nuova' },
+  { href: ROUTES.software, label: 'Software' },
+  { href: ROUTES.guide, label: 'Referral' },
 ];
 
 export const MORE_LINKS: SiteLink[] = [
   { href: ROUTES.charging, label: 'Ricarica', match: 'prefix' },
   { href: ROUTES.homeCharging, label: 'Ricarica casa' },
-  { href: ROUTES.software, label: 'Software e Grok' },
+  { href: ROUTES.faq, label: 'FAQ' },
 ];
 
 export const FOOTER_GROUPS: { title: string; links: SiteLink[] }[] = [
@@ -68,18 +106,19 @@ export const FOOTER_GROUPS: { title: string; links: SiteLink[] }[] = [
     title: 'Referral',
     links: [
       { href: ROUTES.guide, label: 'Come funziona' },
+      { href: ROUTES.faq, label: 'FAQ' },
       { href: ROUTES.modelY, label: 'Model Y' },
       { href: ROUTES.model3, label: 'Model 3' },
-      { href: ROUTES.faq, label: 'FAQ' },
     ],
   },
   {
     title: 'Guide',
     links: [
-      { href: ROUTES.prices, label: 'Prezzi e incentivi' },
       { href: ROUTES.delivery, label: 'Pronta consegna' },
-      { href: ROUTES.charging, label: 'Ricarica LFP/NMC' },
-      { href: ROUTES.homeCharging, label: 'Ricarica casa' },
+      { href: ROUTES.deliveryTimes, label: 'Tempi di consegna' },
+      { href: ROUTES.prices, label: 'Prezzi e incentivi' },
+      { href: ROUTES.usedVsNew, label: 'Usata o nuova' },
+      { href: ROUTES.stores, label: 'Store in Italia' },
       { href: ROUTES.software, label: 'Software e Grok' },
     ],
   },
@@ -90,6 +129,11 @@ export function isActivePath(path: string, link: SiteLink): boolean {
     return path === link.href || path.startsWith(`${link.href}-`) || path.startsWith(`${link.href}/`);
   }
   return path === link.href;
+}
+
+export function isNavItemActive(path: string, item: NavItem): boolean {
+  if (item.children?.some((child) => isActivePath(path, child))) return true;
+  return isActivePath(path, item);
 }
 
 const MONTHS_IT = [

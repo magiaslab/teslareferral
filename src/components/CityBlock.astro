@@ -1,0 +1,25 @@
+---
+import { render, type CollectionEntry } from 'astro:content';
+
+interface Props {
+  entry: CollectionEntry<'cities'>;
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const isH2 = entry.data.headingLevel === 'h2';
+---
+
+<section id={entry.data.slug} class={isH2 ? 'mt-16' : 'mt-10'}>
+  {
+    isH2 ? (
+      <h2 class="heading-28 m-0">{entry.data.heading}</h2>
+    ) : (
+      <h3 class="heading-22 m-0">{entry.data.heading}</h3>
+    )
+  }
+  <div class="content-md body-18 mt-4">
+    <Content />
+  </div>
+  <p class="caption-14 text-ink-soft m-0 mt-4">{entry.data.pickupNote}</p>
+</section>

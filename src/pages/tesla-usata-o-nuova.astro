@@ -1,0 +1,162 @@
+---
+import ArticleMeta from '../components/ArticleMeta.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import Callout from '../components/Callout.astro';
+import CtaBanner from '../components/CtaBanner.astro';
+import Faq from '../components/Faq.astro';
+import KeyPoints from '../components/KeyPoints.astro';
+import ReferralCta from '../components/ReferralCta.astro';
+import SpecTable from '../components/SpecTable.astro';
+import { REFERRAL_CTA, ROUTES } from '../consts';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { articlePageJsonLd } from '../lib/schema';
+import type { FaqItem } from '../types';
+
+const title = 'Tesla usata o nuova nel 2026? Prezzi, garanzia e quando conviene la nuova';
+const description =
+  'Tesla Model 3 usata e Model Y usata nel 2026: cosa controllare, Tesla Approved vs privato, quando conviene la nuova (garanzia, incentivi, software). Il referral da 1.000 km Supercharger vale solo sul nuovo.';
+const h1 = 'Tesla Model 3 e Model Y usata o nuova: cosa conviene davvero';
+
+const rows = [
+  { label: 'Prezzo d\'acquisto', value: 'Usata: Model 3 circa 22.000–42.000 €, Model Y circa 28.000–45.000 € · Nuova: listino in /prezzo-incentivi' },
+  { label: 'Garanzia residua', value: 'Usata: da verificare sul VIN · Nuova: garanzia Tesla di primo impianto' },
+  { label: 'Incentivi pubblici', value: 'Di solito sul nuovo (fino a 11.000 € se bando aperto) · Usata: 0 € sul bando PNRR nazionale' },
+  { label: 'Software / Grok', value: 'OTA su entrambe; hardware può limitare le funzioni' },
+  { label: 'Referral 1.000 km', value: 'Solo sul nuovo da Tesla. Sull\'usato: no.' },
+];
+
+const pageFaq: FaqItem[] = [
+  {
+    q: 'Il referral Tesla vale sull\'usato?',
+    a: 'No. Il programma Segnala e guadagna vale su Model 3 e Model Y nuove comprate da Tesla. Usato, Tesla Approved e privati restano fuori. I 1.000 km Supercharger non si aggiungono dopo.',
+  },
+  {
+    q: 'Quanto costa una Model 3 usata?',
+    a: 'In Italia, a settembre 2026, una Model 3 usata sta di solito tra circa 22.000 € e 42.000 € (pre-Highland più bassa, Highland più alta). Confronta con il listino nuovo e con gli incentivi, se spettano.',
+  },
+  {
+    q: 'Conviene una Tesla usata?',
+    a: 'Può convenire se i 22.000–45.000 € di mercato compensano garanzia residua e assenza di referral e (spesso) di incentivi. Se vuoi garanzia piena, software recente e 1.000 km Supercharger, la nuova vince sul totale.',
+  },
+];
+
+const jsonLd = articlePageJsonLd({
+  path: ROUTES.usedVsNew,
+  crumbName: 'Usata o nuova',
+  headline: h1,
+  description,
+  about: 'Tesla Model 3 Model Y usata o nuova 2026',
+  faqItems: pageFaq,
+  itemList: {
+    name: 'Tesla usata vs nuova',
+    items: rows.map((row) => ({ name: row.label, description: row.value })),
+  },
+});
+---
+
+<BaseLayout title={title} description={description} jsonLd={jsonLd}>
+  <article class="section-pad">
+    <div class="wrap max-w-[76ch]">
+      <Breadcrumb
+        items={[{ name: 'Home', path: '/' }, { name: 'Usata o nuova', path: ROUTES.usedVsNew }]}
+      />
+      <div class="mt-4">
+        <ArticleMeta reading="Guida · Lettura 7 min" />
+      </div>
+      <h1 class="display-40 m-0 mt-4">{h1}</h1>
+      <p class="body-18 m-0 mt-6">
+        Model 3 usata e Model Y usata costano meno all'acquisto (circa 22.000–45.000 €), ma perdono
+        incentivi (spesso), garanzia piena e — punto fermo — il referral Tesla. I 1.000 km
+        Supercharger valgono solo sul nuovo comprato da Tesla. Qui il confronto è per
+        decidere, non per vendere usato.
+      </p>
+
+      <div class="mt-8">
+        <Callout title="Trasparenza">
+          <p class="m-0">
+            Il referral Tesla <strong>non vale sull'usato</strong>, né Tesla Approved né
+            privato. {REFERRAL_CTA} — solo se ordini nuova.
+          </p>
+        </Callout>
+      </div>
+
+      <div class="mt-8">
+        <KeyPoints
+          items={[
+            'Usato: Model 3 circa 22.000–42.000 €, Model Y circa 28.000–45.000 €; garanzia e batteria da controllare sul VIN.',
+            'Nuova: listino + eventuali incentivi + referral 1.000 km.',
+            'Approved ≠ privato: ispezione Tesla vs rischio annuncio.',
+            'Nessun codice referral dopo un passaggio di proprietà.',
+          ]}
+        />
+      </div>
+
+      <div class="mt-10">
+        <ReferralCta ctaPosition="mid" />
+      </div>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">Tesla Model 3 usata: prezzi e cosa controllare</h2>
+        <p class="body-18 m-0 mt-4">
+          Una <strong>Tesla Model 3 usata</strong> si trova in fascia circa 22.000–42.000 €
+          (il mercato cambia). Controlla cicli batteria, incidenti, km, versione
+          (pre-Highland vs Highland), Autopilot e aggiornamenti. Confronta con il nuovo:{' '}
+          <a href={ROUTES.model3} class="text-brand">guida Model 3</a> e{' '}
+          <a href={ROUTES.prices} class="text-brand">prezzi 2026</a>.
+        </p>
+      </section>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">Tesla Model Y usata: prezzi e cosa controllare</h2>
+        <p class="body-18 m-0 mt-4">
+          Una <strong>Tesla Model Y usata</strong>: prezzo di solito circa 28.000–45.000 €. Stessi controlli,
+          più assetto (5 vs 7 posti) e chimica batteria. Nuova e Standard:{' '}
+          <a href={ROUTES.modelY} class="text-brand">Model Y</a> ·{' '}
+          <a href={ROUTES.modelYStandard} class="text-brand">Model Y Standard</a>.
+        </p>
+      </section>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">Usato Tesla Approved vs privato</h2>
+        <p class="body-18 m-0 mt-4">
+          Tesla Approved è usato certificato da Tesla, con ispezione e (spesso) garanzia
+          residua o estesa secondo l'offerta del momento. Il privato costa meno e scarica
+          su di te perizia e burocrazia. In nessuno dei due casi entra il referral.
+        </p>
+      </section>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">Quando conviene la nuova</h2>
+        <p class="body-18 m-0 mt-4">
+          Conviene la nuova se vuoi garanzia di primo impianto, incentivi (se spettano),
+          software recente e <strong>referral 1.000 km — solo sul nuovo</strong>.{' '}
+          {REFERRAL_CTA} Stock rapido:{' '}
+          <a href={ROUTES.delivery} class="text-brand">pronta consegna</a>.
+        </p>
+      </section>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">Tabella: usata vs nuova con incentivi + referral</h2>
+        <div class="mt-8">
+          <SpecTable
+            caption="Confronto Tesla usata e nuova"
+            headers={['Voce', 'Usata vs nuova']}
+            rows={rows}
+            note="Fasce usato: annunci AutoScout / Tesla Approved, settembre 2026. Allinea prima di comprare."
+          />
+        </div>
+      </section>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">Domande su usato e nuovo</h2>
+        <div class="mt-6">
+          <Faq items={pageFaq} />
+        </div>
+      </section>
+
+      <div class="mt-16">
+        <CtaBanner title="Il referral è solo sul nuovo" />
+      </div>
+    </div>
+  </article>
+</BaseLayout>

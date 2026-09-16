@@ -1,0 +1,26 @@
+---
+import { render, type CollectionEntry } from 'astro:content';
+
+interface Props {
+  entry: CollectionEntry<'stores'>;
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const kindLabel =
+  entry.data.kind === 'store'
+    ? 'Store'
+    : entry.data.kind === 'delivery'
+      ? 'Delivery Center'
+      : 'Store e Delivery Center';
+---
+
+<section id={entry.data.slug} class="mt-10">
+  <h3 class="heading-22 m-0">{entry.data.heading}</h3>
+  <p class="caption-14 text-ink-soft m-0 mt-2">
+    {kindLabel} · {entry.data.address}
+  </p>
+  <div class="content-md body-18 mt-4">
+    <Content />
+  </div>
+</section>

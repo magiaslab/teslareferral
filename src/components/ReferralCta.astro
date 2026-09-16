@@ -1,0 +1,23 @@
+---
+import { REFERRAL_CTA, REFERRAL_URL, ROUTES } from '../consts';
+import Button from './Button.astro';
+
+interface Props {
+  ctaPosition?: string;
+  model?: string;
+}
+
+const { ctaPosition = 'mid', model = '' } = Astro.props;
+---
+
+<aside class="rounded-[14px] border border-brand bg-brand-tint p-6 md:p-7">
+  <p class="body-18 m-0 font-semibold text-brand-strong">{REFERRAL_CTA}</p>
+  <div class="mt-5 flex flex-col sm:flex-row gap-3">
+    <Button href={REFERRAL_URL} external icon="arrow-right" ctaPosition={ctaPosition} model={model}>
+      Ottieni i 1.000 km
+    </Button>
+    <Button variant="ghost" href={ROUTES.guide} icon="book-open">
+      Come funziona
+    </Button>
+  </div>
+</aside>

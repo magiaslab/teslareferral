@@ -1,6 +1,7 @@
 ---
 import ArticleMeta from '../components/ArticleMeta.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
+import BuyerHub from '../components/BuyerHub.astro';
 import Callout from '../components/Callout.astro';
 import CtaBanner from '../components/CtaBanner.astro';
 import Faq from '../components/Faq.astro';
@@ -34,6 +35,10 @@ const description =
         </Callout>
       </div>
 
+      <div class="mt-12">
+        <BuyerHub />
+      </div>
+
       <h2 class="heading-28 m-0 mt-12">Le domande che arrivano più spesso</h2>
       <div class="mt-6">
         <Faq items={faq as FaqItem[]} />
@@ -47,11 +52,13 @@ const description =
         {' · '}
         <a href={ROUTES.model3} class="text-brand">Model 3</a>
         {' · '}
-        <a href={ROUTES.charging} class="text-brand">ricarica LFP/NMC</a>
-        {' · '}
         <a href={ROUTES.delivery} class="text-brand">Tesla pronta consegna</a>
         {' · '}
-        <a href={ROUTES.prices} class="text-brand">prezzi e incentivi</a>.
+        <a href={ROUTES.deliveryTimes} class="text-brand">tempi di consegna</a>
+        {' · '}
+        <a href={ROUTES.prices} class="text-brand">prezzi e incentivi</a>
+        {' · '}
+        <a href={ROUTES.usedVsNew} class="text-brand">usata o nuova</a>.
       </p>
 
       <div class="mt-16">

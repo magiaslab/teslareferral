@@ -1,0 +1,20 @@
+---
+import { render, type CollectionEntry } from 'astro:content';
+
+interface Props {
+  entry: CollectionEntry<'softwareNotes'>;
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+
+<section id={entry.data.id} class="mt-16">
+  <h2 class="heading-28 m-0">{entry.data.heading}</h2>
+  <p class="caption-14 text-ink-soft m-0 mt-3">
+    Ultimo aggiornamento: {entry.data.updatedLabel}
+  </p>
+  <div class="content-md body-18 mt-4">
+    <Content />
+  </div>
+</section>

@@ -1,0 +1,203 @@
+---
+import ArticleMeta from '../components/ArticleMeta.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import Callout from '../components/Callout.astro';
+import CtaBanner from '../components/CtaBanner.astro';
+import Faq from '../components/Faq.astro';
+import KeyPoints from '../components/KeyPoints.astro';
+import ReferralCta from '../components/ReferralCta.astro';
+import SpecTable from '../components/SpecTable.astro';
+import prices from '../content/prices.json';
+import { formatVerifiedDateIt, REFERRAL_CTA, ROUTES } from '../consts';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { articlePageJsonLd } from '../lib/schema';
+import type { FaqItem, PriceRow } from '../types';
+
+const verified = formatVerifiedDateIt();
+const yRows = (prices.rows as PriceRow[]).filter((row) => row.model === 'Model Y');
+const yStd = yRows.find((row) => row.version.includes('Standard')) ?? yRows[0];
+const yPremium = yRows.find((row) => row.version.includes('Long Range RWD')) ?? yRows[1];
+if (!yStd || !yPremium) {
+  throw new Error('Listino Model Y Standard/Long Range mancante in prices.json');
+}
+
+function formatEur(value: number): string {
+  return new Intl.NumberFormat('it-IT', {
+    style: 'currency',
+    currency: 'EUR',
+    maximumFractionDigits: 0,
+  }).format(value);
+}
+
+const stdPrice = formatEur(yStd.listinoEur);
+const premiumPrice = formatEur(yPremium.listinoEur);
+const stdRange = '534 km';
+const premiumRange = 'circa 603 km';
+
+const title = 'Tesla Model Y Standard 2026: prezzo, autonomia, differenze con la Premium';
+const description =
+  'Tesla Model Y Standard: cos\'è, prezzo 2026, autonomia, batteria LFP (carica al 100%) e differenze con la Premium. Stesso listino + 1.000 km Supercharger con il referral.';
+const h1 = 'Tesla Model Y Standard: cosa cambia e a chi conviene';
+
+const diffs = [
+  { label: 'Posizionamento', value: 'Standard = versione d\'ingresso; Premium / Long Range = allestimenti superiori' },
+  { label: 'Prezzo listino', value: `${stdPrice} (Standard) vs ${premiumPrice} (Premium Long Range RWD)` },
+  { label: 'Autonomia', value: `${stdRange} WLTP (Standard) vs ${premiumRange} WLTP (Premium LR RWD)` },
+  { label: 'Batteria', value: 'Standard: LFP (carica quotidiana al 100%). Premium: da verificare in scheda' },
+  { label: 'Referral', value: '1.000 km Supercharger su entrambe, se nuove da Tesla' },
+];
+
+const pageFaq: FaqItem[] = [
+  {
+    q: 'Quanto costa la Tesla Model Y Standard?',
+    a: `Il Tesla Model Y Standard prezzo è il listino della versione d'ingresso sul configuratore: ${stdPrice}, verificato a ${verified}. Non è uno sconto rispetto alle altre: è un altro allestimento. Il referral non cambia quel numero.`,
+  },
+  {
+    q: 'Che batteria ha la Model Y Standard?',
+    a: 'Di solito LFP: in settimana si può tenere carica al 100%. Dettagli sulla chimica nella guida LFP vs NMC. Le Long Range usano chimiche diverse.',
+  },
+  {
+    q: 'Model Y Standard o Premium?',
+    a: `Standard se ti basta l'autonomia ${stdRange} e carichi a casa. Premium/Long Range se fai extraurbani lunghi o vuoi più allestimento. Il referral vale uguale su entrambe, solo sul nuovo.`,
+  },
+];
+
+const jsonLd = articlePageJsonLd({
+  path: ROUTES.modelYStandard,
+  crumbName: 'Model Y Standard',
+  headline: h1,
+  description,
+  about: 'Tesla Model Y Standard prezzo autonomia Premium',
+  crumbs: [
+    { name: 'Home', path: '/' },
+    { name: 'Model Y', path: ROUTES.modelY },
+    { name: 'Model Y Standard', path: ROUTES.modelYStandard },
+  ],
+  faqItems: pageFaq,
+  itemList: {
+    name: 'Model Y Standard vs Premium',
+    items: diffs.map((row) => ({ name: row.label, description: row.value })),
+  },
+});
+---
+
+<BaseLayout title={title} description={description} jsonLd={jsonLd}>
+  <article class="section-pad">
+    <div class="wrap max-w-[76ch]">
+      <Breadcrumb
+        items={[
+          { name: 'Home', path: '/' },
+          { name: 'Model Y', path: ROUTES.modelY },
+          { name: 'Model Y Standard', path: ROUTES.modelYStandard },
+        ]}
+      />
+      <div class="mt-4">
+        <ArticleMeta reading="Guida · Lettura 6 min" />
+      </div>
+      <h1 class="display-40 m-0 mt-4">{h1}</h1>
+      <p class="body-18 m-0 mt-6">
+        La Tesla Model Y Standard è la versione d'ingresso del SUV: listino più basso
+        ({stdPrice}), autonomia indicativa {stdRange} WLTP, batteria LFP da caricare al 100% in
+        settimana. Non è un altro modello. Il referral aggiunge 1.000 km Supercharger
+        allo stesso prezzo, se la compri nuova da Tesla.
+      </p>
+
+      <div class="mt-8">
+        <Callout title="Da sapere">
+          <p class="m-0">{REFERRAL_CTA} Vale sulla Standard come sulle altre versioni nuove.</p>
+        </Callout>
+      </div>
+
+      <div class="mt-8">
+        <KeyPoints
+          items={[
+            'Standard = RWD d\'ingresso, non un allestimento «nascosto».',
+            `Prezzo e autonomia: ${stdPrice} e ${stdRange} WLTP, da verificare su Tesla.com.`,
+            'LFP: carica quotidiana al 100%. Guida ricarica sul sito.',
+            'Referral identico: 1.000 km, codice prima dell\'ordine.',
+          ]}
+        />
+      </div>
+
+      <div class="mt-10">
+        <ReferralCta ctaPosition="mid" model="model-y-standard" />
+      </div>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">Cos'è la Model Y Standard?</h2>
+        <p class="body-18 m-0 mt-4">
+          In Italia «Tesla Model Y Standard» è di solito la RWD d'ingresso: listino più
+          basso, autonomia inferiore alle Long Range, batteria LFP. Non è un nome sul
+          cruscotto diverso: è la versione base del configuratore. Guida completa del SUV:{' '}
+          <a href={ROUTES.modelY} class="text-brand">Tesla Model Y 2026</a>.
+        </p>
+      </section>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">Model Y Standard: prezzo 2026</h2>
+        <p class="body-18 m-0 mt-4">
+          Il <strong>Tesla Model Y Standard prezzo</strong> 2026 è {stdPrice} di listino
+          (verificato a {verified}; allinea sempre al configuratore). Incentivi pubblici,
+          se spettano, sono un canale a parte.{' '}
+          <a href={ROUTES.prices} class="text-brand">Prezzi Tesla 2026 con incentivi</a>.
+        </p>
+      </section>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">Autonomia e ricarica della Standard</h2>
+        <p class="body-18 m-0 mt-4">
+          Autonomia indicativa: {stdRange} WLTP, da verificare in scheda. La batteria LFP
+          si può tenere al 100% nel quotidiano, a differenza delle NMC. Come ricaricare:{' '}
+          <a href={ROUTES.charging} class="text-brand">LFP vs NMC</a>. Casa:{' '}
+          <a href={ROUTES.homeCharging} class="text-brand">ricarica domestica</a>.
+        </p>
+      </section>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">Standard vs Premium: tabella differenze</h2>
+        <p class="body-18 m-0 mt-4">
+          «Premium» in Italia indica le versioni sopra la Standard (allestimento e spesso
+          Long Range). Cifre di riferimento da listino e schede 2026; verifica tesla.com.
+        </p>
+        <div class="mt-8">
+          <SpecTable
+            caption="Differenze Model Y Standard e Premium"
+            headers={['Voce', 'Cosa cambia']}
+            rows={diffs}
+            note="Listino e WLTP di riferimento: allinea a tesla.com prima di ordinare."
+          />
+        </div>
+      </section>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">Conviene la Standard? A chi sì e a chi no</h2>
+        <p class="body-18 m-0 mt-4">
+          Sì se fai casa–lavoro, carichi a muro e ti basta {stdRange}. No se vuoi il terzo
+          fila, viaggi extraurbani lunghi ogni settimana o cerchi l'allestimento più
+          completo. Usata vs nuova:{' '}
+          <a href={ROUTES.usedVsNew} class="text-brand">Tesla usata o nuova</a>. Stock:{' '}
+          <a href={ROUTES.delivery} class="text-brand">pronta consegna</a>.
+        </p>
+      </section>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">Model Y Standard con referral: 1.000 km inclusi</h2>
+        <p class="body-18 m-0 mt-4">
+          {REFERRAL_CTA} Solo sul nuovo comprato da Tesla, non sull'usato. Passo passo:{' '}
+          <a href={ROUTES.guide} class="text-brand">come funziona</a>.
+        </p>
+      </section>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">Domande sulla Model Y Standard</h2>
+        <div class="mt-6">
+          <Faq items={pageFaq} />
+        </div>
+      </section>
+
+      <div class="mt-16">
+        <CtaBanner title="Referral sulla Model Y Standard" model="model-y-standard" />
+      </div>
+    </div>
+  </article>
+</BaseLayout>

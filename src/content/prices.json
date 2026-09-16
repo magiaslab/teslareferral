@@ -28,8 +28,8 @@
     {
       "model": "Model Y",
       "version": "RWD / Standard",
-      "listinoEur": 44990,
-      "note": "SUV d'ingresso, LFP"
+      "listinoEur": 39990,
+      "note": "SUV d'ingresso Standard, LFP, ~534 km WLTP"
     },
     {
       "model": "Model Y",
@@ -46,7 +46,7 @@
     {
       "model": "Model Y",
       "version": "Performance",
-      "listinoEur": 59990,
+      "listinoEur": 61990,
       "note": "Allestimento sportivo"
     }
   ]

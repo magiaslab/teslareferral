@@ -1,5 +1,5 @@
 ---
-import { COOKIE_CONSENT_KEY, COOKIE_CONSENT_MAX_DAYS, GA_MEASUREMENT_ID, ROUTES } from '../consts';
+import { COOKIE_CONSENT_KEY, COOKIE_CONSENT_MAX_DAYS, ROUTES } from '../consts';
 import Icon from './Icon.astro';
 ---
 
@@ -18,8 +18,8 @@ import Icon from './Icon.astro';
         <div>
           <p id="cookie-title" class="m-0 text-base font-semibold">Cookie e misurazione</p>
           <p id="cookie-desc" class="caption-14 text-ink-soft m-0 mt-2 max-w-[48rem]">
-            Se accetti usiamo Google Analytics 4 per capire quali pagine e pulsanti servono.
-            Niente pubblicità. Dettagli nella{' '}
+            Se accetti usiamo Google Analytics 4 (cookie) per capire quali pagine e pulsanti
+            servono. Niente pubblicità. Dettagli nella{' '}
             <a href={ROUTES.cookie} class="text-brand">cookie policy</a>.
           </p>
         </div>
@@ -35,14 +35,12 @@ import Icon from './Icon.astro';
 <script
   is:inline
   define:vars={{
-    measurementId: GA_MEASUREMENT_ID,
     consentKey: COOKIE_CONSENT_KEY,
     maxDays: COOKIE_CONSENT_MAX_DAYS,
   }}
 >
   (function () {
     var banner = document.getElementById('cookie-banner');
-    var loaded = false;
 
     function getCookie(name) {
       var parts = ('; ' + document.cookie).split('; ' + name + '=');
@@ -65,14 +63,6 @@ import Icon from './Icon.astro';
     function choice() {
       var fromCookie = getCookie(consentKey);
       if (fromCookie === 'accepted' || fromCookie === 'rejected') return fromCookie;
-      try {
-        var legacy = localStorage.getItem(consentKey);
-        if (legacy === 'accepted' || legacy === 'rejected') {
-          setCookie(consentKey, legacy, maxDays);
-          localStorage.removeItem(consentKey);
-          return legacy;
-        }
-      } catch (e) {}
       return null;
     }
 
@@ -84,65 +74,29 @@ import Icon from './Icon.astro';
       if (!banner) return;
       banner.hidden = false;
       var focusTarget = banner.querySelector('[data-cookie-accept]');
-      if (focusTarget instanceof HTMLElement && document.activeElement && document.activeElement.closest('[data-cookie-prefs]')) {
+      if (
+        focusTarget instanceof HTMLElement &&
+        document.activeElement &&
+        document.activeElement.closest('[data-cookie-prefs]')
+      ) {
         focusTarget.focus();
       }
     }
 
-    function loadGtag() {
-      if (loaded || !measurementId) return;
-      loaded = true;
-      window.dataLayer = window.dataLayer || [];
-      window.gtag =
-        window.gtag ||
-        function () {
-          window.dataLayer.push(arguments);
-        };
+    function applyConsent(value) {
+      if (typeof window.gtag !== 'function') return;
       window.gtag('consent', 'update', {
-        analytics_storage: 'granted',
+        analytics_storage: value === 'accepted' ? 'granted' : 'denied',
         ad_storage: 'denied',
         ad_user_data: 'denied',
         ad_personalization: 'denied',
       });
-      var script = document.createElement('script');
-      script.async = true;
-      script.src = 'https://www.googletagmanager.com/gtag/js?id=' + measurementId;
-      script.onload = function () {
-        window.gtag('js', new Date());
-        window.gtag('config', measurementId, {
-          anonymize_ip: true,
-          allow_google_signals: false,
-          allow_ad_personalization_signals: false,
-        });
-      };
-      document.head.appendChild(script);
     }
 
     function setConsent(value) {
       setCookie(consentKey, value, maxDays);
       hideBanner();
-      if (value === 'accepted') {
-        loadGtag();
-        return;
-      }
-      if (typeof window.gtag === 'function') {
-        window.gtag('consent', 'update', {
-          analytics_storage: 'denied',
-          ad_storage: 'denied',
-        });
-      }
-    }
-
-    function trackCta(el) {
-      if (choice() !== 'accepted' || typeof window.gtag !== 'function') return;
-      var eventName = el.getAttribute('data-track-event') || 'cta_click';
-      var label = (el.textContent || '').replace(/\s+/g, ' ').trim();
-      window.gtag('event', eventName, {
-        event_category: 'conversion',
-        event_label: label,
-        link_url: el.getAttribute('href') || '',
-        transport_type: 'beacon',
-      });
+      applyConsent(value);
     }
 
     document.addEventListener('click', function (event) {
@@ -159,23 +113,16 @@ import Icon from './Icon.astro';
       if (target.closest('[data-cookie-prefs]')) {
         event.preventDefault();
         showBanner();
-        return;
       }
-      var cta = target.closest('[data-track-event]');
-      if (cta) trackCta(cta);
     });
 
     document.addEventListener('keydown', function (event) {
       if (event.key !== 'Escape' || !banner || banner.hidden) return;
-      var stored = choice();
-      if (stored) hideBanner();
+      if (choice()) hideBanner();
     });
 
     var stored = choice();
-    if (stored === 'accepted') {
-      hideBanner();
-      loadGtag();
-    } else if (stored === 'rejected') {
+    if (stored === 'accepted' || stored === 'rejected') {
       hideBanner();
     } else {
       showBanner();

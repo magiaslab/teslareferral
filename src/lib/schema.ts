@@ -218,13 +218,14 @@ export function articlePageJsonLd(opts: {
   description: string;
   about: string;
   faqItems?: FaqItem[];
+  crumbs?: Crumb[];
   itemList?: {
     name: string;
     items: { name: string; description: string; url?: string }[];
   };
 }) {
   const url = `${SITE_URL}${opts.path}`;
-  const crumbs: Crumb[] = opts.path === '/ricarica-domestica'
+  const crumbs: Crumb[] = opts.crumbs ?? (opts.path === '/ricarica-domestica'
     ? [
         { name: 'Home', path: '/' },
         { name: 'Ricarica', path: '/ricarica' },
@@ -233,7 +234,7 @@ export function articlePageJsonLd(opts: {
     : [
         { name: 'Home', path: '/' },
         { name: opts.crumbName, path: opts.path },
-      ];
+      ]);
   const nodes: object[] = [
     breadcrumbList(crumbs),
     articleNode({

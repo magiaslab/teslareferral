@@ -44,19 +44,24 @@ const description = `${BRAND} (${DOMAIN}): cookie necessari e, solo con il tuo c
 
       <h2 class="heading-28 m-0 mt-12">Cookie statistici (Google Analytics 4)</h2>
       <p class="body-18 m-0 mt-4">
-        Solo se accetti, carichiamo Google Analytics 4 (servizio di Google LLC) per
-        misurare le visite e i click sui pulsanti: link referral Tesla, mail di contatto,
-        link Octopus e altre call to action. Serve a capire quali azioni portano a una
-        conversione. Non attiviamo segnali pubblicitari né personalizzazione ads.
+        Solo se accetti, Google Analytics 4 imposta cookie statistici (_ga) per
+        misurare le visite e i click sui pulsanti: link referral Tesla, WhatsApp,
+        mail di contatto, link Octopus e altre call to action. Serve a capire quali
+        azioni portano a una conversione. Non attiviamo segnali pubblicitari né
+        personalizzazione ads.
       </p>
       <p class="body-18 m-0 mt-4">
-        Prima del consenso impostiamo Google Consent Mode v2 con
-        <code>analytics_storage</code> e <code>ad_storage</code> su <code>denied</code>.
-        Lo script gtag.js e i cookie <code>_ga</code> / <code>_ga_*</code> partono solo
-        dopo l'accettazione. I dati sono trattati da Google secondo la sua
+        Lo script gtag.js è caricato sempre (Consent Mode v2 advanced), con
+        <code>analytics_storage</code>, <code>ad_storage</code>, <code>ad_user_data</code> e
+        <code>ad_personalization</code> su <code>denied</code> finché non accetti.
+        Sono attivi <code>url_passthrough</code> e <code>ads_data_redaction</code>.
+        I cookie <code>_ga</code> / <code>_ga_*</code> partono solo dopo l'accettazione.
+        Gli eventi di click (referral, WhatsApp) possono essere inviati come ping
+        cookieless anche senza consenso, per misurare le conversioni. I dati sono
+        trattati da Google secondo la sua
         {' '}<a href="https://policies.google.com/privacy" class="text-brand" target="_blank" rel="noopener">informativa</a>.
-        Base giuridica: consenso (art. 6, par. 1, lett. a GDPR). Se rifiuti, lo script
-        non viene caricato.
+        Base giuridica del consenso ai cookie: art. 6, par. 1, lett. a GDPR. Se
+        rifiuti, i cookie analytics non vengono impostati.
       </p>
 
       <h2 class="heading-28 m-0 mt-12">Google Search Console</h2>

@@ -1,6 +1,7 @@
 ---
 import ArticleMeta from '../components/ArticleMeta.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
+import BuyerHub from '../components/BuyerHub.astro';
 import Button from '../components/Button.astro';
 import Callout from '../components/Callout.astro';
 import Card from '../components/Card.astro';
@@ -217,6 +218,10 @@ const crumbs = [
             <Faq items={faq as FaqItem[]} />
           </div>
         </section>
+
+        <div class="mt-16">
+          <BuyerHub />
+        </div>
 
         <Card class="mt-16">
           <h2 class="heading-22 m-0">Vuoi usare il link?</h2>

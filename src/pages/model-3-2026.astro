@@ -1,0 +1,196 @@
+---
+import ArticleMeta from '../components/ArticleMeta.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import Callout from '../components/Callout.astro';
+import CtaBanner from '../components/CtaBanner.astro';
+import Faq from '../components/Faq.astro';
+import KeyPoints from '../components/KeyPoints.astro';
+import ReferralCta from '../components/ReferralCta.astro';
+import SpecTable from '../components/SpecTable.astro';
+import prices from '../content/prices.json';
+import { formatVerifiedDateIt, REFERRAL_CTA, ROUTES } from '../consts';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { articlePageJsonLd } from '../lib/schema';
+import type { FaqItem, PriceRow } from '../types';
+
+const verified = formatVerifiedDateIt();
+const model3From = (prices.rows as PriceRow[])
+  .filter((row) => row.model === 'Model 3')
+  .sort((a, b) => a.listinoEur - b.listinoEur)[0];
+if (!model3From) {
+  throw new Error('Listino Model 3 mancante in prices.json');
+}
+
+function formatEur(value: number): string {
+  return new Intl.NumberFormat('it-IT', {
+    style: 'currency',
+    currency: 'EUR',
+    maximumFractionDigits: 0,
+  }).format(value);
+}
+
+const m3Price = formatEur(model3From.listinoEur);
+const m3Range = 'circa 500–520 km WLTP (Standard); oltre 600 km sulle Long Range';
+
+const title = 'Tesla Model 3 2026: novità, prezzo, autonomia e differenze con la Highland';
+const description =
+  'Tesla Model 3 2026: cosa cambia rispetto alla Highland 2024–2025, prezzo, autonomia, arrivo in Italia e tempi di consegna. Referral: stesso listino + 1.000 km Supercharger.';
+const h1 = 'Tesla Model 3 2026: tutte le novità';
+
+const diffs = [
+  { label: 'Generazione', value: '2026 in Italia = Highland già in listino (restyling 2024–2025), aggiornata da software e allestimenti' },
+  { label: 'Prezzo', value: `Da ${m3Price} (verificato a ${verified}) — stesso listino Highland in tabella prezzi` },
+  { label: 'Autonomia', value: m3Range },
+  { label: 'Software', value: 'Grok e OTA dipendono dalla release, non dall\'anno di brochure' },
+  { label: 'Referral', value: '1.000 km Supercharger su Model 3 nuova da Tesla, 2026 compresa se in vendita' },
+];
+
+const pageFaq: FaqItem[] = [
+  {
+    q: 'Quali sono le novità della Tesla Model 3 2026?',
+    a: 'Va verificato sul configuratore Tesla Italia: software, listino e allestimenti cambiano. La Highland resta il nome non ufficiale del restyling 2024–2025. Non pubblichiamo novità non confermate.',
+  },
+  {
+    q: 'Quanto costa la Model 3 2026?',
+    a: `Listino da ${m3Price} (verificato a ${verified}). Incentivi pubblici a parte. Il referral non sconta il prezzo.`,
+  },
+  {
+    q: 'Conviene aspettare la Model 3 2026?',
+    a: 'Solo se sul configuratore compare una versione che ti serve e non è già la Highland in vendita. Se ti serve l\'auto ora, pronta consegna e Highland attuale restano la strada breve. Il referral vale sul nuovo, non sull\'attesa.',
+  },
+];
+
+const jsonLd = articlePageJsonLd({
+  path: ROUTES.model3_2026,
+  crumbName: 'Model 3 2026',
+  headline: h1,
+  description,
+  about: 'Tesla Model 3 2026 novità Highland prezzo autonomia',
+  crumbs: [
+    { name: 'Home', path: '/' },
+    { name: 'Model 3', path: ROUTES.model3 },
+    { name: 'Model 3 2026', path: ROUTES.model3_2026 },
+  ],
+  faqItems: pageFaq,
+  itemList: {
+    name: 'Model 3 2026 vs Highland 2024–2025',
+    items: diffs.map((row) => ({ name: row.label, description: row.value })),
+  },
+});
+---
+
+<BaseLayout title={title} description={description} jsonLd={jsonLd}>
+  <article class="section-pad">
+    <div class="wrap max-w-[76ch]">
+      <Breadcrumb
+        items={[
+          { name: 'Home', path: '/' },
+          { name: 'Model 3', path: ROUTES.model3 },
+          { name: 'Model 3 2026', path: ROUTES.model3_2026 },
+        ]}
+      />
+      <div class="mt-4">
+        <ArticleMeta reading="Guida · Lettura 6 min" />
+      </div>
+      <h1 class="display-40 m-0 mt-4">{h1}</h1>
+      <p class="body-18 m-0 mt-6">
+        Tesla Model 3 2026 in Italia va letta sul configuratore: può coincidere con la
+        Highland già in listino o mostrare aggiornamenti di software e allestimento.
+        Prezzo da {m3Price}, autonomia {m3Range}. Il referral resta 1.000 km
+        Supercharger sul nuovo, stesso listino, codice prima dell'ordine.
+      </p>
+
+      <div class="mt-8">
+        <Callout title="Da sapere">
+          <p class="m-0">{REFERRAL_CTA} Non aspettare un «anno di brochure» per applicare il codice.</p>
+        </Callout>
+      </div>
+
+      <div class="mt-8">
+        <KeyPoints
+          items={[
+            'La Highland 2024–2025 è già la Model 3 in vendita in Italia.',
+            'Novità 2026: solo ciò che Tesla mostra in configuratore.',
+            `Prezzo e autonomia 2026: da ${m3Price} e ${m3Range}.`,
+            'Referral sul nuovo, anche se il ritiro è tra settimane.',
+          ]}
+        />
+      </div>
+
+      <div class="mt-10">
+        <ReferralCta ctaPosition="mid" model="model-3-2026" />
+      </div>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">Cosa cambia nella Model 3 2026?</h2>
+        <p class="body-18 m-0 mt-4">
+          Cambia ciò che Tesla pubblica: listino, optional, software (Grok, OTA). Non
+          attribuiamo restyling non confermati. La guida pillar resta{' '}
+          <a href={ROUTES.model3} class="text-brand">Tesla Model 3 2026: guida completa</a>.
+          Grok in auto: <a href={ROUTES.software} class="text-brand">software Tesla</a>.
+        </p>
+      </section>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">Model 3 2026 vs Highland (2024–2025)</h2>
+        <p class="body-18 m-0 mt-4">
+          Highland è il nome non ufficiale del restyling. In Italia, nel 2026, è ancora
+          la base da cui partire. La tabella confronta voci, non inventa misure.
+        </p>
+        <div class="mt-8">
+          <SpecTable
+            caption="Model 3 2026 rispetto alla Highland"
+            headers={['Voce', 'Nota']}
+            rows={diffs}
+          />
+        </div>
+      </section>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">Prezzo Model 3 2026</h2>
+        <p class="body-18 m-0 mt-4">
+          Listino da {m3Price} (verificato a {verified}). Tabella versioni già a listino:{' '}
+          <a href={ROUTES.prices} class="text-brand">prezzi Tesla 2026 con incentivi</a>.
+        </p>
+      </section>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">Autonomia Model 3 2026</h2>
+        <p class="body-18 m-0 mt-4">
+          Autonomia {m3Range}. Fasce Highland già raccolte nella{' '}
+          <a href={`${ROUTES.model3}#autonomia`} class="text-brand">sezione autonomia Model 3</a>.
+        </p>
+      </section>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">Quando arriva in Italia e tempi di consegna</h2>
+        <p class="body-18 m-0 mt-4">
+          Se è già in configuratore, i tempi sono quelli dell'ordine: stock o
+          configurata. Un eventuale nuovo allestimento, a settembre 2026, non risulta
+          in listino a parte dalla Highland già in vendita. Attesa:{' '}
+          <a href={ROUTES.deliveryTimes} class="text-brand">tempi di consegna Tesla</a> ·
+          stock: <a href={ROUTES.delivery} class="text-brand">pronta consegna</a>.
+        </p>
+      </section>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">Model 3 2026 con referral</h2>
+        <p class="body-18 m-0 mt-4">
+          {REFERRAL_CTA}{' '}
+          <a href={ROUTES.guide} class="text-brand">Come funziona il referral</a>.
+        </p>
+      </section>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">Domande sulla Model 3 2026</h2>
+        <div class="mt-6">
+          <Faq items={pageFaq} />
+        </div>
+      </section>
+
+      <div class="mt-16">
+        <CtaBanner title="Referral sulla Model 3 2026" model="model-3-2026" />
+      </div>
+    </div>
+  </article>
+</BaseLayout>

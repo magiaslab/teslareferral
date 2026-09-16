@@ -1,0 +1,145 @@
+---
+import ArticleMeta from '../components/ArticleMeta.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import Callout from '../components/Callout.astro';
+import CtaBanner from '../components/CtaBanner.astro';
+import Faq from '../components/Faq.astro';
+import KeyPoints from '../components/KeyPoints.astro';
+import ReferralCta from '../components/ReferralCta.astro';
+import StoreBlock from '../components/StoreBlock.astro';
+import { REFERRAL_CTA, ROUTES } from '../consts';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { articlePageJsonLd } from '../lib/schema';
+import type { FaqItem } from '../types';
+import { getCollection } from 'astro:content';
+
+const stores = (await getCollection('stores')).sort((a, b) => a.data.order - b.data.order);
+const title = 'Store e Delivery Center Tesla in Italia: dove provare e ritirare l\'auto';
+const description =
+  'Tesla in Italia non ha concessionari: vendita diretta. Dove sono Store e Delivery Center (Milano, Roma, Bologna, Padova, Torino, Firenze), come prenotare il test drive e come ritirare. Referral prima dell\'ordine.';
+const h1 = 'Dove sono gli Store Tesla in Italia (e perché non esistono concessionari)';
+
+const pageFaq: FaqItem[] = [
+  {
+    q: 'Dove si comprano le Tesla in Italia?',
+    a: 'Online su tesla.com, in vendita diretta. Lo Store serve a provare e farsi spiegare la configurazione, non a «chiudere» un prezzo da concessionario. Il ritiro è in Delivery Center.',
+  },
+  {
+    q: 'Esistono concessionari Tesla?',
+    a: 'No. Tesla non usa la rete concessionari tradizionale. Niente trattativa sul listino in sede. Il referral si applica nel configuratore, prima dell\'ordine.',
+  },
+  {
+    q: 'Dove si ritira una Tesla a Milano?',
+    a: 'Nel Delivery Center che Tesla assegna dopo l\'ordine, di solito il Tesla Center Milano-Vittuone in Via Vincenzo Bellini 1/3, 20009 Vittuone (MI) — non necessariamente nello Store di Piazza Gae Aulenti. Conferma su tesla.com/findus e in app.',
+  },
+];
+
+const jsonLd = articlePageJsonLd({
+  path: ROUTES.stores,
+  crumbName: 'Store Tesla Italia',
+  headline: h1,
+  description,
+  about: 'Store Delivery Center Tesla Italia vendita diretta',
+  faqItems: pageFaq,
+});
+---
+
+<BaseLayout title={title} description={description} jsonLd={jsonLd}>
+  <article class="section-pad">
+    <div class="wrap max-w-[76ch]">
+      <Breadcrumb
+        items={[{ name: 'Home', path: '/' }, { name: 'Store Tesla Italia', path: ROUTES.stores }]}
+      />
+      <div class="mt-4">
+        <ArticleMeta reading="Guida · Lettura 6 min" />
+      </div>
+      <h1 class="display-40 m-0 mt-4">{h1}</h1>
+      <p class="body-18 m-0 mt-6">
+        I concessionari Tesla in Italia non esistono: Tesla vende diretto. Si prova in
+        Store, si ordina online, si ritira in Delivery Center (Milano, Roma, Bologna,
+        Padova, Torino, Firenze). Indirizzi di riferimento sotto; conferma sempre su
+        tesla.com/findus. Il listino è quello del sito; il referral aggiunge 1.000 km
+        Supercharger se il codice è applicato prima dell'ordine.
+      </p>
+
+      <div class="mt-8">
+        <Callout title="Da sapere">
+          <p class="m-0">{REFERRAL_CTA} In Store non si «aggiunge» il codice dopo.</p>
+        </Callout>
+      </div>
+
+      <div class="mt-8">
+        <KeyPoints
+          items={[
+            'Niente concessionari: vendita diretta Tesla.',
+            'Store = prova e info. Delivery Center = ritiro.',
+            'Indirizzi: Vittuone, Roma, Bologna, Padova, Torino, Firenze — conferma su tesla.com/findus.',
+            'Ordine online con referral, anche in pronta consegna.',
+          ]}
+        />
+      </div>
+
+      <div class="mt-10">
+        <ReferralCta ctaPosition="mid" />
+      </div>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">Tesla ha concessionari? No: ecco come funziona la vendita diretta</h2>
+        <p class="body-18 m-0 mt-4">
+          Non c'è un dealer che sconta il listino. Il prezzo è sul configuratore. Lo
+          Store non sostituisce l'ordine online. Per lo stock:{' '}
+          <a href={ROUTES.delivery} class="text-brand">Tesla pronta consegna</a> (sezioni
+          città). Tempi se configuri:{' '}
+          <a href={ROUTES.deliveryTimes} class="text-brand">tempi di consegna</a>.
+        </p>
+      </section>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">Store e Delivery Center per città</h2>
+        <p class="body-18 m-0 mt-4">
+          Elenco orientativo (stampa e localizzatore Tesla). Prima di partire conferma su
+          tesla.com: le sedi cambiano.
+        </p>
+        {stores.map((store) => <StoreBlock entry={store} />)}
+      </section>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">Test drive: come prenotarlo</h2>
+        <p class="body-18 m-0 mt-4">
+          Si prenota dal sito Tesla (test drive) scegliendo Store e fascia. Porta la
+          patente. Il test drive non applica il referral: il codice si usa quando
+          apri il <a href={ROUTES.guide} class="text-brand">link prima di ordinare</a>.
+        </p>
+      </section>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">Ritiro dell'auto: cosa succede in Delivery Center</h2>
+        <p class="body-18 m-0 mt-4">
+          Dopo VIN e data, il Delivery team indica il centro. Servono documento,
+          pagamento del saldo e dati per l'immatricolazione. Controlla batteria,
+          software e danni da trasporto prima di firmare. Dettaglio post-ordine:{' '}
+          <a href={ROUTES.deliveryTimes} class="text-brand">fasi fino alla consegna</a>.
+        </p>
+      </section>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">Ordinare online con il referral</h2>
+        <p class="body-18 m-0 mt-4">
+          {REFERRAL_CTA} Vale su <a href={ROUTES.modelY} class="text-brand">Model Y</a> e{' '}
+          <a href={ROUTES.model3} class="text-brand">Model 3</a> nuove.
+        </p>
+      </section>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">Domande su Store e ritiro</h2>
+        <div class="mt-6">
+          <Faq items={pageFaq} />
+        </div>
+      </section>
+
+      <div class="mt-16">
+        <CtaBanner title="Ordina online, ritira in Delivery Center" />
+      </div>
+    </div>
+  </article>
+</BaseLayout>

@@ -1,5 +1,11 @@
 ---
-import { GSC_VERIFICATION } from '../consts';
+import {
+  COOKIE_CONSENT_KEY,
+  GA_MEASUREMENT_ID,
+  GSC_VERIFICATION,
+  PLAUSIBLE_DOMAIN,
+  UMAMI_ID,
+} from '../consts';
 ---
 
 {
@@ -7,17 +13,115 @@ import { GSC_VERIFICATION } from '../consts';
     <meta name="google-site-verification" content={GSC_VERIFICATION} />
   )
 }
-<script is:inline>
-  window.dataLayer = window.dataLayer || [];
-  function gtag() {
-    window.dataLayer.push(arguments);
-  }
-  window.gtag = gtag;
-  gtag('consent', 'default', {
-    ad_storage: 'denied',
-    ad_user_data: 'denied',
-    ad_personalization: 'denied',
-    analytics_storage: 'denied',
-    wait_for_update: 500,
-  });
+<script
+  is:inline
+  define:vars={{
+    measurementId: GA_MEASUREMENT_ID,
+    consentKey: COOKIE_CONSENT_KEY,
+    umamiId: UMAMI_ID,
+    plausibleDomain: PLAUSIBLE_DOMAIN,
+  }}
+>
+  (function () {
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      window.dataLayer.push(arguments);
+    }
+    window.gtag = gtag;
+
+    function getCookie(name) {
+      var parts = ('; ' + document.cookie).split('; ' + name + '=');
+      if (parts.length < 2) return null;
+      return decodeURIComponent(parts.pop().split(';').shift() || '');
+    }
+
+    gtag('consent', 'default', {
+      analytics_storage: 'denied',
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      wait_for_update: 500,
+    });
+    gtag('set', 'url_passthrough', true);
+    gtag('set', 'ads_data_redaction', true);
+
+    if (getCookie(consentKey) === 'accepted') {
+      gtag('consent', 'update', {
+        analytics_storage: 'granted',
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+      });
+    }
+
+    if (measurementId) {
+      var ga = document.createElement('script');
+      ga.async = true;
+      ga.src = 'https://www.googletagmanager.com/gtag/js?id=' + measurementId;
+      ga.onload = function () {
+        gtag('js', new Date());
+        gtag('config', measurementId, {
+          anonymize_ip: true,
+          allow_google_signals: false,
+          allow_ad_personalization_signals: false,
+        });
+      };
+      document.head.appendChild(ga);
+    }
+
+    if (umamiId) {
+      var umamiScript = document.createElement('script');
+      umamiScript.defer = true;
+      umamiScript.src = 'https://cloud.umami.is/script.js';
+      umamiScript.setAttribute('data-website-id', umamiId);
+      document.head.appendChild(umamiScript);
+    }
+
+    if (plausibleDomain) {
+      var plausible = document.createElement('script');
+      plausible.defer = true;
+      plausible.src = 'https://plausible.io/js/script.js';
+      plausible.setAttribute('data-domain', plausibleDomain);
+      document.head.appendChild(plausible);
+    }
+
+    function sendEvent(name, params) {
+      if (typeof window.gtag !== 'function') return;
+      var payload = { transport_type: 'beacon' };
+      for (var key in params) {
+        if (Object.prototype.hasOwnProperty.call(params, key)) payload[key] = params[key];
+      }
+      window.gtag('event', name, payload);
+    }
+
+    document.addEventListener('click', function (event) {
+      var target = event.target;
+      if (!(target instanceof Element)) return;
+      var link = target.closest('a');
+      if (!link) return;
+      var href = link.getAttribute('href') || '';
+      var path = location.pathname.replace(/\/$/, '') || '/';
+      var position = link.getAttribute('data-cta-position') || 'unknown';
+      var model = link.getAttribute('data-model') || '';
+      var isReferral =
+        link.hasAttribute('data-referral-cta') || href.indexOf('https://ts.la/') === 0;
+      if (isReferral) {
+        sendEvent('referral_click', {
+          cta_position: position,
+          page_path: path,
+          model: model,
+          link_url: href,
+        });
+        return;
+      }
+      if (href.indexOf('wa.me') !== -1 || href.indexOf('whatsapp.com') !== -1) {
+        sendEvent('whatsapp_click', {
+          cta_position: position,
+          page_path: path,
+          model: model,
+          link_url: href,
+        });
+      }
+    });
+  })();
 </script>

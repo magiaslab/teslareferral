@@ -1,0 +1,175 @@
+---
+import ArticleMeta from '../components/ArticleMeta.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import Callout from '../components/Callout.astro';
+import CtaBanner from '../components/CtaBanner.astro';
+import Faq from '../components/Faq.astro';
+import KeyPoints from '../components/KeyPoints.astro';
+import ReferralCta from '../components/ReferralCta.astro';
+import SpecTable from '../components/SpecTable.astro';
+import waitTimes from '../content/wait-times.json';
+import { REFERRAL_CTA, ROUTES } from '../consts';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { articlePageJsonLd } from '../lib/schema';
+import type { FaqItem, WaitRow } from '../types';
+
+const title = 'Tempi di consegna Tesla 2026: quanto si aspetta per Model 3 e Model Y';
+const description =
+  'Tempi di consegna Tesla in Italia nel 2026 se configuri Model 3 o Model Y da zero: da cosa dipendono, fasi post-ordine e come accorciare l\'attesa con la pronta consegna. Stima soggetta a variazioni Tesla.';
+const h1 = 'Tempi di consegna Tesla in Italia nel 2026';
+const rows = waitTimes.rows as WaitRow[];
+const typicalWait = waitTimes.typicalConfigured;
+
+const pageFaq: FaqItem[] = [
+  {
+    q: 'Quanto si aspetta una Tesla in Italia?',
+    a: `Dipende. In pronta consegna spesso 1–2 settimane. Se configuri da zero, l'attesa tipica è ${typicalWait} e cade spesso a fine trimestre. Non è una coda pubblica: VIN, transito e slot di delivery possono slittare.`,
+  },
+  {
+    q: 'I tempi di consegna Tesla cambiano a fine trimestre?',
+    a: 'Sì, di solito: a marzo, giugno, settembre e dicembre Tesla spinge i volumi. Più stock e più slot, ma anche più domanda. Una configurazione rara può slittare all\'inizio del trimestre successivo.',
+  },
+  {
+    q: 'Il referral vale se ordino oggi e ritiro tra 2 mesi?',
+    a: 'Sì, se il codice era applicato prima di confermare l\'ordine. Il ritiro successivo non lo annulla. Dopo l\'invio Tesla non associa più il link.',
+  },
+];
+
+const jsonLd = articlePageJsonLd({
+  path: ROUTES.deliveryTimes,
+  crumbName: 'Tempi di consegna',
+  headline: h1,
+  description,
+  about: 'Tempi di consegna Tesla Italia Model 3 Model Y 2026',
+  faqItems: pageFaq,
+  itemList: {
+    name: 'Versione Tesla → attesa tipica',
+    items: rows.map((row) => ({
+      name: row.version,
+      description: `Attesa tipica: ${row.wait}.`,
+    })),
+  },
+});
+---
+
+<BaseLayout title={title} description={description} jsonLd={jsonLd}>
+  <article class="section-pad">
+    <div class="wrap max-w-[76ch]">
+      <Breadcrumb
+        items={[
+          { name: 'Home', path: '/' },
+          { name: 'Tempi di consegna', path: ROUTES.deliveryTimes },
+        ]}
+      />
+      <div class="mt-4">
+        <ArticleMeta reading="Guida · Lettura 7 min" />
+      </div>
+      <h1 class="display-40 m-0 mt-4">{h1}</h1>
+      <p class="body-18 m-0 mt-6">
+        I tempi di consegna Tesla in Italia, se ordini oggi una Model 3 o una Model Y
+        configurata da zero, non sono quelli dello stock: l'attesa tipica è
+        {' '}{typicalWait} e spesso cade a fine trimestre. In pronta consegna, invece,
+        il ritiro può arrivare in 1–2 settimane. Il referral vale lo stesso: codice
+        prima dell'ordine, anche se ritiri tra due mesi.
+      </p>
+
+      <div class="mt-8">
+        <Callout title="Da sapere">
+          <p class="m-0">{REFERRAL_CTA} Il ritiro successivo non toglie i chilometri se il link era già applicato.</p>
+        </Callout>
+      </div>
+
+      <div class="mt-8">
+        <KeyPoints
+          items={[
+            `Configurata su misura: attesa ${typicalWait}, spesso fine trimestre.`,
+            'Pronta consegna: di solito 1–2 settimane, allestimento fisso.',
+            'Versione, colore e trimestre spostano la data.',
+            'Referral prima dell\'ordine: vale anche con ritiro a 2 mesi.',
+          ]}
+        />
+      </div>
+
+      <div class="mt-10">
+        <ReferralCta ctaPosition="mid" />
+      </div>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">Tempi di consegna Tesla Model 3 (2026)</h2>
+        <p class="body-18 m-0 mt-4">
+          I <strong>tempi di consegna Tesla Model 3</strong> nel 2026 dipendono da Standard,
+          Long Range o Performance e da colore/ruote. In pronta consegna valgono 1–2
+          settimane se accetti lo stock. Se configuri, l'attesa indicativa è
+          {' '}{typicalWait}: verifica la stima sul configuratore Tesla. Highland e
+          novità: <a href={ROUTES.model3} class="text-brand">Model 3</a> e{' '}
+          <a href={ROUTES.model3_2026} class="text-brand">Model 3 2026</a>.
+        </p>
+      </section>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">Tempi di consegna Tesla Model Y (2026)</h2>
+        <p class="body-18 m-0 mt-4">
+          I <strong>tempi di consegna Tesla Model Y 2026</strong> seguono lo stesso schema:
+          stock rapido, ordine su misura più lungo. Standard e Long Range possono avere
+          code diverse. Dettaglio versioni:{' '}
+          <a href={ROUTES.modelY} class="text-brand">guida Model Y</a>.
+        </p>
+      </section>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">Da cosa dipendono i tempi (trimestre, versione, colore, stock)</h2>
+        <p class="body-18 m-0 mt-4">
+          Trimestre fiscale, versione, colore poco richiesto e presenza di stock
+          spostano la data. Tesla non pubblica una coda nazionale. La tabella è una
+          stima di esperienza, non un impegno Tesla.
+        </p>
+        <div class="mt-8">
+          <SpecTable
+            caption="Versione Tesla e attesa tipica"
+            headers={['Versione', 'Attesa tipica']}
+            rows={rows.map((row) => ({ label: row.version, value: row.wait }))}
+            note={`${waitTimes.note} Pronta consegna: 1–2 settimane.`}
+          />
+        </div>
+      </section>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">Cosa succede dopo l'ordine: le fasi fino alla consegna</h2>
+        <p class="body-18 m-0 mt-4">
+          Dopo l'invio l'ordine entra nel post-ordine: Tesla assegna un VIN quando il
+          veicolo è in produzione o in stock, poi il Delivery team contatta per data,
+          luogo e pagamento. Gli stati in app (in attesa di VIN, in transito, pronto al
+          ritiro) non sono una coda pubblica: le date possono slittare.
+        </p>
+        <p class="body-18 m-0 mt-4">
+          L'acconto va versato almeno 7 giorni prima della consegna, con le istruzioni
+          del Delivery team. Il <a href={ROUTES.guide} class="text-brand">codice referral</a>{' '}
+          va applicato prima di questo punto. Dopo l'ordine non si aggiunge. Dove si
+          ritira: <a href={ROUTES.stores} class="text-brand">Store e Delivery Center</a>.
+        </p>
+      </section>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">Come accorciare l'attesa</h2>
+        <p class="body-18 m-0 mt-4">
+          L'unico modo strutturale è accettare una Tesla già prodotta.{' '}
+          <a href={ROUTES.delivery} class="text-brand">Tesla pronta consegna in Italia</a>:
+          stock nazionale, ritiro in 1–2 settimane se la configurazione ti va bene. A
+          fine trimestre di solito ce n'è di più. Listino:{' '}
+          <a href={ROUTES.prices} class="text-brand">prezzi e incentivi</a>.
+        </p>
+      </section>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">Domande sui tempi di consegna</h2>
+        <div class="mt-6">
+          <Faq items={pageFaq} />
+        </div>
+      </section>
+
+      <div class="mt-16">
+        <CtaBanner title="Il referral vale anche se ritiri tra due mesi" ctaPosition="footer" />
+      </div>
+    </div>
+  </article>
+</BaseLayout>

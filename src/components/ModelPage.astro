@@ -8,9 +8,11 @@ import CtaBanner from './CtaBanner.astro';
 import Faq from './Faq.astro';
 import KeyPoints from './KeyPoints.astro';
 import PhotoSlot from './PhotoSlot.astro';
+import ReferralCta from './ReferralCta.astro';
 import {
   formatVerifiedDateIt,
   HOW_TO_STEPS,
+  REFERRAL_CTA,
   REFERRAL_URL,
   ROUTES,
   VERIFIED_DATE,
@@ -61,14 +63,16 @@ function formatEur(value: number): string {
           <p class="body-18 m-0 mt-6">{model.quickAnswer}</p>
           <div class="mt-8">
             <Callout title="Da sapere">
-              <p class="m-0">{model.intro}</p>
+              <p class="m-0">{REFERRAL_CTA}</p>
               <p class="caption-14 text-ink-soft m-0 mt-4">
                 Controllato a {verified}. Tesla può cambiare l'offerta.
               </p>
             </Callout>
           </div>
           <div class="mt-8 flex flex-col sm:flex-row gap-4">
-            <Button href={REFERRAL_URL} external hero icon="arrow-right">Ottieni i 1.000 km</Button>
+            <Button href={REFERRAL_URL} external hero icon="arrow-right" ctaPosition="hero" model={model.slug}>
+              Ottieni i 1.000 km
+            </Button>
             <Button variant="ghost" href="#faq-modello" icon="circle-help">FAQ del modello</Button>
           </div>
         </div>
@@ -87,6 +91,10 @@ function formatEur(value: number): string {
         <KeyPoints items={model.keyPoints} />
       </div>
 
+      <div class="mt-10 max-w-[76ch]">
+        <ReferralCta ctaPosition="mid" model={model.slug} />
+      </div>
+
       <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
         <Card>
           <p class="caption-14 text-ink-soft m-0">Vantaggio</p>
@@ -103,18 +111,18 @@ function formatEur(value: number): string {
       </div>
 
       <section class="mt-16 max-w-[76ch]">
-        <h2 class="heading-28 m-0">Che cos'è la {model.name} {model.codename}?</h2>
+        <h2 class="heading-28 m-0">
+          {model.name === 'Model Y'
+            ? 'Quali versioni di Model Y esistono? (Standard, Premium, Long Range, Performance)'
+            : 'Quali versioni di Model 3 esistono?'}
+        </h2>
         <p class="body-18 m-0 mt-4">{model.why}</p>
         <ul class="body-18 mt-6 pl-6 grid gap-3">
           {model.bullets.map((bullet) => <li>{bullet}</li>)}
         </ul>
-      </section>
-
-      <section class="mt-16 max-w-[76ch]">
-        <h2 class="heading-28 m-0">Quali versioni della {model.name} ricevono i 1.000 km?</h2>
         <p class="body-18 m-0 mt-4">
-          Tutte le versioni nuove acquistate da Tesla. La chimica della batteria cambia la strategia
-          di ricarica quotidiana, non il referral: dettagli nella{' '}
+          Tutte le versioni nuove acquistate da Tesla ricevono i 1.000 km. Chimica e
+          ricarica:{' '}
           <a href={ROUTES.charging} class="text-brand">guida LFP vs NMC</a>.
         </p>
         <div class="mt-8 overflow-hidden rounded-[14px] border border-line">
@@ -196,13 +204,16 @@ function formatEur(value: number): string {
       }
 
       <section class="mt-16 max-w-[76ch]">
-        <h2 class="heading-28 m-0">C'è Tesla {model.name} pronta consegna?</h2>
+        <h2 class="heading-28 m-0">{model.name} in pronta consegna</h2>
         <p class="body-18 m-0 mt-4">{model.deliveryLead}</p>
         <p class="body-16 m-0 mt-6">
           Tempi, stock e sprint di fine trimestre:{' '}
           <a href={ROUTES.delivery} class="text-brand">Tesla pronta consegna in Italia</a>
           {' · '}
-          listino e incentivi:{' '}
+          attesa se configuri:{' '}
+          <a href={ROUTES.deliveryTimes} class="text-brand">tempi di consegna</a>
+          {' · '}
+          listino:{' '}
           <a href={ROUTES.prices} class="text-brand">prezzi Tesla 2026</a>.
         </p>
       </section>
@@ -233,7 +244,8 @@ function formatEur(value: number): string {
       <div class="mt-16">
         <CtaBanner
           title={`Referral ${model.name}: usa il codice prima dell'ordine`}
-          summary="Dopo l'invio Tesla non lo associa più. Il listino resta quello."
+          summary={REFERRAL_CTA}
+          model={model.slug}
         />
       </div>
     </div>

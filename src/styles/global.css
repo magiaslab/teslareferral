@@ -348,6 +348,27 @@
     display: none;
   }
 
+  .nav-drop-panel {
+    display: none;
+  }
+
+  .group:hover > .nav-drop-panel,
+  .group:focus-within > .nav-drop-panel {
+    display: block;
+  }
+
+  .content-md > p {
+    margin: 0;
+  }
+
+  .content-md > p + p {
+    margin-top: 1rem;
+  }
+
+  .content-md a {
+    color: var(--color-brand);
+  }
+
   .cv-auto {
     content-visibility: auto;
     contain-intrinsic-size: auto 480px;

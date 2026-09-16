@@ -86,6 +86,11 @@ export interface PriceRow {
   note: string;
 }
 
+export interface WaitRow {
+  version: string;
+  wait: string;
+}
+
 export interface Crumb {
   name: string;
   path: string;
