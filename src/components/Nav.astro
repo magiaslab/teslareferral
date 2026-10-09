@@ -1,9 +1,9 @@
 ---
-import { BRAND, isNavItemActive, MORE_LINKS, NAV_LINKS, REFERRAL_URL } from '../consts';
+import { BRAND, isNavItemActive, MORE_LINKS, normalizePath, NAV_LINKS, REFERRAL_URL } from '../consts';
 import Button from './Button.astro';
 import Icon from './Icon.astro';
 
-const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const path = normalizePath(Astro.url.pathname);
 const menuItems = [...NAV_LINKS, ...MORE_LINKS.map((link) => ({ ...link, children: undefined }))];
 ---
 

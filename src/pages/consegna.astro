@@ -7,6 +7,7 @@ import CtaBanner from '../components/CtaBanner.astro';
 import Faq from '../components/Faq.astro';
 import KeyPoints from '../components/KeyPoints.astro';
 import ReferralCta from '../components/ReferralCta.astro';
+import Step from '../components/Step.astro';
 import { formatVerifiedDateIt, REFERRAL_CTA, ROUTES } from '../consts';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { articlePageJsonLd } from '../lib/schema';
@@ -15,7 +16,7 @@ import { getCollection } from 'astro:content';
 
 const cities = (await getCollection('cities')).sort((a, b) => a.data.order - b.data.order);
 const verified = formatVerifiedDateIt();
-const title = `Tesla pronta consegna Italia (${verified}): come averla subito, città e modelli`;
+const title = `Tesla pronta consegna (${verified}): Milano, Roma, Bologna e stock Italia`;
 const description =
   'Tesla in pronta consegna in Italia: come funziona, dove si ritira (Milano, Roma, Bologna, Padova, Torino), differenze tra Model 3 e Model Y disponibili e perché a fine trimestre ce ne sono di più. Stesso prezzo + 1.000 km Supercharger con il referral.';
 const h1 = 'Tesla pronta consegna in Italia: come averla subito';
@@ -83,8 +84,30 @@ const jsonLd = articlePageJsonLd({
       </div>
 
       <div class="mt-10">
-        <ReferralCta ctaPosition="mid" />
+        <ReferralCta
+          ctaPosition="mid"
+          summary="Il link apre la mia pagina referral su Tesla.com. Da lì c'è il bottone «Scopri i veicoli in pronta consegna»: scegli l'auto e ordini con il codice già dentro. Stesso prezzo, in più 1.000 km Supercharger."
+          primaryLabel="Vedi le Tesla in pronta consegna"
+        />
       </div>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">Come vedere le Tesla in pronta consegna con il codice</h2>
+        <ol class="m-0 mt-6 flex list-none flex-col gap-6 p-0">
+          <Step n={1} title="Apri il link referral">
+            Si apre Tesla.com con la pagina «Ordina con il referral di Alessandro».
+            Parti da lì, non da una scheda già aperta.
+          </Step>
+          <Step n={2} title="Scopri i veicoli in pronta consegna">
+            È il bottone sotto la Model Y. Ti porta all'inventario Italia: filtra per
+            modello, colore e zona di ritiro.
+          </Step>
+          <Step n={3} title="Ordina dalla stessa pagina">
+            Resta tutto nella stessa scheda fino alla conferma. Se riparti da un'altra
+            scheda o da Google, prima di pagare controlla che il codice ci sia ancora.
+          </Step>
+        </ol>
+      </section>
 
       <section class="mt-16">
         <h2 class="heading-28 m-0">Cosa significa "Tesla pronta consegna"?</h2>
@@ -172,6 +195,7 @@ const jsonLd = articlePageJsonLd({
         <CtaBanner
           title="Referral prima dell'ordine, anche in pronta consegna"
           summary={REFERRAL_CTA}
+          primaryLabel="Vedi le Tesla in pronta consegna"
           ctaPosition="footer"
         />
       </div>

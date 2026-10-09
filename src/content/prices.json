@@ -1,52 +1,52 @@
 {
-  "note": "Valori di listino indicativi Tesla Italia. Segnaposto da riallineare sul configuratore tesla.com a ogni verifica. Non sono un'offerta.",
+  "note": "Prezzi in contanti per privati letti sul configuratore tesla.com il 9 ottobre 2026. Riallineare a ogni verifica. Non sono un'offerta.",
   "rows": [
     {
       "model": "Model 3",
       "version": "RWD / Standard",
-      "listinoEur": 40990,
-      "note": "Versione d'ingresso, batteria LFP"
+      "listinoEur": 36990,
+      "note": "Versione d'ingresso, 572 km WLTP"
     },
     {
       "model": "Model 3",
       "version": "Long Range RWD",
-      "listinoEur": 45990,
+      "listinoEur": 42690,
       "note": "Autonomia più alta, NMC"
     },
     {
       "model": "Model 3",
       "version": "Long Range AWD",
-      "listinoEur": 49990,
+      "listinoEur": 48790,
       "note": "Trazione integrale"
     },
     {
       "model": "Model 3",
       "version": "Performance",
-      "listinoEur": 54990,
+      "listinoEur": 57490,
       "note": "Allestimento sportivo"
     },
     {
       "model": "Model Y",
       "version": "RWD / Standard",
-      "listinoEur": 39990,
-      "note": "SUV d'ingresso Standard, LFP, ~534 km WLTP"
+      "listinoEur": 40990,
+      "note": "SUV d'ingresso, 525 km WLTP"
     },
     {
       "model": "Model Y",
       "version": "Long Range RWD",
-      "listinoEur": 49990,
+      "listinoEur": 50990,
       "note": "Autonomia più alta, NMC"
     },
     {
       "model": "Model Y",
       "version": "Long Range AWD",
-      "listinoEur": 52990,
+      "listinoEur": 53990,
       "note": "Trazione integrale"
     },
     {
       "model": "Model Y",
       "version": "Performance",
-      "listinoEur": 61990,
+      "listinoEur": 62990,
       "note": "Allestimento sportivo"
     }
   ]

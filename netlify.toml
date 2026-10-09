@@ -48,3 +48,13 @@
   from = "/referral-tesla-model-x"
   to = "/come-funziona"
   status = 301
+
+[[redirects]]
+  from = "/prezzi"
+  to = "/prezzo-incentivi"
+  status = 301
+
+[[redirects]]
+  from = "/incentivi"
+  to = "/prezzo-incentivi"
+  status = 301
