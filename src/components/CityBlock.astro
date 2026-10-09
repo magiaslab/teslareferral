@@ -1,5 +1,6 @@
 ---
 import { render, type CollectionEntry } from 'astro:content';
+import { REFERRAL_URL } from '../consts';
 
 interface Props {
   entry: CollectionEntry<'cities'>;
@@ -22,4 +23,16 @@ const isH2 = entry.data.headingLevel === 'h2';
     <Content />
   </div>
   <p class="caption-14 text-ink-soft m-0 mt-4">{entry.data.pickupNote}</p>
+  <p class="body-16 m-0 mt-3">
+    <a
+      href={REFERRAL_URL}
+      target="_blank"
+      rel="nofollow noopener"
+      class="text-brand font-semibold"
+      data-referral-cta
+      data-cta-position={`city-${entry.data.slug}`}
+    >
+      Guarda le Tesla in pronta consegna con il codice già applicato
+    </a>
+  </p>
 </section>

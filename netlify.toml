@@ -28,23 +28,40 @@
   from = "/guida/come-funziona-il-referral-tesla"
   to = "/come-funziona"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/referral-tesla-model-y"
   to = "/model-y"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/referral-tesla-model-3"
   to = "/model-3"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/referral-tesla-model-s"
   to = "/come-funziona"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/referral-tesla-model-x"
   to = "/come-funziona"
   status = 301
+  force = true
+
+[[redirects]]
+  from = "/prezzi"
+  to = "/prezzo-incentivi"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/incentivi"
+  to = "/prezzo-incentivi"
+  status = 301
+  force = true

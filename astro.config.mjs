@@ -10,6 +10,7 @@ export default defineConfig({
   output: 'static',
   build: {
     inlineStylesheets: 'always',
+    format: 'file',
   },
   redirects: {
     '/guida/come-funziona-il-referral-tesla': '/come-funziona',

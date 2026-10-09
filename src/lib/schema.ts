@@ -5,6 +5,7 @@ import {
   OG_IMAGE_PATH,
   CONTACT_EMAIL,
   MAGIASLAB_URL,
+  normalizePath,
   OWNER_NAME,
   SITE_URL,
   VERIFIED_DATE,
@@ -282,6 +283,7 @@ export function faqPageJsonLd() {
 }
 
 export function absoluteUrl(pathname: string): string {
-  if (pathname === '/') return SITE_URL;
-  return new URL(pathname.replace(/\/$/, ''), SITE_URL).href;
+  const path = normalizePath(pathname);
+  if (path === '/') return SITE_URL;
+  return new URL(path, SITE_URL).href;
 }

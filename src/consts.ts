@@ -10,7 +10,7 @@ export const CONTACT_EMAIL = 'social@magiaslab.com';
 export const CONTACT_MAILTO = `mailto:${CONTACT_EMAIL}`;
 export const MAGIASLAB_URL = 'https://www.magiaslab.com';
 /** Fonte unica per badge visibile e JSON-LD (`dateModified`). */
-export const VERIFIED_DATE = '2026-09-16';
+export const VERIFIED_DATE = '2026-10-09';
 export const REFERRAL_CTA =
   'Stesso prezzo di listino. In più 1.000 km Supercharger: applica il codice prima di ordinare';
 export const OWNER = 'Alessandro Cipriani — Magias Lab';
@@ -123,6 +123,12 @@ export const FOOTER_GROUPS: { title: string; links: SiteLink[] }[] = [
     ],
   },
 ];
+
+/** Percorso pulito della pagina: con `build.format: 'file'` Astro restituisce `/consegna.html`. */
+export function normalizePath(pathname: string): string {
+  const clean = pathname.replace(/(\/index)?\.html$/, '').replace(/\/$/, '');
+  return clean || '/';
+}
 
 export function isActivePath(path: string, link: SiteLink): boolean {
   if (link.match === 'prefix') {
