@@ -65,3 +65,103 @@
   to = "/prezzo-incentivi"
   status = 301
   force = true
+
+# Anche /pagina/ risponde 200 con il file della pagina, senza redirect.
+# Chi aveva in cache il vecchio 301 di Netlify (/pagina -> /pagina/) altrimenti
+# finisce in loop con il 301 inverso. Il canonical resta /pagina.
+
+[[redirects]]
+  from = "/come-funziona/"
+  to = "/come-funziona.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/consegna/"
+  to = "/consegna.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/cookie/"
+  to = "/cookie.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/faq/"
+  to = "/faq.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/model-3-2026/"
+  to = "/model-3-2026.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/model-3/"
+  to = "/model-3.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/model-y/"
+  to = "/model-y.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/model-y-standard/"
+  to = "/model-y-standard.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/prezzo-incentivi/"
+  to = "/prezzo-incentivi.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/privacy/"
+  to = "/privacy.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/ricarica-domestica/"
+  to = "/ricarica-domestica.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/ricarica/"
+  to = "/ricarica.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/software/"
+  to = "/software.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/store-tesla-italia/"
+  to = "/store-tesla-italia.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/tempi-di-consegna/"
+  to = "/tempi-di-consegna.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/tesla-usata-o-nuova/"
+  to = "/tesla-usata-o-nuova.html"
+  status = 200
+  force = true
