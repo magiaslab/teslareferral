@@ -77,7 +77,7 @@ Solo transizioni brevi: colore dei bottoni 150ms, chevron FAQ 160ms, scroll flui
 
 | ID | Regola | Esito prima | Correzione |
 |---|---|---|---|
-| R1 | T06/A10 MUST: link riconoscibili non solo dal colore | FAIL (109 link nel testo solo colorati; 2,6:1 al testo nel tema scuro) | sottolineatura dei link nel testo |
+| R1 | T06/A10 MUST: link riconoscibili non solo dal colore | FAIL (109 link nel testo e il link autore solo colorati; 2,6:1 al testo nel tema scuro) | sottolineatura dei link nel testo; le breadcrumb restano navigazione senza sottolineatura |
 | R2 | A02 MUST: contrasto `.num-hl` nel tema scuro | FAIL (1,49:1, cifre chiave quasi illeggibili) | `highlight` scuro #7a5f12 (5,4:1) |
 | R3 | A02 MUST: `brand-strong` su `brand-tint` scuro | FAIL (4,48:1, testo 18px semibold non è "grande") | #3cc0a0 (5,8:1) |
 | R4 | A07 MUST: `aria-haspopup` su link di navigazione senza menu ARIA | FAIL | rimosso |
@@ -94,3 +94,11 @@ Non verificati in questa revisione: screen reader (A11), zoom 200%/reflow 320px 
 - Una pagina nuova va anche in `netlify.toml` (rewrite 200 per `/pagina/`, vedi commento nel file).
 - Un colore nuovo diventa un token con il valore per entrambi i temi, e se porta testo se ne misura il contrasto.
 - Una sezione nuova deve servire a una decisione o all'orientamento (N03), non a riempire.
+
+## Prove eseguite (anteprima Netlify PR #4, Chrome desktop 1241px)
+
+- Tema scuro, `/ricarica-domestica`: evidenziatore `rgb(122, 95, 18)` sotto testo `#f2f2f0`, cifre leggibili; 9 link su 12 in `p`/`li` sottolineati, i 3 restanti erano breadcrumb (attese) e il link autore (poi corretto).
+- Tema chiaro, `/prezzo-incentivi`: tabella con `muted`/`stripe`, link "Tesla pronta consegna" sottolineato.
+- Tastiera: focus su "Consegna" apre il sottomenu, Esc reale lo chiude e il focus resta sulla voce; uscendo col focus il sottomenu torna disponibile.
+- Bottone tema: etichetta "Tema scuro" fissa, `aria-pressed` passa da true a false; nessun `aria-haspopup` rimasto.
+- Build e `astro check`: 0 errori.
