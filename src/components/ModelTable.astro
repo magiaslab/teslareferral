@@ -16,7 +16,7 @@ const { models = modelsData as Model[], footnote = defaultFootnote } = Astro.pro
   <div class="hidden sm:block overflow-hidden rounded-[14px] border border-line">
     <table class="w-full border-collapse text-left">
       <caption class="sr-only">Vantaggio referral Tesla su Model 3 e Model Y</caption>
-      <thead class="bg-[#F3F3F0] dark:bg-[#252830]">
+      <thead class="bg-muted">
         <tr>
           <th scope="col" class="body-16 font-semibold px-6 py-4 border-b border-line">Modello</th>
           <th scope="col" class="body-16 font-semibold px-6 py-4 border-b border-line">Vantaggio</th>
@@ -26,7 +26,7 @@ const { models = modelsData as Model[], footnote = defaultFootnote } = Astro.pro
       <tbody>
         {
           models.map((model, index) => (
-            <tr class={index % 2 === 0 ? 'bg-[#FAFAF8] dark:bg-paper' : 'bg-surface'}>
+            <tr class={index % 2 === 0 ? 'bg-stripe' : 'bg-surface'}>
               <th scope="row" class="body-16 font-semibold px-6 py-4 border-b border-line">
                 <a href={`/${model.slug}`} class="text-brand hover:underline">
                   {model.name}

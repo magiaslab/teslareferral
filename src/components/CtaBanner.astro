@@ -21,9 +21,9 @@ const {
 } = Astro.props;
 ---
 
-<section class="rounded-[14px] bg-[#14151A] px-7 py-12 md:px-12 md:py-16 text-[#F2F2F0]">
-  <h2 class="heading-28 m-0 text-[#F2F2F0]">{title}</h2>
-  <p class="body-18 m-0 mt-4 max-w-[40rem] text-[#9BA0AB]">{summary}</p>
+<section class="rounded-[14px] bg-night px-7 py-12 md:px-12 md:py-16 text-night-ink">
+  <h2 class="heading-28 m-0 text-night-ink">{title}</h2>
+  <p class="body-18 m-0 mt-4 max-w-[40rem] text-night-soft">{summary}</p>
   <div class="mt-8 flex flex-col sm:flex-row gap-4">
     <Button
       variant="primary"
@@ -41,7 +41,7 @@ const {
     </Button>
   </div>
   <p class="caption-14 m-0 mt-6">
-    <a href={ROUTES.guide} class="text-[#9BA0AB] underline-offset-2 hover:text-[#F2F2F0] hover:underline">
+    <a href={ROUTES.guide} class="text-night-soft underline-offset-2 hover:text-night-ink hover:underline">
       Come funziona il referral
     </a>
   </p>

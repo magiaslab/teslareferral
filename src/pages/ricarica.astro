@@ -92,7 +92,7 @@ const jsonLd = articlePageJsonLd({
         <div class="mt-8 overflow-x-auto overflow-hidden rounded-[14px] border border-line">
           <table class="w-full border-collapse text-left min-w-[36rem]">
             <caption class="sr-only">Chimica batteria e ricarica quotidiana per versione Tesla</caption>
-            <thead class="bg-[#F3F3F0] dark:bg-[#252830]">
+            <thead class="bg-muted">
               <tr>
                 <th scope="col" class="body-16 font-semibold px-6 py-4 border-b border-line">Versione</th>
                 <th scope="col" class="body-16 font-semibold px-6 py-4 border-b border-line">Chimica</th>
@@ -103,7 +103,7 @@ const jsonLd = articlePageJsonLd({
             <tbody>
               {
                 charging.map((row, index) => (
-                  <tr class={index % 2 === 0 ? 'bg-[#FAFAF8] dark:bg-paper' : 'bg-surface'}>
+                  <tr class={index % 2 === 0 ? 'bg-stripe' : 'bg-surface'}>
                     <th scope="row" class="body-16 font-semibold px-6 py-4 border-b border-line">{row.version}</th>
                     <td class="body-16 px-6 py-4 border-b border-line">{row.chemistry}</td>
                     <td class="body-16 px-6 py-4 border-b border-line">{row.daily}</td>

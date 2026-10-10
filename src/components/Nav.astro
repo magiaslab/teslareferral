@@ -11,7 +11,7 @@ const menuItems = [...NAV_LINKS, ...MORE_LINKS.map((link) => ({ ...link, childre
   <nav class="wrap flex h-16 items-center gap-3" aria-label="Principale">
     <a href="/" class="flex items-center gap-2.5 no-underline text-ink shrink-0 min-h-11">
       <span
-        class="flex h-[30px] w-[30px] items-center justify-center rounded-[6px] bg-[#0E7C66] font-display text-[18px] font-bold leading-none text-white"
+        class="flex h-[30px] w-[30px] items-center justify-center rounded-[6px] bg-mark font-display text-[18px] font-bold leading-none text-white"
         aria-hidden="true"
       >
         C
@@ -32,7 +32,6 @@ const menuItems = [...NAV_LINKS, ...MORE_LINKS.map((link) => ({ ...link, childre
                     isNavItemActive(path, link) ? 'text-brand' : 'text-ink',
                   ]}
                   aria-current={isNavItemActive(path, link) ? 'page' : undefined}
-                  aria-haspopup="true"
                 >
                   {link.label}
                   <Icon name="chevron-down" size={14} class="opacity-70" />
@@ -76,7 +75,7 @@ const menuItems = [...NAV_LINKS, ...MORE_LINKS.map((link) => ({ ...link, childre
         type="button"
         id="theme-toggle"
         class="inline-flex h-11 w-11 items-center justify-center rounded-[10px] text-ink hover:bg-brand-tint"
-        aria-label="Attiva il tema scuro"
+        aria-label="Tema scuro"
         aria-pressed="false"
       >
         <span class="dark:hidden"><Icon name="moon" size={20} /></span>
@@ -144,7 +143,6 @@ const menuItems = [...NAV_LINKS, ...MORE_LINKS.map((link) => ({ ...link, childre
     if (!btn) return;
     function sync() {
       var dark = document.documentElement.classList.contains('dark');
-      btn.setAttribute('aria-label', dark ? 'Attiva il tema chiaro' : 'Attiva il tema scuro');
       btn.setAttribute('aria-pressed', dark ? 'true' : 'false');
     }
     sync();
@@ -155,6 +153,33 @@ const menuItems = [...NAV_LINKS, ...MORE_LINKS.map((link) => ({ ...link, childre
         localStorage.setItem('theme', dark ? 'dark' : 'light');
       } catch (e) {}
       sync();
+    });
+
+    // Esc chiude il sottomenu aperto al passaggio o col focus (WCAG 1.4.13)
+    // e il menu mobile; il focus torna sulla voce che lo apre.
+    document.addEventListener('keydown', function (event) {
+      if (event.key !== 'Escape') return;
+      var openItem = document.querySelector('.group:hover, .group:focus-within');
+      if (openItem) {
+        openItem.classList.add('nav-dismissed');
+        var trigger = openItem.querySelector('a');
+        if (trigger && openItem.contains(document.activeElement)) trigger.focus();
+      }
+      var menu = document.querySelector('.nav-menu[open]');
+      if (menu) {
+        menu.removeAttribute('open');
+        var summary = menu.querySelector('summary');
+        if (summary) summary.focus();
+      }
+    });
+    document.querySelectorAll('.group').forEach(function (item) {
+      function reset() {
+        item.classList.remove('nav-dismissed');
+      }
+      item.addEventListener('mouseleave', reset);
+      item.addEventListener('focusout', function (event) {
+        if (!item.contains(event.relatedTarget)) reset();
+      });
     });
   })();
 </script>

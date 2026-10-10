@@ -128,7 +128,7 @@ function formatEur(value: number): string {
         <div class="mt-8 overflow-hidden rounded-[14px] border border-line">
           <table class="w-full border-collapse text-left">
             <caption class="sr-only">Versioni {model.name} e vantaggio referral</caption>
-            <thead class="bg-[#F3F3F0] dark:bg-[#252830]">
+            <thead class="bg-muted">
               <tr>
                 <th scope="col" class="body-16 font-semibold px-6 py-4 border-b border-line">Versione</th>
                 <th scope="col" class="body-16 font-semibold px-6 py-4 border-b border-line">Chimica</th>
@@ -138,7 +138,7 @@ function formatEur(value: number): string {
             <tbody>
               {
                 model.versions.map((version, index) => (
-                  <tr class={index % 2 === 0 ? 'bg-[#FAFAF8] dark:bg-paper' : 'bg-surface'}>
+                  <tr class={index % 2 === 0 ? 'bg-stripe' : 'bg-surface'}>
                     <th scope="row" class="body-16 font-semibold px-6 py-4 border-b border-line">{version.name}</th>
                     <td class="body-16 px-6 py-4 border-b border-line">{version.chemistry}</td>
                     <td class="body-16 px-6 py-4 border-b border-line">{version.note}</td>
@@ -169,7 +169,7 @@ function formatEur(value: number): string {
               <div class="mt-8 overflow-hidden rounded-[14px] border border-line">
                 <table class="w-full border-collapse text-left">
                   <caption class="sr-only">{section.tableCaption ?? section.h2}</caption>
-                  <thead class="bg-[#F3F3F0] dark:bg-[#252830]">
+                  <thead class="bg-muted">
                     <tr>
                       <th scope="col" class="body-16 font-semibold px-6 py-4 border-b border-line">
                         {section.tableHeaders[0]}
@@ -181,7 +181,7 @@ function formatEur(value: number): string {
                   </thead>
                   <tbody>
                     {section.tableRows.map((row, index) => (
-                      <tr class={index % 2 === 0 ? 'bg-[#FAFAF8] dark:bg-paper' : 'bg-surface'}>
+                      <tr class={index % 2 === 0 ? 'bg-stripe' : 'bg-surface'}>
                         <th scope="row" class="body-16 font-semibold px-6 py-4 border-b border-line">
                           {row.label}
                         </th>
