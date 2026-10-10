@@ -128,7 +128,7 @@ const jsonLd = articlePageJsonLd({
         <div class="mt-8 overflow-hidden rounded-[14px] border border-line">
           <table class="w-full border-collapse text-left">
             <caption class="sr-only">Ripartizione energia per fonte di ricarica</caption>
-            <thead class="bg-[#F3F3F0] dark:bg-[#252830]">
+            <thead class="bg-muted">
               <tr>
                 <th scope="col" class="body-16 font-semibold px-6 py-4 border-b border-line">Fonte</th>
                 <th scope="col" class="body-16 font-semibold px-6 py-4 border-b border-line">kWh</th>
@@ -136,7 +136,7 @@ const jsonLd = articlePageJsonLd({
               </tr>
             </thead>
             <tbody>
-              <tr class="bg-[#FAFAF8] dark:bg-paper">
+              <tr class="bg-stripe">
                 <th scope="row" class="body-16 font-semibold px-6 py-4 border-b border-line">Casa</th>
                 <td class="body-16 px-6 py-4 border-b border-line">{stats.teslaApp.homeKwh}</td>
                 <td class="body-16 px-6 py-4 border-b border-line">{stats.teslaApp.homePct}%</td>
@@ -146,7 +146,7 @@ const jsonLd = articlePageJsonLd({
                 <td class="body-16 px-6 py-4 border-b border-line">{stats.teslaApp.superchargerKwh}</td>
                 <td class="body-16 px-6 py-4 border-b border-line">{stats.teslaApp.superchargerPct}%</td>
               </tr>
-              <tr class="bg-[#FAFAF8] dark:bg-paper">
+              <tr class="bg-stripe">
                 <th scope="row" class="body-16 font-semibold px-6 py-4 border-b border-line">Altro</th>
                 <td class="body-16 px-6 py-4 border-b border-line">{stats.teslaApp.otherKwh}</td>
                 <td class="body-16 px-6 py-4 border-b border-line">{stats.teslaApp.otherPct}%</td>
