@@ -43,7 +43,7 @@ const diffs = [
   { label: 'Posizionamento', value: 'Standard = versione d\'ingresso; Premium / Long Range = allestimenti superiori' },
   { label: 'Prezzo listino', value: `${stdPrice} (Standard) vs ${premiumPrice} (Premium Long Range RWD)` },
   { label: 'Autonomia', value: `${stdRange} WLTP (Standard) vs ${premiumRange} WLTP (Premium LR RWD)` },
-  { label: 'Batteria', value: 'Standard: LFP (carica quotidiana al 100%). Premium: da verificare in scheda' },
+  { label: 'Batteria', value: 'Standard: LFP (carica quotidiana al 100%). Premium Long Range: NMC (meglio all\'80% nel quotidiano)' },
   { label: 'Referral', value: '1.000 km Supercharger su entrambe, se nuove da Tesla' },
 ];
 
@@ -112,7 +112,7 @@ const jsonLd = articlePageJsonLd({
         <KeyPoints
           items={[
             'Standard = RWD d\'ingresso, non un allestimento «nascosto».',
-            `Prezzo e autonomia: ${stdPrice} e ${stdRange} WLTP, da verificare su Tesla.com.`,
+            `Prezzo e autonomia: ${stdPrice} e ${stdRange} WLTP, listino Tesla.com di ${verified}.`,
             'LFP: carica quotidiana al 100%. Guida ricarica sul sito.',
             'Referral identico: 1.000 km, codice prima dell\'ordine.',
           ]}
@@ -146,7 +146,7 @@ const jsonLd = articlePageJsonLd({
       <section class="mt-16">
         <h2 class="heading-28 m-0">Autonomia e ricarica della Standard</h2>
         <p class="body-18 m-0 mt-4">
-          Autonomia indicativa: {stdRange} WLTP, da verificare in scheda. La batteria LFP
+          Autonomia WLTP: {stdRange} (scheda Tesla.com di {verified}). La batteria LFP
           si può tenere al 100% nel quotidiano, a differenza delle NMC. Come ricaricare:{' '}
           <a href={ROUTES.charging} class="text-brand">LFP vs NMC</a>. Casa:{' '}
           <a href={ROUTES.homeCharging} class="text-brand">ricarica domestica</a>.

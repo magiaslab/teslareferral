@@ -9,8 +9,9 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "check": "astro check",
-    "astro": "astro"
+    "check": "astro check && node scripts/check-design-system.mjs",
+    "astro": "astro",
+    "check:ds": "node scripts/check-design-system.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",
