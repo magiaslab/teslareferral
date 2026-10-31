@@ -42,6 +42,7 @@ Aggiornare il testo senza toccare i layout:
 - `src/content/wait-times.json` — attese configurate vs pronta consegna
 - `src/content/prices.json` — listino (verificare su Tesla.com)
 - `src/content/models.json` — pillar Model 3 / Model Y
+- `src/content/availability.json` — stock e consegna stimata dal configuratore, con data (box `StockStatus` su /consegna e /tempi-di-consegna). Da ricontrollare a ogni inizio e fine trimestre: se la data è vecchia il box diventa una promessa falsa
 
 ## SEO / GEO
 

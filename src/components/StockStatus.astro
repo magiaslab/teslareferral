@@ -1,0 +1,45 @@
+---
+import availability from '../content/availability.json';
+import { formatDayIt } from '../consts';
+import Icon from './Icon.astro';
+
+/**
+ * Situazione di stock e attese, da una sola fonte (`src/content/availability.json`).
+ * Va aggiornata a mano: la data in testa dice al lettore quanto è fresca.
+ */
+const day = formatDayIt(availability.checkedAt);
+const empty = availability.stock.every((row) => row.count === 0);
+---
+
+<aside class="rounded-[14px] border border-line bg-surface p-6 md:p-7">
+  <p class="heading-22 m-0 inline-flex items-center gap-2">
+    <Icon name="info" size={20} />
+    Com'è la situazione al {day}
+  </p>
+  <div class="body-16 text-ink mt-3">
+    {
+      empty ? (
+        <p class="m-0">
+          Sul sito Tesla oggi <strong>non c'è nessuna Model 3 o Model Y nuova in pronta consegna</strong>.
+          Lo stock di solito si riempie verso fine trimestre, quindi a dicembre.
+        </p>
+      ) : (
+        <p class="m-0">
+          In pronta consegna sul sito Tesla:{' '}
+          {availability.stock.map((row) => `${row.model} ${row.count}`).join(', ')}.
+        </p>
+      )
+    }
+    <p class="m-0 mt-3">Se ordini adesso una configurata, il configuratore stima:</p>
+    <ul class="m-0 mt-2 pl-5">
+      {
+        availability.configured.map((row) => (
+          <li>
+            <strong>{row.model} {row.version}</strong>: consegna {row.estimate}, {row.price}.
+          </li>
+        ))
+      }
+    </ul>
+    <p class="caption-14 text-ink-soft m-0 mt-3">{availability.source}</p>
+  </div>
+</aside>

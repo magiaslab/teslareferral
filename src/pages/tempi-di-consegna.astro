@@ -7,6 +7,7 @@ import Faq from '../components/Faq.astro';
 import KeyPoints from '../components/KeyPoints.astro';
 import ReferralCta from '../components/ReferralCta.astro';
 import SpecTable from '../components/SpecTable.astro';
+import StockStatus from '../components/StockStatus.astro';
 import waitTimes from '../content/wait-times.json';
 import { REFERRAL_CTA, ROUTES } from '../consts';
 import BaseLayout from '../layouts/BaseLayout.astro';
@@ -23,7 +24,7 @@ const typicalWait = waitTimes.typicalConfigured;
 const pageFaq: FaqItem[] = [
   {
     q: 'Quanto si aspetta una Tesla in Italia?',
-    a: `Dipende. In pronta consegna spesso 1–2 settimane. Se configuri da zero, l'attesa tipica è ${typicalWait} e cade spesso a fine trimestre. Non è una coda pubblica: VIN, transito e slot di delivery possono slittare.`,
+    a: `Dipende. In pronta consegna, quando c'è stock, spesso 1–2 settimane. Se configuri da zero, l'attesa tipica è ${typicalWait} e cade spesso a fine trimestre. Non è una coda pubblica: VIN, transito e slot di delivery possono slittare.`,
   },
   {
     q: 'I tempi di consegna Tesla cambiano a fine trimestre?',
@@ -68,10 +69,14 @@ const jsonLd = articlePageJsonLd({
       <p class="body-18 m-0 mt-6">
         I tempi di consegna Tesla in Italia, se ordini oggi una Model 3 o una Model Y
         configurata da zero, non sono quelli dello stock: l'attesa tipica è
-        {' '}{typicalWait} e spesso cade a fine trimestre. In pronta consegna, invece,
-        il ritiro può arrivare in 1–2 settimane. Il referral vale lo stesso: codice
+        {' '}{typicalWait} e spesso cade a fine trimestre. In pronta consegna, quando
+        c'è stock, il ritiro può arrivare in 1–2 settimane. Il referral vale lo stesso: codice
         prima dell'ordine, anche se ritiri tra due mesi.
       </p>
+
+      <div class="mt-8">
+        <StockStatus />
+      </div>
 
       <div class="mt-8">
         <Callout title="Da sapere">
@@ -83,7 +88,7 @@ const jsonLd = articlePageJsonLd({
         <KeyPoints
           items={[
             `Configurata su misura: attesa ${typicalWait}, spesso fine trimestre.`,
-            'Pronta consegna: di solito 1–2 settimane, allestimento fisso.',
+            'Pronta consegna: 1–2 settimane quando c\'è stock, allestimento fisso.',
             'Versione, colore e trimestre spostano la data.',
             'Referral prima dell\'ordine: vale anche con ritiro a 2 mesi.',
           ]}
@@ -99,7 +104,7 @@ const jsonLd = articlePageJsonLd({
         <p class="body-18 m-0 mt-4">
           I <strong>tempi di consegna Tesla Model 3</strong> nel 2026 dipendono da Standard,
           Long Range o Performance e da colore/ruote. In pronta consegna valgono 1–2
-          settimane se accetti lo stock. Se configuri, l'attesa indicativa è
+          settimane se c'è stock e lo accetti. Se configuri, l'attesa indicativa è
           {' '}{typicalWait}: verifica la stima sul configuratore Tesla. Highland e
           novità: <a href={ROUTES.model3} class="text-brand">Model 3</a> e{' '}
           <a href={ROUTES.model3_2026} class="text-brand">Model 3 2026</a>.
@@ -128,7 +133,7 @@ const jsonLd = articlePageJsonLd({
             caption="Versione Tesla e attesa tipica"
             headers={['Versione', 'Attesa tipica']}
             rows={rows.map((row) => ({ label: row.version, value: row.wait }))}
-            note={`${waitTimes.note} Pronta consegna: 1–2 settimane.`}
+            note={waitTimes.note}
           />
         </div>
       </section>
@@ -154,7 +159,7 @@ const jsonLd = articlePageJsonLd({
         <p class="body-18 m-0 mt-4">
           L'unico modo strutturale è accettare una Tesla già prodotta.{' '}
           <a href={ROUTES.delivery} class="text-brand">Tesla pronta consegna in Italia</a>:
-          stock nazionale, ritiro in 1–2 settimane se la configurazione ti va bene. A
+          stock nazionale, ritiro in 1–2 settimane se c'è e la configurazione ti va bene. A
           fine trimestre di solito ce n'è di più. Listino:{' '}
           <a href={ROUTES.prices} class="text-brand">prezzi e incentivi</a>.
         </p>
