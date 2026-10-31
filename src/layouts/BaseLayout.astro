@@ -87,10 +87,14 @@ const ogAbsolute = new URL(ogImage, SITE_URL).href;
   <body class="min-h-screen flex flex-col">
     <a class="skip-link" href="#contenuto">Salta al contenuto</a>
     <Nav />
-    <main id="contenuto" class="flex-1">
+    <main id="contenuto" class="flex-1" data-m-scope>
       <slot />
     </main>
     <Footer />
     <CookieBanner />
+    <script>
+      import { startScrollMotion } from '../scripts/motion/scroll-motion';
+      startScrollMotion();
+    </script>
   </body>
 </html>

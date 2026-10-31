@@ -160,6 +160,7 @@ const jsonLd = articlePageJsonLd({
           {stats.teslaApp.superchargerSessions} sessioni Supercharger su {stats.teslaApp.superchargerSites} siti.
         </p>
         <figure class="m-0 mt-8 max-w-[22rem]">
+          <div class="overflow-hidden rounded-[14px]" data-m="curtain">
           <picture>
             <source srcset="/img/charge-stats.webp" type="image/webp" />
             <img
@@ -172,6 +173,7 @@ const jsonLd = articlePageJsonLd({
               class="w-full rounded-[14px] border border-line"
             />
           </picture>
+          </div>
           <figcaption class="caption-14 text-ink-soft mt-3 m-0">
             Statistiche di ricarica dall'app Tesla, Model Y.
           </figcaption>

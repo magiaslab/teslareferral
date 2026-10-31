@@ -16,6 +16,10 @@ const jpg = `${src}.jpg`;
 ---
 
 <figure class="m-0">
+  <div
+    class="overflow-hidden rounded-[14px]"
+    data-m={priority ? undefined : 'curtain'}
+  >
   <picture>
     <source srcset={webp} type="image/webp" />
     <img
@@ -26,10 +30,11 @@ const jpg = `${src}.jpg`;
       decoding="async"
       fetchpriority={priority ? 'high' : 'low'}
       loading={priority ? 'eager' : 'lazy'}
-      class="w-full rounded-[14px] object-cover"
+      class:list={['w-full rounded-[14px] object-cover', priority && 'm-hero-settle']}
       style={`aspect-ratio: ${ratio};`}
     />
   </picture>
+  </div>
   {
     caption && (
       <figcaption class="caption-14 text-ink-soft mt-3 m-0">{caption}</figcaption>

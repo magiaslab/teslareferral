@@ -11,7 +11,7 @@ Riferimento: Magias UI Protocol v0.3 (repo `magiaslab/magias-ui-protocol`, relea
 - **Informazioni decisive (P09, C04):** il referral non sconta il listino; vale solo su Model 3/Model Y nuove comprate da Tesla; va applicato prima dell'ordine. Sono nel primo blocco di ogni pagina d'acquisto, vicino alla CTA.
 - **Voce:** quella di Alessandro, italiano parlato, "tu" al lettore, niente formule da testo generato.
 - **Profilo (G05):** generico. Non è una struttura ricettiva: il profilo ospitalità non si applica.
-- **Livello di movimento (MV00):** 0, fermo, su tutte le pagine. Solo feedback di stato e transizioni brevi; nessuna libreria di movimento (niente GSAP, Lenis, WebGL), quindi le regole ML non si applicano.
+- **Livello di movimento (MV00):** 1, editoriale, su tutte le pagine (dal 31/10/2026, prima era 0). Libreria: GSAP 3.15 con ScrollTrigger e SplitText, caricata solo se il movimento è ammesso. Niente Lenis, parallax, zoom o WebGL: quelli sono livello 2. Pulsanti e box del link referral restano sempre fermi.
 - **Servizi di terzi:** Google Analytics 4 (`googletagmanager.com`) con Consent Mode avanzato; link in uscita verso Tesla.com (`ts.la`). Quello che succede su Tesla.com dopo il clic (stock, configuratore, codice applicato) non si può verificare dal sito: si controlla a mano e si scrive in `src/content/availability.json`.
 - **Prestazioni (PF01):** soglie Core Web Vitals del protocollo (LCP ≤ 2,5 s, INP ≤ 200 ms, CLS ≤ 0,1). Dati di campo non disponibili (traffico troppo basso per il report CrUX).
 
@@ -75,9 +75,32 @@ La classe visiva non decide il livello: ogni pagina ha un solo H1 e i titoli seg
 - **Link nel testo:** dentro `main`, in `p`, `li`, `td`, `dd`, `figcaption`, `blockquote` e `.content-md` sono sottolineati; il passaggio del mouse ingrossa la riga. Per un link che non deve esserlo (navigazione, card) si usa `no-underline`.
 - **Faq:** `details/summary` nativi, chevron ruotato.
 
-## Movimento (M, MV)
+## Movimento (M, MV, ML)
 
-Livello 0. Solo transizioni brevi: colore dei bottoni 150ms, chevron FAQ 160ms, scroll fluido alle ancore. Con `prefers-reduced-motion: reduce` tutto si annulla. Nessuna animazione decorativa, nessun loop, nessuno stato iniziale nascosto: senza JavaScript la pagina è completa (MV02, MV03).
+Livello 1. Il motore è il porting in TypeScript, senza React, di `ScrollMotion` del kit `magiaslab/magias-ui-kit`: `src/scripts/motion/` (`gsap.ts` unico punto di caricamento dei plugin, `preferences.ts` ascolto di «riduci movimento», `tokens.ts` ponte fra token CSS e GSAP, `scroll-motion.ts` gli effetti). Si avvia da `BaseLayout` quando il browser è libero, dopo il primo disegno.
+
+**Token:** `--duration-fast` 150ms, `--duration-base` 250ms, `--duration-slow` 400ms, `--duration-editorial` 700ms, `--duration-long` 1100ms; `--ease-out-soft`, `--ease-editorial`, `--ease-inout`. In `:root` di `src/styles/global.css`; il codice del movimento non scrive durate sue.
+
+**Effetti (ML02, prefisso unico `data-m`):**
+
+| Attributo | Effetto | Dove |
+|---|---|---|
+| `data-m-scope` | i blocchi (`p`, `li`, `figure`, `details`, `table`, `h3`, `aside`…) entrano dal basso; gli `h2` riga per riga | su `main`, quindi tutte le pagine |
+| `data-m="reveal"` | blocco che entra dal basso | per elementi fuori da `main` |
+| `data-m="split"` | titolo riga per riga | automatico sugli `h2`; mai l'`h1` |
+| `data-m="curtain"` | la foto si apre dal centro | `PhotoSlot` non in prima schermata, schermata dell'app in `/ricarica-domestica` |
+| `data-m="line"` | filetto che si scopre da sinistra | disponibile, non usato |
+| `data-m-none` | esclude un ramo | `ReferralCta`, `CtaBanner`; il banner cookie è escluso dal motore |
+
+**Prima schermata (MV03):** in CSS, l'`h1` sale di poco partendo da opacità 0,6 (400 ms) e la foto della home si assesta da 1,04 (`.m-hero-settle`). Niente resta nascosto e nessuna classe va tolta con JavaScript. Fra una pagina e l'altra c'è la dissolvenza del browser (`@view-transition`).
+
+**Garanzie:**
+- ciò che è già visibile al caricamento non si anima;
+- lo stato nascosto lo imposta lo script, mai il CSS: senza JavaScript la pagina è completa (MV02);
+- un blocco in attesa ha opacità 0 ma resta raggiungibile da tastiera e dalla ricerca nella pagina; se riceve il focus compare subito (MV04);
+- con «riduci movimento» GSAP non si scarica; se la preferenza cambia a pagina aperta tutto torna allo stato finale (MV01). Le transizioni CSS si annullano;
+- un solo effetto per elemento (MV08); maschera dei titoli allargata per non tagliare g, p, q;
+- nessun loop, video o movimento continuo (MV05 non applicabile); nessun handler che legge il layout a ogni frame (PF05).
 
 ## Dati da confermare (G03)
 
@@ -110,8 +133,8 @@ Non verificati in questa revisione: screen reader (A11), zoom 200%/reflow 320px 
 | — | PF02 elemento LCP | PASS | home: immagine hero `priority`; le altre pagine: testo |
 | — | PF04 spazio riservato | PASS | immagini con dimensioni; banner cookie `fixed`, non sposta il contenuto |
 | — | PF01 soglie | PASS in laboratorio desktop, NON VERIFICATO su telefono | vedi prove |
-| — | MV01–MV07, PF03, PF05, ML | NON APPLICABILE | livello 0: nessuna libreria, loop, video, striscia bloccata né handler di scroll |
-| — | MV02, MV03 | PASS su sorgente | nessuno stato nascosto in CSS, nessun effetto d'ingresso |
+| — | MV05–MV07, PF03 | NON APPLICABILE | nessun loop, video, fase di acquisto sul sito né striscia bloccata |
+| — | MV00–MV04, MV08, ML01, ML02, PF05 | vedi «Movimento»; prove sull'anteprima della PR del livello 1 | livello 1 dal 31/10/2026 |
 | — | G01 token e contrasti | PASS | tabelle sopra |
 | — | G02 controlli dei moduli | NON APPLICABILE | il sito non ha moduli |
 
@@ -123,7 +146,8 @@ Ancora aperti dalla v0.2: screen reader (A11), zoom 200% e reflow 320px su tutte
 - Un colore nuovo diventa un token con il valore per entrambi i temi, e se porta testo se ne misura il contrasto.
 - Una sezione nuova deve servire a una decisione o all'orientamento (N03), non a riempire.
 - Un componente, token o classe nuovi citati qui devono esistere nel codice: `npm run check:ds` lo controlla.
-- Un effetto di movimento oltre le transizioni brevi cambia il livello (MV00): va deciso e scritto qui prima, con la scheda effetto del protocollo.
+- Un effetto nuovo si aggiunge in `src/scripts/motion/scroll-motion.ts` e nella tabella «Effetti». Parallax, zoom legati allo scroll o scroll fluido portano al livello 2 (MV00): vanno decisi prima.
+- Un blocco che non deve muoversi (un pulsante d'acquisto, un avviso) prende `data-m-none`.
 
 ## Prove eseguite (anteprima Netlify PR #4, Chrome desktop 1241px)
 
