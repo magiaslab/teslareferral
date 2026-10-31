@@ -166,4 +166,6 @@ Ancora aperti dalla v0.2: screen reader (A11), zoom 200% e reflow 320px su tutte
 | `/tempi-di-consegna` | 96 ms | primo paragrafo | 0 | 52 ms |
 | `/ricarica-domestica` | 320 ms | H1 | 0 | 275 ms |
 
+Con il movimento di livello 1 (anteprima PR #7, `/consegna`, stesso ambiente): LCP 528 ms, CLS 0,013, nessun blocco nascosto nella prima schermata, 8 `h2` su 9 divisi in righe con `aria-label` intero (il nono era già in vista), CTA referral a opacità 1, un paragrafo in attesa compare appena riceve il focus, la ricerca nella pagina trova testo non ancora rivelato, dopo lo scroll fino in fondo nessun elemento resta a opacità 0. «Riduci movimento» e JavaScript disattivato: NON VERIFICATO a runtime (il browser di prova non li emula), garantiti dal codice come sopra.
+
 Misura di laboratorio su desktop veloce: non sostituisce un telefono di fascia media con rete e CPU rallentate né i dati di campo, che restano NON VERIFICATO. INP non misurato.
