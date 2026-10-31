@@ -31,7 +31,7 @@ const empty = availability.stock.every((row) => row.count === 0);
       )
     }
     <p class="m-0 mt-3">Se ordini adesso una configurata, il configuratore stima:</p>
-    <ul class="m-0 mt-2 pl-5">
+    <ul class="m-0 mt-2 pl-5 list-disc">
       {
         availability.configured.map((row) => (
           <li>
