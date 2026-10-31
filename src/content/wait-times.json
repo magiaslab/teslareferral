@@ -1,13 +1,34 @@
 {
-  "note": "Riferimento Italia, settembre 2026: forum TESLARI (ordini Model 3 Standard aprile–maggio ancora in consegna ad agosto–settembre, alcuni slittati a ottobre–novembre; Model Y aprile con VIN ~30 giorni e ritiro 10–18 giorni dopo il saldo). Non è un impegno Tesla: la stima sul configuratore e in app può cambiare da un giorno all'altro.",
-  "typicalConfigured": "8–16 settimane",
+  "note": "Versioni base (trazione posteriore): stima del configuratore tesla.com del 31 ottobre 2026. Altre versioni: esperienze dal forum TESLARI di settembre 2026, da riverificare sul configuratore. Non è un impegno Tesla: la stima cambia da un giorno all'altro.",
+  "typicalConfigured": "10–20 settimane",
   "rows": [
-    { "version": "Model 3 RWD / Standard (configurata)", "wait": "12–20 settimane" },
-    { "version": "Model 3 Long Range (configurata)", "wait": "8–16 settimane" },
-    { "version": "Model 3 Performance (configurata)", "wait": "6–12 settimane" },
-    { "version": "Model Y Standard / RWD (configurata)", "wait": "8–16 settimane" },
-    { "version": "Model Y Long Range (configurata)", "wait": "8–16 settimane" },
-    { "version": "Model Y Performance (configurata)", "wait": "6–12 settimane" },
-    { "version": "Pronta consegna (stock, qualsiasi versione in inventario)", "wait": "1–2 settimane" }
+    {
+      "version": "Model 3 RWD / Standard (configurata)",
+      "wait": "1° trimestre 2027 (configuratore, 31/10)"
+    },
+    {
+      "version": "Model 3 Long Range (configurata)",
+      "wait": "8–16 settimane"
+    },
+    {
+      "version": "Model 3 Performance (configurata)",
+      "wait": "6–12 settimane"
+    },
+    {
+      "version": "Model Y Standard / RWD (configurata)",
+      "wait": "gennaio–febbraio 2027 (configuratore, 31/10)"
+    },
+    {
+      "version": "Model Y Long Range (configurata)",
+      "wait": "8–16 settimane"
+    },
+    {
+      "version": "Model Y Performance (configurata)",
+      "wait": "6–12 settimane"
+    },
+    {
+      "version": "Pronta consegna (stock, qualsiasi versione in inventario)",
+      "wait": "1–2 settimane quando c'è stock (al 31/10 nessuna auto nuova)"
+    }
   ]
 }

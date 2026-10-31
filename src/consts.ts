@@ -165,6 +165,13 @@ export function formatVerifiedDateIt(iso: string = VERIFIED_DATE): string {
   return `${MONTHS_IT[monthIndex]} ${year}`;
 }
 
+/** Data con il giorno: `2026-10-31` → `31 ottobre 2026`. */
+export function formatDayIt(iso: string): string {
+  const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso);
+  if (!match) return iso;
+  return `${Number(match[3])} ${MONTHS_IT[Number(match[2]) - 1]} ${match[1]}`;
+}
+
 export const HOW_TO_STEPS = [
   {
     title: 'Apri il link',
