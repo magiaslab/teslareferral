@@ -1,15 +1,19 @@
 # Design system — teslareferral.it
 
-Riferimento: Magias UI Protocol v0.2 (repo `magiaslab/magias-ui-protocol`), applicato in modalità Review + Refactor il 10/10/2026. Il protocollo non impone uno stile: qui serve a tenere esplicite le decisioni e a verificarle. L'identità del sito (verde CodiceEV, Space Grotesk + Inter, carta chiara, banner finale scuro) resta quella esistente.
+Riferimento: Magias UI Protocol v0.3 (repo `magiaslab/magias-ui-protocol`, release 0.3.0-beta.1). Prima applicazione con la v0.2 il 10/10/2026, aggiornamento alla v0.3 il 31/10/2026: le 77 regole della v0.2 non cambiano, la v0.3 aggiunge movimento ricco, prestazioni e profili. Il protocollo non impone uno stile: qui serve a tenere esplicite le decisioni e a verificarle. L'identità del sito (verde CodiceEV, Space Grotesk + Inter, carta chiara, banner finale scuro) resta quella esistente.
 
 ## Contesto (P07, C01)
 
 - **Tipo:** sito editoriale con un'azione commerciale (link referral Tesla). Indipendente, non affiliato.
 - **Chi arriva:** quasi tutti da Google, con query di acquisto ("tesla pronta consegna milano", "prezzi tesla 2026"). Pochi cercano il codice referral in sé.
 - **Compito principale:** capire tempi, prezzi e dove si ritira; poi, se compra, aprire Tesla.com con il codice prima di ordinare.
-- **Risultato atteso:** l'utente ordina dalla pagina referral (anche dallo stock in pronta consegna) e riceve 1.000 km Supercharger. Conversione misurata con l'evento GA4 `referral_click` (`cta_position`, `page_path`); i clic di chi rifiuta i cookie non compaiono nei report (Consent Mode avanzato).
+- **Risultato atteso:** l'utente ordina dalla pagina referral (dallo stock quando c'è, altrimenti con «Ordina ora») e riceve 1.000 km Supercharger. Conversione misurata con l'evento GA4 `referral_click` (`cta_position`, `page_path`); i clic di chi rifiuta i cookie non compaiono nei report (Consent Mode avanzato).
 - **Informazioni decisive (P09, C04):** il referral non sconta il listino; vale solo su Model 3/Model Y nuove comprate da Tesla; va applicato prima dell'ordine. Sono nel primo blocco di ogni pagina d'acquisto, vicino alla CTA.
 - **Voce:** quella di Alessandro, italiano parlato, "tu" al lettore, niente formule da testo generato.
+- **Profilo (G05):** generico. Non è una struttura ricettiva: il profilo ospitalità non si applica.
+- **Livello di movimento (MV00):** 0, fermo, su tutte le pagine. Solo feedback di stato e transizioni brevi; nessuna libreria di movimento (niente GSAP, Lenis, WebGL), quindi le regole ML non si applicano.
+- **Servizi di terzi:** Google Analytics 4 (`googletagmanager.com`) con Consent Mode avanzato; link in uscita verso Tesla.com (`ts.la`). Quello che succede su Tesla.com dopo il clic (stock, configuratore, codice applicato) non si può verificare dal sito: si controlla a mano e si scrive in `src/content/availability.json`.
+- **Prestazioni (PF01):** soglie Core Web Vitals del protocollo (LCP ≤ 2,5 s, INP ≤ 200 ms, CLS ≤ 0,1). Dati di campo non disponibili (traffico troppo basso per il report CrUX).
 
 ## Token
 
@@ -64,14 +68,20 @@ La classe visiva non decide il livello: ogni pagina ha un solo H1 e i titoli seg
 ## Componenti e stati (L09)
 
 - **Button** (`primary`, `secondary`, `ghost`, `on-dark`, `primary-on-dark`, `disabled`): hover, focus visibile (outline brand 2px), altezza minima 48px (52 in hero). Il link referral apre una nuova scheda con `rel="nofollow noopener"` e manda `referral_click`.
-- **ReferralCta / CtaBanner:** testo e etichetta personalizzabili per pagina (`summary`, `primaryLabel`); su `/consegna` la CTA porta allo stock in pronta consegna.
+- **ReferralCta / CtaBanner:** testo e etichetta personalizzabili per pagina (`summary`, `primaryLabel`); su `/consegna` la CTA apre la pagina referral su Tesla.com («Apri Tesla.com con il codice»), da cui si guarda lo stock o si ordina.
+- **StockStatus:** box datato con lo stato dello stock e le stime del configuratore, da `src/content/availability.json`. Su `/consegna` e `/tempi-di-consegna`.
+- **PhotoSlot:** immagine con `width`/`height` e `aspect-ratio`; `priority` solo per l'immagine della prima schermata (caricamento immediato e priorità alta), le altre in differita.
 - **Nav:** sottomenu desktop su hover e focus, si chiude con Esc; menu mobile `details`, si chiude con Esc e riporta il focus sul bottone. Bottone tema con etichetta fissa "Tema scuro" e stato in `aria-pressed`.
 - **Link nel testo:** dentro `main`, in `p`, `li`, `td`, `dd`, `figcaption`, `blockquote` e `.content-md` sono sottolineati; il passaggio del mouse ingrossa la riga. Per un link che non deve esserlo (navigazione, card) si usa `no-underline`.
-- **FAQ:** `details/summary` nativi, chevron ruotato.
+- **Faq:** `details/summary` nativi, chevron ruotato.
 
-## Movimento (M)
+## Movimento (M, MV)
 
-Solo transizioni brevi: colore dei bottoni 150ms, chevron FAQ 160ms, scroll fluido alle ancore. Con `prefers-reduced-motion: reduce` tutto si annulla. Nessuna animazione decorativa.
+Livello 0. Solo transizioni brevi: colore dei bottoni 150ms, chevron FAQ 160ms, scroll fluido alle ancore. Con `prefers-reduced-motion: reduce` tutto si annulla. Nessuna animazione decorativa, nessun loop, nessuno stato iniziale nascosto: senza JavaScript la pagina è completa (MV02, MV03).
+
+## Dati da confermare (G03)
+
+Un numero o una condizione va in pagina solo se ha fonte e data: listino e autonomia da `src/content/prices.json` e `src/content/models.json` con la data di `VERIFIED_DATE`, stock e attese da `src/content/availability.json`. Niente scritte «da verificare» o «segnaposto» al posto del dato: se il dato non c'è, la frase non si scrive. Restano ammessi i rimandi a cose che solo il lettore può controllare (la garanzia residua sul VIN di un'usata, l'indirizzo del Delivery Center nell'app).
 
 ## Esito review 10/10/2026
 
@@ -89,11 +99,31 @@ Solo transizioni brevi: colore dei bottoni 150ms, chevron FAQ 160ms, scroll flui
 
 Non verificati in questa revisione: screen reader (A11), zoom 200%/reflow 320px e text spacing su tutte le pagine (A04, A12), registro WCAG completo (A01). Il sito non dichiara conformità AA.
 
+## Esito review v0.3, 31/10/2026
+
+| ID | Regola | Esito prima | Correzione |
+|---|---|---|---|
+| V1 | G05, MV00 SHOULD: profilo, livello di movimento e servizi di terzi nel contesto | FAIL (contesto scritto per la v0.2) | campi aggiunti in «Contesto» |
+| V2 | G04 SHOULD: documento allineato al codice con controllo automatico | FAIL (descriveva ancora la CTA verso lo stock, mancava StockStatus, nessun controllo) | testo corretto, `scripts/check-design-system.mjs` (`npm run check:ds`), eseguito in `npm run check` |
+| V3 | G03 SHOULD: dati da confermare | FAIL («segnaposto da verificare» in pagina su `/consegna`; prezzo e autonomia della Model Y Standard e listini nelle risposte rapide «da verificare» anche se il dato c'era) | scritte tolte, al loro posto fonte e data |
+| V4 | PF06 SHOULD: script di terzi dopo il consenso | DEVIAZIONE motivata | `gtag.js` si carica prima della scelta con Consent Mode avanzato e consenso negato (nessun cookie). Era già così prima della v0.3: serve a contare i `referral_click`, in forma anonima, anche di chi non risponde al banner. Se si vuole il caricamento solo dopo «Accetta», si passa al Consent Mode base e si perdono quei dati |
+| — | PF02 elemento LCP | PASS | home: immagine hero `priority`; le altre pagine: testo |
+| — | PF04 spazio riservato | PASS | immagini con dimensioni; banner cookie `fixed`, non sposta il contenuto |
+| — | PF01 soglie | PASS in laboratorio desktop, NON VERIFICATO su telefono | vedi prove |
+| — | MV01–MV07, PF03, PF05, ML | NON APPLICABILE | livello 0: nessuna libreria, loop, video, striscia bloccata né handler di scroll |
+| — | MV02, MV03 | PASS su sorgente | nessuno stato nascosto in CSS, nessun effetto d'ingresso |
+| — | G01 token e contrasti | PASS | tabelle sopra |
+| — | G02 controlli dei moduli | NON APPLICABILE | il sito non ha moduli |
+
+Ancora aperti dalla v0.2: screen reader (A11), zoom 200% e reflow 320px su tutte le pagine (A04, A12), file di licenza dei font (T02.a).
+
 ## Quando si aggiunge qualcosa
 
 - Una pagina nuova va anche in `netlify.toml` (rewrite 200 per `/pagina/`, vedi commento nel file).
 - Un colore nuovo diventa un token con il valore per entrambi i temi, e se porta testo se ne misura il contrasto.
 - Una sezione nuova deve servire a una decisione o all'orientamento (N03), non a riempire.
+- Un componente, token o classe nuovi citati qui devono esistere nel codice: `npm run check:ds` lo controlla.
+- Un effetto di movimento oltre le transizioni brevi cambia il livello (MV00): va deciso e scritto qui prima, con la scheda effetto del protocollo.
 
 ## Prove eseguite (anteprima Netlify PR #4, Chrome desktop 1241px)
 
@@ -102,3 +132,14 @@ Non verificati in questa revisione: screen reader (A11), zoom 200%/reflow 320px 
 - Tastiera: focus su "Consegna" apre il sottomenu, Esc reale lo chiude e il focus resta sulla voce; uscendo col focus il sottomenu torna disponibile.
 - Bottone tema: etichetta "Tema scuro" fissa, `aria-pressed` passa da true a false; nessun `aria-haspopup` rimasto.
 - Build e `astro check`: 0 errori.
+
+## Prove eseguite v0.3 (produzione, 31/10/2026, Chrome desktop 1467px, rete di casa, senza rallentamenti)
+
+| Pagina | LCP | Elemento LCP | CLS | TTFB |
+|---|---|---|---|---|
+| `/` | 144 ms | immagine hero | 0 | 32 ms |
+| `/consegna` | 136 ms | primo paragrafo | 0 | 31 ms |
+| `/tempi-di-consegna` | 96 ms | primo paragrafo | 0 | 52 ms |
+| `/ricarica-domestica` | 320 ms | H1 | 0 | 275 ms |
+
+Misura di laboratorio su desktop veloce: non sostituisce un telefono di fascia media con rete e CPU rallentate né i dati di campo, che restano NON VERIFICATO. INP non misurato.
