@@ -42,6 +42,24 @@ for (const [, route] of doc.matchAll(/`\/([a-z][a-z0-9-]*)`/g)) {
   if (!existsSync(join(root, `src/pages/${route}.astro`))) errors.push(`pagina "/${route}" non esiste`);
 }
 
+// Effetti di movimento (ML02): ogni data-m="x" citato esiste nel motore, ogni data-m usato
+// nel codice è citato nel documento.
+const engine = readFileSync(join(root, 'src/scripts/motion/scroll-motion.ts'), 'utf8');
+const docEffects = new Set([...doc.matchAll(/`data-m="([a-z]+)"`/g)].map((m) => m[1]));
+for (const name of docEffects) {
+  if (!engine.includes(`declared('${name}')`)) errors.push(`effetto data-m="${name}" non implementato`);
+}
+const walk = (dir) =>
+  readdirSync(join(root, dir), { withFileTypes: true }).flatMap((d) =>
+    d.isDirectory() ? walk(join(dir, d.name)) : d.name.endsWith('.astro') ? [join(dir, d.name)] : [],
+  );
+for (const file of walk('src')) {
+  const src = readFileSync(join(root, file), 'utf8');
+  for (const [, name] of src.matchAll(/data-m(?:=\{[^}]*'|=")([a-z]+)['"]/g)) {
+    if (!docEffects.has(name)) errors.push(`effetto data-m="${name}" usato in ${file} ma non documentato`);
+  }
+}
+
 if (errors.length) {
   console.error(`DESIGN-SYSTEM.md non allineato al codice:\n- ${errors.join('\n- ')}`);
   process.exit(1);

@@ -33,6 +33,18 @@
   --shadow-lg: 0 12px 32px rgba(20, 21, 26, 0.1);
 }
 
+/* Token del movimento: fuori da @theme, così restano tutti in :root e il ponte JS li legge. */
+:root {
+  --ease-out-soft: cubic-bezier(0.16, 0.68, 0.28, 1);
+  --ease-editorial: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-inout: cubic-bezier(0.65, 0, 0.35, 1);
+  --duration-fast: 150ms;
+  --duration-base: 250ms;
+  --duration-slow: 400ms;
+  --duration-editorial: 700ms;
+  --duration-long: 1100ms;
+}
+
 @font-face {
   font-family: "Space Grotesk";
   src: url("/fonts/space-grotesk-600.woff2") format("woff2");
@@ -425,6 +437,31 @@
 
   .wrap {
     padding-inline: 32px;
+  }
+}
+
+/*
+ * Movimento livello 1 (dal kit magias-ui-kit/tokens/motion.css).
+ * Prima schermata (MV03): il testo è visibile al primo disegno. L'apertura si muove solo
+ * in CSS, parte da opacità 0,6 e non nasconde nulla; nessuna classe da togliere con JS.
+ */
+@media (prefers-reduced-motion: no-preference) {
+  main h1 {
+    animation: m-rise var(--duration-slow) var(--ease-out-soft) both;
+  }
+  .m-hero-settle {
+    animation: m-settle var(--duration-long) var(--ease-editorial) both;
+  }
+  @keyframes m-settle {
+    from { transform: scale(1.04); }
+    to { transform: none; }
+  }
+  @keyframes m-rise {
+    from { transform: translateY(0.4em); opacity: 0.6; }
+    to { transform: none; opacity: 1; }
+  }
+  @view-transition {
+    navigation: auto;
   }
 }
 
