@@ -70,6 +70,8 @@ La classe visiva non decide il livello: ogni pagina ha un solo H1 e i titoli seg
 - **Button** (`primary`, `secondary`, `ghost`, `on-dark`, `primary-on-dark`, `disabled`): hover, focus visibile (outline brand 2px), altezza minima 48px (52 in hero). Il link referral apre una nuova scheda con `rel="nofollow noopener"` e manda `referral_click`.
 - **ReferralCta / CtaBanner:** testo e etichetta personalizzabili per pagina (`summary`, `primaryLabel`); su `/consegna` la CTA apre la pagina referral su Tesla.com («Apri Tesla.com con il codice»), da cui si guarda lo stock o si ordina.
 - **StockStatus:** box datato con lo stato dello stock e le stime del configuratore, da `src/content/availability.json`. Su `/consegna` e `/tempi-di-consegna`.
+- **TadBanner:** banner scuro della home sulla guida assistita, con un'illustrazione SVG disegnata a mano (bandiera italiana, strada, etichetta «Approvato e utilizzabile»). I colori della bandiera sono fissi e valgono in entrambi i temi; il testo dell'etichetta, #14151a su `brand` scuro, è a 6,2:1. I pulsanti portano alle guide interne, non al referral.
+- **Sources:** elenco delle fonti in fondo alle guide con dati che cambiano, con la data del controllo.
 - **PhotoSlot:** immagine con `width`/`height` e `aspect-ratio`; `priority` solo per l'immagine della prima schermata (caricamento immediato e priorità alta), le altre in differita.
 - **Nav:** sottomenu desktop su hover e focus, si chiude con Esc; menu mobile `details`, si chiude con Esc e riporta il focus sul bottone. Bottone tema con etichetta fissa "Tema scuro" e stato in `aria-pressed`.
 - **Link nel testo:** dentro `main`, in `p`, `li`, `td`, `dd`, `figcaption`, `blockquote` e `.content-md` sono sottolineati; il passaggio del mouse ingrossa la riga. Per un link che non deve esserlo (navigazione, card) si usa `no-underline`.
@@ -88,7 +90,7 @@ Livello 1. Il motore è il porting in TypeScript, senza React, di `ScrollMotion`
 | `data-m-scope` | i blocchi (`p`, `li`, `figure`, `details`, `table`, `h3`, `aside`…) entrano dal basso; gli `h2` riga per riga | su `main`, quindi tutte le pagine |
 | `data-m="reveal"` | blocco che entra dal basso | per elementi fuori da `main` |
 | `data-m="split"` | titolo riga per riga | automatico sugli `h2`; mai l'`h1` |
-| `data-m="curtain"` | la foto si apre dal centro | `PhotoSlot` non in prima schermata, schermata dell'app in `/ricarica-domestica` |
+| `data-m="curtain"` | la foto si apre dal centro | `PhotoSlot` non in prima schermata, schermata dell'app in `/ricarica-domestica`, illustrazione di `TadBanner` |
 | `data-m="line"` | filetto che si scopre da sinistra | disponibile, non usato |
 | `data-m-none` | esclude un ramo | `ReferralCta`, `CtaBanner`; il banner cookie è escluso dal motore |
 
