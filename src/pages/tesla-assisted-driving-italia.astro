@@ -1,0 +1,302 @@
+---
+import ArticleMeta from '../components/ArticleMeta.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import Callout from '../components/Callout.astro';
+import CtaBanner from '../components/CtaBanner.astro';
+import Faq from '../components/Faq.astro';
+import KeyPoints from '../components/KeyPoints.astro';
+import ReferralCta from '../components/ReferralCta.astro';
+import Sources from '../components/Sources.astro';
+import tad from '../content/assisted-driving.json';
+import { ROUTES, formatDayIt } from '../consts';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { articlePageJsonLd } from '../lib/schema';
+import type { FaqItem } from '../types';
+
+const approved = formatDayIt(tad.approvedOn);
+const checked = formatDayIt(tad.checkedAt);
+const transferDeadline = formatDayIt(tad.transferOrderDeadline);
+const price = `${tad.monthlyPrice} €`;
+
+const title = 'Tesla Assisted Driving in Italia (ex FSD): prezzo, auto compatibili, attivazione';
+const description = `Dal ${approved} la guida assistita Tesla (ex FSD Supervisionato) è approvata in Italia: cosa fa, quali Tesla la ricevono, ${price} al mese e come attivarla passo per passo.`;
+const h1 = 'Tesla Assisted Driving in Italia: cos\'è l\'ex FSD, quanto costa e come si attiva';
+
+const pageFaq: FaqItem[] = [
+  {
+    q: 'L\'FSD di Tesla è approvato in Italia?',
+    a: `Sì. Dal ${approved} l'Italia è nell'elenco dei paesi in cui Tesla Assisted Driving, il nome europeo di FSD Supervisionato, si può usare. È il dodicesimo paese europeo. L'auto la riceve con un aggiornamento software, che arriva a scaglioni.`,
+  },
+  {
+    q: 'Quanto costa Tesla Assisted Driving in Italia?',
+    a: `${price} al mese IVA inclusa, solo in abbonamento: non si compra più una volta per tutte. Si disdice quando vuoi dall'app e resta attivo fino alla fine del mese pagato. Con una Tesla nuova l'abbonamento parte dopo un mese di prova.`,
+  },
+  {
+    q: 'Tesla Assisted Driving è guida autonoma?',
+    a: 'No. È un aiuto alla guida che richiede la tua supervisione: guardi la strada, sei pronto a intervenire e resti responsabile della guida in ogni momento.',
+  },
+  {
+    q: 'Funziona sulle Tesla con Hardware 3?',
+    a: 'Non ancora. Sulle auto che non hanno l\'hardware richiesto Tesla permette di abbonarsi solo a Tesla Assisted Driving Basic. Per la versione completa sulle auto più vecchie bisogna aspettare un\'approvazione europea.',
+  },
+  {
+    q: 'Funziona anche all\'estero?',
+    a: 'Solo nei paesi che l\'hanno approvato. Avvicinandoti al confine di un paese che non l\'ha approvato ricevi un avviso e il sistema si disattiva.',
+  },
+  {
+    q: 'Cambia qualcosa per il referral?',
+    a: 'No. Il referral dà circa 1.000 km Supercharger su una Model 3 o Model Y nuova ordinata con il codice. La guida assistita è un abbonamento a parte, che puoi aggiungere all\'ordine.',
+  },
+];
+
+const jsonLd = articlePageJsonLd({
+  path: ROUTES.assistedDriving,
+  crumbName: 'Guida assistita in Italia',
+  headline: h1,
+  description,
+  about: 'Tesla Assisted Driving FSD Supervisionato Italia approvazione prezzo abbonamento',
+  faqItems: pageFaq,
+  date: tad.checkedAt,
+});
+---
+
+<BaseLayout title={title} description={description} jsonLd={jsonLd}>
+  <article class="section-pad">
+    <div class="wrap max-w-[76ch]">
+      <Breadcrumb
+        items={[
+          { name: 'Home', path: '/' },
+          { name: 'Guida assistita in Italia', path: ROUTES.assistedDriving },
+        ]}
+      />
+      <div class="mt-4">
+        <ArticleMeta reading="Guida · Lettura 8 min" verifiedOn={tad.checkedAt} withDay />
+      </div>
+      <h1 class="display-40 m-0 mt-4">{h1}</h1>
+      <p class="body-18 m-0 mt-6">
+        Il {approved} l'Italia è entrata nell'elenco dei paesi in cui si può usare Tesla Assisted
+        Driving, il nome che Tesla usa in Europa per l'FSD Supervisionato. Con la tua supervisione
+        l'auto guida quasi ovunque: cambia corsia, sceglie gli incroci del percorso, fa le svolte e le
+        rotonde, entra ed esce dall'autostrada. Costa {price} al mese, solo in abbonamento, e arriva
+        con un aggiornamento software. A me è arrivato la mattina dopo.
+      </p>
+
+      <div class="mt-8">
+        <Callout title={`Com'è la situazione al ${checked}`}>
+          <ul class="m-0 pl-5 grid gap-2 list-disc">
+            <li>Approvato in Italia, dodicesimo paese europeo dopo {tad.countries.slice(0, -1).join(', ')}.</li>
+            <li>L'aggiornamento sta arrivando alle auto a scaglioni: non tutte lo ricevono lo stesso giorno.</li>
+            <li>Per ora serve l'hardware più recente. Le Tesla con Hardware 3 aspettano.</li>
+            <li>{price} al mese, niente acquisto definitivo. Con un'auto nuova il primo mese è di prova.</li>
+          </ul>
+        </Callout>
+      </div>
+
+      <div class="mt-8">
+        <KeyPoints
+          items={[
+            'È un aiuto alla guida: guardi la strada e la responsabilità resta tua.',
+            `${price} al mese, si disdice dall'app quando vuoi. Niente rimborsi del mese in corso.`,
+            'Lo attivi dal menu dell\'auto dopo un video e un quiz obbligatori.',
+            'Dalle Tesla ordinate adesso è sparito l\'Autopilot di serie: resta il Cruise Control adattivo.',
+          ]}
+        />
+      </div>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">Cosa fa Tesla Assisted Driving</h2>
+        <p class="body-18 m-0 mt-4">
+          Imposti la destinazione e l'auto segue il percorso: tiene le curve, si ferma e dà la
+          precedenza agli incroci, svolta, fa le rotonde, entra ed esce dall'autostrada, cambia
+          corsia e aggira veicoli e ostacoli. Funziona anche in città e nelle strade di quartiere, non
+          solo in autostrada.
+        </p>
+        <p class="body-18 m-0 mt-4">Nello stesso pacchetto Tesla mette:</p>
+        <ul class="body-18 mt-4 pl-6 grid gap-3">
+          <li>
+            <strong>Actually Smart Summon</strong>: dall'app fai venire l'auto verso di te in un
+            parcheggio, controllandola da fuori.
+          </li>
+          <li><strong>Dumb Summon</strong>: sposta l'auto avanti e indietro in uno spazio stretto.</li>
+          <li><strong>Autopark</strong>: parcheggio automatico in parallelo o a pettine.</li>
+        </ul>
+        <p class="body-18 m-0 mt-4">
+          Cosa non fa: non trasforma la Tesla in un'auto che guida da sola. Devi guardare la strada ed
+          essere pronto a riprendere il volante. Chi l'ha già usato all'estero racconta che per ora,
+          in Europa, non va a cercarsi il parcheggio come negli Stati Uniti: arrivato a destinazione
+          parcheggi tu o usi l'Autopark.
+        </p>
+      </section>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">Com'è arrivata l'approvazione</h2>
+        <p class="body-18 m-0 mt-4">
+          Il primo paese è stato l'Olanda: l'ente olandese per i veicoli (RDW) ha dato un'approvazione
+          provvisoria con la procedura europea per le tecnologie nuove, l'articolo 39. Gli altri
+          paesi, Italia compresa, l'hanno riconosciuta. Vale nei paesi che l'hanno approvata, non in
+          tutta Europa. Un voto europeo che la estenderebbe a tutti è atteso non prima di dicembre.
+        </p>
+        <p class="body-18 m-0 mt-4">
+          Se il voto europeo andasse male, l'approvazione italiana resta: è una decisione del nostro
+          paese. Lo spiega anche Lampi di Tesla nella diretta del 20 novembre.
+        </p>
+      </section>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">Quali Tesla possono usarlo</h2>
+        <p class="body-18 m-0 mt-4">
+          Tesla scrive che serve «la versione hardware richiesta». In pratica, oggi è il computer di
+          guida più recente, l'Hardware 4 (detto anche AI4): è quello su cui è stata fatta
+          l'approvazione olandese. Per vedere quale hai: in auto vai in <em>Software</em> e poi in
+          <em>Informazioni aggiuntive sul veicolo</em>, alla voce del computer di guida autonoma.
+        </p>
+        <p class="body-18 m-0 mt-4">
+          Con l'Hardware 3 per ora puoi abbonarti solo a Tesla Assisted Driving Basic, sempre a{' '}
+          {price} al mese. Se più avanti l'auto diventa idonea, Tesla dice che l'abbonamento Basic
+          passa da solo alla versione completa, senza costi in più. Chi segue Tesla da vicino si
+          aspetta una versione per l'Hardware 3 solo dopo il voto europeo.
+        </p>
+        <p class="body-18 m-0 mt-4">
+          Le funzioni possono cambiare anche per modello, allestimento, anno e versione del software.
+          Il controllo che conta è nell'app: <em>Upgrade</em> → <em>Upgrade software</em>. Se l'auto è
+          idonea, lì trovi l'abbonamento.
+        </p>
+      </section>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">Quanto costa</h2>
+        <ul class="body-18 mt-4 pl-6 grid gap-3">
+          <li>
+            <strong>{price} al mese</strong> IVA inclusa, rinnovo automatico ogni mese. Fanno{' '}
+            {(tad.monthlyPrice * 12).toLocaleString('it-IT')} € l'anno se lo tieni sempre.
+          </li>
+          <li>
+            <strong>Niente acquisto definitivo.</strong> Tesla lo vende solo in abbonamento.
+          </li>
+          <li>
+            <strong>Disdetta quando vuoi</strong> dall'app. Resta attivo fino alla fine del mese
+            pagato; il mese in corso non viene rimborsato, salvo il diritto di recesso previsto dalla
+            legge.
+          </li>
+          <li>
+            <strong>Auto nuova:</strong> lo aggiungi all'ordine e l'abbonamento parte dopo un mese di
+            prova.
+          </li>
+        </ul>
+        <p class="body-18 m-0 mt-4">
+          Chi ha già comprato l'Autopilot avanzato racconta di vedere nell'app un prezzo di 49 € al
+          mese. Sulle pagine di Tesla Italia questo prezzo non c'è: prima di abbonarti guarda quanto ti
+          chiede l'app.
+        </p>
+        <p class="body-18 m-0 mt-4">
+          Un consiglio: abbonati quando l'aggiornamento è già sulla tua auto. Così non paghi giorni
+          in cui non puoi usarlo.
+        </p>
+      </section>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">Come si attiva, passo per passo</h2>
+        <h3 class="heading-22 m-0 mt-6">Nell'app Tesla</h3>
+        <ol class="body-18 mt-4 pl-6 grid gap-3">
+          <li>Apri l'app e tocca <em>Upgrade</em> → <em>Upgrade software</em>.</li>
+          <li>In alto tocca <em>Abbonati</em>.</li>
+          <li>Tocca <em>Aggiungi</em> accanto a Tesla Assisted Driving.</li>
+        </ol>
+        <p class="body-16 text-ink-soft m-0 mt-3">
+          Può farlo solo l'account del proprietario dell'auto, non quello di un altro guidatore.
+        </p>
+        <h3 class="heading-22 m-0 mt-8">In auto</h3>
+        <ol class="body-18 mt-4 pl-6 grid gap-3">
+          <li>Installa l'aggiornamento software, se non l'hai già fatto.</li>
+          <li>Tocca <em>Comandi</em> → <em>Assisted Driving</em> → <em>Tesla Assisted Driving</em>.</li>
+          <li>Leggi e accetta il contratto.</li>
+          <li>Guarda il video di Tesla, che è obbligatorio.</li>
+          <li>Rispondi bene al quiz.</li>
+        </ol>
+        <p class="body-18 m-0 mt-4">
+          Per inserirlo premi la rotellina destra del volante, sotto i {tad.maxEngageKmh} km/h (o sotto
+          il limite massimo del paese). Se è attivo vedi la scritta «Tesla Assisted Driving» in blu,
+          un volante blu e una linea blu sul percorso. Ad auto ferma puoi partire anche con «Avvia
+          Tesla Assisted Driving» sullo schermo.
+        </p>
+        <p class="body-18 m-0 mt-4">
+          Per toglierlo: premi il freno, giri il volante, premi la rotellina destra o, sulle auto che
+          ce l'hanno, alzi la leva del cambio.
+        </p>
+      </section>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">Velocità e limiti</h2>
+        <p class="body-18 m-0 mt-4">
+          L'auto sceglie la velocità in base a strada, traffico, meteo e limite, senza superare la
+          velocità massima che hai impostato. Puoi regolarla in tre modi: con la rotellina destra,
+          con uno scostamento in percentuale rispetto al limite oppure con la «velocità massima
+          contestuale», che si adatta a quello che l'auto vede.
+        </p>
+        <p class="body-18 m-0 mt-4">
+          Chi l'ha provato racconta che oltre il 10% sopra il limite l'auto chiede una conferma: un
+          clic in su sulla rotellina. Senza conferma resta sotto. La velocità resta comunque una tua
+          responsabilità.
+        </p>
+      </section>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">Distrazione: avvisi e sospensione</h2>
+        <p class="body-18 m-0 mt-4">
+          Se ti distrai l'auto ti avvisa con suoni e messaggi. Se insisti, il sistema si spegne per il
+          resto del viaggio e conta un avviso. Dopo tre o cinque avvisi, secondo la configurazione,
+          resta sospeso per circa una settimana. Un avviso si cancella dopo mezza settimana se non ne
+          prendi altri. Quanti te ne restano lo vedi in <em>Comandi</em> → <em>Assisted Driving</em>.
+          Toglierlo tu, con freno o volante, non conta come avviso.
+        </p>
+      </section>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">All'estero</h2>
+        <p class="body-18 m-0 mt-4">
+          Funziona nei paesi che l'hanno approvato: oggi {tad.countries.join(', ')}. Se vai verso un
+          paese che non l'ha approvato, vicino al confine ricevi un avviso e il sistema si spegne. Lì
+          torni alle funzioni che avevi prima sull'auto.
+        </p>
+      </section>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">Se stai per comprare una Tesla</h2>
+        <p class="body-18 m-0 mt-4">
+          Dalle auto ordinate adesso è sparito l'Autopilot di serie: resta il Cruise Control
+          adattivo, mentre per farti tenere la corsia e cambiarla serve l'abbonamento. Chi ha già
+          l'Autopilot, avanzato o FSD si chiede cosa succede alla sua auto. Ho messo tutto in una
+          pagina:{' '}
+          <a href={ROUTES.autopilot} class="text-brand">Autopilot Tesla, cosa cambia</a>. Se hai FSD
+          comprato e vuoi cambiare auto, c'è una scadenza: l'ordine della nuova Tesla va fatto entro
+          il {transferDeadline}.
+        </p>
+      </section>
+
+      <div class="mt-10">
+        <ReferralCta
+          ctaPosition="mid"
+          summary="La guida assistita la aggiungi all'ordine, il referral no: va applicato prima. Con il codice ricevi circa 1.000 km Supercharger sulla Model 3 o Model Y nuova, stesso prezzo."
+          primaryLabel="Apri Tesla.com con il codice"
+        />
+      </div>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">Domande frequenti</h2>
+        <div class="mt-6">
+          <Faq items={pageFaq} />
+        </div>
+      </section>
+
+      <Sources checkedOn={checked} items={tad.sources} />
+
+      <div class="mt-16">
+        <CtaBanner
+          title="Stai ordinando una Tesla?"
+          summary="Apri Tesla.com con il mio codice prima di confermare: ricevi circa 1.000 km Supercharger, allo stesso prezzo. L'abbonamento alla guida assistita lo aggiungi nello stesso ordine."
+          primaryLabel="Apri Tesla.com con il codice"
+        />
+      </div>
+    </div>
+  </article>
+</BaseLayout>

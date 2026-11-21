@@ -15,9 +15,9 @@ import type { FaqItem } from '../types';
 import { getCollection } from 'astro:content';
 
 const notes = (await getCollection('softwareNotes')).sort((a, b) => a.data.order - b.data.order);
-const title = 'Grok Tesla Italia, FSD e aggiornamenti software 2026';
+const title = 'Grok Tesla Italia, guida assistita (ex FSD) e aggiornamenti software 2026';
 const description =
-  'FSD in Italia nel 2026, Grok Tesla in italiano (attivazione e Model 3 Grok update) e Summer Update. Il software non tocca i 1.000 km Supercharger del referral.';
+  'Guida assistita Tesla (ex FSD) approvata in Italia dal 20 novembre 2026, Grok Tesla in italiano e Summer Update. Il software non tocca i 1.000 km Supercharger del referral.';
 const h1 = 'Grok Tesla e gli aggiornamenti in auto';
 
 const pageFaq: FaqItem[] = [
@@ -26,8 +26,8 @@ const pageFaq: FaqItem[] = [
     a: 'Aggiorna il software in auto e cerca Grok nel menu vocale. Lingua italiana e funzioni dipendono da paese, hardware, release e spesso Premium Connectivity. Non è un extra del referral.',
   },
   {
-    q: 'FSD in Italia: a che punto siamo nel 2026?',
-    a: 'Restano le funzioni omologate che l\'auto mostra. Le note US (anche FSD v14) non equivalgono a un\'abilitazione italiana. Guarda il menu Autopilot / FSD del veicolo.',
+    q: 'FSD in Italia: a che punto siamo?',
+    a: 'Dal 20 novembre 2026 è approvato: in Europa si chiama Tesla Assisted Driving, costa 99 € al mese in abbonamento e arriva con un aggiornamento software sulle auto con l\'hardware richiesto. Prezzo, attivazione e auto compatibili sono nella guida dedicata.',
   },
   {
     q: 'Qual è l\'aggiornamento Tesla più recente?',
@@ -54,8 +54,9 @@ const jsonLd = articlePageJsonLd({
       </div>
       <h1 class="display-40 m-0 mt-4">{h1}</h1>
       <p class="body-18 m-0 mt-6">
-        Grok Tesla Italia è l'assistente vocale in auto; FSD in Italia resta ciò che è
-        omologato sul veicolo, non il nome della release americana. L'ultimo grande OTA è
+        Grok Tesla Italia è l'assistente vocale in auto. L'FSD in Europa si chiama Tesla Assisted
+        Driving ed è approvato in Italia dal 20 novembre 2026: ne parlo nella{' '}
+        <a href={ROUTES.assistedDriving} class="text-brand">guida alla guida assistita</a>. L'ultimo grande aggiornamento è
         il {software.latestName} ({software.latestVersion}). Il referral non sblocca
         software: stesso listino, 1.000 km Supercharger se il codice è applicato prima
         dell'ordine.
@@ -71,7 +72,7 @@ const jsonLd = articlePageJsonLd({
         <KeyPoints
           items={[
             'Grok in italiano dipende da rollout, hardware e spesso Premium Connectivity.',
-            'FSD Italia: guarda le funzioni attive in auto, non le note US.',
+            'Guida assistita (ex FSD): approvata in Italia, 99 € al mese in abbonamento.',
             `Ultimo grande update: ${software.latestName} (${software.latestVersion}).`,
             'I km del referral restano crediti Supercharger, indipendenti dal software.',
           ]}

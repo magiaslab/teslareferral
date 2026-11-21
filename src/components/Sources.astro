@@ -1,0 +1,27 @@
+---
+interface Props {
+  checkedOn: string;
+  items: { label: string; url: string }[];
+}
+
+const { checkedOn, items } = Astro.props;
+---
+
+<section class="mt-16">
+  <h2 class="heading-28 m-0">Da dove vengono queste informazioni</h2>
+  <p class="body-16 text-ink-soft m-0 mt-4">
+    Pagine controllate il {checkedOn}. Quando un dato viene da chi l'ha provato e non da Tesla, nel
+    testo lo trovi scritto.
+  </p>
+  <ul class="body-16 mt-4 pl-6 grid gap-2">
+    {
+      items.map((item) => (
+        <li>
+          <a href={item.url} class="text-brand" target="_blank" rel="noopener">
+            {item.label}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</section>

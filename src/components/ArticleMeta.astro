@@ -1,12 +1,16 @@
 ---
-import { MAGIASLAB_URL, OWNER_NAME, OWNER_ORG, VERIFIED_DATE, formatVerifiedDateIt } from '../consts';
+import { MAGIASLAB_URL, OWNER_NAME, OWNER_ORG, VERIFIED_DATE, formatDayIt, formatVerifiedDateIt } from '../consts';
 
 interface Props {
   reading?: string;
+  /** Data di verifica della pagina (`2026-11-21`), se diversa da quella del sito. */
+  verifiedOn?: string;
+  /** Mostra anche il giorno: utile per le notizie che cambiano di giorno in giorno. */
+  withDay?: boolean;
 }
 
-const { reading } = Astro.props;
-const verified = formatVerifiedDateIt(VERIFIED_DATE);
+const { reading, verifiedOn = VERIFIED_DATE, withDay = false } = Astro.props;
+const verified = withDay ? formatDayIt(verifiedOn) : formatVerifiedDateIt(verifiedOn);
 ---
 
 <p class="caption-14 text-ink-soft m-0">

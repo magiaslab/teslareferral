@@ -46,6 +46,8 @@ export const ROUTES = {
   prices: '/prezzo-incentivi',
   usedVsNew: '/tesla-usata-o-nuova',
   software: '/software',
+  assistedDriving: '/tesla-assisted-driving-italia',
+  autopilot: '/autopilot-tesla',
   faq: '/faq',
   privacy: '/privacy',
   cookie: '/cookie',
@@ -91,7 +93,15 @@ export const NAV_LINKS: NavItem[] = [
   },
   { href: ROUTES.prices, label: 'Prezzi' },
   { href: ROUTES.usedVsNew, label: 'Usata o nuova' },
-  { href: ROUTES.software, label: 'Software' },
+  {
+    href: ROUTES.software,
+    label: 'Software',
+    children: [
+      { href: ROUTES.assistedDriving, label: 'Guida assistita (ex FSD)' },
+      { href: ROUTES.autopilot, label: 'Autopilot: cosa cambia' },
+      { href: ROUTES.software, label: 'Aggiornamenti e Grok' },
+    ],
+  },
   { href: ROUTES.guide, label: 'Referral' },
 ];
 
@@ -119,6 +129,8 @@ export const FOOTER_GROUPS: { title: string; links: SiteLink[] }[] = [
       { href: ROUTES.prices, label: 'Prezzi e incentivi' },
       { href: ROUTES.usedVsNew, label: 'Usata o nuova' },
       { href: ROUTES.stores, label: 'Store in Italia' },
+      { href: ROUTES.assistedDriving, label: 'Guida assistita in Italia' },
+      { href: ROUTES.autopilot, label: 'Autopilot: cosa cambia' },
       { href: ROUTES.software, label: 'Software e Grok' },
     ],
   },

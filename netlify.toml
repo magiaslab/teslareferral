@@ -149,6 +149,18 @@
   force = true
 
 [[redirects]]
+  from = "/tesla-assisted-driving-italia/"
+  to = "/tesla-assisted-driving-italia.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/autopilot-tesla/"
+  to = "/autopilot-tesla.html"
+  status = 200
+  force = true
+
+[[redirects]]
   from = "/store-tesla-italia/"
   to = "/store-tesla-italia.html"
   status = 200
