@@ -1,0 +1,91 @@
+---
+import tad from '../content/assisted-driving.json';
+import { ROUTES, formatDayIt } from '../consts';
+import Button from './Button.astro';
+
+const approved = formatDayIt(tad.approvedOn);
+---
+
+<section class="pb-16 md:pb-24" aria-labelledby="tad-banner-title">
+  <div class="wrap">
+    <div
+      class="grid grid-cols-1 md:grid-cols-12 overflow-hidden rounded-[14px] bg-night text-night-ink"
+    >
+      <div class="md:col-span-5" data-m="curtain">
+        <svg
+          viewBox="0 0 640 440"
+          class="block h-full w-full"
+          role="img"
+          aria-labelledby="tad-img-title"
+          preserveAspectRatio="xMidYMid slice"
+        >
+          <title id="tad-img-title">
+            Bandiera italiana con la scritta «Approvato e utilizzabile»: la guida assistita Tesla in
+            Italia
+          </title>
+          <rect width="640" height="440" fill="#14151a"></rect>
+          <!-- Strada in prospettiva -->
+          <path d="M250 440 L305 250 L335 250 L390 440 Z" fill="#1f2229"></path>
+          <path d="M318 270 L322 270 L326 310 L314 310 Z" fill="#f2f2f0" opacity="0.5"></path>
+          <path d="M313 330 L327 330 L332 385 L308 385 Z" fill="#f2f2f0" opacity="0.6"></path>
+          <path d="M303 405 L337 405 L341 440 L299 440 Z" fill="#f2f2f0" opacity="0.7"></path>
+          <!-- Bandiera che sventola -->
+          <g transform="translate(150 54)">
+            <rect x="-6" y="-8" width="6" height="250" rx="3" fill="#9ba0ab"></rect>
+            <path d="M0 0 C40 -10 70 10 113 0 L113 170 C70 180 40 160 0 170 Z" fill="#009246"></path>
+            <path d="M113 0 C153 -10 183 10 226 0 L226 170 C183 180 153 160 113 170 Z" fill="#f4f5f0"></path>
+            <path d="M226 0 C266 -10 296 10 340 0 L340 170 C296 180 266 160 226 170 Z" fill="#ce2b37"></path>
+            <path
+              d="M0 0 C40 -10 70 10 113 0 C153 -10 183 10 226 0 C266 -10 296 10 340 0 L340 40 C296 50 266 30 226 40 C183 50 153 30 113 40 C70 50 40 30 0 40 Z"
+              fill="#ffffff"
+              opacity="0.08"
+            ></path>
+          </g>
+          <!-- Etichetta -->
+          <g transform="translate(320 292)">
+            <rect x="-196" y="-30" width="392" height="60" rx="30" fill="#2fa98d"></rect>
+            <circle cx="-160" cy="0" r="17" fill="#14151a"></circle>
+            <path
+              d="M-168 0 L-162 7 L-151 -7"
+              fill="none"
+              stroke="#2fa98d"
+              stroke-width="4.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></path>
+            <text
+              x="14"
+              y="8"
+              text-anchor="middle"
+              font-family="Space Grotesk, ui-sans-serif, system-ui, sans-serif"
+              font-size="25"
+              font-weight="700"
+              fill="#14151a"
+              letter-spacing="0.5">APPROVATO E UTILIZZABILE</text
+            >
+          </g>
+        </svg>
+      </div>
+      <div class="md:col-span-7 px-7 py-10 md:px-12 md:py-12">
+        <p class="caption-14 m-0 font-semibold uppercase tracking-wide text-night-soft">
+          Novità del {approved}
+        </p>
+        <h2 id="tad-banner-title" class="heading-28 m-0 mt-3 text-night-ink">
+          La guida assistita Tesla (ex FSD) è approvata in Italia
+        </h2>
+        <p class="body-18 m-0 mt-4 text-night-soft">
+          Con la tua supervisione l'auto guida quasi ovunque, anche in città. Si usa appena l'auto
+          riceve l'aggiornamento, che sta arrivando in questi giorni. Costa {tad.monthlyPrice} € al
+          mese in abbonamento; per ora serve l'Hardware 4. E dalle Tesla ordinate adesso è sparito
+          l'Autopilot di serie.
+        </p>
+        <div class="mt-8 flex flex-col sm:flex-row gap-4">
+          <Button variant="primary" href={ROUTES.assistedDriving} icon="arrow-right">
+            Come funziona e quanto costa
+          </Button>
+          <Button variant="on-dark" href={ROUTES.autopilot}>Cosa cambia per Autopilot</Button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
