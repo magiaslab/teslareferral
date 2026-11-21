@@ -9,7 +9,7 @@ const approved = formatDayIt(tad.approvedOn);
 <section class="pb-16 md:pb-24" aria-labelledby="tad-banner-title">
   <div class="wrap">
     <div
-      class="grid grid-cols-1 md:grid-cols-12 overflow-hidden rounded-[14px] bg-night text-night-ink"
+      class="grid grid-cols-1 md:grid-cols-12 overflow-hidden rounded-[14px] border border-line bg-night text-night-ink"
     >
       <div class="md:col-span-5" data-m="curtain">
         <svg
@@ -43,10 +43,10 @@ const approved = formatDayIt(tad.approvedOn);
           </g>
           <!-- Etichetta -->
           <g transform="translate(320 292)">
-            <rect x="-196" y="-30" width="392" height="60" rx="30" fill="#2fa98d"></rect>
-            <circle cx="-160" cy="0" r="17" fill="#14151a"></circle>
+            <rect x="-214" y="-30" width="428" height="60" rx="30" fill="#2fa98d"></rect>
+            <circle cx="-180" cy="0" r="17" fill="#14151a"></circle>
             <path
-              d="M-168 0 L-162 7 L-151 -7"
+              d="M-188 0 L-182 7 L-171 -7"
               fill="none"
               stroke="#2fa98d"
               stroke-width="4.5"
@@ -54,11 +54,11 @@ const approved = formatDayIt(tad.approvedOn);
               stroke-linejoin="round"
             ></path>
             <text
-              x="14"
+              x="18"
               y="8"
               text-anchor="middle"
               font-family="Space Grotesk, ui-sans-serif, system-ui, sans-serif"
-              font-size="25"
+              font-size="23"
               font-weight="700"
               fill="#14151a"
               letter-spacing="0.5">APPROVATO E UTILIZZABILE</text
@@ -81,9 +81,9 @@ const approved = formatDayIt(tad.approvedOn);
         </p>
         <div class="mt-8 flex flex-col sm:flex-row gap-4">
           <Button variant="primary" href={ROUTES.assistedDriving} icon="arrow-right">
-            Come funziona e quanto costa
+            Guida completa
           </Button>
-          <Button variant="on-dark" href={ROUTES.autopilot}>Cosa cambia per Autopilot</Button>
+          <Button variant="on-dark" href={ROUTES.autopilot}>Autopilot: cosa cambia</Button>
         </div>
       </div>
     </div>
