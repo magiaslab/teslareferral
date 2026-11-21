@@ -1,0 +1,59 @@
+{
+  "checkedAt": "2026-11-21",
+  "approvedOn": "2026-11-20",
+  "monthlyPrice": 99,
+  "transferOrderDeadline": "2026-12-20",
+  "countries": [
+    "Paesi Bassi",
+    "Lituania",
+    "Estonia",
+    "Danimarca",
+    "Belgio",
+    "Slovenia",
+    "Repubblica Ceca",
+    "Croazia",
+    "Slovacchia",
+    "Lettonia",
+    "Finlandia",
+    "Italia"
+  ],
+  "maxEngageKmh": 140,
+  "sources": [
+    {
+      "label": "Tesla Europe su X, annuncio del 20 novembre 2026 alle 11:21 («Now approved in Italy»)",
+      "url": "https://x.com/teslaeurope"
+    },
+    {
+      "label": "Tesla Italia, pagina di assistenza «Tesla Assisted Driving»",
+      "url": "https://www.tesla.com/it_it/support/tesla-assisted-driving"
+    },
+    {
+      "label": "Tesla Italia, «Abbonamenti a Tesla Assisted Driving»",
+      "url": "https://www.tesla.com/it_it/support/tesla-assisted-driving/subscriptions"
+    },
+    {
+      "label": "Tesla Italia, «Trasferimenti di Tesla Assisted Driving»",
+      "url": "https://www.tesla.com/it_it/support/tesla-assisted-driving/transfer"
+    },
+    {
+      "label": "Tesla Italia, «Funzioni di sicurezza attiva e Cruise Control adattivo»",
+      "url": "https://www.tesla.com/it_it/support/active-safety-tacc"
+    },
+    {
+      "label": "Tesla Italia, configuratore Model Y",
+      "url": "https://www.tesla.com/it_it/modely/design"
+    },
+    {
+      "label": "Lampi di Tesla, diretta «TAD in Italia» del 20 novembre 2026",
+      "url": "https://www.youtube.com/live/jwxP7_7qNek"
+    },
+    {
+      "label": "Electrek, approvazione in Italia (20 novembre 2026, in inglese)",
+      "url": "https://electrek.co/2026/11/20/tesla-fsd-italy-approval-assisted-driving/"
+    },
+    {
+      "label": "RDW, approvazione provvisoria nei Paesi Bassi (in inglese)",
+      "url": "https://www.rdw.nl/en/news/2026/rdw-explanation-of-european-type-approval-tesla-with-provisional-validity-in-the-netherlands"
+    }
+  ]
+}

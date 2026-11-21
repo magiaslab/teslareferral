@@ -1,0 +1,226 @@
+---
+import ArticleMeta from '../components/ArticleMeta.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import Callout from '../components/Callout.astro';
+import CtaBanner from '../components/CtaBanner.astro';
+import Faq from '../components/Faq.astro';
+import KeyPoints from '../components/KeyPoints.astro';
+import ReferralCta from '../components/ReferralCta.astro';
+import Sources from '../components/Sources.astro';
+import SpecTable from '../components/SpecTable.astro';
+import tad from '../content/assisted-driving.json';
+import { ROUTES, formatDayIt } from '../consts';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { articlePageJsonLd } from '../lib/schema';
+import type { FaqItem } from '../types';
+
+const approved = formatDayIt(tad.approvedOn);
+const checked = formatDayIt(tad.checkedAt);
+const transferDeadline = formatDayIt(tad.transferOrderDeadline);
+const price = `${tad.monthlyPrice} €`;
+const yearly = `${(tad.monthlyPrice * 12).toLocaleString('it-IT')} €`;
+
+const title = 'Autopilot Tesla 2026: cosa cambia per base, avanzato e FSD in Italia';
+const description = `Dal ${approved} le Tesla ordinate in Italia hanno solo il Cruise Control adattivo di serie. Cosa succede ad Autopilot base, Autopilot avanzato e FSD comprato, e quanto costa l'abbonamento.`;
+const h1 = 'Autopilot Tesla nel 2026: cosa cambia per base, avanzato e FSD';
+
+const situations = [
+  {
+    label: 'Ordini una Tesla nuova adesso',
+    value: `Di serie hai Cruise Control adattivo e funzioni di sicurezza. Per tenere e cambiare corsia serve Tesla Assisted Driving: ${price} al mese, il primo mese è di prova.`,
+  },
+  {
+    label: 'Hai ordinato prima e aspetti la consegna',
+    value: 'Se nel contratto c\'è scritto «Autopilot», l\'auto arriva con l\'Autopilot. Controlla il contratto nell\'account Tesla.',
+  },
+  {
+    label: 'Hai già Autopilot base',
+    value: `Resta sulla tua auto. Se vuoi la guida assistita completa ti abboni a ${price} al mese; se disdici torni all'Autopilot che avevi.`,
+  },
+  {
+    label: 'Hai comprato Autopilot avanzato',
+    value: 'Resta sulla tua auto ma non si trasferisce su un\'auto nuova. Per la guida assistita completa serve l\'abbonamento: c\'è chi vede 49 € al mese nell\'app, controlla il tuo prezzo.',
+  },
+  {
+    label: 'Hai comprato FSD (guida autonoma completa)',
+    value: `Con l'hardware richiesto diventa Tesla Assisted Driving, senza abbonamento. Puoi spostarlo una volta su una Tesla nuova ordinata entro il ${transferDeadline}.`,
+  },
+  {
+    label: 'La tua Tesla ha Hardware 3',
+    value: `Per ora puoi abbonarti solo a Tesla Assisted Driving Basic (${price} al mese). La versione completa aspetta un'approvazione europea.`,
+  },
+  {
+    label: 'Compri una Tesla usata',
+    value: 'Se il vecchio proprietario aveva comprato FSD e non l\'ha spostato su un\'altra auto, resta sull\'auto. Un abbonamento invece non passa: lo rifai tu.',
+  },
+];
+
+const pageFaq: FaqItem[] = [
+  {
+    q: 'Le Tesla nuove hanno ancora l\'Autopilot di serie?',
+    a: `No. Il configuratore di Tesla Italia non lo elenca più: di serie restano Cruise Control adattivo e funzioni di sicurezza attiva. Per farti tenere e cambiare corsia serve l'abbonamento a Tesla Assisted Driving, ${price} al mese.`,
+  },
+  {
+    q: 'Si può ancora comprare FSD una volta per tutte?',
+    a: 'No. Tesla Assisted Driving si vende solo in abbonamento mensile. Chi l\'aveva già comprato lo tiene sull\'auto.',
+  },
+  {
+    q: 'Ho FSD comprato: posso portarlo sulla nuova Tesla?',
+    a: `Sì, una volta sola, se ordini la nuova Tesla entro il ${transferDeadline}, le due auto sono sullo stesso account e firmi il trasferimento prima della consegna. Non valgono auto usate, aziendali o in leasing. La vecchia auto resta con il solo Cruise Control adattivo.`,
+  },
+  {
+    q: 'L\'Autopilot avanzato si trasferisce?',
+    a: 'No. Tesla prevede il trasferimento solo per il pacchetto completo comprato una volta per tutte.',
+  },
+  {
+    q: 'Se disdico l\'abbonamento perdo l\'Autopilot che avevo?',
+    a: 'No. Alla fine del mese pagato l\'auto torna alle funzioni che aveva prima dell\'abbonamento.',
+  },
+];
+
+const jsonLd = articlePageJsonLd({
+  path: ROUTES.autopilot,
+  crumbName: 'Autopilot: cosa cambia',
+  headline: h1,
+  description,
+  about: 'Autopilot Tesla base avanzato FSD abbonamento trasferimento Italia 2026',
+  faqItems: pageFaq,
+  date: tad.checkedAt,
+});
+---
+
+<BaseLayout title={title} description={description} jsonLd={jsonLd}>
+  <article class="section-pad">
+    <div class="wrap max-w-[76ch]">
+      <Breadcrumb
+        items={[
+          { name: 'Home', path: '/' },
+          { name: 'Autopilot: cosa cambia', path: ROUTES.autopilot },
+        ]}
+      />
+      <div class="mt-4">
+        <ArticleMeta reading="Guida · Lettura 6 min" verifiedOn={tad.checkedAt} withDay />
+      </div>
+      <h1 class="display-40 m-0 mt-4">{h1}</h1>
+      <p class="body-18 m-0 mt-6">
+        Con l'arrivo della guida assistita in Italia, il {approved}, Tesla ha cambiato anche quello
+        che trovi di serie. Le auto ordinate adesso hanno il Cruise Control adattivo e le funzioni di
+        sicurezza, ma non più l'Autopilot che teneva la corsia. Tutto il resto, dal cambio corsia alla
+        guida in città, passa da un abbonamento: Tesla Assisted Driving, {price} al mese. Chi ha già
+        Autopilot, Autopilot avanzato o FSD non perde quello che ha. Qui sotto trovi il tuo caso.
+      </p>
+
+      <div class="mt-8">
+        <KeyPoints
+          items={[
+            'Ordini nuovi: di serie solo Cruise Control adattivo e sicurezza attiva.',
+            `Guida assistita completa: ${price} al mese, niente più acquisto definitivo.`,
+            `FSD comprato: si trasferisce una volta se ordini la nuova Tesla entro il ${transferDeadline}.`,
+            'Autopilot avanzato: resta sull\'auto, non si trasferisce.',
+          ]}
+        />
+      </div>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">Il tuo caso in una tabella</h2>
+        <div class="mt-6">
+          <SpecTable
+            caption="Cosa cambia per ogni situazione"
+            headers={['Situazione', 'Cosa cambia']}
+            rows={situations}
+            note={`Situazione al ${checked}. Tesla può cambiare prezzi e condizioni: la conferma è nell'app e nel contratto.`}
+          />
+        </div>
+      </section>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">Cosa resta di serie su ogni Tesla</h2>
+        <p class="body-18 m-0 mt-4">
+          Su tutte le Tesla, comprese quelle ordinate adesso, Tesla indica di serie:
+        </p>
+        <ul class="body-18 mt-4 pl-6 grid gap-3">
+          <li>Cruise Control adattivo: tiene la velocità e la distanza dall'auto davanti. Lo sterzo è tuo.</li>
+          <li>Frenata automatica d'emergenza.</li>
+          <li>Avviso di collisione frontale e laterale.</li>
+          <li>Monitoraggio dell'angolo cieco.</li>
+          <li>Prevenzione dell'uscita di corsia, anche d'emergenza: l'auto corregge lo sterzo se stai uscendo di strada.</li>
+          <li>Accelerazione limitata se c'è un ostacolo davanti a bassa velocità.</li>
+        </ul>
+        <p class="body-18 m-0 mt-4">
+          Quello che non c'è più di serie è l'Autosterzatura, il «doppio clic» che teneva l'auto al
+          centro della corsia. Chi ha un'auto che già ce l'ha, lo tiene.
+        </p>
+      </section>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">Conviene abbonarsi?</h2>
+        <p class="body-18 m-0 mt-4">
+          {price} al mese fanno {yearly} l'anno. È un costo che si accende e si spegne: puoi tenerlo nei
+          mesi dei viaggi lunghi e toglierlo quando giri solo in città. Con un'auto nuova il primo mese
+          è di prova, quindi lo provi prima di pagare.
+        </p>
+        <p class="body-18 m-0 mt-4">
+          Il mio consiglio è provarlo un mese sui tuoi percorsi di tutti i giorni, prima di decidere.
+          Per l'abbonamento aspetta che l'aggiornamento sia arrivato sull'auto: i giorni pagati senza
+          aggiornamento non li recuperi. Come funziona e come si attiva:{' '}
+          <a href={ROUTES.assistedDriving} class="text-brand">Tesla Assisted Driving in Italia</a>.
+        </p>
+      </section>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">Hai FSD comprato e pensi di cambiare auto</h2>
+        <p class="body-18 m-0 mt-4">
+          Tesla permette di spostare il pacchetto comprato su una Tesla nuova una volta sola, a queste
+          condizioni:
+        </p>
+        <ul class="body-18 mt-4 pl-6 grid gap-3">
+          <li>ordine della nuova Tesla fatto tra il 18 luglio 2025 e il {transferDeadline};</li>
+          <li>sei proprietario e intestatario dell'auto attuale, che ha il pacchetto comprato;</li>
+          <li>le due auto sono sullo stesso account Tesla;</li>
+          <li>avvisi Tesla e firmi il trasferimento prima della consegna della nuova auto.</li>
+        </ul>
+        <p class="body-18 m-0 mt-4">
+          Non valgono auto usate, dell'usato garantito, aziendali, a uso commerciale o in leasing.
+          Dopo il trasferimento la vecchia auto resta con il solo Cruise Control adattivo, e in
+          permuta il pacchetto non conta più nella valutazione. Il trasferimento avviene entro 72 ore
+          dalla consegna e non si annulla.
+        </p>
+      </section>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">Se compri usato</h2>
+        <p class="body-18 m-0 mt-4">
+          Su un'usata il pacchetto comprato resta all'auto, a meno che il vecchio proprietario non
+          l'abbia spostato su una Tesla nuova. Chiedilo prima di comprare e controlla nell'app dopo il
+          passaggio. Un abbonamento non passa mai: lo rifai con il tuo account. Il resto lo trovi in{' '}
+          <a href={ROUTES.usedVsNew} class="text-brand">Tesla usata o nuova</a>.
+        </p>
+      </section>
+
+      <div class="mt-10">
+        <ReferralCta
+          ctaPosition="mid"
+          summary="Se compri una Model 3 o Model Y nuova, il codice referral va applicato prima dell'ordine: circa 1.000 km Supercharger, stesso prezzo. L'abbonamento alla guida assistita lo aggiungi nello stesso ordine."
+          primaryLabel="Apri Tesla.com con il codice"
+        />
+      </div>
+
+      <section class="mt-16">
+        <h2 class="heading-28 m-0">Domande frequenti</h2>
+        <div class="mt-6">
+          <Faq items={pageFaq} />
+        </div>
+      </section>
+
+      <Sources checkedOn={checked} items={tad.sources} />
+
+      <div class="mt-16">
+        <CtaBanner
+          title="Ordini una Model 3 o Model Y?"
+          summary="Apri Tesla.com con il mio codice prima di confermare: circa 1.000 km Supercharger allo stesso prezzo. Poi scegli se aggiungere la guida assistita."
+          primaryLabel="Apri Tesla.com con il codice"
+        />
+      </div>
+    </div>
+  </article>
+</BaseLayout>

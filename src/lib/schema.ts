@@ -102,6 +102,7 @@ export function articleNode(opts: {
   description: string;
   about: string;
   dateModified?: string;
+  datePublished?: string;
 }) {
   return {
     '@type': 'Article',
@@ -109,7 +110,7 @@ export function articleNode(opts: {
     headline: opts.headline,
     description: opts.description,
     inLanguage: 'it-IT',
-    datePublished: VERIFIED_DATE,
+    datePublished: opts.datePublished ?? VERIFIED_DATE,
     dateModified: opts.dateModified ?? VERIFIED_DATE,
     mainEntityOfPage: opts.url,
     author: { '@id': PERSON_ID },
@@ -224,6 +225,8 @@ export function articlePageJsonLd(opts: {
     name: string;
     items: { name: string; description: string; url?: string }[];
   };
+  /** Pagine nate dopo VERIFIED_DATE: data di pubblicazione e di verifica proprie. */
+  date?: string;
 }) {
   const url = `${SITE_URL}${opts.path}`;
   const crumbs: Crumb[] = opts.crumbs ?? (opts.path === '/ricarica-domestica'
@@ -243,6 +246,8 @@ export function articlePageJsonLd(opts: {
       headline: opts.headline,
       description: opts.description,
       about: opts.about,
+      datePublished: opts.date,
+      dateModified: opts.date,
     }),
   ];
   if (opts.itemList?.items.length) {

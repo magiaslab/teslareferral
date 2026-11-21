@@ -24,7 +24,9 @@ Fonte keyword: DataForSEO Italia agosto 2026 + GSC agosto–settembre 2026.
 | `/tesla-usata-o-nuova` | Usato → nuovo | `tesla model 3/y usata` |
 | `/come-funziona` | Pillar referral | come funziona il codice |
 | `/faq` | FAQ referral | cluster domande |
-| `/software` | Grok / FSD | `grok tesla italia`, `fsd italia` |
+| `/tesla-assisted-driving-italia` | Guida assistita (ex FSD) approvata in Italia il 20/11/2026 | `fsd italia`, `tesla assisted driving`, `guida autonoma tesla italia` |
+| `/autopilot-tesla` | Cosa cambia per Autopilot base, avanzato e FSD comprato | `autopilot tesla`, `autopilot avanzato`, `trasferimento fsd` |
+| `/software` | Grok / aggiornamenti | `grok tesla italia` |
 | `/ricarica` · `/ricarica-domestica` | Supporto E-E-A-T | non traffico |
 | `/privacy` · `/cookie` | Legali | — |
 
@@ -66,3 +68,7 @@ Env di produzione: Netlify → Site configuration → Environment variables.
 - Tempi in `wait-times.json` e indirizzi in `stores/` / `cities/` se Tesla sposta hub o finestre
 - Termini Tesla / Octopus
 - Privacy e cookie se cambia il tracciamento
+
+## Guida assistita (dal 21/11/2026)
+
+Fatti e date in `src/content/assisted-driving.json` (prezzo, paesi, scadenza trasferimento, fonti). Da ricontrollare sulle pagine Tesla Italia elencate nel file: al voto europeo (atteso a dicembre 2026), quando arriva la versione per Hardware 3 e dopo il 20/12/2026, quando scade il trasferimento del pacchetto comprato. I dati non scritti da Tesla (49 € per chi ha Autopilot avanzato, conferma con la rotellina oltre il +10%, parcheggio non incluso in Europa) sono nel testo come racconti di chi l'ha provato.
