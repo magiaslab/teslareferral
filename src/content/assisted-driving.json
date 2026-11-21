@@ -20,6 +20,10 @@
   "maxEngageKmh": 140,
   "sources": [
     {
+      "label": "Tesla Europe su X, annuncio del 20 novembre 2026 alle 11:21 («Now approved in Italy»)",
+      "url": "https://x.com/teslaeurope"
+    },
+    {
       "label": "Tesla Italia, pagina di assistenza «Tesla Assisted Driving»",
       "url": "https://www.tesla.com/it_it/support/tesla-assisted-driving"
     },
